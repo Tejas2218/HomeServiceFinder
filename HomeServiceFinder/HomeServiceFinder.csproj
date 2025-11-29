@@ -67,13 +67,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assests\Login_SignUp\Worker_Age_Icon.png" />
+    <Content Include="Assests\Login_SignUp\Worker_Experience_Icon.png" />
+    <Content Include="Assests\Login_SignUp\Gender_Icon.png" />
+    <Content Include="Assests\Login_SignUp\Worker_Services_Icon.png" />
     <Content Include="Assests\Login_SignUp\User_Address_Icon.png" />
     <Content Include="Assests\Login_SignUp\User_Contact_Icon.png" />
     <Content Include="Assests\Login_SignUp\User_Email_Icon.png" />
     <Content Include="Assests\Login_SignUp\User_Name_Icon.png" />
     <Content Include="Assests\Login_SignUp\User_Password_Icon.png" />
+    <Content Include="login_signup\css\style.css" />
     <Content Include="login_signup\loginPage.aspx" />
     <Content Include="login_signup\User_SignUp.aspx" />
+    <Content Include="login_signup\Worker_SignUp.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +96,13 @@
     </Compile>
     <Compile Include="login_signup\User_SignUp.aspx.designer.cs">
       <DependentUpon>User_SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login_signup\Worker_SignUp.aspx.cs">
+      <DependentUpon>Worker_SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login_signup\Worker_SignUp.aspx.designer.cs">
+      <DependentUpon>Worker_SignUp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

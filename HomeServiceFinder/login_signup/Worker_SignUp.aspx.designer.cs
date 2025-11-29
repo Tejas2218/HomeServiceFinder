@@ -11,7 +11,7 @@ namespace HomeServiceFinder.login_signup
 {
 
 
-    public partial class WebForm2
+    public partial class Worker_SignUp
     {
 
         /// <summary>
@@ -24,76 +24,40 @@ namespace HomeServiceFinder.login_signup
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// User_Name_Icon control.
+        /// Worker_Name_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Name_Icon;
+        protected global::System.Web.UI.WebControls.TextBox Worker_Name_TextBox;
 
         /// <summary>
-        /// User_Name_TextBox control.
+        /// Worker_Email_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Name_TextBox;
+        protected global::System.Web.UI.WebControls.TextBox Worker_Email_TextBox;
 
         /// <summary>
-        /// User_Email_Icon control.
+        /// Worker_Phone_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Email_Icon;
+        protected global::System.Web.UI.WebControls.TextBox Worker_Phone_TextBox;
 
         /// <summary>
-        /// User_Email_TextBox control.
+        /// Worker_Age_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Email_TextBox;
-
-        /// <summary>
-        /// User_Address_Icon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Address_Icon;
-
-        /// <summary>
-        /// User_Address_TextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Address_TextBox;
-
-        /// <summary>
-        /// User_Contact_Icon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Contact_Icon;
-
-        /// <summary>
-        /// User_Contact_TextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Contact_TextBox;
+        protected global::System.Web.UI.WebControls.TextBox Worker_Age_TextBox;
 
         /// <summary>
         /// Worker_Gender_DropDown control.
@@ -105,48 +69,57 @@ namespace HomeServiceFinder.login_signup
         protected global::System.Web.UI.WebControls.DropDownList Worker_Gender_DropDown;
 
         /// <summary>
-        /// User_Password_Icon control.
+        /// Worker_Address_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Password_Icon;
+        protected global::System.Web.UI.WebControls.TextBox Worker_Address_TextBox;
 
         /// <summary>
-        /// User_Password_TextBox control.
+        /// Worker_ServiceType_DropDown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Password_TextBox;
+        protected global::System.Web.UI.WebControls.DropDownList Worker_ServiceType_DropDown;
 
         /// <summary>
-        /// User_Confirm_Password_Icon control.
+        /// Worker_Experience_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Confirm_Password_Icon;
+        protected global::System.Web.UI.WebControls.TextBox Worker_Experience_TextBox;
 
         /// <summary>
-        /// User_Confirm_Password_TextBox control.
+        /// Worker_Password_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Confirm_Password_TextBox;
+        protected global::System.Web.UI.WebControls.TextBox Worker_Password_TextBox;
 
         /// <summary>
-        /// SignupButton control.
+        /// Worker_Confirm_Password_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SignupButton;
+        protected global::System.Web.UI.WebControls.TextBox Worker_Confirm_Password_TextBox;
+
+        /// <summary>
+        /// Worker_Signup_Button control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Worker_Signup_Button;
     }
 }
