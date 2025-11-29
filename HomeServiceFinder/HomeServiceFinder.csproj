@@ -67,7 +67,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assests\Login_SignUp\User_Address_Icon.png" />
+    <Content Include="Assests\Login_SignUp\User_Contact_Icon.png" />
+    <Content Include="Assests\Login_SignUp\User_Email_Icon.png" />
+    <Content Include="Assests\Login_SignUp\User_Name_Icon.png" />
+    <Content Include="Assests\Login_SignUp\User_Password_Icon.png" />
     <Content Include="login_signup\loginPage.aspx" />
+    <Content Include="login_signup\User_SignUp.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +83,13 @@
     </Compile>
     <Compile Include="login_signup\loginPage.aspx.designer.cs">
       <DependentUpon>loginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login_signup\User_SignUp.aspx.cs">
+      <DependentUpon>User_SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login_signup\User_SignUp.aspx.designer.cs">
+      <DependentUpon>User_SignUp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
