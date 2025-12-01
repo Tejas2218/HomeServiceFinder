@@ -1,13 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="User_SignUp.aspx.cs" Inherits="HomeServiceFinder.login_signup.WebForm2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/SignUp_Master.Master" AutoEventWireup="true" CodeBehind="User_SignUp.aspx.cs" Inherits="HomeServiceFinder.Pages.login_signup.User_SignUp" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="css/style.css"/>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>User Sign Up</title>
-    <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
-    <form id="form1" runat="server">
 
         <div class="signup-card">
             <div class="title">Create Account</div>
@@ -77,6 +73,4 @@
 
         </div>
 
-    </form>
-</body>
-</html>
+</asp:Content>

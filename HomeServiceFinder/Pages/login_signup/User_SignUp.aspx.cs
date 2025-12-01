@@ -8,9 +8,9 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
-namespace HomeServiceFinder.login_signup
+namespace HomeServiceFinder.Pages.login_signup
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class User_SignUp : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

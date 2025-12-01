@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HomeServiceFinder.login_signup
+namespace HomeServiceFinder.Pages.login_signup
 {
     public partial class Worker_SignUp : System.Web.UI.Page
     {

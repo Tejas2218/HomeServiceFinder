@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SignUp_Master.master.cs" Inherits="HomeServiceFinder.login_signup.SignUp_Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h1>Sign Up</h1>
+            <br />
+            <asp:Button ID="User_SignUpPage" runat="server" Text="User" OnClick="User_SignUpPage_Click"/>
+            <asp:Button ID="Worker_SignUpPage" runat="server" Text="Worker" OnClick="Worker_SignUpPage_Click"/>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
