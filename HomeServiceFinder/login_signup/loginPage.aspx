@@ -1,14 +1,133 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="loginPage.aspx.cs" Inherits="HomeServiceFinder.login_signup.WebForm1" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+
+    <title>Login - Home Service Finder</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #00bfff, #1e90ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 420px;
+            background: #fff;
+            padding: 35px 40px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 28px;
+            color: #1e90ff;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            margin-top: 5px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #1e90ff;
+            outline: none;
+            box-shadow: 0px 0px 6px rgba(30, 144, 255, 0.5);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #1e90ff;
+            color: #fff;
+            font-size: 17px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .btn-login:hover {
+            background: #187bcd;
+        }
+
+        .footer-text {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-text a {
+            color: #1e90ff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+
 </head>
+
 <body>
+
     <form id="form1" runat="server">
-        <div>
+
+        <div class="login-container">
+
+            <div class="login-title">
+                Login
+            </div>
+
+            <div class="form-group">
+                <asp:Label runat="server" Text="Email or Phone Number" />
+                <asp:TextBox ID="txtContact" runat="server" />
+            </div>
+
+            <div class="form-group">
+                <asp:Label runat="server" Text="Password" />
+                <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" />
+            </div>
+
+            <asp:Button
+                ID="btnlogin"
+                runat="server"
+                Text="Login"
+                CssClass="btn-login"
+                OnClick="btnlogin_Click" />
+
+            <asp:Label
+                ID="lblMessage"
+                runat="server"
+                ForeColor="Red" />
+
+            <div class="footer-text">
+                Don’t have an account?
+                <a href="Signup.aspx">Sign Up</a>
+            </div>
         </div>
     </form>
 </body>
