@@ -1,4 +1,7 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SignUp_Master.master.cs" Inherits="HomeServiceFinder.login_signup.SignUp_Master" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true"
+    CodeBehind="SignUp_Master.master.cs"
+    Inherits="HomeServiceFinder.login_signup.SignUp_Master" %>
+
 
 <!DOCTYPE html>
 

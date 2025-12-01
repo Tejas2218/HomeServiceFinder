@@ -86,24 +86,28 @@
   <ItemGroup>
     <Compile Include="MasterPage\SignUp_Master.Master.cs">
       <DependentUpon>SignUp_Master.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterPage\SignUp_Master.Master.designer.cs">
       <DependentUpon>SignUp_Master.Master</DependentUpon>
     </Compile>
     <Compile Include="Pages\login_signup\loginPage.aspx.cs">
       <DependentUpon>loginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\login_signup\loginPage.aspx.designer.cs">
       <DependentUpon>loginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\login_signup\User_SignUp.aspx.cs">
       <DependentUpon>User_SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\login_signup\User_SignUp.aspx.designer.cs">
       <DependentUpon>User_SignUp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.designer.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
