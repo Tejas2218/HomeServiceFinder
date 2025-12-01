@@ -76,6 +76,7 @@
     <Content Include="Assests\Login_SignUp\User_Email_Icon.png" />
     <Content Include="Assests\Login_SignUp\User_Name_Icon.png" />
     <Content Include="Assests\Login_SignUp\User_Password_Icon.png" />
+    <Content Include="background_img.png" />
     <Content Include="login_signup\css\style.css" />
     <Content Include="login_signup\loginPage.aspx" />
     <Content Include="login_signup\User_SignUp.aspx" />
@@ -115,7 +116,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assests\img\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
