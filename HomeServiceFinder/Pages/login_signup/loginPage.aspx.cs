@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace HomeServiceFinder.login_signup
 {
@@ -10,47 +11,66 @@ namespace HomeServiceFinder.login_signup
         {
         }
 
+        public string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+        public SqlDataAdapter sda;
+        public SqlCommand cmd;
+        public DataSet sd;
+
+        public void connection()
+        {
+            SqlConnection con = new SqlConnection(constr);
+            cmd = new SqlCommand();
+            cmd.Connection = con;
+        }
+        public void open_connection()
+        {
+            cmd.Connection.Open();
+        }
+        public void close_connection()
+        {
+            cmd.Connection.Close();
+        }
+        public void dispose_connection()
+        {
+            cmd.Connection.Dispose();
+        }
+
         protected void btnlogin_Click(object sender, EventArgs e)
         {
-            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-
-            string contact = txtContact.Text.Trim();
-            string password = txtpassword.Text.Trim();
-
-            if (contact == "" || password == "")
+            try
             {
-                lblMessage.Text = "Please enter Email / Phone and Password!";
-                return;
-            }
+                string username = txtContact.Text.Trim();
+                string password = txtpassword.Text.Trim();
+                connection();
+                cmd.CommandText = "LoginSP";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@username", SqlDbType.NVarChar, 100).Value = username;
+                cmd.Parameters.Add("@password", SqlDbType.NVarChar, 100).Value = password;
 
-            using (SqlConnection con = new SqlConnection(cs))
-            {
-                string query = "SELECT Role FROM Users WHERE Contact=@Contact AND Password=@Password";
-                SqlCommand cmd = new SqlCommand(query, con);
+                open_connection();
 
-                cmd.Parameters.AddWithValue("@Contact", contact);
-                cmd.Parameters.AddWithValue("@Password", password);
+                SqlDataReader dr = cmd.ExecuteReader();
 
-                con.Open();
-                object role = cmd.ExecuteScalar();
-                con.Close();
-
-                if (role != null)
+                if (dr.Read())
                 {
-                    Session["User"] = contact;
-                    Session["Role"] = role.ToString();
+                    Session["UserID"] = dr["User_ID"].ToString();
+                    lblMessage.Text = "Your are loged in";
+                    //if (dr["User_Role"] == "Admin")
+                    //{
 
-                    if (role.ToString() == "Admin")
-                        Response.Redirect("AdminDashboard.aspx");
-                    else if (role.ToString() == "ServiceProvider")
-                        Response.Redirect("ServiceDashboard.aspx");
-                    else
-                        Response.Redirect("ClientDashboard.aspx");
+                    //}
+                    //Response.Redirect("Home.aspx");
                 }
                 else
                 {
-                    lblMessage.Text = "Invalid Email / Phone or Password!";
+                    lblMessage.Text = "Invalid Login Details!";
                 }
+                close_connection();
+                dispose_connection();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
     }
