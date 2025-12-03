@@ -104,7 +104,7 @@
         </div>
 
         <!-- Button -->
-        <asp:Button ID="Worker_Signup_Button" runat="server" CssClass="signup-btn" Text="Sign Up" />
+        <asp:Button ID="Worker_Signup_Button" runat="server" CssClass="signup-btn" Text="Sign Up" OnClick="Worker_Signup_Button_Click"/>
 
     </div>
 
