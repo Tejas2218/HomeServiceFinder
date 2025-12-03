@@ -51,6 +51,24 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.TextBox User_Email_TextBox;
 
         /// <summary>
+        /// StateList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList StateList;
+
+        /// <summary>
+        /// CityList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CityList;
+
+        /// <summary>
         /// User_Address_Icon control.
         /// </summary>
         /// <remarks>
@@ -85,15 +103,6 @@ namespace HomeServiceFinder.Pages.login_signup
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox User_Contact_TextBox;
-
-        /// <summary>
-        /// Worker_Gender_DropDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Worker_Gender_DropDown;
 
         /// <summary>
         /// User_Password_Icon control.
