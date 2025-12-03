@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assests\Login_SignUp\317830.png" />
     <Content Include="Assests\Login_SignUp\Worker_Age_Icon.png" />
     <Content Include="Assests\Login_SignUp\Worker_Experience_Icon.png" />
     <Content Include="Assests\Login_SignUp\Gender_Icon.png" />
