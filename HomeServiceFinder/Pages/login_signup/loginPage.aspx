@@ -11,9 +11,8 @@
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
             background: url('<%= ResolveUrl("~/background_img.png") %>');
-
-            background-size: cover; 
-            background-position: center;        
+            background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
             display: flex;
             justify-content: center;
@@ -26,7 +25,6 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 35px 40px;
             border-radius: 15px;
-
         }
 
         .login-title {
@@ -121,10 +119,7 @@
                 CssClass="btn-login"
                 OnClick="btnlogin_Click" />
 
-            <asp:Label
-                ID="lblMessage"
-                runat="server"
-                ForeColor="Red" />
+
 
             <div class="footer-text">
                 Don’t have an account?
@@ -132,6 +127,10 @@
             </div>
 
         </div>
+        <asp:Label
+            ID="lblMessage"
+            runat="server"
+            ForeColor="Red" />
     </form>
 </body>
 </html>

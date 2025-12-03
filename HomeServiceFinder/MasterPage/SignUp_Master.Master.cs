@@ -13,15 +13,5 @@ namespace HomeServiceFinder.login_signup
         {
 
         }
-
-        protected void User_SignUpPage_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("User_SignUp.aspx");
-        }
-
-        protected void Worker_SignUpPage_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Worker_SignUp.aspx");
-        }
     }
 }
