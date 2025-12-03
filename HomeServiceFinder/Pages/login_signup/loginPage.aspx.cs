@@ -9,6 +9,13 @@ namespace HomeServiceFinder.login_signup
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"]!=null && Session["UserRole"].ToString() == "User")
+            {
+                //Response.Redirect("homePage.aspx");
+            }else if (Session["UserID"] != null && Session["UserRole"].ToString() == "Admin")
+            {
+                Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
+            }
         }
 
         public string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
@@ -54,15 +61,16 @@ namespace HomeServiceFinder.login_signup
                 if (dr.Read())
                 {
                     Session["UserID"] = dr["User_ID"].ToString();
+                    Session["UserRole"] = dr["User_Role"].ToString();
                     lblMessage.Text = "Your are loged in";
-                    //if (dr["User_Role"] == "Admin")
-                    //{
-
-                    //}
-                    //Response.Redirect("Home.aspx");
+                    if (dr["User_Role"].ToString() == "Admin")
+                    {
+                        Response.Redirect("~/Pages/Admin/admin_dashboard.aspx"); 
+                    }
+                    
                 }
                 else
-                {
+                { 
                     lblMessage.Text = "Invalid Login Details!";
                 }
                 close_connection();
