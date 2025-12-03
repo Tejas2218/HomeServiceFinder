@@ -95,26 +95,26 @@ namespace HomeServiceFinder.Pages.login_signup
             String city = CityList.SelectedItem.Text;
             String minPrice = Worker_MinimumPrice_TextBox.Text;
 
-            //cmd.CommandText = "Insert_Worker_Details";
-            //cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.Parameters.AddWithValue("@User_Name", name);
-            //cmd.Parameters.AddWithValue("@User_EmailID", email);
-            //cmd.Parameters.AddWithValue("@User_Address", address);
-            //cmd.Parameters.AddWithValue("@User_ContactNo", phone);
-            //cmd.Parameters.AddWithValue("@User_Password", password);
-            //cmd.Parameters.AddWithValue("@User_Role", "Worker");
-            //cmd.Parameters.AddWithValue("@City_Name", city);
+            cmd.CommandText = "Insert_Worker_Details";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@User_Name", name);
+            cmd.Parameters.AddWithValue("@User_EmailID", email);
+            cmd.Parameters.AddWithValue("@User_Address", address);
+            cmd.Parameters.AddWithValue("@User_ContactNo", phone);
+            cmd.Parameters.AddWithValue("@User_Password", password);
+            cmd.Parameters.AddWithValue("@User_Role", "Worker");
+            cmd.Parameters.AddWithValue("@City_Name", city);
 
-            //cmd.Parameters.AddWithValue("@SP_Age", Convert.ToInt32(age));
-            //cmd.Parameters.AddWithValue("@SP_ShopAddress", ShopAddress);
-            //cmd.Parameters.AddWithValue("@SP_Service",service);
-            //cmd.Parameters.AddWithValue("@SP_Experience", Convert.ToInt32(experience));
-            //cmd.Parameters.AddWithValue("@SP_MinimumPrice", Convert.ToInt32(minPrice));
-            //cmd.Parameters.AddWithValue("@SP_AverageRating", Convert.ToInt32("0"));
+            cmd.Parameters.AddWithValue("@SP_Age", Convert.ToInt32(age));
+            cmd.Parameters.AddWithValue("@SP_ShopAddress", ShopAddress);
+            cmd.Parameters.AddWithValue("@SP_Service", service);
+            cmd.Parameters.AddWithValue("@SP_Experience", Convert.ToInt32(experience));
+            cmd.Parameters.AddWithValue("@SP_MinimumPrice", Convert.ToInt32(minPrice));
+            cmd.Parameters.AddWithValue("@SP_AverageRating", Convert.ToInt32("0"));
 
 
-            //int result = cmd.ExecuteNonQuery();
-            int result = 1;
+            int result = cmd.ExecuteNonQuery();
+            //int result = 1;
             if (result > 0)
             {
                 Response.Write("<script>alert('Data inserted successfully');</script>");
