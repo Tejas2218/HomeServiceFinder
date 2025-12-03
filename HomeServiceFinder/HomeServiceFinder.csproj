@@ -82,6 +82,7 @@
     <Content Include="Pages\login_signup\loginPage.aspx" />
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
     <Content Include="Pages\login_signup\Worker_SignUp.aspx" />
+    <Content Include="Pages\User\user_dashboard.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +120,13 @@
     </Compile>
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.designer.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\user_dashboard.aspx.cs">
+      <DependentUpon>user_dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\user_dashboard.aspx.designer.cs">
+      <DependentUpon>user_dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
