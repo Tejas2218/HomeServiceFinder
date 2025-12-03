@@ -55,11 +55,11 @@ namespace HomeServiceFinder.login_signup
                 {
                     Session["UserID"] = dr["User_ID"].ToString();
                     lblMessage.Text = "Your are loged in";
-                    //if (dr["User_Role"] == "Admin")
-                    //{
-
-                    //}
-                    //Response.Redirect("Home.aspx");
+                    if (dr["User_Role"].ToString() == "Admin")
+                    {
+                        Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
+                    }
+                    
                 }
                 else
                 {
