@@ -107,14 +107,13 @@ namespace HomeServiceFinder.Pages.login_signup
 
             cmd.Parameters.AddWithValue("@SP_Age", Convert.ToInt32(age));
             cmd.Parameters.AddWithValue("@SP_ShopAddress", ShopAddress);
-            cmd.Parameters.AddWithValue("@SP_Service", service);
+            cmd.Parameters.AddWithValue("@SP_Service",service);
             cmd.Parameters.AddWithValue("@SP_Experience", Convert.ToInt32(experience));
             cmd.Parameters.AddWithValue("@SP_MinimumPrice", Convert.ToInt32(minPrice));
             cmd.Parameters.AddWithValue("@SP_AverageRating", Convert.ToInt32("0"));
 
 
             int result = cmd.ExecuteNonQuery();
-            //int result = 1;
             if (result > 0)
             {
                 Response.Write("<script>alert('Data inserted successfully');</script>");
