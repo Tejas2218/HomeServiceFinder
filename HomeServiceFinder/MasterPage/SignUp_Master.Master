@@ -8,23 +8,94 @@
 <html>
 <head runat="server">
     <title></title>
+
+    <style>
+           /* Center the card on screen */
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e8f0ff; /* light blue */
+        }
+
+        /* Card styling */
+        .card {
+            width: 450px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.2);
+            border-top: 5px solid #0066ff;
+            text-align: center;
+        }
+
+        /* Page title */
+        .card h1 {
+            margin: 0;
+            color: #0047b3;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Tabs container */
+        .role-tabs {
+            margin: 20px 0;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        /* Tab buttons */
+        .tab {
+            padding: 10px 30px;
+            border-radius: 8px;
+            border: 2px solid #0066ff;
+            background: white;
+            color: #0066ff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        /* Hover effect */
+        .tab:hover {
+            background: #0066ff;
+            color: white;
+        }
+
+        /* Active tab */
+        .tab.active {
+            background: #0066ff;
+            color: white;
+            box-shadow: 0 5px 12px rgba(0, 102, 255, 0.3);
+        }
+
+
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
         <link rel="stylesheet" href="master.css" />
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <h1>Sign Up</h1>
-            <br />
-            <div class="role-tabs">
-                <button class="tab active" onclick="location.href='user_signup.aspx'">User</button>
-                <button class="tab" onclick="location.href='worker_signup.aspx'">Worker</button>
-            </div>
+        <div class="page-wrapper">
+            <div class="card">
 
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+                <h1>Sign Up</h1>
+                <br />
+
+                <div class="role-tabs">
+                    <button type="button" class="tab active" onclick="location.href='user_signup.aspx'">User</button>
+                    <button type="button" class="tab" onclick="location.href='worker_signup.aspx'">Worker</button>
+                </div>
+
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+
+            </div>
         </div>
+
     </form>
 </body>
 </html>

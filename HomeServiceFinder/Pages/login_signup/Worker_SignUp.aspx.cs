@@ -126,6 +126,6 @@ namespace HomeServiceFinder.Pages.login_signup
             cmd.Connection.Close();
             cmd.Connection.Dispose();
 
-        //}
+        }
     }
 }
