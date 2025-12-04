@@ -170,6 +170,26 @@
             align-items: center;
         }
 
+        .input-row {
+            display: flex;
+            align-items: center;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #7aa7ff; /* Light blue underline */
+            transition: 0.3s;
+        }
+
+            .input-row:focus-within {
+                border-bottom: 2px solid #0066ff; /* Strong blue underline on focus */
+            }
+
+        .input-icon {
+            width: 26px;
+            height: 26px;
+            margin-right: 10px;
+            filter: hue-rotate(200deg); /* Makes icons blue-ish */
+        }
+
         .modal-box {
             background: white;
             padding: 20px;
@@ -249,7 +269,7 @@
             <!-- SIDEBAR -->
             <div class="sidebar">
                 <a onclick="showPanel('usersPanel')">Manage Users</a>
-                <a onclick="showPanel('providerPanel')">Manage Providers</a>
+                <a onclick="showPanel('providerPanel')">Manage Service Providers</a>
                 <a onclick="showPanel('bookingPanel')">Booking History</a>
             </div>
 
@@ -283,31 +303,178 @@
                 <!-- USERS -->
                 <div id="usersPanel" class="panel">
                     <div class="title">Manage Users</div>
-                    <input class="input" placeholder="Name" /><br />
-                    <br />
-                    <input class="input" placeholder="Email" /><br />
-                    <br />
-                    <input class="input" placeholder="Mobile" /><br />
-                    <br />
-                    <button class="btn">Insert</button>
+                    <!-- Name -->
+                    <div class="input-row">
+                        <asp:Image CssClass="input-icon" ID="User_Name_Icon" runat="server"
+                            ImageUrl="~/Assests/Login_SignUp/User_Name_Icon.png" />
+                        <asp:TextBox ID="User_Name_TextBox" runat="server" CssClass="textbox"
+                            placeholder="Enter Your Name">
+                        </asp:TextBox>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-row">
+                        <asp:Image CssClass="input-icon" ID="User_Email_Icon" runat="server"
+                            ImageUrl="~/Assests/Login_SignUp/User_Email_Icon.png" />
+                        <asp:TextBox ID="User_Email_TextBox" runat="server" CssClass="textbox"
+                            TextMode="Email" placeholder="Enter Your Email">
+                        </asp:TextBox>
+                    </div>
+
+                    <!-- State -->
+                    <div class="input-row">
+                        <asp:Image CssClass="input-icon" runat="server"
+                            ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
+
+                        <asp:DropDownList ID="StateList" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="BindCityList">
+                            <asp:ListItem Text="Select State" Value=""></asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+
+                    <!-- City -->
+                    <div class="input-row">
+                        <asp:Image CssClass="input-icon" runat="server"
+                            ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
+
+                        <asp:DropDownList ID="CityList" runat="server" CssClass="textbox">
+                            <asp:ListItem Text="Select City" Value=""></asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="input-row">
+                        <asp:Image CssClass="input-icon" ID="User_Address_Icon" runat="server"
+                            ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
+                        <asp:TextBox ID="User_Address_TextBox" runat="server" CssClass="textbox"
+                            placeholder="Enter Your Address">
+                        </asp:TextBox>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="input-row">
+                        <asp:Image CssClass="input-icon" ID="User_Contact_Icon" runat="server"
+                            ImageUrl="~/Assests/Login_SignUp/User_Contact_Icon.png" />
+                        <asp:TextBox ID="User_Contact_TextBox" runat="server" CssClass="textbox"
+                            TextMode="Phone" MaxLength="10" placeholder="Enter Phone Number">
+                        </asp:TextBox>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-row">
+                        <asp:Image CssClass="input-icon" ID="User_Password_Icon" runat="server"
+                            ImageUrl="~/Assests/Login_SignUp/User_Password_Icon.png" />
+                        <asp:TextBox ID="User_Password_TextBox" runat="server" CssClass="textbox"
+                            TextMode="Password" placeholder="Enter Password">
+                        </asp:TextBox>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="input-row">
+                        <asp:Image CssClass="input-icon" ID="User_Confirm_Password_Icon" runat="server"
+                            ImageUrl="~/Assests/Login_SignUp/User_Password_Icon.png" />
+                        <asp:TextBox ID="User_Confirm_Password_TextBox" runat="server" CssClass="textbox"
+                            TextMode="Password" placeholder="Re-enter Password">
+                        </asp:TextBox>
+                    </div>
+
+                    <!-- Button -->
+                    <asp:Button ID="SignupButton" runat="server" CssClass="btn" Text="Add User" OnClick="btnSignup_Click" />
                     <button class="btn">Update</button>
 
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Action</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Anuj</td>
-                            <td>
-                                <button class="btn btn-view">View</button>
-                                <button class="btn">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                    </table>
+                    <asp:GridView
+                        Colomn
+                        ID="UserGrid" 
+                        runat="server"
+                        DataKeyNames="User_ID"
+                        OnRowEditing="gvData_RowEditing"
+                        OnRowCancelingEdit="gvData_RowCancelingEdit"
+                        OnRowDeleting="gvData_RowDeleting"
+                        OnRowUpdating="gvData_RowUpdating"
+                        EmptyDataText="No Data Found"
+                        AllowPaging="true"
+                        AutoGenerateColumns="false"
+                        >
+                        <Columns>
+                            <asp:TemplateField HeaderText="ID">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblID" runat="server" Text='<%#Eval("User_ID")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Name">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblName" runat="server" Text='<%#Eval("User_Name")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtName" runat="server" Text='<%#Eval("User_Name")%>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Email">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblEmail" runat="server" Text='<%#Eval("User_EmailID")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtEmail" runat="server" Text='<%#Eval("User_EmailID")%>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Address">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblAddress" runat="server" Text='<%#Eval("User_Address")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtAddress" runat="server" Text='<%#Eval("User_Address")%>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Contact No.">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblContactNo" runat="server" Text='<%#Eval("User_ContactNo")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtContactNo" runat="server" Text='<%#Eval("User_ContactNo")%>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Password">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblPassword" runat="server" Text='<%#Eval("User_Password")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtPassword" runat="server" Text='<%#Eval("User_Password")%>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Role">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblRole" runat="server" Text='<%#Eval("User_Role")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtRole" runat="server" Text='<%#Eval("User_Role")%>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Created Date Time">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCreatedDateTime" runat="server" Text='<%#Eval("Created_DateTime")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtCreatedDateTime" runat="server" Text='<%#Eval("Created_DateTime")%>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Modified Date Time">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblModifiedDateTime" runat="server" Text='<%#Eval("Modified_DateTime")%>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtModifiedDateTime" runat="server" Text='<%#Eval("Modified_DateTime")%>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+
+                        </Columns>
+                    </asp:GridView>
                 </div>
 
                 <!-- PROVIDERS -->

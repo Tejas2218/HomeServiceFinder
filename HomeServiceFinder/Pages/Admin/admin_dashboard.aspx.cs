@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,6 +13,132 @@ namespace HomeServiceFinder.Pages.Admin
     public partial class admin_dashboard : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                BindStateList();
+                LoadUserData();
+            }
+        }
+        protected void BindStateList()
+        {
+            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("Display_State", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                StateList.DataSource = dr;
+                StateList.DataTextField = "State_Name";
+                StateList.DataValueField = "State_ID";
+                StateList.DataBind();
+            }
+            StateList.Items.Insert(0, new ListItem("Select State", ""));
+        }
+
+        protected void BindCityList(object sender, EventArgs e)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                if (StateList.SelectedIndex <= 0)
+                {
+                    return; // Do NOT call SP when no state is selected
+                }
+                SqlCommand cmd = new SqlCommand("Display_City", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                CityList.DataSource = dr;
+                CityList.DataTextField = "City_Name";
+                if (StateList.Text != "Select State")
+                {
+                    CityList.DataBind();
+                }
+
+            }
+            CityList.Items.Insert(0, new ListItem("Select City", ""));
+        }
+
+        protected void LoadUserData()
+        {
+            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection( connString)) 
+            {
+                SqlCommand cmd = new SqlCommand("Display_User_Details", con);
+                cmd.CommandType=CommandType.StoredProcedure;
+
+                con.Open();
+
+                SqlDataAdapter da= new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                UserGrid.DataSource = dt;
+                UserGrid.DataBind();
+            }
+        }
+
+        protected void btnSignup_Click(object sender, EventArgs e)
+        {
+            if (User_Password_TextBox.Text != User_Confirm_Password_TextBox.Text)
+            {
+                Response.Write("Passwords do not match!");
+                return;
+            }
+            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("Insert_User_Details", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@User_Name", User_Name_TextBox.Text);
+                    cmd.Parameters.AddWithValue("@User_EmailID", User_Email_TextBox.Text);
+                    cmd.Parameters.AddWithValue("@User_Address", User_Address_TextBox.Text);
+                    cmd.Parameters.AddWithValue("@User_ContactNo", User_Contact_TextBox.Text);
+                    cmd.Parameters.AddWithValue("@User_Password", User_Password_TextBox.Text);
+                    cmd.Parameters.AddWithValue("@User_Role", "User");
+                    cmd.Parameters.AddWithValue("@City_Name", CityList.SelectedItem.Text);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    Response.Redirect("loginPage.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
+        }
+
+        protected void gvData_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+
+        }
+
+        protected void gvData_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+
+        }
+
+        protected void gvData_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void gvData_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
         }

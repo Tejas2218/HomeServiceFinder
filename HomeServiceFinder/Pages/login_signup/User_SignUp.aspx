@@ -9,6 +9,7 @@
     <div class="signup-card">
         <div class="title">Create Account</div>
 
+        <!-- Name -->
         <div class="input-row">
             <asp:Image CssClass="input-icon" ID="User_Name_Icon" runat="server"
                 ImageUrl="~/Assests/Login_SignUp/User_Name_Icon.png" />

@@ -39,12 +39,12 @@ namespace HomeServiceFinder.Pages.login_signup
 
             cmd.CommandText = "Insert_User_Details";
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue('@User_Name', name);
-            cmd.Parameters.AddWithValue('@User_EmailID', email); ;
-            cmd.Parameters.AddWithValue('@User_Address', name);
-            cmd.Parameters.AddWithValue('@User_ContactNo', name);
-            cmd.Parameters.AddWithValue('@User_Role', name);
-            cmd.Parameters.AddWithValue('@City_ID', name);
+            cmd.Parameters.AddWithValue("@User_Name", name);
+            cmd.Parameters.AddWithValue("@User_EmailID", email); ;
+            cmd.Parameters.AddWithValue("@User_Address", name);
+            cmd.Parameters.AddWithValue("@User_ContactNo", name);
+            cmd.Parameters.AddWithValue("@User_Role", name);
+            cmd.Parameters.AddWithValue("@City_ID", name);
 
 
         }
