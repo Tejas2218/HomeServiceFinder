@@ -60,6 +60,24 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.DropDownList Worker_Gender_DropDown;
 
         /// <summary>
+        /// StateList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList StateList;
+
+        /// <summary>
+        /// CityList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CityList;
+
+        /// <summary>
         /// Worker_Address_TextBox control.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace HomeServiceFinder.Pages.login_signup
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Worker_Address_TextBox;
+
+        /// <summary>
+        /// Worker_ShopAddress_TextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Worker_ShopAddress_TextBox;
 
         /// <summary>
         /// Worker_ServiceType_DropDown control.
@@ -85,6 +112,15 @@ namespace HomeServiceFinder.Pages.login_signup
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Worker_Experience_TextBox;
+
+        /// <summary>
+        /// Worker_MinimumPrice_TextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Worker_MinimumPrice_TextBox;
 
         /// <summary>
         /// Worker_Password_TextBox control.

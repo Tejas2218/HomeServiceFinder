@@ -52,14 +52,42 @@
                 <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
             </asp:DropDownList>
         </div>
+        <!-- State -->
+        <div class="input-row">
+            <asp:Image CssClass="input-icon" runat="server"
+                ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
+
+            <asp:DropDownList ID="StateList" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="StateList_SelectedIndexChanged">
+                <asp:ListItem Text="Select State" Value=""></asp:ListItem>
+            </asp:DropDownList>
+        </div>
+
+        <!-- City -->
+        <div class="input-row">
+            <asp:Image CssClass="input-icon" runat="server"
+                ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
+
+            <asp:DropDownList ID="CityList" runat="server" CssClass="textbox">
+                <asp:ListItem Text="Select City" Value=""></asp:ListItem>
+            </asp:DropDownList>
+        </div>
 
         <!-- Address -->
         <div class="input-row">
             <asp:Image CssClass="input-icon" runat="server"
                 ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
             <asp:TextBox ID="Worker_Address_TextBox" runat="server" CssClass="textbox"
+                placeholder="Enter House Address"></asp:TextBox>
+        </div>
+
+        <!-- Address -->
+        <div class="input-row">
+            <asp:Image CssClass="input-icon" runat="server"
+                ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
+            <asp:TextBox ID="Worker_ShopAddress_TextBox" runat="server" CssClass="textbox"
                 placeholder="Enter Shop / Work Address"></asp:TextBox>
         </div>
+        
 
         <!-- Service Type -->
         <div class="input-row">
@@ -85,6 +113,16 @@
             <asp:TextBox ID="Worker_Experience_TextBox" runat="server" CssClass="textbox"
                 TextMode="Number" placeholder="Experience (in years)"></asp:TextBox>
         </div>
+
+
+        <div class="input-row">
+            <asp:Image CssClass="input-icon" runat="server"
+                ImageUrl="~/Assests/Login_SignUp/317830.png" />
+            <asp:TextBox ID="Worker_MinimumPrice_TextBox" runat="server" CssClass="textbox"
+                TextMode="Number" placeholder="Minimum Price (in Rupees)"></asp:TextBox>
+        </div>
+
+
 
 
         <!-- Password -->
