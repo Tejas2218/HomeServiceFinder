@@ -72,18 +72,14 @@
 
         /* HERO */
         .hero {
-    height: 320px;             /* fixed height */
-    width: 100%;               /* full width */
-    background: linear-gradient(
-                    rgba(96,165,250,0.3), 
-                    rgba(59,130,246,0.3)
-                ), 
-                url("https://images.unsplash.com/photo-1676311396794-f14881e9daaa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZSUyMG1haW50ZW5hbmNlfGVufDB8fDB8fHww") center center / cover no-repeat;
-    display: flex;
-    align-items: center;
-    padding-left: 80px;
-    color: #fafafa;
-}
+            height: 320px; /* fixed height */
+            width: 100%; /* full width */
+            background: linear-gradient( rgba(96,165,250,0.3), rgba(59,130,246,0.3) ), url("https://images.unsplash.com/photo-1676311396794-f14881e9daaa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZSUyMG1haW50ZW5hbmNlfGVufDB8fDB8fHww") center center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding-left: 80px;
+            color: #fafafa;
+        }
 
 
 
@@ -339,6 +335,14 @@
 
                 <div class="card">
                     <h2>Top Professionals</h2>
+                    <asp:Repeater id="gvProviders" runat="server">
+                        <ItemTemplate>
+                            <div class="provider">
+                                <img src='<%# Eval("ImageUrl") %>' />
+                                <%# Eval("") %>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                     <div class="provider">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" />
                         Raj Kumar

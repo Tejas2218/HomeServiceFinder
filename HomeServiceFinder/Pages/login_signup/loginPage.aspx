@@ -123,7 +123,7 @@
 
             <div class="footer-text">
                 Don’t have an account?
-                <a href="Signup.aspx">Sign Up</a>
+                <a href="User_SignUp.aspx">Sign Up</a>
             </div>
 
         </div>

@@ -9,12 +9,16 @@ namespace HomeServiceFinder.login_signup
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"]!=null && Session["UserRole"].ToString() == "User")
+            if (!IsPostBack)
             {
-                //Response.Redirect("homePage.aspx");
-            }else if (Session["UserID"] != null && Session["UserRole"].ToString() == "Admin")
-            {
-                Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
+                if (Session["UserID"] != null && Session["UserRole"].ToString() == "User")
+                {
+                    Response.Redirect("~/Pages/User/user_dashboard.aspx");
+                }
+                else if (Session["UserID"] != null && Session["UserRole"].ToString() == "Admin")
+                {
+                    Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
+                }
             }
         }
 
@@ -66,6 +70,9 @@ namespace HomeServiceFinder.login_signup
                     if (dr["User_Role"].ToString() == "Admin")
                     {
                         Response.Redirect("~/Pages/Admin/admin_dashboard.aspx"); 
+                    }else if(dr["User_Role"].ToString() == "User")
+                    {
+                        Response.Redirect("~/Pages/User/user_dashboard.aspx");
                     }
                     
                 }

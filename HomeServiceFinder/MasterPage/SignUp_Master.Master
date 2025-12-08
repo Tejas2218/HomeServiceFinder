@@ -18,8 +18,8 @@
             <h1>Sign Up</h1>
             <br />
             <div class="role-tabs">
-                <button class="tab active" onclick="location.href='user_signup.aspx'">User</button>
-                <button class="tab" onclick="location.href='worker_signup.aspx'">Worker</button>
+                <button class="tab active" onclick="location.href='User_SignUp.aspx'">User</button>
+                <button class="tab" onclick="location.href='Worker_SignUp.aspx'">Worker</button>
             </div>
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
