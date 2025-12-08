@@ -2,7 +2,6 @@
     CodeBehind="SignUp_Master.master.cs"
     Inherits="HomeServiceFinder.login_signup.SignUp_Master" %>
 
-
 <!DOCTYPE html>
 
 <html>
@@ -10,13 +9,14 @@
     <title></title>
 
     <style>
-           /* Center the card on screen */
+
+        /* Center the card on screen */
         .page-wrapper {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #e8f0ff; /* light blue */
+            background: #e8f0ff;
         }
 
         /* Card styling */
@@ -30,7 +30,6 @@
             text-align: center;
         }
 
-        /* Page title */
         .card h1 {
             margin: 0;
             color: #0047b3;
@@ -38,7 +37,6 @@
             font-weight: bold;
         }
 
-        /* Tabs container */
         .role-tabs {
             margin: 20px 0;
             display: flex;
@@ -46,7 +44,7 @@
             justify-content: center;
         }
 
-        /* Tab buttons */
+        /* Buttons */
         .tab {
             padding: 10px 30px;
             border-radius: 8px;
@@ -56,45 +54,69 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
-            transition: 0.25s;
+
+            /* Transition effects */
+            transition: all 0.3s ease;
         }
 
-        /* Hover effect */
         .tab:hover {
             background: #0066ff;
             color: white;
         }
 
-        /* Active tab */
+        /* Active tab style with animation */
         .tab.active {
             background: #0066ff;
             color: white;
-            box-shadow: 0 5px 12px rgba(0, 102, 255, 0.3);
+            transform: scale(1.08);
+            box-shadow: 0 5px 12px rgba(0, 102, 255, 0.4);
         }
 
-
     </style>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-        <link rel="stylesheet" href="master.css" />
-    </asp:ContentPlaceHolder>
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
+
 <body>
     <form id="form1" runat="server">
+
         <div class="page-wrapper">
             <div class="card">
 
                 <h1>Sign Up</h1>
                 <br />
 
+                <!-- USER / WORKER TAB BUTTONS -->
                 <div class="role-tabs">
-                    <button type="button" class="tab active" onclick="location.href='user_signup.aspx'">User</button>
-                    <button type="button" class="tab" onclick="location.href='worker_signup.aspx'">Worker</button>
+                    <button id="userTab" type="button" class="tab"
+                        onclick="location.href='User_SignUp.aspx'">User</button>
+
+                    <button id="workerTab" type="button" class="tab"
+                        onclick="location.href='Worker_SignUp.aspx'">Worker</button>
                 </div>
 
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
 
             </div>
         </div>
+
+
+        <!-- SCRIPT TO AUTO-SET ACTIVE BUTTON -->
+        <script>
+            const path = window.location.pathname.toLowerCase();
+
+            const userBtn = document.getElementById("userTab");
+            const workerBtn = document.getElementById("workerTab");
+
+            if (path.includes("user_signup.aspx")) {
+                userBtn.classList.add("active");
+                workerBtn.classList.remove("active");
+            }
+            else if (path.includes("worker_signup.aspx")) {
+                workerBtn.classList.add("active");
+                userBtn.classList.remove("active");
+            }
+        </script>
 
     </form>
 </body>
