@@ -13,7 +13,7 @@
         body {
             margin: 0;
             font-family: 'Inter',sans-serif;
-            background: #F9FAFB;
+            background: #F9FAFB;0
             color: #1F2937;
         }
 
@@ -72,14 +72,18 @@
 
         /* HERO */
         .hero {
-            height: 320px; /* fixed height */
-            width: 100%; /* full width */
-            background: linear-gradient( rgba(96,165,250,0.3), rgba(59,130,246,0.3) ), url("https://images.unsplash.com/photo-1676311396794-f14881e9daaa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZSUyMG1haW50ZW5hbmNlfGVufDB8fDB8fHww") center center / cover no-repeat;
-            display: flex;
-            align-items: center;
-            padding-left: 80px;
-            color: #fafafa;
-        }
+    height: 320px;             
+    width: 100%;              
+    background: linear-gradient(
+                    rgba(96,165,250,0.3), 
+                    rgba(59,130,246,0.3)    
+                ), 
+                url("https://images.unsplash.com/photo-1676311396794-f14881e9daaa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZSUyMG1haW50ZW5hbmNlfGVufDB8fDB8fHww") center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+    color: #fafafa;
+}
 
 
 
@@ -256,15 +260,9 @@
             </div>
 
             <div class="profile">
-                <asp:PlaceHolder ID="phProfileBtn" runat="server">
-                    <asp:Button ID="btnProfile" runat="server" Text="Profile" OnClick="btnProfile_Click" />
-                </asp:PlaceHolder>
-
-                <asp:PlaceHolder ID="phSignupBtn" runat="server">
-                    <asp:Button ID="btnSignup" runat="server" Text="Sign Up" OnClick="btnSignup_Click" />
-                </asp:PlaceHolder>
+                <span>Welcome User</span>
+                <img src="https://i.pravatar.cc/100" />
             </div>
-
         </div>
 
         <!-- HERO -->
@@ -341,14 +339,6 @@
 
                 <div class="card">
                     <h2>Top Professionals</h2>
-                    <asp:Repeater ID="gvProviders" runat="server">
-                        <ItemTemplate>
-                            <div class="provider">
-                                <img src='<%# Eval("ImageUrl") %>' />
-                                <%# Eval("") %>
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
                     <div class="provider">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" />
                         Raj Kumar
