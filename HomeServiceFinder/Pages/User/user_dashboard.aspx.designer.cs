@@ -15,22 +15,31 @@ namespace HomeServiceFinder.Pages.User
     {
 
         /// <summary>
+        /// ProfileMenuPlaceholder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProfileMenuPlaceholder;
+
+        /// <summary>
         /// phProfileBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phProfileBtn;
+        protected global::System.Web.UI.WebControls.Button phProfileBtn;
 
         /// <summary>
-        /// btnProfile control.
+        /// SignUpMenuPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnProfile;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SignUpMenuPlaceholder;
 
         /// <summary>
         /// phSignupBtn control.
@@ -39,24 +48,6 @@ namespace HomeServiceFinder.Pages.User
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phSignupBtn;
-
-        /// <summary>
-        /// btnSignup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSignup;
-
-        /// <summary>
-        /// gvProviders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater gvProviders;
+        protected global::System.Web.UI.WebControls.Button phSignupBtn;
     }
 }

@@ -37,7 +37,7 @@
         .validation-error {
             color: red;
             font-size: 13px;
-            margin: 4px 0 10px 46px;
+            margin: 10px 0 10px 46px;
             display: block;
         }
 
