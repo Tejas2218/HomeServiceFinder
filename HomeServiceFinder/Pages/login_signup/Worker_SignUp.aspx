@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         .validation-error {
             color: red;
@@ -9,6 +10,19 @@
             margin-top: -10px;
             margin-bottom: 10px;
             display: block;
+        }
+
+        .input-row {
+            position: relative;
+        }
+
+        #togglePwd, #toggleCPwd {
+            position: absolute;
+            right: 10px;
+            top: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #555;
         }
     </style>
 
@@ -235,6 +249,8 @@
                 ImageUrl="~/Assests/Login_SignUp/User_Password_Icon.png" />
             <asp:TextBox ID="Worker_Password_TextBox" runat="server" CssClass="textbox"
                 TextMode="Password" placeholder="Enter Password"></asp:TextBox>
+            <i id="togglePwd" class="fa-solid fa-eye"
+                style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
         </div>
         <asp:RequiredFieldValidator
             ControlToValidate="Worker_Password_TextBox"
@@ -248,7 +264,10 @@
                 ImageUrl="~/Assests/Login_SignUp/User_Password_Icon.png" />
             <asp:TextBox ID="Worker_Confirm_Password_TextBox" runat="server" CssClass="textbox"
                 TextMode="Password" placeholder="Re-enter Password"></asp:TextBox>
+            <i id="toggleCPwd" class="fa-solid fa-eye"
+                style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
         </div>
+
 
 
         <asp:RequiredFieldValidator
@@ -269,5 +288,38 @@
         <asp:Button ID="Worker_Signup_Button" runat="server" CssClass="signup-btn" Text="Sign Up" OnClick="Worker_Signup_Button_Click" />
 
     </div>
+    <script>
+        // MAIN PASSWORD
+        const pwd = document.getElementById("<%= Worker_Password_TextBox.ClientID %>");
+        const icon = document.getElementById("togglePwd");
+
+        icon.onclick = function () {
+            if (pwd.type === "password") {
+                pwd.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                pwd.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+
+        // CONFIRM PASSWORD
+        const cpwd = document.getElementById("<%= Worker_Confirm_Password_TextBox.ClientID %>");
+        const cicon = document.getElementById("toggleCPwd");
+
+        cicon.onclick = function () {
+            if (cpwd.type === "password") {
+                cpwd.type = "text";
+                cicon.classList.remove("fa-eye");
+                cicon.classList.add("fa-eye-slash");
+            } else {
+                cpwd.type = "password";
+                cicon.classList.remove("fa-eye-slash");
+                cicon.classList.add("fa-eye");
+            }
+        }
+    </script>
 
 </asp:Content>

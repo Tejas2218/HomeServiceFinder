@@ -256,9 +256,15 @@
             </div>
 
             <div class="profile">
-                <span>Welcome User</span>
-                <img src="https://i.pravatar.cc/100" />
+                <asp:PlaceHolder ID="phProfileBtn" runat="server">
+                    <asp:Button ID="btnProfile" runat="server" Text="Profile" OnClick="btnProfile_Click" />
+                </asp:PlaceHolder>
+
+                <asp:PlaceHolder ID="phSignupBtn" runat="server">
+                    <asp:Button ID="btnSignup" runat="server" Text="Sign Up" OnClick="btnSignup_Click" />
+                </asp:PlaceHolder>
             </div>
+
         </div>
 
         <!-- HERO -->
@@ -335,7 +341,7 @@
 
                 <div class="card">
                     <h2>Top Professionals</h2>
-                    <asp:Repeater id="gvProviders" runat="server">
+                    <asp:Repeater ID="gvProviders" runat="server">
                         <ItemTemplate>
                             <div class="provider">
                                 <img src='<%# Eval("ImageUrl") %>' />

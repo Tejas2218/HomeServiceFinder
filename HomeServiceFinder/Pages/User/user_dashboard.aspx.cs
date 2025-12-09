@@ -20,6 +20,19 @@ namespace HomeServiceFinder.Pages.User
         {
             if (!IsPostBack)
             {
+                if (Session["UserID"] != null)
+                {
+                    // User is logged in
+                    phProfileBtn.Visible = true;
+                    phSignupBtn.Visible = false;
+                }
+                else
+                {
+                    // User not logged in
+                    phProfileBtn.Visible = false;
+                    phSignupBtn.Visible = true;
+                }
+
                 //LoadProviders();
             }
         }
@@ -57,6 +70,16 @@ namespace HomeServiceFinder.Pages.User
         public void dispose_connection()
         {
             cmd.Connection.Dispose();
+        }
+
+        protected void btnProfile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSignup_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/login_signup/User_SignUp.aspx");
         }
     }
 }
