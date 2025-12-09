@@ -12,7 +12,7 @@ namespace HomeServiceFinder.login_signup
         protected void Page_Load(object sender, EventArgs e)
         {
             // Redirect if already logged in
-            /*if (Session["UserID"] != null && Session["UserRole"] != null)
+            if (Session["UserID"] != null && Session["UserRole"] != null)
             {
                 if (Session["UserRole"].ToString() == "Admin")
                 {
@@ -26,7 +26,7 @@ namespace HomeServiceFinder.login_signup
                 {
                     Response.Redirect("~/Pages/Service_Provider/service_provider_dashboard.aspx");
                 }
-            }*/
+            }
         }
 
         protected void btnlogin_Click(object sender, EventArgs e)
@@ -53,6 +53,7 @@ namespace HomeServiceFinder.login_signup
                     if (dr.Read())
                     {
                         Session["UserID"] = dr["User_ID"].ToString();
+                        Session["UserRole"] = dr["User_Role"].ToString();
                         
 
                         lblMessage.CssClass = "success-msg";
