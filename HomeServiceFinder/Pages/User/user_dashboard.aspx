@@ -13,7 +13,7 @@
         body {
             margin: 0;
             font-family: 'Inter',sans-serif;
-            background: #F9FAFB;
+            background: #F9FAFB;0
             color: #1F2937;
         }
 
@@ -72,11 +72,11 @@
 
         /* HERO */
         .hero {
-    height: 320px;             /* fixed height */
-    width: 100%;               /* full width */
+    height: 320px;             
+    width: 100%;              
     background: linear-gradient(
                     rgba(96,165,250,0.3), 
-                    rgba(59,130,246,0.3)
+                    rgba(59,130,246,0.3)    
                 ), 
                 url("https://images.unsplash.com/photo-1676311396794-f14881e9daaa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZSUyMG1haW50ZW5hbmNlfGVufDB8fDB8fHww") center center / cover no-repeat;
     display: flex;
