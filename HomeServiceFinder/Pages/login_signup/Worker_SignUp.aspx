@@ -293,6 +293,8 @@
             ErrorMessage="Passwords do not match."
             runat="server" Display="Dynamic" />
 
+        <asp:Label ID="ErrorLabel" runat="server" ForeColor="Red" Enabled="false"></asp:Label>
+
 
         <!-- Button -->
         <asp:Button ID="Worker_Signup_Button" runat="server" CssClass="signup-btn" Text="Sign Up" OnClick="Worker_Signup_Button_Click" />
