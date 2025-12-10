@@ -182,15 +182,25 @@
             <asp:Image CssClass="input-icon" runat="server"
                 ImageUrl="~/Assests/Login_SignUp/Worker_Services_Icon.png" />
 
-            <asp:DropDownList ID="Worker_ServiceType_DropDown" runat="server" CssClass="textbox">
-                <asp:ListItem Text="Select Service Type" Value=""></asp:ListItem>
-                <asp:ListItem Text="Plumbing"></asp:ListItem>
-                <asp:ListItem Text="Electrician"></asp:ListItem>
-                <asp:ListItem Text="Carpenter"></asp:ListItem>
-                <asp:ListItem Text="AC Repair"></asp:ListItem>
-                <asp:ListItem Text="Painter"></asp:ListItem>
-                <asp:ListItem Text="Appliance Repair"></asp:ListItem>
-                <asp:ListItem Text="Cleaning Service"></asp:ListItem>
+            <asp:DropDownList ID="Worker_ServiceType_DropDown" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="Worker_ServiceType_DropDown_SelectedIndexChanged">
+               
+            </asp:DropDownList>
+        </div>
+
+        <asp:RequiredFieldValidator
+            ControlToValidate="Worker_ServiceType_DropDown"
+            InitialValue=""
+            CssClass="validation-error"
+            ErrorMessage="Please select a service type."
+            runat="server" Display="Dynamic" />
+
+        <!---Equipment ---->
+        <div class="input-row">
+            <asp:Image CssClass="input-icon" runat="server"
+                ImageUrl="~/Assests/Login_SignUp/Worker_Services_Icon.png" />
+
+            <asp:DropDownList ID="Worker_Equipment_DropDown" runat="server" CssClass="textbox">
+               
             </asp:DropDownList>
         </div>
 

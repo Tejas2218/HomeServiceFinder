@@ -28,9 +28,8 @@ namespace HomeServiceFinder.Pages.login_signup
 
         protected void BindStateList()
         {
-            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
 
-            using (SqlConnection con = new SqlConnection(connString))
+            using (SqlConnection con = new SqlConnection(constr))
             {
                 SqlCommand cmd = new SqlCommand("Display_State", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -44,14 +43,26 @@ namespace HomeServiceFinder.Pages.login_signup
                 StateList.DataBind();
             }
             StateList.Items.Insert(0, new ListItem("Select State", ""));
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                SqlCommand cmd = new SqlCommand("View_ServiceMaster", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                Worker_ServiceType_DropDown.DataSource = dr;
+                Worker_ServiceType_DropDown.DataTextField = "Service_Name";
+                Worker_ServiceType_DropDown.DataValueField = "Service_ID";
+                Worker_ServiceType_DropDown.DataBind();
+            }
+            Worker_ServiceType_DropDown.Items.Insert(0, new ListItem("Select Service", ""));
         }
 
         protected void StateList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
-
-            using (SqlConnection con = new SqlConnection(connString))
+            using (SqlConnection con = new SqlConnection(constr))
             {
                 if (StateList.SelectedIndex <= 0)
                 {
@@ -126,6 +137,29 @@ namespace HomeServiceFinder.Pages.login_signup
             cmd.Connection.Close();
             cmd.Connection.Dispose();
 
+        }
+
+        protected void Worker_ServiceType_DropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (SqlConnection con = new SqlConnection(constr)) { 
+                if(Worker_ServiceType_DropDown.SelectedIndex<=0)
+                {
+                    return;
+                }
+                SqlCommand cmd = new SqlCommand("View_Equipment_ByID",con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Service_ID",Worker_ServiceType_DropDown.SelectedValue);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                Worker_Equipment_DropDown.DataSource = dr;
+                Worker_Equipment_DropDown.DataTextField = "Equipment_Name";
+                Worker_Equipment_DropDown.DataValueField = "Equipment_ID";
+                if (Worker_ServiceType_DropDown.Text != "Select Service")
+                {
+                    Worker_Equipment_DropDown.DataBind();
+                }
+            }
+            Worker_Equipment_DropDown.Items.Insert(0, new ListItem("Select Equipment", ""));
         }
     }
 }
