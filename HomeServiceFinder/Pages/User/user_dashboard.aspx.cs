@@ -74,7 +74,7 @@ namespace HomeServiceFinder.Pages.User
 
         protected void btnProfile_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/Pages/User/Profile.aspx");
         }
 
         protected void btnSignup_Click(object sender, EventArgs e)

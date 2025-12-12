@@ -256,10 +256,8 @@
             </div>
 
             <div class="profile">
-                <!--<span>Welcome User</span>
-                <img src="https://i.pravatar.cc/100" /> -->
                 <placeholder runat="server" id="ProfileMenuPlaceholder">
-                    <asp:Button Text="Profile" runat="server" ID="phProfileBtn" />
+                    <asp:Button Text="Profile" runat="server" ID="phProfileBtn" OnClick="btnProfile_Click" />
                 </placeholder>
                 <placeholder runat="server" id="SignUpMenuPlaceholder">
                     <asp:Button Text="SignUp" runat="server" ID="phSignupBtn" OnClick="btnSignup_Click" />

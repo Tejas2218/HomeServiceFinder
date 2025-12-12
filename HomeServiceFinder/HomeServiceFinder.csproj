@@ -84,6 +84,7 @@
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
     <Content Include="Pages\login_signup\Worker_SignUp.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_dashboard.aspx" />
+    <Content Include="Pages\User\Profile.aspx" />
     <Content Include="Pages\User\user_booking.aspx" />
     <Content Include="Pages\User\user_dashboard.aspx" />
     <Content Include="Web.config" />
@@ -130,6 +131,13 @@
     </Compile>
     <Compile Include="Pages\Service_Provider\service_provider_dashboard.aspx.designer.cs">
       <DependentUpon>service_provider_dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\user_booking.aspx.cs">
       <DependentUpon>user_booking.aspx</DependentUpon>
