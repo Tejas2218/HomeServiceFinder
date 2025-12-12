@@ -96,6 +96,15 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.DropDownList Worker_ServiceType_DropDown;
 
         /// <summary>
+        /// Worker_Equipment_DropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Worker_Equipment_DropDown;
+
+        /// <summary>
         /// Worker_Experience_TextBox control.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,15 @@ namespace HomeServiceFinder.Pages.login_signup
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Worker_Confirm_Password_TextBox;
+
+        /// <summary>
+        /// ErrorLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ErrorLabel;
 
         /// <summary>
         /// Worker_Signup_Button control.
