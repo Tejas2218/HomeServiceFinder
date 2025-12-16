@@ -19,7 +19,14 @@ namespace HomeServiceFinder.Pages.login_signup
             {
                 BindStateList();
             }
-            
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "restoreStep",
+                $"showStep({CurrentStep.Value});",
+                true
+            );
+
         }
 
         public string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
@@ -82,7 +89,7 @@ namespace HomeServiceFinder.Pages.login_signup
                 {
                     CityList.DataBind();
                 }
-
+                CurrentStep.Value = "2";
             }
             CityList.Items.Insert(0, new ListItem("Select City", ""));
         }
