@@ -39,27 +39,43 @@
             border-bottom: 2px solid #e5e5e5;
         }
 
-        .row i {
-            font-size: 20px;
-            color: black;
-            width: 25px;
-        }
+            .row i {
+                font-size: 20px;
+                color: black;
+                width: 25px;
+            }
 
-        .row input,
-        .row textarea,
-        .row select {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 16px;
-            padding: 10px 5px;
-        }
+            .row input,
+            .row textarea,
+            .row select {
+                flex: 1;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                padding: 10px 5px;
+            }
 
-        .row select {
-            background: none;
-        }
+            .row select {
+                background: none;
+            }
 
         .update-btn {
+            width: 100%;
+            background: #0066ff;
+            color: #fff;
+            padding: 14px;
+            font-size: 18px;
+            border: none;
+            border-radius: 12px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+            .update-btn:hover {
+                background: #0053d6;
+            }
+
+        .password-btn {
             width: 100%;
             background: #0066ff;
             color: #fff;
@@ -101,12 +117,6 @@
                 <asp:TextBox ID="txtName" runat="server" placeholder="Enter Your Name"></asp:TextBox>
             </div>
 
-            <!-- Email -->
-            <div class="row">
-                <i class="fa fa-envelope"></i>
-                <asp:TextBox ID="txtEmail" runat="server" placeholder="Enter Your Email"></asp:TextBox>
-            </div>
-
             <!-- Phone -->
             <div class="row">
                 <i class="fa fa-phone"></i>
@@ -119,46 +129,30 @@
                 <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" placeholder="Enter Address"></asp:TextBox>
             </div>
 
-            <!-- City -->
+            <!-- STATE -->
             <div class="row">
                 <i class="fa fa-location-dot"></i>
-                <asp:DropDownList ID="ddlCity" runat="server" >
-                    <asp:ListItem Text="Select City" Value=""></asp:ListItem>
+                <asp:DropDownList ID="StateList" runat="server" AutoPostBack="true"
+                    OnSelectedIndexChanged="StateList_SelectedIndexChanged">
                 </asp:DropDownList>
             </div>
 
-            <!-- Password -->
-            <div class="row password-wrap">
-                <i class="fa fa-lock"></i>
-                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" placeholder="Enter Password"></asp:TextBox>
-                <i class="fa fa-eye eye" onclick="togglePassword()"></i>
+            <!-- CITY -->
+            <div class="row">
+                <i class="fa fa-location-dot"></i>
+                <asp:DropDownList ID="CityList" runat="server"></asp:DropDownList>
             </div>
 
+
             <!-- Update Button -->
-            <asp:Button ID="btnUpdate" runat="server" CssClass="update-btn" Text="Update Profile" />
+            <asp:Button ID="btnUpdate" runat="server" CssClass="update-btn" Text="Update Profile" OnClick="btnUpdate_Click" />
+            <asp:Button ID="btnPassword" runat="server" CssClass="password-btn" Text="Update Password" OnClick="btnPassword_Click" />
             <div>
-                <asp:Label ID="lblMessage" Text="" runat="server" ForeColor="red"/>
+                <asp:Label ID="lblMessage" Text="" runat="server" ForeColor="red" />
             </div>
         </div>
 
     </form>
-
-    <script>
-        function togglePassword() {
-            var txt = document.getElementById("<%= txtPassword.ClientID %>");
-            var eye = event.target;
-
-            if (txt.type === "password") {
-                txt.type = "text";
-                eye.classList.remove("fa-eye");
-                eye.classList.add("fa-eye-slash");
-            } else {
-                txt.type = "password";
-                eye.classList.remove("fa-eye-slash");
-                eye.classList.add("fa-eye");
-            }
-        }
-    </script>
 
 </body>
 </html>

@@ -33,15 +33,6 @@ namespace HomeServiceFinder.Pages.User
         protected global::System.Web.UI.WebControls.TextBox txtName;
 
         /// <summary>
-        /// txtEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
-
-        /// <summary>
         /// txtContact control.
         /// </summary>
         /// <remarks>
@@ -60,22 +51,22 @@ namespace HomeServiceFinder.Pages.User
         protected global::System.Web.UI.WebControls.TextBox txtAddress;
 
         /// <summary>
-        /// ddlCity control.
+        /// StateList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCity;
+        protected global::System.Web.UI.WebControls.DropDownList StateList;
 
         /// <summary>
-        /// txtPassword control.
+        /// CityList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.DropDownList CityList;
 
         /// <summary>
         /// btnUpdate control.
@@ -85,6 +76,15 @@ namespace HomeServiceFinder.Pages.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpdate;
+
+        /// <summary>
+        /// btnPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPassword;
 
         /// <summary>
         /// lblMessage control.

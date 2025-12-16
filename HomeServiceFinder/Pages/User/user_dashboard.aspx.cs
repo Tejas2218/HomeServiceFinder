@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace HomeServiceFinder.Pages.User
 {
@@ -37,20 +38,50 @@ namespace HomeServiceFinder.Pages.User
             }
         }
 
-        //private void LoadProviders()
+        private void LoadProviders()
+        {
+            
+        }
+
+        //private void LoadBookings()
         //{
-        //    cmd.CommandText = "SELECT TOP 3 * FROM ServiceProviderDetails";
-        //    connection();
-        //    open_connection();
-        //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-        //    DataSet ds = new DataSet();
+        //    try
+        //    {
+        //        using (SqlConnection con = new SqlConnection(constr))
+        //        using (SqlCommand cmd = new SqlCommand("Display_Booking_Details", con))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
 
-        //    sda.Fill(ds);
+        //            //cmd.Parameters.Add("@User_ID", SqlDbType.Int).Value = Session["UserID"];
 
-        //    gvProviders.DataSource = ds;
-        //    gvProviders.DataBind();
+        //            con.Open();
+
+        //            SqlDataReader dr = cmd.ExecuteReader();
+
+        //            if (dr.Read())
+        //            {
+        //                txtName.Text = dr["User_Name"].ToString();
+        //                txtEmail.Text = dr["User_EmailID"].ToString();
+        //                txtContact.Text = dr["User_ContactNo"].ToString();
+        //                txtAddress.Text = dr["User_Address"].ToString();
+        //                userState = dr["State_ID"].ToString();
+        //                userCity = dr["City_ID"].ToString();
+        //                lblMessage.Text = "State=" + dr["State_ID"] + " City=" + dr["City_ID"];
+
+
+        //            }
+        //            else
+        //            {
+        //                lblMessage.Text = "No user data found.";
+        //            }
+        //            dr.Close();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lblMessage.Text = ex.Message;
+        //    }
         //}
-
 
 
         public void connection()
