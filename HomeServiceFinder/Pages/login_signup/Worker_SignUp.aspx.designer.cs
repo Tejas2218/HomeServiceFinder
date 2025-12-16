@@ -15,6 +15,15 @@ namespace HomeServiceFinder.Pages.login_signup
     {
 
         /// <summary>
+        /// CurrentStep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField CurrentStep;
+
+        /// <summary>
         /// Worker_Name_TextBox control.
         /// </summary>
         /// <remarks>
