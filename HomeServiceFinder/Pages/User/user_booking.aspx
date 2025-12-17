@@ -3,272 +3,241 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <title>Book a Service - HomeServiceFinder</title>
+    <title>Select Professional</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 
     <style>
         body {
             margin: 0;
-            background: #F9FAFB;
-            font-family: 'Inter',sans-serif;
-            color: #1F2937;
+            font-family: 'Inter', sans-serif;
+            background: #F1F5F9;
         }
 
-        /* HEADER */
-        .header {
-            background: linear-gradient(135deg,#60A5FA,#3B82F6);
-            padding: 18px 50px;
+        .container {
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            color: white;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-            .logo img {
-                height: 40px;
-            }
-
-        .back-btn {
+        .box {
             background: white;
+            width: 460px;
+            height: 92vh;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(59,130,246,.15);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
             color: #2563EB;
-            font-weight: 600;
-            padding: 8px 15px;
-            border-radius: 6px;
-            text-decoration: none;
         }
 
-        /* HERO */
-        .hero {
-            background: linear-gradient(rgba(96,165,250,.3),rgba(59,130,246,.3)), url("https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=80") center/cover;
-            height: 280px;
-            display: flex;
-            align-items: center;
-            padding-left: 60px;
-            color: white;
-        }
-
-            .hero h1 {
-                font-size: 38px;
-                margin: 0;
-            }
-
-            .hero p {
-                font-size: 16px
-            }
-
-        /* LAYOUT */
-        .wrapper {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            padding: 50px 70px;
-        }
-
-        /* CARD */
-        .card {
-            background: #fff;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 8px 18px rgba(0,0,0,.05);
-            margin-bottom: 25px;
-        }
-
-            .card h2 {
-                color: #1E3A8A;
-                margin-bottom: 15px;
-            }
-
-        /* INPUTS */
-        label {
-            display: block;
-            font-weight: 600;
-            margin-top: 15px
-        }
-
-        input, select, textarea {
-            width: 100%;
+        select {
             padding: 10px;
-            margin-top: 5px;
-            border-radius: 6px;
-            border: 1px solid #D1D5DB;
-            outline: none;
+            border-radius: 8px;
+            border: 1px solid #CBD5E1;
+            margin-bottom: 10px;
         }
 
-        /* PROVIDERS */
-        .provider {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            padding: 10px;
-            border-radius: 10px;
-            transition: .2s;
-        }
-
-            .provider:hover {
-                background: #EFF6FF;
-            }
-
-            .provider img {
-                width: 45px;
-                height: 45px;
-                border-radius: 50%;
-            }
-
-        .book-btn {
-            margin-left: auto;
-            background: #3B82F6;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        /* SUMMARY */
-        .summary p {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-        }
-
-        .total {
-            font-size: 20px;
-            font-weight: 700;
+        .selected {
+            text-align: center;
+            background: #EFF6FF;
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: 600;
             color: #1E3A8A;
         }
 
-        /* BUTTON */
-        .confirm-btn {
-            background: linear-gradient(135deg,#3B82F6,#2563EB);
-            color: white;
-            padding: 12px;
-            border: none;
-            width: 100%;
-            margin-top: 15px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
+        .list {
+            overflow-y: auto;
+            flex: 1;
+            margin-top: 8px;
+            padding-right: 5px;
         }
 
-        /* MOBILE */
-        @media(max-width:900px) {
-            .wrapper {
-                grid-template-columns: 1fr;
-                padding: 30px;
+            /* Scrollbar */
+            .list::-webkit-scrollbar {
+                width: 6px;
             }
+
+            .list::-webkit-scrollbar-thumb {
+                background: #93C5FD;
+                border-radius: 10px;
+            }
+
+        .pro {
+            background: #EFF6FF;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+            .pro:hover {
+                background: #DBEAFE;
+            }
+
+            /* SELECTED HIGHLIGHT */
+            .pro.active {
+                border: 2px solid #2563EB;
+                background: #BFDBFE;
+            }
+
+            .pro img {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+            }
+
+        .pro-info {
+            flex: 1;
+            font-size: 13px;
+        }
+
+        .select-btn {
+            background: #3B82F6;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .confirm {
+            margin-top: 10px;
+            width: 100%;
+            background: linear-gradient(135deg,#3B82F6,#2563EB);
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            color: white;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
+
     <form runat="server">
 
-        <!-- NAV -->
-        <div class="header">
-            <div class="logo">
-                <img src="https://cdn-icons-png.flaticon.com/512/2933/2933829.png">
-                HomeServiceFinder
-            </div>
-            <a class="back-btn" href="user_dashboard.aspx">← Back</a>
-        </div>
+        <div class="container">
+            <div class="box">
 
-        <!-- HERO -->
-        <div class="hero">
-            <div>
-                <h1>Book a Professional</h1>
-                <p>Quick booking with verified experts</p>
-            </div>
-        </div>
+                <h2>Select Professional</h2>
 
-        <!-- MAIN -->
-        <div class="wrapper">
+                <select id="filter" onchange="filterPros()">
+                    <option value="all">All Professionals</option>
+                    <option value="Plumber">Plumber</option>
+                    <option value="Electrician">Electrician</option>
+                    <option value="Cleaner">Cleaner</option>
+                    <option value="Painter">Painter</option>
+                    <option value="AC">AC Technician</option>
+                </select>
 
-            <!-- LEFT -->
-            <div>
+                <div class="selected">
+                    Selected Professional: <span id="selectedName">None</span>
+                </div>
 
-                <div class="card">
-                    <h2>Select Service</h2>
+                <div class="list" id="list">
 
-                    <label>Service Type</label>
-                    <select>
-                        <option>Plumbing</option>
-                        <option>Electrical</option>
-                        <option>AC Repair</option>
-                        <option>Cleaning</option>
-                        <option>Painting</option>
-                    </select>
+                    <div class="pro" data-type="Plumber" onclick="selectPro(this,'Raj Kumar')">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg">
+                        <div class="pro-info">Raj Kumar<br>
+                            Plumber • ⭐4.8</div>
+                        <button class="select-btn" type="button">Select</button>
+                    </div>
 
-                    <label>Preferred Date</label>
-                    <input type="date" />
+                    <div class="pro" data-type="Electrician" onclick="selectPro(this,'Aman Verma')">
+                        <img src="https://randomuser.me/api/portraits/men/2.jpg">
+                        <div class="pro-info">Aman Verma<br>
+                            Electrician • ⭐4.7</div>
+                        <button class="select-btn" type="button">Select</button>
+                    </div>
 
-                    <label>Preferred Time</label>
-                    <input type="time" />
+                    <div class="pro" data-type="Cleaner" onclick="selectPro(this,'Neha Patel')">
+                        <img src="https://randomuser.me/api/portraits/women/3.jpg">
+                        <div class="pro-info">Neha Patel<br>
+                            Cleaner • ⭐4.6</div>
+                        <button class="select-btn" type="button">Select</button>
+                    </div>
 
-                    <label>Service Address</label>
-                    <textarea rows="3"></textarea>
+                    <div class="pro" data-type="AC" onclick="selectPro(this,'Rahul Singh')">
+                        <img src="https://randomuser.me/api/portraits/men/4.jpg">
+                        <div class="pro-info">Rahul Singh<br>
+                            AC Tech • ⭐4.9</div>
+                        <button class="select-btn" type="button">Select</button>
+                    </div>
+
+                    <div class="pro" data-type="Painter" onclick="selectPro(this,'Mohit Sharma')">
+                        <img src="https://randomuser.me/api/portraits/men/5.jpg">
+                        <div class="pro-info">Mohit Sharma<br>
+                            Painter • ⭐4.5</div>
+                        <button class="select-btn" type="button">Select</button>
+                    </div>
+
+                    <div class="pro" data-type="Plumber" onclick="selectPro(this,'Deepak Joshi')">
+                        <img src="https://randomuser.me/api/portraits/men/6.jpg">
+                        <div class="pro-info">Deepak Joshi<br>
+                            Plumber • ⭐4.8</div>
+                        <button class="select-btn" type="button">Select</button>
+                    </div>
+
+                    <div class="pro" data-type="Electrician" onclick="selectPro(this,'Arjun Yadav')">
+                        <img src="https://randomuser.me/api/portraits/men/8.jpg">
+                        <div class="pro-info">Arjun Yadav<br>
+                            Electrician • ⭐4.6</div>
+                        <button class="select-btn" type="button">Select</button>
+                    </div>
+
+                    <div class="pro" data-type="Cleaner" onclick="selectPro(this,'Anjali Gupta')">
+                        <img src="https://randomuser.me/api/portraits/women/13.jpg">
+                        <div class="pro-info">Anjali Gupta<br>
+                            Cleaner • ⭐4.6</div>
+                        <button class="select-btn" type="button">Select</button>
+                    </div>
 
                 </div>
 
-                <div class="card">
-                    <h2>Select Professional</h2>
-
-                    <div class="provider">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg">
-                        Raj Kumar
-    <button class="book-btn" type="button">Select</button>
-                    </div>
-
-                    <div class="provider">
-                        <img src="https://randomuser.me/api/portraits/men/44.jpg">
-                        Amit Singh
-    <button class="book-btn" type="button">Select</button>
-                    </div>
-
-                    <div class="provider">
-                        <img src="https://randomuser.me/api/portraits/men/55.jpg">
-                        Rahul Verma
-    <button class="book-btn" type="button">Select</button>
-                    </div>
-
-                </div>
+                <button class="confirm">Confirm Selection</button>
 
             </div>
-
-            <!-- RIGHT -->
-            <div>
-
-                <div class="card summary">
-                    <h2>Booking Summary</h2>
-
-                    <p><span>Service</span> <span>Plumbing</span></p>
-                    <p><span>Date</span> <span>25 March 2025</span></p>
-                    <p><span>Time</span> <span>11:00 AM</span></p>
-                    <p><span>Professional</span> <span>Raj Kumar</span></p>
-
-                    <hr>
-
-                    <p class="total"><span>Total</span> <span>₹499</span></p>
-
-                    <button class="confirm-btn">Confirm Booking</button>
-
-                </div>
-
-            </div>
-
         </div>
 
     </form>
+
+    <script>
+        function selectPro(card, name) {
+
+            document.querySelectorAll('.pro').forEach(p => p.classList.remove('active'));
+            card.classList.add('active');
+
+            document.getElementById("selectedName").innerText = name;
+        }
+
+        function filterPros() {
+            var type = document.getElementById("filter").value;
+            var pros = document.querySelectorAll(".pro");
+
+            pros.forEach(p => {
+                if (type == "all" || p.getAttribute("data-type") == type) {
+                    p.style.display = "flex";
+                } else {
+                    p.style.display = "none";
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>

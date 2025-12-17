@@ -11,7 +11,7 @@ namespace HomeServiceFinder.Pages.User
 {
 
 
-    public partial class user_dashboard
+    public partial class contact_us
     {
 
         /// <summary>

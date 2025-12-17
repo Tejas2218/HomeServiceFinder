@@ -1,377 +1,412 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="user_dashboard.aspx.cs" Inherits="HomeServiceFinder.Pages.User.user_dashboard" %>
 
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head runat="server">
-    <title>HomeServiceFinder - User Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>Apex - Home Service Finder</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;700&display=swap" rel="stylesheet">
+    <link href="img/favicon.ico" rel="icon" />
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter',sans-serif;
-            background: #F9FAFB;0
-            color: #1F2937;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
 
-        /* NAVBAR */
-        .header {
-            background: linear-gradient(135deg,#60A5FA,#3B82F6);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 50px;
-            box-shadow: 0 4px 12px rgba(0,0,0,.1);
-        }
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-        }
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
 
-            .logo img {
-                height: 42px
-            }
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 
-        .nav-menu {
-            display: flex;
-            gap: 25px;
-        }
-
-            .nav-menu a {
-                color: white;
-                font-weight: 600;
-                transition: .2s;
-            }
-
-                .nav-menu a:hover {
-                    color: #FACC15;
-                }
-
-        /* PROFILE */
-        .profile {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-            .profile img {
-                width: 44px;
-                height: 44px;
-                border-radius: 50%;
-                border: 3px solid white;
-            }
-
-        /* HERO */
-        .hero {
-    height: 320px;             
-    width: 100%;              
-    background: linear-gradient(
-                    rgba(96,165,250,0.3), 
-                    rgba(59,130,246,0.3)    
-                ), 
-                url("https://images.unsplash.com/photo-1676311396794-f14881e9daaa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZSUyMG1haW50ZW5hbmNlfGVufDB8fDB8fHww") center center / cover no-repeat;
-    display: flex;
-    align-items: center;
-    padding-left: 80px;
-    color: #fafafa;
-}
-
-
-
-            .hero h1 {
-                font-size: 42px;
-            }
-
-            .hero p {
-                font-size: 18px;
-                color: #fafafa;
-            }
-
-        /* DASHBOARD */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 35px;
-            padding: 60px 80px;
-        }
-
-        /* CARD */
-        .card {
-            background: #FFFFFF;
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 8px 20px rgba(0,0,0,.05);
-            border-top: 4px solid #60A5FA;
-            margin-bottom: 30px;
-        }
-
-        /* BUTTONS */
-        .view-btn {
-            margin-top: 15px;
-            background: #3B82F6;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .2s;
-        }
-
-            .view-btn:hover {
-                background: #2563EB;
-            }
-
-        /* SERVICES */
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(175px,1fr));
-            gap: 20px;
-        }
-
-        .service-card {
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,.06);
-            transition: .2s;
-            cursor: pointer;
-            background: white;
-        }
-
-            .service-card:hover {
-                transform: translateY(-6px)
-            }
-
-            .service-card img {
-                height: 130px;
-                width: 100%;
-                object-fit: cover;
-            }
-
-        .service-title {
-            text-align: center;
-            font-weight: 700;
-            padding: 12px;
-            background: #EFF6FF;
-            color: #1E3A8A;
-        }
-
-        /* TABLE */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: #3B82F6;
-            color: white;
-            padding: 12px;
-        }
-
-        td {
-            padding: 12px;
-            text-align: center;
-            border-bottom: 1px solid #E5E7EB;
-        }
-
-        /* PROVIDERS */
-        .provider {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-            .provider img {
-                width: 52px;
-                height: 52px;
-                border-radius: 50%;
-            }
-
-        .book-btn {
-            margin-left: auto;
-            background: #3B82F6;
-            color: white;
-            padding: 7px 14px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: .2s;
-        }
-
-            .book-btn:hover {
-                background: #2563EB;
-            }
-
-        /* FOOTER */
-        footer {
-            background: #E0F2FE;
-            color: #1E3A8A;
-            text-align: center;
-            padding: 16px;
-            font-size: 14px;
-        }
-
-        /* MOBILE */
-        @media(max-width:900px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-                padding: 30px
-            }
-
-            .hero {
-                padding-left: 25px
-            }
-
-            .nav-menu {
-                display: none
-            }
-        }
-    </style>
+    <link href="css/style.css" rel="stylesheet" />
 </head>
-
 <body>
-    <form runat="server">
-
-        <!-- NAVBAR -->
-        <div class="header">
-            <div class="logo">
-                <img src="https://cdn-icons-png.flaticon.com/512/2933/2933829.png" />
-                HomeServiceFinder
-            </div>
-
-            <div class="nav-menu">
-                <a href="#">Home</a>
-                <a href="#">Services</a>
-                <a href="#">Bookings</a>
-                <a href="#">Professionals</a>
-                <a href="#">Contact</a>
-            </div>
-
-            <div class="profile">
-                <span>Welcome User</span>
-                <img src="https://i.pravatar.cc/100" />
+    <form id="form1" runat="server">
+        
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <div class="container-fluid bg-light p-0">
+            <div class="row gx-0 d-none d-lg-flex">
+                <div class="col-lg-7 px-5 text-start">
+                    <div class="h-100 d-inline-flex align-items-center border-start border-end px-3">
+                        <small class="fa fa-phone-alt me-2"></small>
+                        <small>+012 345 6789</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center border-end px-3">
+                        <small class="far fa-envelope-open me-2"></small>
+                        <small>info@example.com</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center border-end px-3">
+                        <small class="far fa-clock me-2"></small>
+                        <small>Mon - Fri : 09 AM - 09 PM</small>
+                    </div>
+                </div>
+                <div class="col-lg-5 px-5 text-end">
+                    <div class="h-100 d-inline-flex align-items-center">
+                        <a class="btn btn-square border-end border-start" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square border-end" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square border-end" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-square border-end" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- HERO -->
-        <div class="hero">
-            <div>
-                <h1>Trusted Home Services at Your Doorstep</h1>
-                <p>Book verified experts instantly</p>
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+            <a href="index.aspx" class="navbar-brand d-flex align-items-center">
+                <h1 class="m-0"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-3 py-lg-0">
+                    <a href="index.aspx" class="nav-item nav-link active">Home</a>
+                    <a href="service.aspx" class="nav-item nav-link">Our Services</a>
+                    <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
+                    <a href="profile.aspx" class="nav-item nav-link">Profile</a>
+                    <a href="about.aspx" class="nav-item nav-link">About Us</a>              
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+            <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="w-100" src="img/carousel-1.jpg" alt="Image" />
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-lg-10">
+                                        <h5 class="text-light text-uppercase mb-3 animated slideInDown">Welcome to Apex</h5>
+                                        <h1 class="display-2 text-light mb-3 animated slideInDown">A Construction & Renovation Company</h1>
+                                        <ol class="breadcrumb mb-4 pb-2">
+                                            <li class="breadcrumb-item fs-5 text-light">Commercial</li>
+                                            <li class="breadcrumb-item fs-5 text-light">Residential</li>
+                                            <li class="breadcrumb-item fs-5 text-light">Industrial</li>
+                                        </ol>
+                                        <a href="#" class="btn btn-primary py-3 px-5">More Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="w-100" src="img/carousel-2.jpg" alt="Image" />
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-lg-10">
+                                        <h5 class="text-light text-uppercase mb-3 animated slideInDown">Welcome to Apex</h5>
+                                        <h1 class="display-2 text-light mb-3 animated slideInDown">Professional Tiling & Painting Services</h1>
+                                        <ol class="breadcrumb mb-4 pb-2">
+                                            <li class="breadcrumb-item fs-5 text-light">Commercial</li>
+                                            <li class="breadcrumb-item fs-5 text-light">Residential</li>
+                                            <li class="breadcrumb-item fs-5 text-light">Industrial</li>
+                                        </ol>
+                                        <a href="#" class="btn btn-primary py-3 px-5">More Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
-
-        <!-- DASHBOARD -->
-        <div class="dashboard">
-
-            <!-- LEFT -->
-            <div>
-
-                <div class="card">
-                    <h2>Available Services</h2>
-                    <div class="services">
-                        <div class="service-card">
-                            <img src="https://images.unsplash.com/photo-1676210134188-4c05dd172f89?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGx1bWJpbmd8ZW58MHx8MHx8fDA%3D" />
-                            <div class="service-title">Plumbing</div>
-                        </div>
-                        <div class="service-card">
-                            <img src="https://images.unsplash.com/photo-1635335874521-7987db781153?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZWxlY3RyaWNhbHxlbnwwfHwwfHx8MA%3D%3D" />
-                            <div class="service-title">Electrical</div>
-                        </div>
-                        <div class="service-card">
-                            <img src="https://media.istockphoto.com/id/2211719481/photo/technician-with-screwdriver-repairing-air-conditioner-at-home.webp?a=1&b=1&s=612x612&w=0&k=20&c=jgXsFwah9TmgEV1m6MXRy3_BqpA0V6zJ5q4AkWw4vM4=" />
-                            <div class="service-title">AC Repair</div>
-                        </div>
-                        <div class="service-card">
-                            <img src="https://plus.unsplash.com/premium_photo-1663011218145-c1d0c3ba3542?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q2xlYW5pbmd8ZW58MHx8MHx8fDA%3D" />
-                            <div class="service-title">Cleaning</div>
-                        </div>
-                        <div class="service-card">
-                            <img src="https://plus.unsplash.com/premium_photo-1683121602687-60c47b2222f0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fFBhaW50ZXIlMjB3b3JrZXJ8ZW58MHx8MHx8fDA%3D" />
-                            <div class="service-title">Painting</div>
-                        </div>
-                        <div class="service-card">
-                            <img src="https://images.unsplash.com/photo-1645651964715-d200ce0939cc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FycGVudHJ5fGVufDB8fDB8fHww" />
-                            <div class="service-title">Carpentry</div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="position-relative overflow-hidden ps-5 pt-5 h-100" style="min-height: 400px;">
+                            <img class="position-absolute w-100 h-100" src="img/about.jpg" alt="" style="object-fit: cover;" />
+                            <div class="position-absolute top-0 start-0 bg-white pe-3 pb-3" style="width: 200px; height: 200px;">
+                                <div class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+                                    <h1 class="text-white">25</h1>
+                                    <h2 class="text-white">Years</h2>
+                                    <h5 class="text-white mb-0">Experience</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <button class="view-btn">View More Services ➜</button>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="h-100">
+                            <div class="border-start border-5 border-primary ps-4 mb-5">
+                                <h6 class="text-body text-uppercase mb-2">About Us</h6>
+                                <h1 class="display-6 mb-0">Unique Solutions For Residentials & Industries!</h1>
+                            </div>
+                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                            <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                            <div class="border-top mt-4 pt-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-4 d-flex wow fadeIn" data-wow-delay="0.1s">
+                                        <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                                        <h6 class="mb-0">Ontime at services</h6>
+                                    </div>
+                                    <div class="col-sm-4 d-flex wow fadeIn" data-wow-delay="0.3s">
+                                        <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                                        <h6 class="mb-0">24/7 hours services</h6>
+                                    </div>
+                                    <div class="col-sm-4 d-flex wow fadeIn" data-wow-delay="0.5s">
+                                        <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                                        <h6 class="mb-0">Verified professionals</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="card">
-                    <h2>Booking History</h2>
-                    <table>
-                        <tr>
-                            <th>Service</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
-                        <tr>
-                            <td>Plumbing</td>
-                            <td>12 Mar 2025</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td>AC Repair</td>
-                            <td>20 Mar 2025</td>
-                            <td>Pending</td>
-                        </tr>
-                    </table>
-                    <button class="view-btn">View More Bookings ➜</button>
-                </div>
-
             </div>
-
-            <!-- RIGHT -->
-            <div>
-
-                <div class="card">
-                    <h2>Top Professionals</h2>
-                    <div class="provider">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" />
-                        Raj Kumar
-                        <button class="book-btn">Book</button>
-                    </div>
-                    <div class="provider">
-                        <img src="https://randomuser.me/api/portraits/men/44.jpg" />
-                        Amit Singh
-                        <button class="book-btn">Book</button>
-                    </div>
-                    <div class="provider">
-                        <img src="https://randomuser.me/api/portraits/men/55.jpg" />
-                        Rahul Verma
-                        <button class="book-btn">Book</button>
-                    </div>
-                    <button class="view-btn">View More Professionals ➜</button>
-                </div>
-
-                <div class="card">
-                    <h2>Contact Support</h2>
-                    📞 +91 98765 43210<br />
-                    📧 support@homeservicefinder.com<br>
-                    <button class="view-btn">View Contact Info ➜</button>
-                </div>
-
-            </div>
-
         </div>
+        <div class="container-fluid my-5 p-0">
+            <div class="row g-0">
+                <div class="col-xl-3 col-sm-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="img/fact-1.jpg" alt="" />
+                        <div class="facts-overlay">
+                            <h1 class="display-1">01</h1>
+                            <h4 class="text-white mb-3">Construction</h4>
+                            <p class="text-white">Aliqu diam amet diam et eos erat ipsum lorem stet lorem sit clita duo justo erat amet</p>
+                            <a class="text-white small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="img/fact-2.jpg" alt="" />
+                        <div class="facts-overlay">
+                            <h1 class="display-1">02</h1>
+                            <h4 class="text-white mb-3">Mechanical</h4>
+                            <p class="text-white">Aliqu diam amet diam et eos erat ipsum lorem stet lorem sit clita duo justo erat amet</p>
+                            <a class="text-white small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="img/fact-3.jpg" alt="" />
+                        <div class="facts-overlay">
+                            <h1 class="display-1">03</h1>
+                            <h4 class="text-white mb-3">Architecture</h4>
+                            <p class="text-white">Aliqu diam amet diam et eos erat ipsum lorem stet lorem sit clita duo justo erat amet</p>
+                            <a class="text-white small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 wow fadeIn" data-wow-delay="0.7s">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="img/fact-4.jpg" alt="" />
+                        <div class="facts-overlay">
+                            <h1 class="display-1">04</h1>
+                            <h4 class="text-white mb-3">Interior Design</h4>
+                            <p class="text-white">Aliqu diam amet diam et eos erat ipsum lorem stet lorem sit clita duo justo erat amet</p>
+                            <a class="text-white small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="border-start border-5 border-primary ps-4 mb-5">
+                            <h6 class="text-body text-uppercase mb-2">Why Choose Us!</h6>
+                            <h1 class="display-6 mb-0">Our Specialization And Company Features</h1>
+                        </div>
+                        <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <div class="row gy-5 gx-4">
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                                    <h6 class="mb-0">Large number of services provided</h6>
+                                </div>
+                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam</span>
+                            </div>
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.2s">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                                    <h6 class="mb-0">25+ years of professional experience</h6>
+                                </div>
+                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam</span>
+                            </div>
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                                    <h6 class="mb-0">A large number of grateful customers</h6>
+                                </div>
+                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam</span>
+                            </div>
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                                    <h6 class="mb-0">Always reliable and affordable prices</h6>
+                                </div>
+                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="position-relative overflow-hidden ps-5 pt-5 h-100" style="min-height: 400px;">
+                            <img class="position-absolute w-100 h-100" src="img/feature.jpg" alt="" style="object-fit: cover;" />
+                            <div class="position-absolute top-0 start-0 bg-white pe-3 pb-3" style="width: 200px; height: 200px;">
+                                <div class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+                                    <h1 class="text-white">25</h1>
+                                    <h2 class="text-white">Years</h2>
+                                    <h5 class="text-white mb-0">Experience</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-end mb-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="border-start border-5 border-primary ps-4">
+                            <h6 class="text-body text-uppercase mb-2">Our Services</h6>
+                            <h1 class="display-6 mb-0">Construction And Renovation Solutions</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-lg-end wow fadeInUp" data-wow-delay="0.3s">
+                        <a class="btn btn-primary py-3 px-5" href="service.aspx">More Services</a>
+                    </div>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item bg-light overflow-hidden h-100">
+                            <img class="img-fluid" src="img/service-1.jpg" alt="" />
+                            <div class="service-text position-relative text-center h-100 p-4">
+                                <h5 class="mb-3">Building Construction</h5>
+                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item bg-light overflow-hidden h-100">
+                            <img class="img-fluid" src="img/service-2.jpg" alt="" />
+                            <div class="service-text position-relative text-center h-100 p-4">
+                                <h5 class="mb-3">Home Maintainance</h5>
+                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="service-item bg-light overflow-hidden h-100">
+                            <img class="img-fluid" src="img/service-3.jpg" alt="" />
+                            <div class="service-text position-relative text-center h-100 p-4">
+                                <h5 class="mb-3">Renovation and Painting</h5>
+                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item bg-light overflow-hidden h-100">
+                            <img class="img-fluid" src="img/service-4.jpg" alt="" />
+                            <div class="service-text position-relative text-center h-100 p-4">
+                                <h5 class="mb-3">Wiring and installation</h5>
+                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item bg-light overflow-hidden h-100">
+                            <img class="img-fluid" src="img/service-5.jpg" alt="" />
+                            <div class="service-text position-relative text-center h-100 p-4">
+                                <h5 class="mb-3">Tiling and Painting</h5>
+                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="service-item bg-light overflow-hidden h-100">
+                            <img class="img-fluid" src="img/service-6.jpg" alt="" />
+                            <div class="service-text position-relative text-center h-100 p-4">
+                                <h5 class="mb-3">Interior Design</h5>
+                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h1 class="text-white mb-4"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
+                        <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Address</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Quick Links</h4>
+                        <a class="btn btn-link" href="about.aspx">About Us</a>
+                        <a class="btn btn-link" href="profile.aspx">Profile</a>
+                        <a class="btn btn-link" href="service.aspx">Our Services</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Newsletter</h4>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email" />
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-        <footer>
-            © 2025 HomeServiceFinder | Professional Home Services Platform
-        </footer>
-
+        <script src="js/main.js"></script>
     </form>
 </body>
 </html>
