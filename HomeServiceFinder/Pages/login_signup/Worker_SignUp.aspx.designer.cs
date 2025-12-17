@@ -33,15 +33,6 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.TextBox Worker_Name_TextBox;
 
         /// <summary>
-        /// Worker_Email_TextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Worker_Email_TextBox;
-
-        /// <summary>
         /// Worker_Phone_TextBox control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace HomeServiceFinder.Pages.login_signup
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Worker_Age_TextBox;
+
+        /// <summary>
+        /// Worker_Email_TextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Worker_Email_TextBox;
 
         /// <summary>
         /// StateList control.

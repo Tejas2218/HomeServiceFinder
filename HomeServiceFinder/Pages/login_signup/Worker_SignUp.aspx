@@ -5,12 +5,190 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* Base styles from your original code */
-        .validation-error {
-            color: red;
+        /* Grid Layout System */
+        .form-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 30px; /* Increased horizontal gap for better breathing room */
+            text-align: left;
+            padding: 10px 5px;
+        }
+
+        .grid-item {
+            flex: 1 1 calc(50% - 30px);
+            min-width: 280px;
+            margin-bottom: 5px; /* Space for validation messages so they don't push layout */
+        }
+
+        .full-row {
+            flex: 1 1 100%;
+        }
+
+        /* Modern Input Styling */
+        .field-label {
+            font-weight: 600;
             font-size: 13px;
-            margin-top: -10px;
-            margin-bottom: 10px;
+            color: #444;
+            margin-bottom: 8px; /* More space between label and input */
+            display: block;
+            margin-left: 2px;
+        }
+
+        .input-row {
+            position: relative;
+            display: flex;
+            align-items: center; /* Vertically centers items in the row */
+        }
+
+        .textbox {
+            width: 100%;
+            padding: 13px 15px 13px 45px; /* Increased left padding for icon room */
+            border-radius: 10px;
+            border: 1px solid #dcdcdc;
+            background: #fdfdfd;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+            .textbox:focus {
+                border-color: #0066ff;
+                background: #fff;
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+            }
+
+        /* Adjusted Icon Logic */
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%); /* Precisely centers the image icon */
+            width: 18px;
+            height: 18px;
+            object-fit: contain; /* Prevents icon distortion */
+            opacity: 0.7;
+        }
+
+        /* Validation Spacing */
+        .validation-error {
+            color: #e74c3c;
+            font-size: 11px;
+            margin-top: 5px;
+            font-weight: 500;
+            display: block;
+        }
+
+        /* Step Header Styling */
+        h3 {
+            color: #222;
+            margin: 10px 0 25px 0;
+            border-left: 5px solid #0066ff;
+            padding-left: 15px;
+            font-size: 19px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Password Eye Icon Adjustment */
+        #togglePwd, #toggleCPwd {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Progress Indicator Spacing */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 35px 0;
+            gap: 20px;
+        }
+
+        /* Navigation Buttons */
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px; /* Clear separation from form fields */
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            padding: 14px 30px;
+            border-radius: 50px; /* Rounder buttons for modern look */
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            font-size: 15px;
+            transition: transform 0.2s;
+        }
+
+            .nav-btn:active {
+                transform: scale(0.98);
+            }
+
+        .form-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 30px;
+            text-align: left;
+            padding: 10px 5px;
+        }
+
+        .grid-item {
+            flex: 1 1 calc(50% - 30px);
+            min-width: 280px;
+        }
+
+        .full-row {
+            flex: 1 1 100%;
+        }
+
+        /* --- Progress Indicator Styles (Restored) --- */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0 40px 0;
+            gap: 0; /* Gap handled by lines */
+        }
+
+        .progress-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            border: 3px solid #e0e0e0;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+            .progress-step.active {
+                background: #0066ff;
+                color: #ffffff;
+                border-color: #0047b3;
+                box-shadow: 0 0 10px rgba(0, 102, 255, 0.4);
+            }
+
+        /* Modern Input Styling */
+        .field-label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #444;
+            margin-bottom: 8px;
             display: block;
         }
 
@@ -18,429 +196,287 @@
             position: relative;
         }
 
-        #togglePwd, #toggleCPwd {
+        .textbox {
+            width: 100%;
+            padding: 13px 15px 13px 45px;
+            border-radius: 10px;
+            border: 1px solid #dcdcdc;
+            background: #fdfdfd;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .input-icon {
             position: absolute;
-            right: 10px;
-            top: 12px;
-            cursor: pointer;
-            font-size: 18px;
-            color: #555;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
         }
 
-        /* --- New styles for multi-step form --- */
-        .form-step {
-            display: none; /* Hide all steps by default */
-            padding: 20px 0;
-            border-top: 1px solid #ccc; /* Visual separation for steps */
-            margin-top: 10px;
-        }
-
+        /* --- Navigation Button Styles (Restored & Fixed) --- */
         .step-navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+            gap: 15px;
         }
 
-        .step-navigation button {
-            padding: 10px 20px;
+        .nav-btn {
+            padding: 14px 25px;
+            border-radius: 12px;
             border: none;
-            border-radius: 5px;
+            font-weight: 700;
             cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            flex: 1;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .next-btn {
-            background-color: #007bff; /* Example: Blue */
-            color: white;
-        }
-
+        /* Previous Button (Gray) */
         .prev-btn {
-            background-color: #6c757d; /* Example: Gray */
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+        }
+
+            .prev-btn:hover {
+                background: #e2e6ea;
+                color: #343a40;
+            }
+
+        /* Next Button (Blue) */
+        .next-btn {
+            background: #0066ff;
             color: white;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
         }
 
-        /* Ensure the first step is visible on page load */
-        #step1 {
+            .next-btn:hover {
+                background: #0052cc;
+                transform: translateY(-1px);
+            }
+
+        /* Sign Up Button (Yellow/Theme) */
+        .signup-btn {
+            background: #ffcc00;
+            color: #000;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+        }
+
+            .signup-btn:hover {
+                background: #e6b800;
+            }
+
+        .validation-error {
+            color: #e74c3c;
+            font-size: 11px;
+            margin-top: 5px;
             display: block;
-            border-top: none; /* No top border for the first step */
         }
 
-        /* Progress indicator styles (Optional but recommended) */
-        .progress-indicator {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+        h3 {
+            color: #333;
+            margin-bottom: 25px;
+            border-left: 4px solid #0066ff;
+            padding-left: 15px;
         }
-        .progress-step {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #ddd;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 10px;
-            font-weight: bold;
-        }
-        .progress-step.active {
-            background-color: #007bff;
-        }
-
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:HiddenField ID="CurrentStep" runat="server" Value="1" />
 
-    <div class="signup-card">
+    <div class="progress-indicator">
+        <div id="pStep1" class="progress-step active">1</div>
+        <div id="pStep2" class="progress-step">2</div>
+        <div id="pStep3" class="progress-step">3</div>
+        <div id="pStep4" class="progress-step">4</div>
+    </div>
 
-        <div class="title">Service Provider Sign Up</div>
+    <div id="step1" class="form-step">
+        <h3>1. Personal Details</h3>
+        <div class="form-grid">
 
-        <div class="progress-indicator">
-            <div id="pStep1" class="progress-step active">1</div>
-            <div id="pStep2" class="progress-step">2</div>
-            <div id="pStep3" class="progress-step">3</div>
-            <div id="pStep4" class="progress-step">4</div>
+            <div class="grid-item full-row">
+                <label class="field-label">Full Name</label>
+                <div class="input-row">
+                    <asp:Image CssClass="input-icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Name_Icon.png" />
+                    <asp:TextBox ID="Worker_Name_TextBox" runat="server" CssClass="textbox" placeholder="Jane Doe"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="Worker_Name_TextBox" CssClass="validation-error" ErrorMessage="Full name is required." runat="server" Display="Dynamic" ValidationGroup="Step1" />
+            </div>
+
+            <div class="grid-item">
+                <label class="field-label">Phone Number</label>
+                <div class="input-row">
+                    <asp:Image CssClass="input-icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Contact_Icon.png" />
+                    <asp:TextBox ID="Worker_Phone_TextBox" runat="server" CssClass="textbox" TextMode="Phone" MaxLength="10" placeholder="10-digit mobile number"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="Worker_Phone_TextBox" CssClass="validation-error" ErrorMessage="Phone is required." runat="server" Display="Dynamic" ValidationGroup="Step1" />
+                <asp:RegularExpressionValidator ControlToValidate="Worker_Phone_TextBox" CssClass="validation-error" ErrorMessage="Invalid phone." ValidationExpression="^\d{10}$" runat="server" Display="Dynamic" ValidationGroup="Step1" />
+            </div>
+
+            <div class="grid-item">
+                <label class="field-label">Age</label>
+                <div class="input-row">
+                    <asp:Image CssClass="input-icon" runat="server" ImageUrl="~/Assests/Login_SignUp/Worker_Age_Icon.png" />
+                    <asp:TextBox ID="Worker_Age_TextBox" runat="server" CssClass="textbox" TextMode="Number" placeholder="Min 18"></asp:TextBox>
+                </div>
+                <asp:RangeValidator ControlToValidate="Worker_Age_TextBox" MinimumValue="18" MaximumValue="70" Type="Integer" CssClass="validation-error" ErrorMessage="Age 18-70 only" runat="server" Display="Dynamic" ValidationGroup="Step1" />
+            </div>
+
+            <div class="grid-item full-row">
+                <label class="field-label">Email Address</label>
+                <div class="input-row">
+                    <asp:Image CssClass="input-icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Email_Icon.png" />
+                    <asp:TextBox ID="Worker_Email_TextBox" runat="server" CssClass="textbox" TextMode="Email" placeholder="jane@example.com"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="Worker_Email_TextBox" CssClass="validation-error" ErrorMessage="Email is required." runat="server" Display="Dynamic" ValidationGroup="Step1" />
+            </div>
+
         </div>
 
-        <div id="step1" class="form-step">
-            <h3>1. Personal Details</h3>
+        <div class="step-navigation">
+            <button type="button" class="nav-btn next-btn" onclick="nextStep(1)">Next: Address Details</button>
+        </div>
+    </div>
 
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Name_Icon.png" />
-                <asp:TextBox ID="Worker_Name_TextBox" runat="server" CssClass="textbox"
-                    placeholder="Enter Full Name"></asp:TextBox>
+    <div id="step2" class="form-step">
+        <h3>2. Address Details</h3>
+        <div class="form-grid">
+            <div class="grid-item">
+                <label class="field-label">State</label>
+                <asp:DropDownList ID="StateList" runat="server" CssClass="textbox" OnSelectedIndexChanged="StateList_SelectedIndexChanged" AutoPostBack="true" Style="padding-left: 15px;"></asp:DropDownList>
             </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Name_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Full name is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step1" />
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Email_Icon.png" />
-                <asp:TextBox ID="Worker_Email_TextBox" runat="server" CssClass="textbox"
-                    TextMode="Email" placeholder="Enter Email"></asp:TextBox>
+            <div class="grid-item">
+                <label class="field-label">City</label>
+                <asp:DropDownList ID="CityList" runat="server" CssClass="textbox" Style="padding-left: 15px;"></asp:DropDownList>
             </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Email_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Email is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step1" />
-            <asp:RegularExpressionValidator
-                ControlToValidate="Worker_Email_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Invalid email format."
-                ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"
-                runat="server" Display="Dynamic" ValidationGroup="Step1" />
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Contact_Icon.png" />
-                <asp:TextBox ID="Worker_Phone_TextBox" runat="server" CssClass="textbox"
-                    TextMode="Phone" MaxLength="10" placeholder="Enter Mobile Number"></asp:TextBox>
+            <div class="grid-item">
+                <label class="field-label">Home Address</label>
+                <asp:TextBox ID="Worker_Address_TextBox" runat="server" CssClass="textbox" placeholder="Residence Address" Style="padding-left: 15px;"></asp:TextBox>
             </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Phone_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Phone number is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step1" />
-            <asp:RegularExpressionValidator
-                ControlToValidate="Worker_Phone_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Phone must be 10 digits."
-                ValidationExpression="^\d{10}$"
-                runat="server" Display="Dynamic" ValidationGroup="Step1" />
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/Worker_Age_Icon.png" />
-                <asp:TextBox ID="Worker_Age_TextBox" runat="server" CssClass="textbox"
-                    TextMode="Number" placeholder="Enter Age"></asp:TextBox>
-            </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Age_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Age is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step1" />
-            <asp:RangeValidator
-                ControlToValidate="Worker_Age_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Age must be between 18 and 70."
-                MinimumValue="18"
-                MaximumValue="70"
-                Type="Integer"
-                runat="server" Display="Dynamic" ValidationGroup="Step1" />
-
-            <div class="step-navigation">
-                <button type="button" class="next-btn" onclick="nextStep(1)">Next: Address</button>
+            <div class="grid-item">
+                <label class="field-label">Shop/Work Address</label>
+                <asp:TextBox ID="Worker_ShopAddress_TextBox" runat="server" CssClass="textbox" placeholder="Business Address" Style="padding-left: 15px;"></asp:TextBox>
             </div>
         </div>
+        <div class="step-navigation">
+            <button type="button" class="nav-btn prev-btn" onclick="prevStep(2)">Back</button>
+            <button type="button" class="nav-btn next-btn" onclick="nextStep(2)">Next: Services</button>
+        </div>
+    </div>
 
-
-        <div id="step2" class="form-step">
-            <h3>2. Address Details</h3>
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
-
-                <asp:DropDownList ID="StateList" runat="server" CssClass="textbox" OnSelectedIndexChanged="StateList_SelectedIndexChanged" AutoPostBack="true">
-                    <asp:ListItem Text="Select State" Value=""></asp:ListItem>
-                </asp:DropDownList>
+    <div id="step3" class="form-step">
+        <h3>3. Experience & Pricing</h3>
+        <div class="form-grid">
+            <div class="grid-item">
+                <label class="field-label">Service Type</label>
+                <asp:DropDownList ID="Worker_ServiceType_DropDown" runat="server" CssClass="textbox" AutoPostBack="true" Style="padding-left: 15px;" OnSelectedIndexChanged="Worker_ServiceType_DropDown_SelectedIndexChanged"></asp:DropDownList>
             </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="StateList"
-                InitialValue=""
-                CssClass="validation-error"
-                ErrorMessage="Please select a state."
-                runat="server" Display="Dynamic" ValidationGroup="Step2" />
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
-
-                <asp:DropDownList ID="CityList" runat="server" CssClass="textbox">
-                    <asp:ListItem Text="Select City" Value=""></asp:ListItem>
-                </asp:DropDownList>
+            <div class="grid-item">
+                <label class="field-label">Equipment Status</label>
+                <asp:DropDownList ID="Worker_Equipment_DropDown" runat="server" CssClass="textbox" Style="padding-left: 15px;"></asp:DropDownList>
             </div>
-
-            <asp:RequiredFieldValidator
-                ControlToValidate="CityList"
-                InitialValue=""
-                CssClass="validation-error"
-                ErrorMessage="Please select a city."
-                runat="server" Display="Dynamic" ValidationGroup="Step2" />
-
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
-                <asp:TextBox ID="Worker_Address_TextBox" runat="server" CssClass="textbox"
-                    placeholder="Enter Home Address"></asp:TextBox>
+            <div class="grid-item">
+                <label class="field-label">Experience (Years)</label>
+                <asp:TextBox ID="Worker_Experience_TextBox" runat="server" CssClass="textbox" TextMode="Number" placeholder="Years of work" Style="padding-left: 15px;"></asp:TextBox>
             </div>
+            <div class="grid-item">
+                <label class="field-label">Minimum Price (₹)</label>
+                <asp:TextBox ID="Worker_MinimumPrice_TextBox" runat="server" CssClass="textbox" TextMode="Number" placeholder="Base Rate" Style="padding-left: 15px;"></asp:TextBox>
+            </div>
+        </div>
+        <div class="step-navigation">
+            <button type="button" class="nav-btn prev-btn" onclick="prevStep(3)">Back</button>
+            <button type="button" class="nav-btn next-btn" onclick="nextStep(3)">Next: Security</button>
+        </div>
+    </div>
 
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Address_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Home address is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step2" />
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Address_Icon.png" />
-                <asp:TextBox ID="Worker_ShopAddress_TextBox" runat="server" CssClass="textbox"
-                    placeholder="Enter Shop / Work Address"></asp:TextBox>
+    <div id="step4" class="form-step">
+        <h3>4. Account Security</h3>
+        <div class="form-grid">
+            <div class="grid-item">
+                <label class="field-label">Password</label>
+                <div class="input-row">
+                    <asp:Image CssClass="input-icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Password_Icon.png" />
+                    <asp:TextBox ID="Worker_Password_TextBox" runat="server" CssClass="textbox" TextMode="Password" placeholder="........"></asp:TextBox>
+                    <i id="togglePwd" class="fa-solid fa-eye"></i>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="Worker_Password_TextBox" CssClass="validation-error" ErrorMessage="Password is required." runat="server" Display="Dynamic" ValidationGroup="Step4" />
             </div>
 
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_ShopAddress_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Shop / Work address is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step2" />
+            <div class="grid-item">
+                <label class="field-label">Confirm Password</label>
+                <div class="input-row">
+                    <asp:Image CssClass="input-icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Password_Icon.png" />
+                    <asp:TextBox ID="Worker_Confirm_Password_TextBox" runat="server" CssClass="textbox" TextMode="Password" placeholder="........"></asp:TextBox>
+                    <i id="toggleCPwd" class="fa-solid fa-eye"></i>
+                </div>
+                <asp:CompareValidator ControlToValidate="Worker_Confirm_Password_TextBox" ControlToCompare="Worker_Password_TextBox" CssClass="validation-error" ErrorMessage="Passwords do not match." runat="server" Display="Dynamic" ValidationGroup="Step4" />
+            </div>
 
-            <div class="step-navigation">
-                <button type="button" class="prev-btn" onclick="prevStep(2)">Previous: Personal</button>
-                <button type="button" class="next-btn" onclick="nextStep(2)">Next: Service Info</button>
+            <div class="grid-item full-row" style="text-align: center;">
+                <asp:Label ID="ErrorLabel" runat="server" CssClass="validation-error" Style="font-size: 14px; font-weight: bold;"></asp:Label>
             </div>
         </div>
 
-
-        <div id="step3" class="form-step">
-            <h3>3. Service and Experience Details</h3>
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/Worker_Services_Icon.png" />
-
-                <asp:DropDownList ID="Worker_ServiceType_DropDown" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="Worker_ServiceType_DropDown_SelectedIndexChanged">
-                </asp:DropDownList>
-            </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_ServiceType_DropDown"
-                InitialValue=""
-                CssClass="validation-error"
-                ErrorMessage="Please select a service type."
-                runat="server" Display="Dynamic" ValidationGroup="Step3" />
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/Worker_Services_Icon.png" />
-
-                <asp:DropDownList ID="Worker_Equipment_DropDown" runat="server" CssClass="textbox">
-                </asp:DropDownList>
-            </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Equipment_DropDown"
-                InitialValue=""
-                CssClass="validation-error"
-                ErrorMessage="Please select equipment details."
-                runat="server" Display="Dynamic" ValidationGroup="Step3" />
-
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/Worker_Experience_Icon.png" />
-                <asp:TextBox ID="Worker_Experience_TextBox" runat="server" CssClass="textbox"
-                    TextMode="Number" placeholder="Experience (in years)"></asp:TextBox>
-            </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Experience_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Experience is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step3" />
-            <asp:RangeValidator
-                ControlToValidate="Worker_Experience_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Experience must be between 0 and 50 years."
-                MinimumValue="0"
-                MaximumValue="50"
-                Type="Integer"
-                runat="server" Display="Dynamic" ValidationGroup="Step3" />
-
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/317830.png" />
-                <asp:TextBox ID="Worker_MinimumPrice_TextBox" runat="server" CssClass="textbox"
-                    TextMode="Number" placeholder="Minimum Price (in Rupees)"></asp:TextBox>
-            </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_MinimumPrice_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Minimum service price is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step3" />
-
-            <div class="step-navigation">
-                <button type="button" class="prev-btn" onclick="prevStep(3)">Previous: Address</button>
-                <button type="button" class="next-btn" onclick="nextStep(3)">Next: Security</button>
-            </div>
+        <div class="step-navigation">
+            <button type="button" class="nav-btn prev-btn" onclick="prevStep(4)">Back</button>
+            <asp:Button ID="Worker_Signup_Button" runat="server" CssClass="nav-btn signup-btn" Text="Complete Registration" OnClick="Worker_Signup_Button_Click" ValidationGroup="Step4" />
         </div>
-
-
-        <div id="step4" class="form-step">
-            <h3>4. Account Security</h3>
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Password_Icon.png" />
-                <asp:TextBox ID="Worker_Password_TextBox" runat="server" CssClass="textbox"
-                    TextMode="Password" placeholder="Enter Password"></asp:TextBox>
-                <i id="togglePwd" class="fa-solid fa-eye"></i>
-            </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Password_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Password is required."
-                runat="server" Display="Dynamic" ValidationGroup="Step4" />
-
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" runat="server"
-                    ImageUrl="~/Assests/Login_SignUp/User_Password_Icon.png" />
-                <asp:TextBox ID="Worker_Confirm_Password_TextBox" runat="server" CssClass="textbox"
-                    TextMode="Password" placeholder="Re-enter Password"></asp:TextBox>
-                <i id="toggleCPwd" class="fa-solid fa-eye"></i>
-            </div>
-            <asp:RequiredFieldValidator
-                ControlToValidate="Worker_Confirm_Password_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Please confirm your password."
-                runat="server" Display="Dynamic" ValidationGroup="Step4" />
-            <asp:CompareValidator
-                ControlToValidate="Worker_Confirm_Password_TextBox"
-                ControlToCompare="Worker_Password_TextBox"
-                CssClass="validation-error"
-                ErrorMessage="Passwords do not match."
-                runat="server" Display="Dynamic" ValidationGroup="Step4" />
-
-            <asp:Label ID="ErrorLabel" runat="server" ForeColor="Red" Enabled="false"></asp:Label>
-
-
-            <div class="step-navigation">
-                <button type="button" class="prev-btn" onclick="prevStep(4)">Previous: Service Info</button>
-                <asp:Button ID="Worker_Signup_Button" runat="server" CssClass="signup-btn" Text="Sign Up" OnClick="Worker_Signup_Button_Click" ValidationGroup="Step4" />
-            </div>
-        </div>
-
-
     </div>
 
     <script>
-        // Store the current step globally (Starts at 1)
-        let currentStep = 1;
-
-        // Function to update the step visibility and progress indicator
         function showStep(step) {
-
-            // ⭐ STORE STEP FOR POSTBACK
             document.getElementById('<%= CurrentStep.ClientID %>').value = step;
-
-            // existing logic
-            document.querySelectorAll('.form-step')
-                .forEach(s => s.style.display = 'none');
-
+            document.querySelectorAll('.form-step').forEach(s => s.style.display = 'none');
             document.getElementById('step' + step).style.display = 'block';
+
+            // Update progress bubbles
+            document.querySelectorAll('.progress-step').forEach((el, index) => {
+                if (index + 1 <= step) el.classList.add('active');
+                else el.classList.remove('active');
+            });
         }
 
-        // Function to handle the 'Next' button click
         function nextStep(current) {
-            // Perform client-side validation for the current step's validation group
             if (typeof (Page_ClientValidate) == 'function') {
-                if (!Page_ClientValidate('Step' + current)) {
-                    // If validation fails, stop and show error messages
-                    return false;
-                }
+                if (!Page_ClientValidate('Step' + current)) return false;
             }
-
-            // If validation passes, move to the next step
             showStep(current + 1);
-            return true;
         }
 
-        // Function to handle the 'Previous' button click
-        function prevStep(current) {
-            showStep(current - 1);
-        }
+        function prevStep(current) { showStep(current - 1); }
 
-        // --- Password Toggle Scripts (Copied from your original code) ---
-        // MAIN PASSWORD
-        const pwd = document.getElementById("<%= Worker_Password_TextBox.ClientID %>");
-        const icon = document.getElementById("togglePwd");
-
-        if (icon) { // Check if the element exists
-            icon.onclick = function () {
-                if (pwd.type === "password") {
-                    pwd.type = "text";
-                    icon.classList.remove("fa-eye");
-                    icon.classList.add("fa-eye-slash");
-                } else {
-                    pwd.type = "password";
-                    icon.classList.remove("fa-eye-slash");
-                    icon.classList.add("fa-eye");
+        function initToggles() {
+            const setup = (txtId, iconId) => {
+                const txt = document.getElementById(txtId);
+                const icon = document.getElementById(iconId);
+                if (icon && txt) {
+                    icon.onclick = function () {
+                        const isPwd = txt.getAttribute("type") === "password";
+                        txt.setAttribute("type", isPwd ? "text" : "password");
+                        this.classList.toggle("fa-eye");
+                        this.classList.toggle("fa-eye-slash");
+                    };
                 }
-            }
+            };
+            setup("<%= Worker_Password_TextBox.ClientID %>", "togglePwd");
+            setup("<%= Worker_Confirm_Password_TextBox.ClientID %>", "toggleCPwd");
         }
 
-        // CONFIRM PASSWORD
-        const cpwd = document.getElementById("<%= Worker_Confirm_Password_TextBox.ClientID %>");
-        const cicon = document.getElementById("toggleCPwd");
+        // Run on load
+        window.onload = initToggles;
 
-        if (cicon) { // Check if the element exists
-            cicon.onclick = function () {
-                if (cpwd.type === "password") {
-                    cpwd.type = "text";
-                    cicon.classList.remove("fa-eye");
-                    cicon.classList.add("fa-eye-slash");
-                } else {
-                    cpwd.type = "password";
-                    cicon.classList.remove("fa-eye-slash");
-                    cicon.classList.add("fa-eye");
-                }
-            }
-        }
+        // Existing Password Toggle logic remains same...
     </script>
 </asp:Content>

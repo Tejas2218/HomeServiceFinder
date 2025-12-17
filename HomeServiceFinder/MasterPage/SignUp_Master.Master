@@ -19,14 +19,14 @@
         }
 
         /* Card styling */
+        /* Update this in your Master Page style section */
         .card {
-            width: 450px;
+            width: 750px; /* Increased from 450px to allow side-by-side fields */
             background: #fff;
             padding: 30px;
             border-radius: 20px;
-            /*            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.2);*/
-            /*            border-top: 5px solid #0066ff;*/
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Optional: adds depth like your image */
         }
 
             .card h1 {
@@ -95,9 +95,11 @@
                 </div>
 
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                <br />
+                <br />
                 <div class="footer-text">
                     Have an account?
-                    <a href="loginPage.aspx">Login</a>
+                        <a href="loginPage.aspx">Login</a>
                 </div>
             </div>
         </div>
@@ -118,8 +120,8 @@
                 workerBtn.classList.add("active");
                 userBtn.classList.remove("active");
             }
-        </script >
+        </script>
 
-    </form >
-</body >
-</html >
+    </form>
+</body>
+</html>
