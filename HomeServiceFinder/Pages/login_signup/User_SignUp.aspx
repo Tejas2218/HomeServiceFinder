@@ -7,32 +7,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
-        /* 1. Reduce padding on the main container if it's in your MasterPage */
         .form-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 1px 20px; /* Further reduced vertical gap */
+            gap: 2px 20px;
             text-align: left;
-            margin-top: 5px; /* Minimal top margin */
+            margin-top: 5px;
         }
 
-        /* 2. Make grid items tighter */
         .grid-item {
             flex: 1 1 calc(50% - 25px);
             min-width: 250px;
-            margin-bottom: 2px; /* Pulls rows closer together */
+            margin-bottom: 3px;
         }
 
         .full-row {
             flex: 1 1 100%;
         }
 
-        /* 3. Reduce Label Spacing */
         .field-label {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             color: #444;
-            margin-bottom: 2px; /* Label sits right on top of the box */
+            margin-bottom: 2px;
             display: block;
         }
 
@@ -40,60 +37,76 @@
             position: relative;
         }
 
-        /* 4. Slim down the Textbox height */
         .textbox {
             width: 100%;
-            padding: 6px 12px 6px 40px; /* Very compact vertical padding */
+            padding: 6px 12px 6px 40px;
             border-radius: 8px;
             border: 1px solid #ddd;
             background: #fcfcfc;
             box-sizing: border-box;
-            font-size: 13px; /* Slightly smaller text */
-            height: 34px; /* Explicit height to ensure it stays small */
+            font-size: 13px;
+            height: 34px;
+            transition: border-color 0.3s;
         }
 
-            /* Adjusting Dropdowns and non-icon inputs */
-            .textbox[style*="padding-left:15px;"],
-            select.textbox {
-                padding-left: 10px !important;
-                padding-top: 0px !important;
-                padding-bottom: 0px !important;
-                height: 34px !important;
+            /* Orange Focus Effect */
+            .textbox:focus {
+                border-color: #FF8C00 !important;
+                outline: none;
+                box-shadow: 0 0 5px rgba(255, 140, 0, 0.2);
             }
+
+        select.textbox {
+            padding-left: 10px !important;
+            height: 34px !important;
+        }
 
         .input-icon {
             position: absolute;
             left: 12px;
             top: 50%;
             transform: translateY(-50%);
-            width: 14px; /* Smaller icons */
+            width: 14px;
+            opacity: 0.8;
         }
 
         .validation-error {
-            color: red;
+            color: #e74c3c;
             font-size: 10px;
             margin-top: 0px;
             display: block;
         }
 
-        /* 5. Button optimization */
+        /* 5. Orange Button Optimization */
         .signup-btn {
             width: 100%;
-            background: #ffff00;
-            color: #000;
+            background: #FF8C00; /* Solid Orange */
+            color: #fff;
             font-weight: bold;
-            padding: 10px; /* Reduced from 15px */
+            padding: 10px;
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
-            margin-top: 12px; /* Pull button closer to the fields */
+            margin-top: 12px;
             font-size: 15px;
-            box-shadow: 0 3px 8px rgba(255, 255, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
+            transition: background 0.3s ease;
         }
 
-        .fa-eye {
-            top: 9px !important;
+            .signup-btn:hover {
+                background: #E67E00; /* Slightly darker orange */
+            }
+
+        #togglePwd, #toggleCPwd {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
             font-size: 13px;
+            color: #888;
         }
     </style>
 </asp:Content>

@@ -86,7 +86,7 @@
 .role-tabs {
     width: 320px;
     height: 48px;
-    background: #E7EDFF;
+    background: orange;
     border-radius: 50px;
     display: flex;
     align-items: center;
@@ -104,13 +104,13 @@
         border-radius: 50px;
         font-size: 16px;
         font-weight: 600;
-        color: #4A79FF;
+        color: orange;
         cursor: pointer;
         transition: 0.25s ease;
     }
 
         .role-tabs .tab.active {
-            background: #4A79FF;
+            background: orange;
             color: white;
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }

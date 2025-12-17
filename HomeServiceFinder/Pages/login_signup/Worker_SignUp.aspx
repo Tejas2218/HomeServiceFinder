@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* 1. Grid Layout System - Compacted */
+        /* 1. Grid Layout System */
         .form-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px 20px; /* Reduced vertical gap to save space */
+            gap: 5px 20px;
             text-align: left;
             padding: 5px;
         }
@@ -17,14 +17,14 @@
         .grid-item {
             flex: 1 1 calc(50% - 25px);
             min-width: 250px;
-            margin-bottom: 2px; /* Minimal margin */
+            margin-bottom: 2px;
         }
 
         .full-row {
             flex: 1 1 100%;
         }
 
-        /* 2. Modern Input Styling - Height Forced to 34px */
+        /* 2. Modern Input Styling - Orange Theme */
         .field-label {
             font-weight: 600;
             font-size: 12px;
@@ -43,7 +43,7 @@
         .textbox {
             width: 100%;
             padding: 6px 12px 6px 40px;
-            height: 34px; /* Fixed slim height */
+            height: 34px;
             border-radius: 8px;
             border: 1px solid #dcdcdc;
             background: #fdfdfd;
@@ -52,18 +52,18 @@
             transition: all 0.2s ease;
         }
 
-        /* Ensure Dropdowns match textbox height */
         select.textbox {
             height: 34px !important;
             padding-top: 0px !important;
             padding-bottom: 0px !important;
         }
 
+        /* Orange Focus Effect */
         .textbox:focus {
-            border-color: #0066ff;
+            border-color: #FF8C00;
             background: #fff;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
         }
 
         .input-icon {
@@ -77,11 +77,11 @@
             opacity: 0.7;
         }
 
-        /* 3. Headers & Progress - Heavily Reduced Margins */
+        /* 3. Headers & Progress - Orange Accent */
         h3 {
             color: #222;
             margin: 5px 0 10px 0;
-            border-left: 5px solid #0066ff;
+            border-left: 5px solid #FF8C00; /* Changed from Blue to Orange */
             padding-left: 12px;
             font-size: 17px;
         }
@@ -90,7 +90,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 5px 0 15px 0; /* Cut down from 40px */
+            margin: 5px 0 15px 0;
             gap: 0;
         }
 
@@ -111,18 +111,19 @@
             z-index: 2;
         }
 
+            /* Active Progress - Orange */
             .progress-step.active {
-                background: #0066ff;
+                background: #FF8C00;
                 color: #ffffff;
-                border-color: #0047b3;
-                box-shadow: 0 0 8px rgba(0, 102, 255, 0.4);
+                border-color: #E67E00;
+                box-shadow: 0 0 8px rgba(255, 140, 0, 0.4);
             }
 
-        /* 4. Navigation & Buttons */
+        /* 4. Navigation & Buttons - Vibrant Orange */
         .step-navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px; /* Pulled up closer to form */
+            margin-top: 15px;
             padding-top: 10px;
             border-top: 1px solid #f0f0f0;
             gap: 15px;
@@ -147,14 +148,23 @@
         }
 
         .next-btn {
-            background: #0066ff;
+            background: #FF8C00; /* Vibrant Orange */
             color: white;
         }
 
+            .next-btn:hover {
+                background: #E67E00;
+            }
+
         .signup-btn {
-            background: #ffcc00;
-            color: #000;
+            background: #FF8C00;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
         }
+
+            .signup-btn:hover {
+                background: #E67E00;
+            }
 
         /* 5. Validation & Extras */
         .validation-error {
