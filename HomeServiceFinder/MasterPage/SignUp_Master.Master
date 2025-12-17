@@ -41,28 +41,42 @@
                 font-size: 24px;
             }
 
-        .role-tabs {
-            margin: 5px 0 10px 0; /* Tighter spacing for the User/Worker toggle */
+        .role {
+            margin: 5px 0 10px 0;
+            height: 50px;
+            background-color: #ffdbbb;
+            width:250px;
+            align-content:center;
+            justify-content: center;
+            align-self:center;
+            border-radius:50px;
         }
 
-        .tab {
-            padding: 6px 25px; /* Slimmer buttons */
-            border-radius: 8px;
-            border: 2px solid #0066ff;
-            background: white;
-            color: #0066ff;
+        .bat {
+            padding: 6px 25px;
+            border-radius: 50px;
+            /* 1. BORDER COLOR: Changed to a neutral gray or your preference */
+            border: 2px solid #ccc;
+            /* 2. BACKGROUND: Default button color (White) */
+            background-color: white;
+            /* 3. TEXT COLOR: Default text color (Gray/Black) */
+            color: orange;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
+            
         }
 
-            .tab.active {
-                background: #4A90E2; /* Blue color from your image */
-                color: white;
-                border-color: #4A90E2;
-                transform: scale(1.05);
-            }
+        .act {
+            /* 4. ACTIVE BACKGROUND: Change 'pink' to your desired highlight color */
+            background-color: orange;
+            /* 5. ACTIVE TEXT: Change to white so it's readable */
+            color: white;
+            /* 6. ACTIVE BORDER: Match the background or use a highlight color */
+            
+            transform: scale(1.05);
+        }
 
         .footer-text {
             font-size: 14px;
@@ -80,9 +94,9 @@
             <div class="card">
                 <h1>Sign Up</h1>
                 <br />
-                <div class="role-tabs">
-                    <button id="userTab" type="button" class="tab" onclick="location.href='User_SignUp.aspx'">User</button>
-                    <button id="workerTab" type="button" class="tab" onclick="location.href='Worker_SignUp.aspx'">Worker</button>
+                <div class="role">
+                    <button id="userTab" type="button" class="bat" onclick="location.href='User_SignUp.aspx'">User</button>
+                    <button id="workerTab" type="button" class="bat" onclick="location.href='Worker_SignUp.aspx'">Worker</button>
                 </div>
 
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
@@ -102,12 +116,12 @@
             const workerBtn = document.getElementById("workerTab");
 
             if (path.includes("user_signup.aspx")) {
-                userBtn.classList.add("active");
-                workerBtn.classList.remove("active");
+                userBtn.classList.add("act");
+                workerBtn.classList.remove("act");
             }
             else if (path.includes("worker_signup.aspx")) {
-                workerBtn.classList.add("active");
-                userBtn.classList.remove("active");
+                workerBtn.classList.add("act");
+                userBtn.classList.remove("act");
             }
         </script>
 
