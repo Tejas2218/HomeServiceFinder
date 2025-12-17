@@ -44,7 +44,7 @@
         .role {
             margin: 5px 0 10px 0;
             height: 50px;
-            background-color: #ffdbbb;
+/*            background-color: antiquewhite;*/
             width:250px;
             align-content:center;
             justify-content: center;
@@ -81,6 +81,11 @@
         .footer-text {
             font-size: 14px;
             margin-top: 5px;
+        }
+        a {
+            text-decoration:none;
+            color:#FF8C00;
+            font-weight:bold;
         }
     </style>
 
