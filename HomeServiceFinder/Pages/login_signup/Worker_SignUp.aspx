@@ -5,31 +5,31 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* Grid Layout System */
+        /* 1. Grid Layout System - Compacted */
         .form-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px 30px; /* Increased horizontal gap for better breathing room */
+            gap: 5px 20px; /* Reduced vertical gap to save space */
             text-align: left;
-            padding: 10px 5px;
+            padding: 5px;
         }
 
         .grid-item {
-            flex: 1 1 calc(50% - 30px);
-            min-width: 280px;
-            margin-bottom: 5px; /* Space for validation messages so they don't push layout */
+            flex: 1 1 calc(50% - 25px);
+            min-width: 250px;
+            margin-bottom: 2px; /* Minimal margin */
         }
 
         .full-row {
             flex: 1 1 100%;
         }
 
-        /* Modern Input Styling */
+        /* 2. Modern Input Styling - Height Forced to 34px */
         .field-label {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             color: #444;
-            margin-bottom: 8px; /* More space between label and input */
+            margin-bottom: 3px;
             display: block;
             margin-left: 2px;
         }
@@ -37,131 +37,66 @@
         .input-row {
             position: relative;
             display: flex;
-            align-items: center; /* Vertically centers items in the row */
+            align-items: center;
         }
 
         .textbox {
             width: 100%;
-            padding: 13px 15px 13px 45px; /* Increased left padding for icon room */
-            border-radius: 10px;
+            padding: 6px 12px 6px 40px;
+            height: 34px; /* Fixed slim height */
+            border-radius: 8px;
             border: 1px solid #dcdcdc;
             background: #fdfdfd;
             box-sizing: border-box;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.2s ease;
         }
 
-            .textbox:focus {
-                border-color: #0066ff;
-                background: #fff;
-                outline: none;
-                box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
-            }
+        /* Ensure Dropdowns match textbox height */
+        select.textbox {
+            height: 34px !important;
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
 
-        /* Adjusted Icon Logic */
+        .textbox:focus {
+            border-color: #0066ff;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+
         .input-icon {
             position: absolute;
-            left: 16px;
+            left: 14px;
             top: 50%;
-            transform: translateY(-50%); /* Precisely centers the image icon */
-            width: 18px;
-            height: 18px;
-            object-fit: contain; /* Prevents icon distortion */
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
             opacity: 0.7;
         }
 
-        /* Validation Spacing */
-        .validation-error {
-            color: #e74c3c;
-            font-size: 11px;
-            margin-top: 5px;
-            font-weight: 500;
-            display: block;
-        }
-
-        /* Step Header Styling */
+        /* 3. Headers & Progress - Heavily Reduced Margins */
         h3 {
             color: #222;
-            margin: 10px 0 25px 0;
+            margin: 5px 0 10px 0;
             border-left: 5px solid #0066ff;
-            padding-left: 15px;
-            font-size: 19px;
-            letter-spacing: 0.5px;
+            padding-left: 12px;
+            font-size: 17px;
         }
 
-        /* Password Eye Icon Adjustment */
-        #togglePwd, #toggleCPwd {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #888;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        /* Progress Indicator Spacing */
-        .progress-indicator {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0 35px 0;
-            gap: 20px;
-        }
-
-        /* Navigation Buttons */
-        .step-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px; /* Clear separation from form fields */
-            padding-top: 20px;
-            border-top: 1px solid #f0f0f0;
-            gap: 20px;
-        }
-
-        .nav-btn {
-            padding: 14px 30px;
-            border-radius: 50px; /* Rounder buttons for modern look */
-            border: none;
-            font-weight: 700;
-            cursor: pointer;
-            flex: 1;
-            font-size: 15px;
-            transition: transform 0.2s;
-        }
-
-            .nav-btn:active {
-                transform: scale(0.98);
-            }
-
-        .form-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px 30px;
-            text-align: left;
-            padding: 10px 5px;
-        }
-
-        .grid-item {
-            flex: 1 1 calc(50% - 30px);
-            min-width: 280px;
-        }
-
-        .full-row {
-            flex: 1 1 100%;
-        }
-
-        /* --- Progress Indicator Styles (Restored) --- */
         .progress-indicator {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 10px 0 40px 0;
-            gap: 0; /* Gap handled by lines */
+            margin: 5px 0 15px 0; /* Cut down from 40px */
+            gap: 0;
         }
 
         .progress-step {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: #f0f0f0;
             color: #999;
@@ -169,8 +104,8 @@
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 16px;
-            border: 3px solid #e0e0e0;
+            font-size: 13px;
+            border: 2px solid #e0e0e0;
             transition: all 0.3s ease;
             position: relative;
             z-index: 2;
@@ -180,55 +115,22 @@
                 background: #0066ff;
                 color: #ffffff;
                 border-color: #0047b3;
-                box-shadow: 0 0 10px rgba(0, 102, 255, 0.4);
+                box-shadow: 0 0 8px rgba(0, 102, 255, 0.4);
             }
 
-        /* Modern Input Styling */
-        .field-label {
-            font-weight: 600;
-            font-size: 13px;
-            color: #444;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .input-row {
-            position: relative;
-        }
-
-        .textbox {
-            width: 100%;
-            padding: 13px 15px 13px 45px;
-            border-radius: 10px;
-            border: 1px solid #dcdcdc;
-            background: #fdfdfd;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            object-fit: contain;
-        }
-
-        /* --- Navigation Button Styles (Restored & Fixed) --- */
+        /* 4. Navigation & Buttons */
         .step-navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 1px solid #eee;
+            margin-top: 15px; /* Pulled up closer to form */
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
             gap: 15px;
         }
 
         .nav-btn {
-            padding: 14px 25px;
-            border-radius: 12px;
+            padding: 10px 20px;
+            border-radius: 10px;
             border: none;
             font-weight: 700;
             cursor: pointer;
@@ -236,57 +138,41 @@
             font-size: 14px;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        /* Previous Button (Gray) */
         .prev-btn {
             background: #f8f9fa;
             color: #6c757d;
             border: 1px solid #dee2e6;
         }
 
-            .prev-btn:hover {
-                background: #e2e6ea;
-                color: #343a40;
-            }
-
-        /* Next Button (Blue) */
         .next-btn {
             background: #0066ff;
             color: white;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
         }
 
-            .next-btn:hover {
-                background: #0052cc;
-                transform: translateY(-1px);
-            }
-
-        /* Sign Up Button (Yellow/Theme) */
         .signup-btn {
             background: #ffcc00;
             color: #000;
-            font-weight: 800;
-            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
         }
 
-            .signup-btn:hover {
-                background: #e6b800;
-            }
-
+        /* 5. Validation & Extras */
         .validation-error {
             color: #e74c3c;
-            font-size: 11px;
-            margin-top: 5px;
+            font-size: 10px;
+            margin-top: 1px;
             display: block;
+            line-height: 1.1;
         }
 
-        h3 {
-            color: #333;
-            margin-bottom: 25px;
-            border-left: 4px solid #0066ff;
-            padding-left: 15px;
+        #togglePwd, #toggleCPwd {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+            font-size: 14px;
         }
     </style>
 </asp:Content>
