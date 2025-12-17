@@ -67,11 +67,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
-                    <a href="index.aspx" class="nav-item nav-link">Home</a>
+                    <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
                     <a href="appointment.aspx" class="nav-item nav-link active">Appointment</a>
                     <a href="profile.aspx" class="nav-item nav-link">Profile</a>
-                    <a href="about.aspx" class="nav-item nav-link">About Us</a>
+                    <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
                 </div>
             </div>
         </nav>
