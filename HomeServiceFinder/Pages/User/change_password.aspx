@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="service.aspx.cs" Inherits="HomeServiceFinder.Pages.User.service" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="change_password.aspx.cs" Inherits="HomeServiceFinder.Pages.User.change_password" %>
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head runat="server">
     <meta charset="utf-8" />
-    <title>Apex - Our Services</title>
+    <title>Apex - Change Password</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="keywords" />
     <meta content="" name="description" />
@@ -25,6 +25,17 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
     <link href="css/style.css" rel="stylesheet" />
+
+    <style>
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: none;
+        }
+
+        .password-card {
+            border-top: 5px solid var(--primary);
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -44,8 +55,8 @@
                         <small>info@example.com</small>
                     </div>
                     <div class="h-100 d-inline-flex align-items-center border-end px-3">
-                        <small class="far fa-clock me-2"></small>
-                        <small>Mon - Fri : 09 AM - 09 PM</small>
+                        <small class="far fa-user me-2"></small>
+                        <small>Welcome, User</small>
                     </div>
                 </div>
                 <div class="col-lg-5 px-5 text-end">
@@ -68,9 +79,9 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
                     <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
-                    <a href="service.aspx" class="nav-item nav-link active">Our Services</a>
+                    <a href="service.aspx" class="nav-item nav-link">Our Services</a>
                     <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
-                    <a href="profile.aspx" class="nav-item nav-link">Profile</a>
+                    <a href="profile.aspx" class="nav-item nav-link active">Profile</a>
                     <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
                     <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
                 </div>
@@ -78,81 +89,61 @@
         </nav>
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
-                <h1 class="display-4 text-white animated slideInDown mb-4">Our Services</h1>
-                
+                <h1 class="display-4 text-white animated slideInDown mb-4">Change Password</h1>
+                <nav aria-label="breadcrumb animated slideInDown">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item"><a class="text-white" href="index.aspx">Home</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="profile.aspx">Profile</a></li>
+                        <li class="breadcrumb-item text-primary active" aria-current="page">Change Password</li>
+                    </ol>
+                </nav>
             </div>
         </div>
         <div class="container-xxl py-5">
             <div class="container">
-                <div class="row g-5 align-items-end mb-5">
+                <div class="row justify-content-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="border-start border-5 border-primary ps-4">
-                            <h6 class="text-body text-uppercase mb-2">Our Services</h6>
-                            <h1 class="display-6 mb-0">Construction And Renovation Solutions</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-lg-end wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="btn btn-primary py-3 px-5" href="more_services.aspx">More Services</a>
-                    </div>
-                </div>
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item bg-light overflow-hidden h-100">
-                            <img class="img-fluid" src="img/service-1.jpg" alt="" />
-                            <div class="service-text position-relative text-center h-100 p-4">
-                                <h5 class="mb-3">Building Construction</h5>
-                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                        <div class="bg-light p-5 rounded password-card shadow-sm">
+
+                            <div class="text-center mb-5">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-3" style="width: 65px; height: 65px;">
+                                    <i class="fa fa-lock fa-2x text-primary"></i>
+                                </div>
+                                <h4 class="text-uppercase">Update Security</h4>
+                                <p class="text-muted">Create a strong password to keep your account safe.</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item bg-light overflow-hidden h-100">
-                            <img class="img-fluid" src="img/service-2.jpg" alt="" />
-                            <div class="service-text position-relative text-center h-100 p-4">
-                                <h5 class="mb-3">Home Maintainance</h5>
-                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item bg-light overflow-hidden h-100">
-                            <img class="img-fluid" src="img/service-3.jpg" alt="" />
-                            <div class="service-text position-relative text-center h-100 p-4">
-                                <h5 class="mb-3">Renovation and Painting</h5>
-                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item bg-light overflow-hidden h-100">
-                            <img class="img-fluid" src="img/service-4.jpg" alt="" />
-                            <div class="service-text position-relative text-center h-100 p-4">
-                                <h5 class="mb-3">Wiring and installation</h5>
-                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item bg-light overflow-hidden h-100">
-                            <img class="img-fluid" src="img/service-5.jpg" alt="" />
-                            <div class="service-text position-relative text-center h-100 p-4">
-                                <h5 class="mb-3">Tiling and Painting</h5>
-                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item bg-light overflow-hidden h-100">
-                            <img class="img-fluid" src="img/service-6.jpg" alt="" />
-                            <div class="service-text position-relative text-center h-100 p-4">
-                                <h5 class="mb-3">Interior Design</h5>
-                                <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+
+                            <div class="row g-3">
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtCurrentPass" runat="server" CssClass="form-control" placeholder="Current Password" TextMode="Password"></asp:TextBox>
+                                        <label for="txtCurrentPass">Current Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtNewPass" runat="server" CssClass="form-control" placeholder="New Password" TextMode="Password"></asp:TextBox>
+                                        <label for="txtNewPass">New Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtConfirmPass" runat="server" CssClass="form-control" placeholder="Confirm New Password" TextMode="Password"></asp:TextBox>
+                                        <label for="txtConfirmPass">Confirm New Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-4">
+                                    <asp:Button ID="btnUpdatePassword" runat="server" Text="Update Password" CssClass="btn btn-primary w-100 py-3" />
+                                </div>
+
+                                <div class="col-12 text-center mt-3">
+                                    <a href="profile.aspx" class="text-muted"><i class="fa fa-arrow-left me-2"></i>Back to Profile</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -181,7 +172,7 @@
                     <div class="col-lg-3 col-md-6">
                         <h4 class="text-light mb-4">Quick Links</h4>
                         <a class="btn btn-link" href="about.aspx">About Us</a>
-                        <a class="btn btn-link" href="profile.aspx">Profile</a>
+                        <a class="btn btn-link" href="contact.aspx">Contact Us</a>
                         <a class="btn btn-link" href="service.aspx">Our Services</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -207,6 +198,7 @@
                 </div>
             </div>
         </div>
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     </form>
 

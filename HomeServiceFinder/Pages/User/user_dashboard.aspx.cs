@@ -19,23 +19,23 @@ namespace HomeServiceFinder.Pages.User
         public DataSet sd;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                if (Session["UserID"] != null)
-                {
-                    // User is logged in
-                    phProfileBtn.Visible = true;
-                    phSignupBtn.Visible = false;
-                }
-                else
-                {
-                    // User not logged in
-                    phProfileBtn.Visible = false;
-                    phSignupBtn.Visible = true;
-                }
+            //if (!IsPostBack)
+            //{
+            //    if (Session["UserID"] != null)
+            //    {
+            //        // User is logged in
+            //        phProfileBtn.Visible = true;
+            //        phSignupBtn.Visible = false;
+            //    }
+            //    else
+            //    {
+            //        // User not logged in
+            //        phProfileBtn.Visible = false;
+            //        phSignupBtn.Visible = true;
+            //    }
 
-                //LoadProviders();
-            }
+            //    //LoadProviders();
+            //}
         }
 
         private void LoadProviders()

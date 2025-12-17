@@ -28,7 +28,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        
+
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
         </div>
@@ -67,11 +67,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
-                    <a href="index.aspx" class="nav-item nav-link active">Home</a>
+                    <a href="user_dashboard.aspx" class="nav-item nav-link active">Home</a>
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
                     <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
                     <a href="profile.aspx" class="nav-item nav-link">Profile</a>
-                    <a href="about.aspx" class="nav-item nav-link">About Us</a>              
+                    <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
+                    <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
                 </div>
             </div>
         </nav>

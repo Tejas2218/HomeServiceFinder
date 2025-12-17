@@ -67,24 +67,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
-                    <a href="index.aspx" class="nav-item nav-link">Home</a>
+                    <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
                     <a href="appointment.aspx" class="nav-item nav-link active">Appointment</a>
                     <a href="profile.aspx" class="nav-item nav-link">Profile</a>
-                    <a href="about.aspx" class="nav-item nav-link">About Us</a>
+                    <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
+                    <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
                 </div>
             </div>
         </nav>
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
                 <h1 class="display-4 text-white animated slideInDown mb-4">Appointment</h1>
-                <nav aria-label="breadcrumb animated slideInDown">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a class="text-white" href="index.aspx">Home</a></li>
-                        <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                        <li class="breadcrumb-item text-primary active" aria-current="page">Appointment</li>
-                    </ol>
-                </nav>
+                
             </div>
         </div>
         <div class="container-xxl py-5">
@@ -185,7 +180,6 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     </form>
 

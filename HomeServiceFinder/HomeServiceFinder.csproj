@@ -86,8 +86,10 @@
     <Content Include="Pages\Service_Provider\service_provider_dashboard.aspx" />
     <Content Include="Pages\User\about_us.aspx" />
     <Content Include="Pages\User\appointment.aspx" />
+    <Content Include="Pages\User\change_password.aspx" />
     <Content Include="Pages\User\contact_us.aspx" />
     <Content Include="Pages\User\equipment.aspx" />
+    <Content Include="Pages\User\more_services.aspx" />
     <Content Include="Pages\User\profile.aspx" />
     <Content Include="Pages\User\service.aspx" />
     <Content Include="Pages\User\user_booking.aspx" />
@@ -151,6 +153,13 @@
     <Compile Include="Pages\User\appointment.aspx.designer.cs">
       <DependentUpon>appointment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\change_password.aspx.cs">
+      <DependentUpon>change_password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\change_password.aspx.designer.cs">
+      <DependentUpon>change_password.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\contact_us.aspx.cs">
       <DependentUpon>contact_us.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -164,6 +173,13 @@
     </Compile>
     <Compile Include="Pages\User\equipment.aspx.designer.cs">
       <DependentUpon>equipment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\more_services.aspx.cs">
+      <DependentUpon>more_services.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\more_services.aspx.designer.cs">
+      <DependentUpon>more_services.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>

@@ -1,243 +1,295 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="user_booking.aspx.cs" Inherits="HomeServiceFinder.Pages.User.user_booking" %>
 
 <!DOCTYPE html>
-<html>
-<head runat="server">
-    <title>Select Professional</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Apex - Appointment History</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <link href="img/favicon.ico" rel="icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="css/style.css" rel="stylesheet" />
 
     <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: #F1F5F9;
+        .history-card {
+            border: 1px solid #eee;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: 0.3s;
+            background-color: #fff;
         }
 
-        .container {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .box {
-            background: white;
-            width: 460px;
-            height: 92vh;
-            border-radius: 18px;
-            box-shadow: 0 8px 20px rgba(59,130,246,.15);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 10px;
-            color: #2563EB;
-        }
-
-        select {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #CBD5E1;
-            margin-bottom: 10px;
-        }
-
-        .selected {
-            text-align: center;
-            background: #EFF6FF;
-            padding: 8px;
-            border-radius: 8px;
-            font-weight: 600;
-            color: #1E3A8A;
-        }
-
-        .list {
-            overflow-y: auto;
-            flex: 1;
-            margin-top: 8px;
-            padding-right: 5px;
-        }
-
-            /* Scrollbar */
-            .list::-webkit-scrollbar {
-                width: 6px;
+            .history-card:hover {
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
             }
 
-            .list::-webkit-scrollbar-thumb {
-                background: #93C5FD;
-                border-radius: 10px;
-            }
-
-        .pro {
-            background: #EFF6FF;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: .2s;
+        .status-badge {
+            font-size: 0.85rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
         }
 
-            .pro:hover {
-                background: #DBEAFE;
-            }
-
-            /* SELECTED HIGHLIGHT */
-            .pro.active {
-                border: 2px solid #2563EB;
-                background: #BFDBFE;
-            }
-
-            .pro img {
-                width: 48px;
-                height: 48px;
-                border-radius: 50%;
-            }
-
-        .pro-info {
-            flex: 1;
-            font-size: 13px;
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
         }
 
-        .select-btn {
-            background: #3B82F6;
-            border: none;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12px;
+        .status-cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
         }
 
-        .confirm {
-            margin-top: 10px;
-            width: 100%;
-            background: linear-gradient(135deg,#3B82F6,#2563EB);
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            color: white;
-            font-weight: bold;
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
         }
     </style>
 </head>
-
 <body>
+    <form id="form1" runat="server">
 
-    <form runat="server">
-
-        <div class="container">
-            <div class="box">
-
-                <h2>Select Professional</h2>
-
-                <select id="filter" onchange="filterPros()">
-                    <option value="all">All Professionals</option>
-                    <option value="Plumber">Plumber</option>
-                    <option value="Electrician">Electrician</option>
-                    <option value="Cleaner">Cleaner</option>
-                    <option value="Painter">Painter</option>
-                    <option value="AC">AC Technician</option>
-                </select>
-
-                <div class="selected">
-                    Selected Professional: <span id="selectedName">None</span>
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <div class="container-fluid bg-light p-0">
+            <div class="row gx-0 d-none d-lg-flex">
+                <div class="col-lg-7 px-5 text-start">
+                    <div class="h-100 d-inline-flex align-items-center border-start border-end px-3">
+                        <small class="fa fa-phone-alt me-2"></small>
+                        <small>+012 345 6789</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center border-end px-3">
+                        <small class="far fa-envelope-open me-2"></small>
+                        <small>info@example.com</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center border-end px-3">
+                        <small class="far fa-user me-2"></small>
+                        <small>Welcome, User</small>
+                    </div>
                 </div>
-
-                <div class="list" id="list">
-
-                    <div class="pro" data-type="Plumber" onclick="selectPro(this,'Raj Kumar')">
-                        <img src="https://randomuser.me/api/portraits/men/1.jpg">
-                        <div class="pro-info">Raj Kumar<br>
-                            Plumber • ⭐4.8</div>
-                        <button class="select-btn" type="button">Select</button>
+                <div class="col-lg-5 px-5 text-end">
+                    <div class="h-100 d-inline-flex align-items-center">
+                        <a class="btn btn-square border-end border-start" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square border-end" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square border-end" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-square border-end" href=""><i class="fab fa-instagram"></i></a>
                     </div>
-
-                    <div class="pro" data-type="Electrician" onclick="selectPro(this,'Aman Verma')">
-                        <img src="https://randomuser.me/api/portraits/men/2.jpg">
-                        <div class="pro-info">Aman Verma<br>
-                            Electrician • ⭐4.7</div>
-                        <button class="select-btn" type="button">Select</button>
-                    </div>
-
-                    <div class="pro" data-type="Cleaner" onclick="selectPro(this,'Neha Patel')">
-                        <img src="https://randomuser.me/api/portraits/women/3.jpg">
-                        <div class="pro-info">Neha Patel<br>
-                            Cleaner • ⭐4.6</div>
-                        <button class="select-btn" type="button">Select</button>
-                    </div>
-
-                    <div class="pro" data-type="AC" onclick="selectPro(this,'Rahul Singh')">
-                        <img src="https://randomuser.me/api/portraits/men/4.jpg">
-                        <div class="pro-info">Rahul Singh<br>
-                            AC Tech • ⭐4.9</div>
-                        <button class="select-btn" type="button">Select</button>
-                    </div>
-
-                    <div class="pro" data-type="Painter" onclick="selectPro(this,'Mohit Sharma')">
-                        <img src="https://randomuser.me/api/portraits/men/5.jpg">
-                        <div class="pro-info">Mohit Sharma<br>
-                            Painter • ⭐4.5</div>
-                        <button class="select-btn" type="button">Select</button>
-                    </div>
-
-                    <div class="pro" data-type="Plumber" onclick="selectPro(this,'Deepak Joshi')">
-                        <img src="https://randomuser.me/api/portraits/men/6.jpg">
-                        <div class="pro-info">Deepak Joshi<br>
-                            Plumber • ⭐4.8</div>
-                        <button class="select-btn" type="button">Select</button>
-                    </div>
-
-                    <div class="pro" data-type="Electrician" onclick="selectPro(this,'Arjun Yadav')">
-                        <img src="https://randomuser.me/api/portraits/men/8.jpg">
-                        <div class="pro-info">Arjun Yadav<br>
-                            Electrician • ⭐4.6</div>
-                        <button class="select-btn" type="button">Select</button>
-                    </div>
-
-                    <div class="pro" data-type="Cleaner" onclick="selectPro(this,'Anjali Gupta')">
-                        <img src="https://randomuser.me/api/portraits/women/13.jpg">
-                        <div class="pro-info">Anjali Gupta<br>
-                            Cleaner • ⭐4.6</div>
-                        <button class="select-btn" type="button">Select</button>
-                    </div>
-
                 </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+            <a href="index.aspx" class="navbar-brand d-flex align-items-center">
+                <h1 class="m-0"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-3 py-lg-0">
+                    <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
+                    <a href="service.aspx" class="nav-item nav-link">Our Services</a>
+                    <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
+                    <a href="profile.aspx" class="nav-item nav-link">Profile</a>
+                    <a href="user_booking.aspx" class="nav-item nav-link active">Booking History</a>
+                    <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container text-center py-5">
+                <h1 class="display-4 text-white animated slideInDown mb-4">Booking History</h1>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="border-start border-5 border-primary ps-4 mb-5">
+                            <h6 class="text-body text-uppercase mb-2">Past & Current Bookings</h6>
+                            <h1 class="display-6 mb-0">Your Appointment History</h1>
+                        </div>
 
-                <button class="confirm">Confirm Selection</button>
+                        <div class="history-card rounded p-4">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col">Booking ID</th>
+                                            <th scope="col">Service Name</th>
+                                            <th scope="col">Date & Time</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>#BK-2023001</strong></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="btn-square bg-light rounded-circle me-2">
+                                                        <i class="fa fa-paint-roller text-primary"></i>
+                                                    </div>
+                                                    <span>Wall Painting</span>
+                                                </div>
+                                            </td>
+                                            <td>24 Oct 2023, 10:00 AM</td>
+                                            <td>$150.00</td>
+                                            <td><span class="status-badge status-pending">Pending</span></td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-outline-danger">Cancel</button>
+                                            </td>
+                                        </tr>
 
+                                        <tr>
+                                            <td><strong>#BK-2023002</strong></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="btn-square bg-light rounded-circle me-2">
+                                                        <i class="fa fa-wrench text-primary"></i>
+                                                    </div>
+                                                    <span>Plumbing Service</span>
+                                                </div>
+                                            </td>
+                                            <td>15 Sep 2023, 02:30 PM</td>
+                                            <td>$80.00</td>
+                                            <td><span class="status-badge status-completed">Completed</span></td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-outline-primary">Invoice</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>#BK-2023003</strong></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="btn-square bg-light rounded-circle me-2">
+                                                        <i class="fa fa-bolt text-primary"></i>
+                                                    </div>
+                                                    <span>Electrical Repair</span>
+                                                </div>
+                                            </td>
+                                            <td>10 Aug 2023, 11:00 AM</td>
+                                            <td>$120.00</td>
+                                            <td><span class="status-badge status-cancelled">Cancelled</span></td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-primary">Rebook</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>#BK-2023004</strong></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="btn-square bg-light rounded-circle me-2">
+                                                        <i class="fa fa-tools text-primary"></i>
+                                                    </div>
+                                                    <span>Furniture Assembly</span>
+                                                </div>
+                                            </td>
+                                            <td>01 Aug 2023, 09:00 AM</td>
+                                            <td>$200.00</td>
+                                            <td><span class="status-badge status-completed">Completed</span></td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-outline-primary">Invoice</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <nav aria-label="Page navigation" class="mt-4">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h1 class="text-white mb-4"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
+                        <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Address</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Quick Links</h4>
+                        <a class="btn btn-link" href="about.aspx">About Us</a>
+                        <a class="btn btn-link" href="contact.aspx">Contact Us</a>
+                        <a class="btn btn-link" href="service.aspx">Our Services</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Newsletter</h4>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email" />
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </form>
 
-    <script>
-        function selectPro(card, name) {
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-            document.querySelectorAll('.pro').forEach(p => p.classList.remove('active'));
-            card.classList.add('active');
-
-            document.getElementById("selectedName").innerText = name;
-        }
-
-        function filterPros() {
-            var type = document.getElementById("filter").value;
-            var pros = document.querySelectorAll(".pro");
-
-            pros.forEach(p => {
-                if (type == "all" || p.getAttribute("data-type") == type) {
-                    p.style.display = "flex";
-                } else {
-                    p.style.display = "none";
-                }
-            });
-        }
-    </script>
-
+    <script src="js/main.js"></script>
 </body>
 </html>
