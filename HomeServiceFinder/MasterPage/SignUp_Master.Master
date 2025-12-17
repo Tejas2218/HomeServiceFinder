@@ -9,66 +9,65 @@
     <title></title>
 
     <style>
-        /* Center the card on screen */
-        .page-wrapper {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /*            background: #e8f0ff;*/
+        /*.page-wrapper {
+            min-height: 100vh;*/
+        /*            display: flex;*/
+        /*            justify-content: center;
+            align-items: center;*/
+        /*padding: 10px;*/ /* Prevents card from touching screen edges on mobile */
+        /*}*/
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* This deactivates the scroll bar */
         }
 
-        /* Card styling */
         .card {
-            width: 450px;
+            width: 750px;
             background: #fff;
-            padding: 30px;
+            /* Tightened vertical padding to keep button on screen */
+            padding: 10px 25px 15px 25px;
             border-radius: 20px;
-            /*            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.2);*/
-            /*            border-top: 5px solid #0066ff;*/
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
         }
 
             .card h1 {
-                margin: 0;
-                color: #0047b3;
-                font-size: 28px;
-                font-weight: bold;
+                margin: 5px 0; /* Minimal margin */
+                font-size: 24px;
             }
 
         .role-tabs {
-            margin: 20px 0;
-            display: flex;
-            gap: 12px;
-            justify-content: center;
+            margin: 5px 0 10px 0; /* Tighter spacing for the User/Worker toggle */
         }
 
-        /* Buttons */
         .tab {
-            padding: 10px 30px;
+            padding: 6px 25px; /* Slimmer buttons */
             border-radius: 8px;
             border: 2px solid #0066ff;
             background: white;
             color: #0066ff;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
-            /* Transition effects */
             transition: all 0.3s ease;
         }
 
-            .tab:hover {
-                background: #0066ff;
+            .tab.active {
+                background: #4A90E2; /* Blue color from your image */
                 color: white;
+                border-color: #4A90E2;
+                transform: scale(1.05);
             }
 
-            /* Active tab style with animation */
-            .tab.active {
-                background: #0066ff;
-                color: white;
-                transform: scale(1.08);
-                box-shadow: 0 5px 12px rgba(0, 102, 255, 0.4);
-            }
+        .footer-text {
+            font-size: 14px;
+            margin-top: 5px;
+        }
     </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
@@ -79,25 +78,17 @@
 
         <div class="page-wrapper">
             <div class="card">
-
                 <h1>Sign Up</h1>
                 <br />
-
-                <!-- USER / WORKER TAB BUTTONS -->
                 <div class="role-tabs">
-                    <button id="userTab" type="button" class="tab"
-                        onclick="location.href='User_SignUp.aspx'">
-                        User</button>
-
-                    <button id="workerTab" type="button" class="tab"
-                        onclick="location.href='Worker_SignUp.aspx'">
-                        Worker</button>
+                    <button id="userTab" type="button" class="tab" onclick="location.href='User_SignUp.aspx'">User</button>
+                    <button id="workerTab" type="button" class="tab" onclick="location.href='Worker_SignUp.aspx'">Worker</button>
                 </div>
 
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+
                 <div class="footer-text">
-                    Have an account?
-                    <a href="loginPage.aspx">Login</a>
+                    Have an account? <a href="loginPage.aspx">Login</a>
                 </div>
             </div>
         </div>
@@ -118,8 +109,8 @@
                 workerBtn.classList.add("active");
                 userBtn.classList.remove("active");
             }
-        </script >
+        </script>
 
-    </form >
-</body >
-</html >
+    </form>
+</body>
+</html>

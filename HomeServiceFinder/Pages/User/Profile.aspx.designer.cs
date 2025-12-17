@@ -7,48 +7,48 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HomeServiceFinder.Pages.login_signup
+namespace HomeServiceFinder.Pages.User
 {
 
 
-    public partial class User_SignUp
+    public partial class Profile
     {
 
         /// <summary>
-        /// User_Name_Icon control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Name_Icon;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// User_Name_TextBox control.
+        /// txtName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Name_TextBox;
+        protected global::System.Web.UI.WebControls.TextBox txtName;
 
         /// <summary>
-        /// User_Email_Icon control.
+        /// txtContact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Email_Icon;
+        protected global::System.Web.UI.WebControls.TextBox txtContact;
 
         /// <summary>
-        /// User_Email_TextBox control.
+        /// txtAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Email_TextBox;
+        protected global::System.Web.UI.WebControls.TextBox txtAddress;
 
         /// <summary>
         /// StateList control.
@@ -69,48 +69,30 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.DropDownList CityList;
 
         /// <summary>
-        /// User_Contact_TextBox control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Contact_TextBox;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
 
         /// <summary>
-        /// User_Address_TextBox control.
+        /// btnPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Address_TextBox;
+        protected global::System.Web.UI.WebControls.Button btnPassword;
 
         /// <summary>
-        /// User_Password_TextBox control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Password_TextBox;
-
-        /// <summary>
-        /// User_Confirm_Password_TextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Confirm_Password_TextBox;
-
-        /// <summary>
-        /// SignupButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SignupButton;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
     }
 }

@@ -22,6 +22,10 @@ namespace HomeServiceFinder.login_signup
                 {
                     Response.Redirect("~/Pages/User/homePage.aspx");
                 }
+                else if (Session["User_Role"].ToString() == "Worker")
+                {
+                    Response.Redirect("~/Pages/Service_Provider/service_provider_dashboard.aspx");
+                }
             }
         }
 
@@ -50,18 +54,25 @@ namespace HomeServiceFinder.login_signup
                     {
                         Session["UserID"] = dr["User_ID"].ToString();
                         Session["UserRole"] = dr["User_Role"].ToString();
+                        
 
                         lblMessage.CssClass = "success-msg";
                         lblMessage.Text = "Login successful! Redirecting...";
 
                         if (dr["User_Role"].ToString() == "Admin")
                         {
-                            Response.Redirect("~/Pages/Admin/admin_dashboard.aspx", false);
+                            Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
                         }
-                        else
+                        else if(dr["User_Role"].ToString() == "User")
                         {
-                            Response.Redirect("~/Pages/User/homePage.aspx", false);
+                            Response.Redirect("~/Pages/User/user_dashboard.aspx");
                         }
+                        else if (dr["User_Role"].ToString() == "Worker")
+                        {
+                            Response.Redirect("~/Pages/Service_Provider/service_provider_dashboard.aspx");
+                        }
+                        
+
                     }
                     else
                     {
@@ -71,7 +82,7 @@ namespace HomeServiceFinder.login_signup
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "Something went wrong. Try again later!";
+                lblMessage.Text = "Something went wrong. Try again later!<br>"+ex;
             }
         }
     }

@@ -13,5 +13,10 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
 
         }
+
+        protected void grdBookingRequest_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
     }
 }
