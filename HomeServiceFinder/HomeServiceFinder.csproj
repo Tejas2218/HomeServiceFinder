@@ -89,7 +89,10 @@
     <Content Include="Pages\New_Admin\ServiceProvider.aspx" />
     <Content Include="Pages\New_Admin\Settings.aspx" />
     <Content Include="Pages\New_Admin\User.aspx" />
-    <Content Include="Pages\Service_Provider\service_provider_dashboard.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_booking.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_profile.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_user.aspx" />
+    <Content Include="Pages\Service_Provider\WebForm3.aspx" />
     <Content Include="Pages\User\about_us.aspx" />
     <Content Include="Pages\User\appointment.aspx" />
     <Content Include="Pages\User\change_password.aspx" />
@@ -180,12 +183,40 @@
     <Compile Include="Pages\New_Admin\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Service_Provider\service_provider_dashboard.aspx.cs">
-      <DependentUpon>service_provider_dashboard.aspx</DependentUpon>
+    <Compile Include="Pages\Service_Provider\service_provider_booking.aspx.cs">
+      <DependentUpon>service_provider_booking.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Service_Provider\service_provider_dashboard.aspx.designer.cs">
-      <DependentUpon>service_provider_dashboard.aspx</DependentUpon>
+    <Compile Include="Pages\Service_Provider\service_provider_booking.aspx.designer.cs">
+      <DependentUpon>service_provider_booking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\service_provider_master.Master.cs">
+      <DependentUpon>service_provider_master.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\service_provider_master.Master.designer.cs">
+      <DependentUpon>service_provider_master.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_profile.aspx.cs">
+      <DependentUpon>service_provider_profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_profile.aspx.designer.cs">
+      <DependentUpon>service_provider_profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_user.aspx.cs">
+      <DependentUpon>service_provider_user.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_user.aspx.designer.cs">
+      <DependentUpon>service_provider_user.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\WebForm3.aspx.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\WebForm3.aspx.designer.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\about_us.aspx.cs">
       <DependentUpon>about_us.aspx</DependentUpon>
@@ -262,6 +293,7 @@
   <ItemGroup>
     <Content Include="MasterPage\SignUp_Master.Master" />
     <None Include="packages.config" />
+    <Content Include="MasterPage\service_provider_master.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

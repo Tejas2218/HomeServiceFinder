@@ -11,8 +11,17 @@ namespace HomeServiceFinder.Pages.Service_Provider
 {
 
 
-    public partial class service_provider_dashboard
+    public partial class Site1
     {
+
+        /// <summary>
+        /// head control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
 
         /// <summary>
         /// form1 control.
@@ -24,39 +33,39 @@ namespace HomeServiceFinder.Pages.Service_Provider
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// imgProfile control.
+        /// lnkBookings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProfile;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkBookings;
 
         /// <summary>
-        /// lblWorkerName control.
+        /// lnkCustomers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWorkerName;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkCustomers;
 
         /// <summary>
-        /// lblWorkerCategory control.
+        /// lnkProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWorkerCategory;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkProfile;
 
         /// <summary>
-        /// lblWorkerEmail control.
+        /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWorkerEmail;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
     }
 }

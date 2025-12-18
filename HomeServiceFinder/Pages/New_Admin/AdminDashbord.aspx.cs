@@ -16,10 +16,10 @@ namespace HomeServiceFinder.Pages.New_Admin
         {
             if (!IsPostBack)
             {
-                CountUser();
-                CountWorker();
-                CountTodayBooking();
-                CountTotalBooking();
+                //CountUser();
+                //CountWorker();
+                //CountTodayBooking();
+                //CountTotalBooking();
             }
         }
         void CountUser()
