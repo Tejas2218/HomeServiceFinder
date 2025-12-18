@@ -160,11 +160,11 @@
         <h2>Admin Panel</h2>
 
         <div class="menu-item"><a href="AdminDashbord.aspx">🏠 Dashboard</a></div>
-        <div class="menu-item"><a href="AdminUsers.aspx">👥 Users</a></div>
+        <div class="menu-item"><a href="User.aspx">👥 Users</a></div>
         <div class="menu-item"><a href="ServiceProvider.aspx">🛠 Service Providers</a></div>
-        <div class="menu-item"><a href="#">📅 Bookings</a></div>
-        <div class="menu-item"><a href="#">📊 Reports</a></div>
-        <div class="menu-item"><a href="#">⚙ Settings</a></div>
+        <div class="menu-item"><a href="AdminBookings.aspx">📅 Bookings</a></div>
+        <div class="menu-item"><a href="Reports.aspx">📊 Reports</a></div>
+        <div class="menu-item"><a href="Settings.aspx">⚙ Settings</a></div>
     </div>
 
     <!-- Topbar -->
