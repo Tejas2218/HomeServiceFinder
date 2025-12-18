@@ -83,6 +83,10 @@
     <Content Include="Pages\login_signup\loginPage.aspx" />
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
     <Content Include="Pages\login_signup\Worker_SignUp.aspx" />
+    <Content Include="Pages\New_Admin\AddServiceProvider.aspx" />
+    <Content Include="Pages\New_Admin\AdminDashbord.aspx" />
+    <Content Include="Pages\New_Admin\ServiceProvider.aspx" />
+    <Content Include="Pages\New_Admin\User.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_dashboard.aspx" />
     <Content Include="Pages\User\Profile.aspx" />
     <Content Include="Pages\User\user_booking.aspx" />
@@ -124,6 +128,34 @@
     </Compile>
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.designer.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AddServiceProvider.aspx.cs">
+      <DependentUpon>AddServiceProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AddServiceProvider.aspx.designer.cs">
+      <DependentUpon>AddServiceProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AdminDashbord.aspx.cs">
+      <DependentUpon>AdminDashbord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AdminDashbord.aspx.designer.cs">
+      <DependentUpon>AdminDashbord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ServiceProvider.aspx.cs">
+      <DependentUpon>ServiceProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ServiceProvider.aspx.designer.cs">
+      <DependentUpon>ServiceProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Service_Provider\service_provider_dashboard.aspx.cs">
       <DependentUpon>service_provider_dashboard.aspx</DependentUpon>
