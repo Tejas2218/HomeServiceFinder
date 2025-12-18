@@ -69,13 +69,13 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.DropDownList CityList;
 
         /// <summary>
-        /// User_Address_Icon control.
+        /// User_Contact_TextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Address_Icon;
+        protected global::System.Web.UI.WebControls.TextBox User_Contact_TextBox;
 
         /// <summary>
         /// User_Address_TextBox control.
@@ -87,33 +87,6 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.TextBox User_Address_TextBox;
 
         /// <summary>
-        /// User_Contact_Icon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Contact_Icon;
-
-        /// <summary>
-        /// User_Contact_TextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Contact_TextBox;
-
-        /// <summary>
-        /// User_Password_Icon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Password_Icon;
-
-        /// <summary>
         /// User_Password_TextBox control.
         /// </summary>
         /// <remarks>
@@ -121,15 +94,6 @@ namespace HomeServiceFinder.Pages.login_signup
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox User_Password_TextBox;
-
-        /// <summary>
-        /// User_Confirm_Password_Icon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Confirm_Password_Icon;
 
         /// <summary>
         /// User_Confirm_Password_TextBox control.

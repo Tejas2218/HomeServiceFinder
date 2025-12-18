@@ -88,7 +88,14 @@
     <Content Include="Pages\New_Admin\ServiceProvider.aspx" />
     <Content Include="Pages\New_Admin\User.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_dashboard.aspx" />
-    <Content Include="Pages\User\Profile.aspx" />
+    <Content Include="Pages\User\about_us.aspx" />
+    <Content Include="Pages\User\appointment.aspx" />
+    <Content Include="Pages\User\change_password.aspx" />
+    <Content Include="Pages\User\contact_us.aspx" />
+    <Content Include="Pages\User\equipment.aspx" />
+    <Content Include="Pages\User\more_services.aspx" />
+    <Content Include="Pages\User\profile.aspx" />
+    <Content Include="Pages\User\service.aspx" />
     <Content Include="Pages\User\user_booking.aspx" />
     <Content Include="Pages\User\user_dashboard.aspx" />
     <Content Include="Web.config" />
@@ -164,12 +171,61 @@
     <Compile Include="Pages\Service_Provider\service_provider_dashboard.aspx.designer.cs">
       <DependentUpon>service_provider_dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\User\Profile.aspx.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
+    <Compile Include="Pages\User\about_us.aspx.cs">
+      <DependentUpon>about_us.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\User\Profile.aspx.designer.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
+    <Compile Include="Pages\User\about_us.aspx.designer.cs">
+      <DependentUpon>about_us.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\appointment.aspx.cs">
+      <DependentUpon>appointment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\appointment.aspx.designer.cs">
+      <DependentUpon>appointment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\change_password.aspx.cs">
+      <DependentUpon>change_password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\change_password.aspx.designer.cs">
+      <DependentUpon>change_password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\contact_us.aspx.cs">
+      <DependentUpon>contact_us.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\contact_us.aspx.designer.cs">
+      <DependentUpon>contact_us.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\equipment.aspx.cs">
+      <DependentUpon>equipment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\equipment.aspx.designer.cs">
+      <DependentUpon>equipment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\more_services.aspx.cs">
+      <DependentUpon>more_services.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\more_services.aspx.designer.cs">
+      <DependentUpon>more_services.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\profile.aspx.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\profile.aspx.designer.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\service.aspx.cs">
+      <DependentUpon>service.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\service.aspx.designer.cs">
+      <DependentUpon>service.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\user_booking.aspx.cs">
       <DependentUpon>user_booking.aspx</DependentUpon>
@@ -222,7 +278,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50095</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60123/</IISUrl>
+          <IISUrl>http://localhost:50095/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

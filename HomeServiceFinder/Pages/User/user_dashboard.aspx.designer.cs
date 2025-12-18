@@ -15,39 +15,12 @@ namespace HomeServiceFinder.Pages.User
     {
 
         /// <summary>
-        /// ProfileMenuPlaceholder control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProfileMenuPlaceholder;
-
-        /// <summary>
-        /// phProfileBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button phProfileBtn;
-
-        /// <summary>
-        /// SignUpMenuPlaceholder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SignUpMenuPlaceholder;
-
-        /// <summary>
-        /// phSignupBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button phSignupBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }
