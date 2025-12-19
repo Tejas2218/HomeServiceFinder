@@ -212,27 +212,7 @@
             </div>
 
             <!-- RECENT BOOKINGS -->
-            <div class="bookings-box">
-                <h3>Recent Bookings</h3>
-
-                <div class="booking-item">
-                    <span>Rahul | Plumber | Ramesh | 10:30 AM</span>
-                    <a href="#" class="btn-view">View</a>
-                </div>
-
-                <div class="booking-item">
-                    <span>Anita | Electrician | Suresh | 12:00 PM</span>
-                    <a href="#" class="btn-view">View</a>
-                </div>
-
-                <div class="booking-item">
-                    <span>Neha | AC Repair | Mohan | 4:00 PM</span>
-                    <a href="#" class="btn-view">View</a>
-                </div>
-            </div>
-
-        </div>
-
+            
         <!-- CHART JS CODE -->
         <script>
             new Chart(document.getElementById("serviceChart"), {

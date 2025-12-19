@@ -203,7 +203,7 @@
                     <td>9876543210</td>
                     <td><span class="badge active">Active</span></td>
                     <td>
-                        <a class="btn btn-view">View</a>
+                        <a class="btn btn-view" href="UserProfile.aspx">View</a>
                         <a class="btn btn-delete">Delete</a>
                     </td>
                 </tr>
@@ -215,7 +215,7 @@
                     <td>9123456780</td>
                     <td><span class="badge blocked">Blocked</span></td>
                     <td>
-                        <a class="btn btn-view">View</a>
+                        <a class="btn btn-view" href="UserProfile.aspx">View</a>
                         <a class="btn btn-delete">Delete</a>
                     </td>
                 </tr>

@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Settings.aspx.cs"
-    Inherits="HomeServiceFinder.Pages.New_Admin.Settings" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ServiceProviderProfile.aspx.cs" Inherits="HomeServiceFinder.Pages.New_Admin.ServiceProviderProfile" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -136,8 +135,8 @@
         <div class="menu-item"><a href="AdminDashbord.aspx">🏠 Dashboard</a></div>
         <div class="menu-item"><a href="User.aspx">👥 Users</a></div>
         <div class="menu-item"><a href="ServiceProvider.aspx">🛠 Service Providers</a></div>
-        <div class="menu-item"><a href="AdminBookings.aspx">📅 Bookings</a></div>
-        <div class="menu-item"><a href="Reports.aspx">📊 Reports</a></div>
+        <div class="menu-item"><a href="Booking.aspx">📅 Bookings</a></div>
+        <div class="menu-item"><a href="Report.aspx">📊 Reports</a></div>
         <div class="menu-item"><a href="Settings.aspx">⚙ Settings</a></div>
     </div>
 
@@ -151,7 +150,7 @@
 
         <!-- Profile Settings -->
         <div class="settings-box">
-            <h3>Admin Profile</h3>
+            <h3>Service Provider Profile</h3>
 
             <label>Name</label>
             <input type="text" placeholder="Admin Name" />
