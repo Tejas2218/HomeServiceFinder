@@ -216,7 +216,7 @@
         <!-- Header -->
         <div class="page-header">
             <h3>Service Provider List</h3>
-            <a href="AddServiceProvider.aspx" class="btn-add">➕ Add Service Provider</a>
+            <a href="../login_signup/Worker_SignUp.aspx" class="btn-add">➕ Add Service Provider</a>
         </div>
 
         <!-- Table -->
@@ -238,8 +238,8 @@
                     <td>9876543210</td>
                     <td><span class="badge active">Active</span></td>
                     <td>
-                        <a class="btn btn-view">View</a>
-                        <a class="btn btn-edit">Edit</a>
+                        <a class="btn btn-view" href="UserProfile.aspx">View</a>
+                        <a class="btn btn-edit" href="UserProfile.aspx">Edit</a>
                         <a class="btn btn-delete">Delete</a>
                     </td>
                 </tr>
@@ -251,8 +251,8 @@
                     <td>9123456789</td>
                     <td><span class="badge inactive">Inactive</span></td>
                     <td>
-                        <a class="btn btn-view">View</a>
-                        <a class="btn btn-edit">Edit</a>
+                        <a class="btn btn-view" href="UserProfile.aspx">View</a>
+                        <a class="btn btn-edit" href="UserProfile.aspx">Edit</a>
                         <a class="btn btn-delete">Delete</a>
                     </td>
                 </tr>
