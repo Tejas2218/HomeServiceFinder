@@ -83,11 +83,22 @@
     <Content Include="Pages\login_signup\loginPage.aspx" />
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
     <Content Include="Pages\login_signup\Worker_SignUp.aspx" />
-    <Content Include="Pages\Service_Provider\service_provider_dashboard.aspx" />
+    <Content Include="Pages\New_Admin\AdminBookings.aspx" />
+    <Content Include="Pages\New_Admin\AdminDashbord.aspx" />
+    <Content Include="Pages\New_Admin\Reports.aspx" />
+    <Content Include="Pages\New_Admin\ServiceProvider.aspx" />
+    <Content Include="Pages\New_Admin\Settings.aspx" />
+    <Content Include="Pages\New_Admin\User.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_booking.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_profile.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_user.aspx" />
+    <Content Include="Pages\Service_Provider\WebForm3.aspx" />
     <Content Include="Pages\User\about_us.aspx" />
     <Content Include="Pages\User\appointment.aspx" />
+    <Content Include="Pages\User\change_password.aspx" />
     <Content Include="Pages\User\contact_us.aspx" />
     <Content Include="Pages\User\equipment.aspx" />
+    <Content Include="Pages\User\more_services.aspx" />
     <Content Include="Pages\User\profile.aspx" />
     <Content Include="Pages\User\service.aspx" />
     <Content Include="Pages\User\user_booking.aspx" />
@@ -130,12 +141,82 @@
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.designer.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Service_Provider\service_provider_dashboard.aspx.cs">
-      <DependentUpon>service_provider_dashboard.aspx</DependentUpon>
+    <Compile Include="Pages\New_Admin\AdminBookings.aspx.cs">
+      <DependentUpon>AdminBookings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Service_Provider\service_provider_dashboard.aspx.designer.cs">
-      <DependentUpon>service_provider_dashboard.aspx</DependentUpon>
+    <Compile Include="Pages\New_Admin\AdminBookings.aspx.designer.cs">
+      <DependentUpon>AdminBookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AdminDashbord.aspx.cs">
+      <DependentUpon>AdminDashbord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AdminDashbord.aspx.designer.cs">
+      <DependentUpon>AdminDashbord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ServiceProvider.aspx.cs">
+      <DependentUpon>ServiceProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ServiceProvider.aspx.designer.cs">
+      <DependentUpon>ServiceProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\Settings.aspx.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\Settings.aspx.designer.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_booking.aspx.cs">
+      <DependentUpon>service_provider_booking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_booking.aspx.designer.cs">
+      <DependentUpon>service_provider_booking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\service_provider_master.Master.cs">
+      <DependentUpon>service_provider_master.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\service_provider_master.Master.designer.cs">
+      <DependentUpon>service_provider_master.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_profile.aspx.cs">
+      <DependentUpon>service_provider_profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_profile.aspx.designer.cs">
+      <DependentUpon>service_provider_profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_user.aspx.cs">
+      <DependentUpon>service_provider_user.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_user.aspx.designer.cs">
+      <DependentUpon>service_provider_user.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\WebForm3.aspx.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\WebForm3.aspx.designer.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\about_us.aspx.cs">
       <DependentUpon>about_us.aspx</DependentUpon>
@@ -151,6 +232,13 @@
     <Compile Include="Pages\User\appointment.aspx.designer.cs">
       <DependentUpon>appointment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\change_password.aspx.cs">
+      <DependentUpon>change_password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\change_password.aspx.designer.cs">
+      <DependentUpon>change_password.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\contact_us.aspx.cs">
       <DependentUpon>contact_us.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -164,6 +252,13 @@
     </Compile>
     <Compile Include="Pages\User\equipment.aspx.designer.cs">
       <DependentUpon>equipment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\more_services.aspx.cs">
+      <DependentUpon>more_services.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\more_services.aspx.designer.cs">
+      <DependentUpon>more_services.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>
@@ -198,6 +293,7 @@
   <ItemGroup>
     <Content Include="MasterPage\SignUp_Master.Master" />
     <None Include="packages.config" />
+    <Content Include="MasterPage\service_provider_master.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

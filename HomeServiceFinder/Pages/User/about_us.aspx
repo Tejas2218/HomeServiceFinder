@@ -71,6 +71,7 @@
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
                     <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
                     <a href="profile.aspx" class="nav-item nav-link">Profile</a>
+                    <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
                     <a href="about_us.aspx" class="nav-item nav-link active">About Us</a>
                 </div>
             </div>
@@ -78,13 +79,7 @@
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
                 <h1 class="display-4 text-white animated slideInDown mb-4">About Us</h1>
-                <nav aria-label="breadcrumb animated slideInDown">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a class="text-white" href="index.aspx">Home</a></li>
-                        <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                        <li class="breadcrumb-item text-primary active" aria-current="page">About</li>
-                    </ol>
-                </nav>
+                
             </div>
         </div>
         <div class="container-xxl py-5">
@@ -196,7 +191,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h4 class="text-light mb-4">Quick Links</h4>
-                        <a class="btn btn-link" href="about.aspx">About Us</a>
+                        <a class="btn btn-link" href="contact_us.aspx">Contact Us</a>
                         <a class="btn btn-link" href="profile.aspx">Profile</a>
                         <a class="btn btn-link" href="service.aspx">Our Services</a>
                     </div>
@@ -223,7 +218,6 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     </form>
 

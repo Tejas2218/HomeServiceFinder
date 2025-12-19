@@ -11,7 +11,7 @@ namespace HomeServiceFinder.Pages.User
 {
 
 
-    public partial class profile
+    public partial class Profile
     {
 
         /// <summary>
@@ -24,31 +24,13 @@ namespace HomeServiceFinder.Pages.User
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// txtFirstName control.
+        /// txtFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
-
-        /// <summary>
-        /// txtLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLastName;
-
-        /// <summary>
-        /// txtEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtFullName;
 
         /// <summary>
         /// txtPhone control.
@@ -60,6 +42,15 @@ namespace HomeServiceFinder.Pages.User
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
 
         /// <summary>
+        /// txtEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
         /// txtAddress control.
         /// </summary>
         /// <remarks>
@@ -69,22 +60,22 @@ namespace HomeServiceFinder.Pages.User
         protected global::System.Web.UI.WebControls.TextBox txtAddress;
 
         /// <summary>
-        /// txtPassword control.
+        /// ddlState control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.DropDownList ddlState;
 
         /// <summary>
-        /// txtConfirmPassword control.
+        /// ddlCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCity;
 
         /// <summary>
         /// btnSaveChanges control.

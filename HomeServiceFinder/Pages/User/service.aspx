@@ -71,6 +71,7 @@
                     <a href="service.aspx" class="nav-item nav-link active">Our Services</a>
                     <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
                     <a href="profile.aspx" class="nav-item nav-link">Profile</a>
+                    <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
                     <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
                 </div>
             </div>
@@ -78,13 +79,7 @@
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
                 <h1 class="display-4 text-white animated slideInDown mb-4">Our Services</h1>
-                <nav aria-label="breadcrumb animated slideInDown">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a class="text-white" href="index.aspx">Home</a></li>
-                        <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                        <li class="breadcrumb-item text-primary active" aria-current="page">Our Services</li>
-                    </ol>
-                </nav>
+                
             </div>
         </div>
         <div class="container-xxl py-5">
@@ -97,7 +92,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 text-lg-end wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="btn btn-primary py-3 px-5" href="">More Services</a>
+                        <a class="btn btn-primary py-3 px-5" href="more_services.aspx">More Services</a>
                     </div>
                 </div>
                 <div class="row g-4 justify-content-center">
@@ -107,7 +102,7 @@
                             <div class="service-text position-relative text-center h-100 p-4">
                                 <h5 class="mb-3">Building Construction</h5>
                                 <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -117,7 +112,7 @@
                             <div class="service-text position-relative text-center h-100 p-4">
                                 <h5 class="mb-3">Home Maintainance</h5>
                                 <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -127,7 +122,7 @@
                             <div class="service-text position-relative text-center h-100 p-4">
                                 <h5 class="mb-3">Renovation and Painting</h5>
                                 <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -137,7 +132,7 @@
                             <div class="service-text position-relative text-center h-100 p-4">
                                 <h5 class="mb-3">Wiring and installation</h5>
                                 <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -147,7 +142,7 @@
                             <div class="service-text position-relative text-center h-100 p-4">
                                 <h5 class="mb-3">Tiling and Painting</h5>
                                 <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -157,7 +152,7 @@
                             <div class="service-text position-relative text-center h-100 p-4">
                                 <h5 class="mb-3">Interior Design</h5>
                                 <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                                <a class="small" href="">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
+                                <a class="small" href="equipment.aspx">READ MORE<i class="fa fa-arrow-right ms-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -212,7 +207,6 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     </form>
 

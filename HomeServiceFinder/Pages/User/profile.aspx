@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="HomeServiceFinder.Pages.User.profile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="HomeServiceFinder.Pages.User.Profile" %>
 
 <!DOCTYPE html>
 
@@ -46,9 +46,15 @@
             border-top: 5px solid var(--primary);
         }
 
-        .form-control:focus {
+        .form-control:focus, .form-select:focus {
             border-color: var(--primary);
             box-shadow: none;
+        }
+        /* Style for the ReadOnly Email field to look disabled */
+        .form-control[readonly] {
+            background-color: #e9ecef;
+            opacity: 1;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -58,6 +64,7 @@
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
         </div>
+
         <div class="container-fluid bg-light p-0">
             <div class="row gx-0 d-none d-lg-flex">
                 <div class="col-lg-7 px-5 text-start">
@@ -97,6 +104,7 @@
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
                     <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
                     <a href="profile.aspx" class="nav-item nav-link active">Profile</a>
+                    <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
                     <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
                 </div>
             </div>
@@ -148,28 +156,25 @@
                             </div>
 
                             <div class="row g-3">
+
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" placeholder="First Name" Text="John"></asp:TextBox>
-                                        <label for="txtFirstName">First Name</label>
+                                        <asp:TextBox ID="txtFullName" runat="server" CssClass="form-control" placeholder="Full Name" Text="John Doe"></asp:TextBox>
+                                        <label for="txtFullName">Full Name</label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" placeholder="Last Name" Text="Doe"></asp:TextBox>
-                                        <label for="txtLastName">Last Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email" TextMode="Email" Text="john@example.com"></asp:TextBox>
-                                        <label for="txtEmail">Email Address</label>
-                                    </div>
-                                </div>
+
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" placeholder="Phone Number" Text="+012 345 6789"></asp:TextBox>
                                         <label for="txtPhone">Phone Number</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email" TextMode="Email" Text="john@example.com" ReadOnly="true"></asp:TextBox>
+                                        <label for="txtEmail">Email Address (Cannot be changed)</label>
                                     </div>
                                 </div>
 
@@ -180,27 +185,41 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 mt-4">
-                                    <h5 class="text-uppercase mb-3"><i class="fa fa-lock text-primary me-2"></i>Security</h5>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <asp:DropDownList ID="ddlState" runat="server" CssClass="form-select">
+                                            <asp:ListItem Text="Select State" Value="0"></asp:ListItem>
+                                            <asp:ListItem Text="New York" Value="NY"></asp:ListItem>
+                                            <asp:ListItem Text="California" Value="CA"></asp:ListItem>
+                                            <asp:ListItem Text="Texas" Value="TX"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <label for="ddlState">State</label>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="New Password" TextMode="Password"></asp:TextBox>
-                                        <label for="txtPassword">New Password</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" placeholder="Confirm Password" TextMode="Password"></asp:TextBox>
-                                        <label for="txtConfirmPassword">Confirm Password</label>
+                                        <asp:DropDownList ID="ddlCity" runat="server" CssClass="form-select">
+                                            <asp:ListItem Text="Select City" Value="0"></asp:ListItem>
+                                            <asp:ListItem Text="New York City" Value="NYC"></asp:ListItem>
+                                            <asp:ListItem Text="Los Angeles" Value="LA"></asp:ListItem>
+                                            <asp:ListItem Text="Houston" Value="HOU"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <label for="ddlCity">City</label>
                                     </div>
                                 </div>
 
-                                <div class="col-12 mt-4">
+                                <div class="col-12 mt-4 mb-4">
                                     <asp:Button ID="btnSaveChanges" runat="server" Text="Save Changes" CssClass="btn btn-primary py-3 px-5" />
                                     <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-secondary py-3 px-5 ms-2" />
                                 </div>
+
+                                <hr class="my-2" />
+
+                                <div class="col-12 mt-2">
+                                    <a href="change_password.aspx" class="fw-bold"><i class="fa fa-key me-2"></i>Change Password</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -208,6 +227,7 @@
                 </div>
             </div>
         </div>
+
         <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">

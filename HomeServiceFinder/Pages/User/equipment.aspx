@@ -1,232 +1,256 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="equipment.aspx.cs" Inherits="HomeServiceFinder.Pages.User.equipment" %>
 
+<script runat="server">
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            // The specific sub-services for "Home Cleaning"
+            var subServices = new System.Collections.Generic.List<object>
+            {
+                new { Name = "Brooming & Mopping", Price = 199, Icon = "fa-broom", Desc = "Daily floor dusting & wet mop." },
+                new { Name = "Washroom Deep Clean", Price = 499, Icon = "fa-sink", Desc = "Tile scrubbing, acid wash & sanitizing." },
+                new { Name = "Full House Deep Clean", Price = 2499, Icon = "fa-house-chimney", Desc = "Complete home deep cleaning (Floor+Walls)." },
+                new { Name = "Water Tank Wash", Price = 899, Icon = "fa-faucet-drip", Desc = "Underground & overhead sludge removal." },
+                new { Name = "Summer Cool (AC/Fan)", Price = 799, Icon = "fa-snowflake", Desc = "AC servicing & fan cleaning special." },
+                new { Name = "Equipment Clean", Price = 599, Icon = "fa-blender-phone", Desc = "Fridge, Oven & Washing machine." }
+            };
+            rptServices.DataSource = subServices;
+            rptServices.DataBind();
+        }
+    }
+
+    protected void btnConfirm_Click(object sender, EventArgs e)
+    {
+        // Simulate Booking
+        string service = hfServiceName.Value;
+        string date = txtDate.Text;
+        ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('APEX BOOKING SUCCESS!\\nConfirmed: {service}\\nDate: {date}');", true);
+    }
+</script>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Select Equipment</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cleaning Sub-Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;700&display=swap" rel="stylesheet" />
 
     <style>
-        body {
-            margin: 0;
-            font-family: 'Inter',sans-serif;
-            background: #F9FAFB;
+        /* --- APEX ORANGE THEME --- */
+        :root {
+            --apex-orange: #FF4500; /* The "Apex" Orange */
+            --apex-dark: #121212; /* Dark background for contrast */
+            --apex-grey: #f4f4f4;
         }
 
-        .header {
-            background: linear-gradient(135deg,#60A5FA,#3B82F6);
-            color: white;
-            padding: 18px 40px;
+        body {
+            background-color: var(--apex-grey);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* HEADER: Navigation Bar Style */
+        .nav-header {
+            background-color: white;
+            padding: 15px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .back-btn {
-            background: white;
-            color: #2563EB;
-            padding: 8px 14px;
-            border-radius: 6px;
+            color: var(--apex-dark);
+            font-size: 1.2rem;
             text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            gap: 6px;
-            align-items: center;
+            margin-right: 15px;
+            transition: 0.2s;
         }
 
-        .container {
-            padding: 50px 70px;
+            .back-btn:hover {
+                color: var(--apex-orange);
+            }
+
+        .page-title {
+            font-weight: 800;
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--apex-dark);
         }
 
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-
-        select, input {
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #CBD5E1;
-        }
-
-        .equipment-box {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
-            gap: 20px;
-            max-height: 420px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .item {
+        /* LIST CARD DESIGN (Horizontal for sub-services) */
+        .sub-service-card {
             background: white;
-            border-radius: 14px;
-            padding: 18px;
-            box-shadow: 0 4px 10px rgba(0,0,0,.05);
-            text-align: center;
+            border-radius: 12px;
+            border-left: 5px solid transparent;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: all 0.2s ease-in-out;
             cursor: pointer;
-            border: 2px solid transparent;
-            transition: .2s;
         }
 
-            .item:hover {
-                transform: scale(1.05);
-                border-color: #60A5FA;
+            .sub-service-card:hover {
+                transform: translateX(5px);
+                border-left: 5px solid var(--apex-orange);
+                box-shadow: 0 5px 15px rgba(255, 69, 0, 0.15);
             }
 
-            .item.selected {
-                background: #EFF6FF;
-                border: 2px solid #2563EB;
-            }
-
-            .item i {
-                font-size: 34px;
-                color: #2563EB;
-                margin-bottom: 10px;
-            }
-
-        .preview {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1E3A8A;
-        }
-
-        .confirm-btn {
-            margin-top: 18px;
-            background: linear-gradient(135deg,#3B82F6,#2563EB);
-            border: none;
-            padding: 14px 18px;
+        /* ICON BOX */
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: #FFF0E6; /* Light Orange */
+            color: var(--apex-orange);
             border-radius: 10px;
-            color: white;
-            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        /* TEXT CONTENT */
+        .content-box {
+            flex-grow: 1;
+        }
+
+        .service-name {
             font-weight: 700;
-            cursor: pointer;
+            color: var(--apex-dark);
+            margin-bottom: 2px;
         }
 
-        @media(max-width:800px) {
-            .container {
-                padding: 30px
-            }
-
-            .top-bar {
-                flex-direction: column
-            }
+        .service-desc {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0;
         }
+
+        /* PRICE & ACTION */
+        .price-box {
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .price-text {
+            display: block;
+            font-weight: 800;
+            color: var(--apex-orange);
+            font-size: 1.1rem;
+        }
+
+        .add-btn {
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: underline;
+        }
+
+        /* MODAL (POPUP) STYLING */
+        .btn-orange-fill {
+            background-color: var(--apex-orange);
+            color: white;
+            font-weight: 700;
+            border: none;
+            padding: 12px;
+            width: 100%;
+        }
+
+            .btn-orange-fill:hover {
+                background-color: #e03e00;
+                color: white;
+            }
     </style>
 </head>
-
 <body>
-    <form runat="server">
+    <form id="form1" runat="server">
 
-        <div class="header">
-            <h2>Choose Equipment</h2>
-            <a href="user_dashboard.aspx" class="back-btn">
-                <i class="fa fa-arrow-left"></i>Back
-            </a>
+        <div class="nav-header">
+            <a href="#" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+            <h1 class="page-title">Home Cleaning</h1>
         </div>
 
-        <div class="container">
+        <div class="container py-4">
+            <p class="text-muted small mb-3 text-uppercase fw-bold ls-1">Select a Service Type</p>
 
-            <div class="top-bar">
-                <select id="serviceSelect" onchange="loadEquipment()">
-                    <option value="Electrical">Electrical</option>
-                    <option value="Plumbing">Plumbing</option>
-                    <option value="AC">AC Repair</option>
-                    <option value="Cleaning">Cleaning</option>
-                    <option value="Painting">Painting</option>
-                    <option value="Carpentry">Carpentry</option>
-                </select>
+            <asp:Repeater ID="rptServices" runat="server">
+                <ItemTemplate>
+                    <div class="sub-service-card" onclick="openModal('<%# Eval("Name") %>', '<%# Eval("Price") %>')">
 
-                <input type="text" id="searchBox" placeholder="Search equipment..." onkeyup="searchEquipment()" />
+                        <div class="icon-box">
+                            <i class="fa-solid <%# Eval("Icon") %>"></i>
+                        </div>
+
+                        <div class="content-box">
+                            <div class="service-name"><%# Eval("Name") %></div>
+                            <p class="service-desc"><%# Eval("Desc") %></p>
+                        </div>
+
+                        <div class="price-box">
+                            <span class="price-text">₹<%# Eval("Price") %></span>
+                            <span class="add-btn">Book</span>
+                        </div>
+
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+
+        <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg">
+
+                    <div class="modal-header border-0 pb-0">
+                        <h5 class="modal-title fw-bold">Confirm Service</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded">
+                            <div>
+                                <small class="text-muted d-block">Service</small>
+                                <strong class="text-dark" id="lblServiceName">...</strong>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted d-block">Total</small>
+                                <strong style="color: var(--apex-orange); font-size: 1.2rem;" id="lblServicePrice">...</strong>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="fw-bold small text-muted">DATE</label>
+                            <asp:TextBox ID="txtDate" runat="server" TextMode="Date" CssClass="form-control" required="true"></asp:TextBox>
+                        </div>
+                        <div class="mb-4">
+                            <label class="fw-bold small text-muted">ADDRESS</label>
+                            <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-control" placeholder="House/Flat No..." required="true"></asp:TextBox>
+                        </div>
+
+                        <asp:HiddenField ID="hfServiceName" runat="server" />
+
+                        <asp:Button ID="btnConfirm" runat="server" Text="Yes, Confirm Booking" CssClass="btn btn-orange-fill rounded-pill" OnClick="btnConfirm_Click" />
+                    </div>
+                </div>
             </div>
-
-            <div class="equipment-box" id="equipmentBox"></div>
-
-            <div class="preview">
-                Selected Equipment: <span id="selectedItem">None</span>
-            </div>
-
-            <button type="button" class="confirm-btn" onclick="confirmSelection()">Confirm Selection</button>
-
         </div>
 
     </form>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
-        const equipmentData = {
-            Electrical: [
-                ["Fan", "fa-fan"], ["Light", "fa-lightbulb"], ["Switch", "fa-toggle-on"],
-                ["Socket", "fa-plug"], ["MCB", "fa-bolt"], ["Fuse", "fa-fire"],
-                ["Wiring", "fa-code-branch"], ["Inverter", "fa-battery-full"], ["Battery", "fa-car-battery"]
-            ],
-            Plumbing: [
-                ["Tap", "fa-faucet"], ["Pipe", "fa-water"], ["Sink", "fa-sink"],
-                ["Toilet", "fa-toilet"], ["Tank", "fa-oil-can"], ["Motor", "fa-cogs"]
-            ],
-            AC: [
-                ["AC Unit", "fa-snowflake"], ["Filter", "fa-filter"],
-                ["Gas Refill", "fa-wind"], ["Compressor", "fa-industry"]
-            ],
-            Cleaning: [
-                ["Vacuum", "fa-soap"], ["Mop", "fa-broom"], ["Glass Cleaner", "fa-spray-can"]
-            ],
-            Painting: [
-                ["Brush", "fa-paint-brush"], ["Roller", "fa-roller"], ["Spray Gun", "fa-air-freshener"]
-            ],
-            Carpentry: [
-                ["Hammer", "fa-hammer"], ["Drill", "fa-screwdriver"],
-                ["Door", "fa-door-closed"], ["Window", "fa-house"]
-            ]
-        };
-
-        function loadEquipment() {
-            const service = serviceSelect.value;
-            const box = document.getElementById("equipmentBox");
-            box.innerHTML = "";
-
-            equipmentData[service].forEach(eq => {
-                const div = document.createElement("div");
-                div.className = "item";
-                div.setAttribute("data-name", eq[0].toLowerCase());
-                div.innerHTML = `<i class="fa ${eq[1]}"></i><div>${eq[0]}</div>`;
-
-                div.onclick = function () {
-                    document.querySelectorAll('.item').forEach(i => i.classList.remove("selected"));
-                    div.classList.add("selected");
-                    selectedItem.innerText = eq[0];
-                };
-
-                box.appendChild(div);
-            });
+        function openModal(name, price) {
+            document.getElementById('lblServiceName').innerText = name;
+            document.getElementById('lblServicePrice').innerText = '₹' + price;
+            document.getElementById('<%= hfServiceName.ClientID %>').value = name;
+            new bootstrap.Modal(document.getElementById('bookingModal')).show();
         }
-
-        function searchEquipment() {
-            const q = searchBox.value.toLowerCase();
-            document.querySelectorAll('.item').forEach(e => {
-                e.style.display = e.dataset.name.includes(q) ? "block" : "none";
-            });
-        }
-
-        function confirmSelection() {
-            const item = document.getElementById("selectedItem").innerText;
-            if (item === "None") {
-                alert("Please select equipment first.");
-            } else {
-                alert("You selected: " + item);
-                // Redirect / store in session if required
-            }
-        }
-
-        loadEquipment();
-
     </script>
-
 </body>
 </html>
