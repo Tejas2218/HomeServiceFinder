@@ -245,8 +245,8 @@
                     <td>18 Dec 2025 | 10:30 AM</td>
                     <td><span class="badge pending">Pending</span></td>
                     <td>
-                        <a class="btn btn-view">View</a>
-                        <a class="btn btn-update">Update</a>
+                        <a class="btn btn-view" href="UserProfile.aspx">View</a>
+                        <a class="btn btn-update" href="UserProfile.aspx">Update</a>
                         <a class="btn btn-cancel">Cancel</a>
                     </td>
                 </tr>

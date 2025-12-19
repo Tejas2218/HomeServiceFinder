@@ -94,6 +94,7 @@
     <Content Include="Pages\New_Admin\ServiceProvider.aspx" />
     <Content Include="Pages\New_Admin\Settings.aspx" />
     <Content Include="Pages\New_Admin\User.aspx" />
+    <Content Include="Pages\New_Admin\UserProfile.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_booking.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_profile.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_user.aspx" />
@@ -108,7 +109,6 @@
     <Content Include="Pages\User\service.aspx" />
     <Content Include="Pages\User\user_booking.aspx" />
     <Content Include="Pages\User\user_dashboard.aspx" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MasterPage\SignUp_Master.Master.cs">
@@ -187,6 +187,13 @@
     </Compile>
     <Compile Include="Pages\New_Admin\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Service_Provider\service_provider_booking.aspx.cs">
       <DependentUpon>service_provider_booking.aspx</DependentUpon>
@@ -299,6 +306,7 @@
     <Content Include="MasterPage\SignUp_Master.Master" />
     <None Include="packages.config" />
     <Content Include="MasterPage\service_provider_master.Master" />
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
