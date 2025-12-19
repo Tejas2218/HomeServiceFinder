@@ -77,11 +77,11 @@
             }
 
             .menu-item:hover {
-                background: var(--primary);
+                color: var(--primary);
             }
 
                 .menu-item:hover a {
-                    color: var(--dark);
+                    color: var(--primary);
                     font-weight: 600;
                 }
 
@@ -300,7 +300,7 @@
                     <a href="#">⭐ My Reviews</a>
                 </div>-->
                 <div class="menu-item">
-                    <a id="lnkProfile" runat="server" href="~/Pages/Service_Provider/service_provider_profile.aspx">⚙ Profile Settings</a>
+                    <a id="lnkProfile" runat="server" href="~/Pages/Service_Provider/service_provider_profile.aspx">&nbsp;⚙ Profile Settings</a>
                 </div>
             </div>
             <div class="topbar">
