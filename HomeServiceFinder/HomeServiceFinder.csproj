@@ -78,6 +78,11 @@
     <Content Include="Assests\Login_SignUp\User_Name_Icon.png" />
     <Content Include="Assests\Login_SignUp\User_Password_Icon.png" />
     <Content Include="background_img.png" />
+    <Content Include="Database_1\Address.sql" />
+    <Content Include="Database_1\BookingDetails.sql" />
+    <Content Include="Database_1\Tables.sql" />
+    <Content Include="Database_1\UserDetails.sql" />
+    <Content Include="Database_1\WorkerDetails.sql" />
     <Content Include="Pages\Admin\admin_dashboard.aspx" />
     <Content Include="Pages\login_signup\css\style.css" />
     <Content Include="Pages\login_signup\loginPage.aspx" />
