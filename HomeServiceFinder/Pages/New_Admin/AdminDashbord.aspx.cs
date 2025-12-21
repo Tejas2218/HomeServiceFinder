@@ -12,20 +12,28 @@ namespace HomeServiceFinder.Pages.New_Admin
 {
     public partial class AdminDashbord : System.Web.UI.Page
     {
+        string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                //CountUser();
-                //CountWorker();
-                //CountTodayBooking();
-                //CountTotalBooking();
+                CountUser();
+                CountWorker();
+                CountTodayBooking();
+                CountTotalBooking();
+                LoadServiceChart();
+            }
+        }
+        void LoadServiceChart()
+        {
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+
             }
         }
         void CountUser()
         {
-            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
-
             using(SqlConnection con=new SqlConnection(connString))
             {
                 SqlCommand cmd = new SqlCommand("Count_User", con);
@@ -37,8 +45,6 @@ namespace HomeServiceFinder.Pages.New_Admin
         }
         void CountWorker()
         {
-            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
-
             using (SqlConnection con = new SqlConnection(connString))
             {
                 SqlCommand cmd = new SqlCommand("Count_Worker", con);
@@ -50,7 +56,6 @@ namespace HomeServiceFinder.Pages.New_Admin
         }
         void CountTodayBooking()
         {
-            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(connString))
             {
@@ -63,7 +68,6 @@ namespace HomeServiceFinder.Pages.New_Admin
         }
         void CountTotalBooking()
         {
-            string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(connString))
             {
