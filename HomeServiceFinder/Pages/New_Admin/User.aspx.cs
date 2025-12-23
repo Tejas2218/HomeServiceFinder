@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,6 +10,7 @@ namespace HomeServiceFinder.Pages.New_Admin
     public partial class User : System.Web.UI.Page
     {
         string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,6 +20,7 @@ namespace HomeServiceFinder.Pages.New_Admin
             }
         }
 
+        // 🔹 LOAD USER GRID
         protected void LoadUserData()
         {
             using (SqlConnection con = new SqlConnection(connString))
@@ -38,7 +37,8 @@ namespace HomeServiceFinder.Pages.New_Admin
             }
         }
 
-        void CountUser()
+        // 🔹 COUNT TOTAL USERS
+        protected void CountUser()
         {
             using (SqlConnection con = new SqlConnection(connString))
             {
@@ -47,6 +47,45 @@ namespace HomeServiceFinder.Pages.New_Admin
 
                 con.Open();
                 lblUserCount.Text = cmd.ExecuteScalar().ToString();
+            }
+        }
+
+        // 🔹 PAGING (IMPORTANT)
+        protected void UserGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            UserGrid.PageIndex = e.NewPageIndex;
+            LoadUserData();
+        }
+
+        // 🔹 EDIT / DELETE BUTTON HANDLER
+        protected void UserGrid_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EditUser")
+            {
+                int userId = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("UserProfile.aspx?id=" + userId);
+            }
+
+            if (e.CommandName == "Delete")
+            {
+                int userId = Convert.ToInt32(e.CommandArgument);
+                DeleteUser(userId);
+                LoadUserData();
+                CountUser();
+            }
+        }
+
+        // 🔹 DELETE USER
+        protected void DeleteUser(int userId)
+        {
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("Delete_User_Details", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@User_ID", userId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
             }
         }
     }
