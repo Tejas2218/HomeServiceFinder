@@ -1,9 +1,14 @@
 --UserDetails--
 --Displa User Detail--
-alter proc Display_User_Details
+create or alter proc Display_User_Details
 as
 begin
-	select * from UserDetails  where User_Role='User'
+	select * from UserDetails UD
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	left join StateDetails SD
+	on UD.State_ID=SD.State_ID
+	where User_Role='User'
 end
 
 --Display Specific User Details--
