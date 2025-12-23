@@ -53,12 +53,13 @@ namespace HomeServiceFinder.Pages.login_signup
                 SqlCommand cmd = new SqlCommand("Display_City", con);
                 cmd.CommandType=CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@State_ID", StateList.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
 
                 con.Open();
                 SqlDataReader dr=cmd.ExecuteReader();
                 CityList.DataSource = dr;
                 CityList.DataTextField = "City_Name";
+                CityList.DataValueField = "City_ID";
                 if(StateList.Text!="Select State")
                 {
                     CityList.DataBind();
@@ -90,8 +91,8 @@ namespace HomeServiceFinder.Pages.login_signup
                     cmd.Parameters.AddWithValue("@User_ContactNo", User_Contact_TextBox.Text);
                     cmd.Parameters.AddWithValue("@User_Password", User_Password_TextBox.Text);
                     cmd.Parameters.AddWithValue("@User_Role", "User");
-                    cmd.Parameters.AddWithValue("@City_Name", CityList.SelectedItem.Text);
-                    cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@City_ID", CityList.SelectedItem.Value);
+                    cmd.Parameters.AddWithValue("@State_ID", StateList.SelectedItem.Value);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
