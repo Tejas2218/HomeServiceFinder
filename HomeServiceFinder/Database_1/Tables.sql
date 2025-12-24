@@ -28,6 +28,10 @@ create table UserDetails(
 )---------------created------
 
 select * from UserDetails
+select * from ServiceProviderDetails
+
+delete from UserDetails
+delete from ServiceProviderDetails
 
 
 alter table UserDetails alter column User_ContactNo varchar(10)
@@ -127,7 +131,7 @@ select * from UserDetails
 delete from UserDetails where User_ID=4
 
 select * from BookingDetails INNER JOIN ServiceProviderDetails on BookingDetails.SP_ID = ServiceProviderDetails.SP_ID 
-INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID where ServiceProviderDetails.User_ID = 1
+INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID 
 
 
 select * from ServiceProviderDetails INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID INNER JOIN CityDetails on UserDetails.City_ID = CityDetails.City_ID where ServiceProviderDetails.User_ID = 1
@@ -180,4 +184,4 @@ END
 select * from ServiceProviderDetails
 select * from UserDetails
 
-exec LoginSP 'anujmehta1107@gmail.com','anujhitu'
+exec LoginSP 'dev46408@gmail.com','dev123'
