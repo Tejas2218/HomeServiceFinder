@@ -56,7 +56,8 @@ Create OR alter proc Insert_Worker_Details
 @SP_Service varchar(50),
 @SP_Experience int,
 @SP_MinimumPrice int,
-@SP_AverageRating int
+@SP_AverageRating int,
+@SP_Status varchar(20)
 as
 begin
     DECLARE @User_ID INT;
@@ -95,7 +96,8 @@ begin
 		SP_MinimumPrice,
 		SP_AverageRating,
 		Service_ID,
-		Equipment_ID
+		Equipment_ID,
+		SP_Status
 	)
 	values(
 		@User_ID,
@@ -106,7 +108,8 @@ begin
 		@SP_MinimumPrice,
 		@SP_AverageRating,
 		@Service_ID,
-		@Equipment_ID
+		@Equipment_ID,
+		@SP_Status
 	)
 
 end

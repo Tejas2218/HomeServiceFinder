@@ -137,13 +137,15 @@ namespace HomeServiceFinder.Pages.login_signup
                 cmd.Parameters.AddWithValue("@SP_AverageRating", Convert.ToInt32("0"));
                 cmd.Parameters.AddWithValue("@Service_ID", Service_ID);
                 cmd.Parameters.AddWithValue("@Equipment_ID", Equipment_ID);
+                cmd.Parameters.AddWithValue("@SP_Status", "Pending");
 
 
 
                 int result = cmd.ExecuteNonQuery();
                 if (result > 0)
                 {
-                    Response.Write("<script>alert('Data inserted successfully');</script>");
+                    Response.Redirect("Waiting_ServiceProvider.aspx");
+                    Response.Write("<script>alert('You have successfully registered');</script>");
                 }
                 else
                 {
