@@ -63,7 +63,7 @@ namespace HomeServiceFinder.Pages.New_Admin
             if (e.CommandName == "EditUser")
             {
                 int userId = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("UserProfile.aspx?id=" + userId);
+                Response.Redirect("~/Pages/New_Admin/EditUserDetails.aspx?id=" + userId);
             }
 
             if (e.CommandName == "Delete")

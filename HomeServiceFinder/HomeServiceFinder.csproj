@@ -88,9 +88,9 @@
     <Content Include="Pages\login_signup\loginPage.aspx" />
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
     <Content Include="Pages\login_signup\Worker_SignUp.aspx" />
-    <Content Include="Pages\New_Admin\Admin.aspx" />
     <Content Include="Pages\New_Admin\AdminBookings.aspx" />
     <Content Include="Pages\New_Admin\AdminDashbord.aspx" />
+    <Content Include="Pages\New_Admin\EditUserDetails.aspx" />
     <Content Include="Pages\New_Admin\Reports.aspx" />
     <Content Include="Pages\New_Admin\ServiceProvider.aspx" />
     <Content Include="Pages\New_Admin\Settings.aspx" />
@@ -154,13 +154,6 @@
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.designer.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\New_Admin\Admin.aspx.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\New_Admin\Admin.aspx.designer.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\New_Admin\AdminBookings.aspx.cs">
       <DependentUpon>AdminBookings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -174,6 +167,13 @@
     </Compile>
     <Compile Include="Pages\New_Admin\AdminDashbord.aspx.designer.cs">
       <DependentUpon>AdminDashbord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\EditUserDetails.aspx.cs">
+      <DependentUpon>EditUserDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\EditUserDetails.aspx.designer.cs">
+      <DependentUpon>EditUserDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\New_Admin\Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
