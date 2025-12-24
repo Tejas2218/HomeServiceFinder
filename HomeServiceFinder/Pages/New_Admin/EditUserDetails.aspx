@@ -52,37 +52,18 @@
             <asp:ListItem Text="Select City" Value=""></asp:ListItem>
         </asp:DropDownList><br />
 
+        <label>Password</label>
+        <asp:TextBox
+            ID="User_Password_TextBox"
+            runat="server"
+            CssClass="input" />
+
         <asp:Button
             ID="btnUpdateProfile"
             runat="server"
             Text="Save Changes"
-            CssClass="btn-save" 
-            OnClick="btnUpdateProfile_Click"
-            />
-    </div>
-
-    <div class="settings-box">
-        <h3>Change Password</h3>
-
-        <label>New Password</label>
-        <asp:TextBox
-            ID="User_Password_TextBox"
-            runat="server"
-            CssClass="input"
-            TextMode="Password" />
-
-        <label>Confirm Password</label>
-        <asp:TextBox
-            ID="User_Confirm_Password_TextBox"
-            runat="server"
-            CssClass="input"
-            TextMode="Password" />
-
-        <asp:Button
-            ID="btnUpdatePassword"
-            runat="server"
-            Text="Update Password"
-            CssClass="btn-save" />
+            CssClass="btn-save"
+            OnClick="btnUpdateProfile_Click" />
     </div>
 
 </asp:Content>

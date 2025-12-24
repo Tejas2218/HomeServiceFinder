@@ -69,15 +69,6 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.DropDownList CityList;
 
         /// <summary>
-        /// btnUpdateProfile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateProfile;
-
-        /// <summary>
         /// User_Password_TextBox control.
         /// </summary>
         /// <remarks>
@@ -87,21 +78,12 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.TextBox User_Password_TextBox;
 
         /// <summary>
-        /// User_Confirm_Password_TextBox control.
+        /// btnUpdateProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Confirm_Password_TextBox;
-
-        /// <summary>
-        /// btnUpdatePassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdatePassword;
+        protected global::System.Web.UI.WebControls.Button btnUpdateProfile;
     }
 }

@@ -90,6 +90,7 @@ namespace HomeServiceFinder.Pages.New_Admin
                     StateList.SelectedValue = dr["State_Name"].ToString();
                     BindCityList(null,null);
                     CityList.SelectedValue = dr["City_Name"].ToString();
+                    User_Password_TextBox.Text = dr["User_Password"].ToString();
                 }
             }
             ViewState["UserId"] = userId;
@@ -113,9 +114,11 @@ namespace HomeServiceFinder.Pages.New_Admin
                 cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedValue);
                 cmd.Parameters.AddWithValue("@City_Name", CityList.SelectedValue);
 
+
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
+            Response.Redirect("User.aspx");
 
             
         }
