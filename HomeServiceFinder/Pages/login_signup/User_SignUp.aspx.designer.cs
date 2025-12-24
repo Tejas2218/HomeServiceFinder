@@ -105,6 +105,15 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.TextBox User_Confirm_Password_TextBox;
 
         /// <summary>
+        /// ErrorLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ErrorLabel;
+
+        /// <summary>
         /// SignupButton control.
         /// </summary>
         /// <remarks>
