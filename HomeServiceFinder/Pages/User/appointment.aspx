@@ -51,7 +51,7 @@
                 <div class="col-lg-5 px-5 text-end">
                     <div class="h-100 d-inline-flex align-items-center">
                         <a class="btn btn-square border-end border-start" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square border-end" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square border-end" href=""><i class="fab fa-youtube"></i></a>
                         <a class="btn btn-square border-end" href=""><i class="fab fa-linkedin-in"></i></a>
                         <a class="btn btn-square border-end" href=""><i class="fab fa-instagram"></i></a>
                     </div>
@@ -79,7 +79,7 @@
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
                 <h1 class="display-4 text-white animated slideInDown mb-4">Appointment</h1>
-                
+
             </div>
         </div>
         <div class="container-xxl py-5">
@@ -112,10 +112,26 @@
                                     <label for="cname">Your Mobile</label>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-light border-0" id="cage" placeholder="Child Age" />
-                                    <label for="cage">Service Type</label>
+                                    <asp:DropDownList ID="ddlService" runat="server" CssClass="form-select bg-light border-0">
+                                        <asp:ListItem Text="Service Type" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="Plumbing" Value="P"></asp:ListItem>
+                                        <asp:ListItem Text="Electrical" Value="E"></asp:ListItem>
+                                        <asp:ListItem Text="House Cleaning" Value="HC"></asp:ListItem>
+                                    </asp:DropDownList>
+                                    <label for="ddlService">Service</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <asp:DropDownList ID="ddlequipment" runat="server" CssClass="form-select bg-light border-0">
+                                        <asp:ListItem Text="Equipment Type" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="Plumbing" Value="P"></asp:ListItem>
+                                        <asp:ListItem Text="Electrical" Value="E"></asp:ListItem>
+                                        <asp:ListItem Text="House Cleaning" Value="HC"></asp:ListItem>
+                                    </asp:DropDownList>
+                                    <label for="ddlequipment">Equipment</label>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -139,7 +155,7 @@
                         <h1 class="text-white mb-4"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
                         <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita</p>
                         <div class="d-flex pt-2">
-                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-instagram"></i></a>
                             <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-youtube"></i></a>
                             <a class="btn btn-square btn-outline-primary me-0" href=""><i class="fab fa-linkedin-in"></i></a>
