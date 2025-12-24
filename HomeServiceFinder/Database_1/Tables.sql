@@ -60,6 +60,8 @@ create table ServiceProviderDetails(
 	Equipment_ID int Foreign Key References EquipmentMaster(Equipment_ID)
 )
 
+alter table ServiceProviderDetails add SP_Status varchar(20)---add
+
 create table BookingDetails(
 	Booking_ID int primary key identity(1,1),
 	Booking_Status varchar(50) not null,
@@ -129,3 +131,53 @@ INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID w
 
 
 select * from ServiceProviderDetails INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID INNER JOIN CityDetails on UserDetails.City_ID = CityDetails.City_ID where ServiceProviderDetails.User_ID = 1
+
+
+
+--------------------login sp
+CREATE OR ALTER PROC LoginSP
+(
+    @username NVARCHAR(100),
+    @password NVARCHAR(10)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @user_role VARCHAR(50);
+    DECLARE @user_ID INT;
+    SELECT 
+        @user_ID = User_ID, 
+        @user_role = User_Role
+    FROM UserDetails
+    WHERE 
+        (User_EmailID = @username OR User_ContactNo = @username)
+        AND User_Password = @password;
+    IF (@user_ID IS NOT NULL)
+    BEGIN
+        IF (@user_role = 'Worker')
+        BEGIN
+            SELECT 
+                spd.User_ID, 
+                ud.User_Role, 
+                spd.SP_Status 
+            FROM ServiceProviderDetails spd
+            INNER JOIN UserDetails ud ON spd.User_ID = ud.User_ID 
+            WHERE spd.User_ID = @user_ID;
+        END
+        ELSE
+        BEGIN
+            SELECT User_ID, User_Role
+            FROM UserDetails 
+            WHERE User_ID = @user_ID;
+        END
+    END
+    ELSE
+    BEGIN
+        SELECT NULL AS User_ID, NULL AS User_Role WHERE 1=0;
+    END
+END
+select * from ServiceProviderDetails
+select * from UserDetails
+
+exec LoginSP 'anujmehta1107@gmail.com','anujhitu'
