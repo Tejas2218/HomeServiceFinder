@@ -18,7 +18,7 @@ create table UserDetails(
 	User_Name varchar(50) not null,
 	User_EmailID varchar(100) unique,
 	User_Address varchar(200) not null,
-	User_ContactNo bigint not null,
+	User_ContactNo varchar(10) not null,
 	User_Password varchar(50) not null,
 	User_Role varchar(50) not null,
 	City_ID int Foreign Key References CityDetails(City_ID),
@@ -30,7 +30,7 @@ create table UserDetails(
 select * from UserDetails
 
 
-alter table UserDetails alter column State_ID int
+alter table UserDetails alter column User_ContactNo varchar(10)
 
 alter table UserDetails add constraint FK_UserDetails_State Foreign key (State_ID) References StateDetails(State_ID)
 
