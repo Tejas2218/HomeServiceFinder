@@ -7,7 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <!-- PAGE TITLE ONLY -->
-    <h2 style="margin-bottom:20px;">Service Providers</h2>
+    <h2 style="margin-bottom: 20px;">Service Providers</h2>
 
     <!-- TOTAL PROVIDERS -->
     <div class="stat-card">
@@ -20,49 +20,104 @@
     <!-- HEADER -->
     <div class="page-header">
         <h3>Service Provider List</h3>
-        <a href="../login_signup/Worker_SignUp.aspx" class="btn-add">
-            ➕ Add Service Provider
+        <a href="../login_signup/Worker_SignUp.aspx" class="btn-add">➕ Add Service Provider
         </a>
     </div>
 
     <!-- TABLE -->
     <div class="table-box">
-        <table class="admin-table">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Service</th>
-                <th>Mobile</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+        <h3>Service Provider List</h3>
+        <br />
 
-            <tr>
-                <td>1</td>
-                <td>Ramesh Kumar</td>
-                <td>Plumber</td>
-                <td>9876543210</td>
-                <td><span class="badge active">Active</span></td>
-                <td>
-                    <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                    <a class="btn btn-edit" href="UserProfile.aspx">Edit</a>
-                    <a class="btn btn-delete">Delete</a>
-                </td>
-            </tr>
+        <asp:GridView
+            ID="UserGrid"
+            runat="server"
+            CssClass="admin-table"
+            DataKeyNames="User_ID"
+            EmptyDataText="No Data Found"
+            AllowPaging="true"
+            PageSize="10"
+            AutoGenerateColumns="false"
+            OnRowCommand="UserGrid_RowCommand"
+            OnPageIndexChanging="UserGrid_PageIndexChanging">
 
-            <tr>
-                <td>2</td>
-                <td>Suresh Patel</td>
-                <td>Electrician</td>
-                <td>9123456789</td>
-                <td><span class="badge inactive">Inactive</span></td>
-                <td>
-                    <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                    <a class="btn btn-edit" href="UserProfile.aspx">Edit</a>
-                    <a class="btn btn-delete">Delete</a>
-                </td>
-            </tr>
-        </table>
+            <Columns>
+
+                <asp:TemplateField HeaderText="Name">
+                    <ItemTemplate>
+                        <%# Eval("User_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Email">
+                    <ItemTemplate>
+                        <%# Eval("User_EmailID") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Address">
+                    <ItemTemplate>
+                        <%# Eval("User_Address") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="State">
+                    <ItemTemplate>
+                        <%# Eval("State_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="City">
+                    <ItemTemplate>
+                        <%# Eval("City_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Contact No.">
+                    <ItemTemplate>
+                        <%# Eval("User_ContactNo") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Created Date">
+                    <ItemTemplate>
+                        <%# Eval("Created_DateTime", "{0:dd-MM-yyyy hh:mm tt}") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Modified Date">
+                    <ItemTemplate>
+                        <%# Eval("Modified_DateTime", "{0:dd-MM-yyyy hh:mm tt}") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Action">
+                    <ItemTemplate>
+                        <asp:Button
+                            ID="btnEdit"
+                            runat="server"
+                            Text="Edit"
+                            CssClass="btn btn-edit"
+                            CommandName="EditUser"
+                            CommandArgument='<%# Eval("User_ID") %>'
+                            CausesValidation="false" />
+
+                        <asp:Button
+                            ID="btnRemove"
+                            runat="server"
+                            Text="Remove"
+                            CssClass="btn btn-delete"
+                            CommandName="Delete"
+                            CommandArgument='<%# Eval("User_ID") %>'
+                            CausesValidation="false"
+                            OnClientClick="return confirm('Are you sure you want to remove this user?');" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+            </Columns>
+
+        </asp:GridView>
+
     </div>
 
 </asp:Content>
