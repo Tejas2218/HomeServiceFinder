@@ -91,8 +91,8 @@ namespace HomeServiceFinder.Pages.login_signup
                     cmd.Parameters.AddWithValue("@User_ContactNo", User_Contact_TextBox.Text);
                     cmd.Parameters.AddWithValue("@User_Password", User_Password_TextBox.Text);
                     cmd.Parameters.AddWithValue("@User_Role", "User");
-                    cmd.Parameters.AddWithValue("@City_ID", CityList.SelectedItem.Value);
-                    cmd.Parameters.AddWithValue("@State_ID", StateList.SelectedItem.Value);
+                    cmd.Parameters.AddWithValue("@City_Name", CityList.SelectedItem.Value);
+                    cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Value);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
