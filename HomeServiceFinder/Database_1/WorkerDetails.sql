@@ -185,3 +185,9 @@ begin
 	where SP_ID=@SP_ID;
 end
 ---------------------------------------------------- not executed --------------------------------------------^
+--Count total user--
+create proc Count_ServiceProvider
+as
+begin
+	select count(*) from ServiceProviderDetails
+end
