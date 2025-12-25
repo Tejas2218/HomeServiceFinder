@@ -76,6 +76,15 @@ create table BookingDetails(
 	Booking_Decline_Reason varchar(100) null
 )
 
+select * from BookingDetails
+
+alter table BookingDetails add Equipment_ID int
+alter table BookingDetails add constraint FK_BookingDetails_Equipment Foreign key (Equipment_ID) References EquipmentMaster(Equipment_ID)----- column added
+
+alter table BookingDetails add Time_Slot varchar(10) not null----addd column
+
+alter table BookingDetails add Visiting_DateTime datetime not null----addd column
+
 
 
 --------------SP for Select Service and view acccording to equipment for sign up----------------

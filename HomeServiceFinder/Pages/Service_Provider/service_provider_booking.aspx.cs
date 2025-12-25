@@ -37,7 +37,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 cmd.Connection = con;
                 cmd.Connection.Open();
 
-                cmd.CommandText ="";// sp name
+                cmd.CommandText ="Select ";// sp name
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataReader dr = cmd.ExecuteReader();
