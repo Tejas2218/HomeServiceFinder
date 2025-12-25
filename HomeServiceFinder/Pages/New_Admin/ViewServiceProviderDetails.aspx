@@ -6,55 +6,110 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
+    <h2 style="margin-bottom:20px;">Service Provider Profile</h2>
 
     <div class="profile-card">
 
         <div class="profile-grid">
 
+            <!-- USER INFO -->
             <div class="profile-item">
                 <label>Name</label>
-                <asp:Label ID="User_Name_TextBox" runat="server" CssClass="profile-value"></asp:Label>
+                <asp:Label ID="User_Name" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
                 <label>Email</label>
-                <asp:Label ID="User_Email_TextBox" runat="server" CssClass="profile-value"></asp:Label>
+                <asp:Label ID="User_Email" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
                 <label>Contact Number</label>
-                <asp:Label ID="User_Contact_TextBox" runat="server" CssClass="profile-value"></asp:Label>
+                <asp:Label ID="User_Contact" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Role</label>
+                <asp:Label ID="User_Role" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
                 <label>State</label>
-                <asp:Label ID="State" runat="server" CssClass="profile-value"></asp:Label>
+                <asp:Label ID="State_Name" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
                 <label>City</label>
-                <asp:Label ID="City" runat="server" CssClass="profile-value"></asp:Label>
+                <asp:Label ID="City_Name" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item full-width">
                 <label>Address</label>
-                <asp:Label ID="User_Address_TextBox" runat="server" CssClass="profile-value"></asp:Label>
+                <asp:Label ID="User_Address" runat="server" CssClass="profile-value" />
+            </div>
+
+            <!-- SERVICE PROVIDER INFO -->
+            <div class="profile-item">
+                <label>Service</label>
+                <asp:Label ID="Service_Name" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Equipment</label>
+                <asp:Label ID="Equipment_Name" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Age</label>
+                <asp:Label ID="SP_Age" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Experience (Years)</label>
+                <asp:Label ID="SP_Experience" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Minimum Price</label>
+                <asp:Label ID="SP_MinimumPrice" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Average Rating</label>
+                <asp:Label ID="SP_AverageRating" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Status</label>
+                <asp:Label ID="SP_Status" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item full-width">
-                <label>Password</label>
-                <asp:Label ID="User_Password_TextBox" runat="server" CssClass="profile-value"></asp:Label>
+                <label>Shop Address</label>
+                <asp:Label ID="SP_ShopAddress" runat="server" CssClass="profile-value" />
             </div>
+
+            
 
         </div>
 
-        <div class="profile-actions">
+        <!-- ACTION BUTTONS -->
+        <div style="text-align:center; margin-top:20px;">
+
             <asp:Button
-                ID="btnUpdateProfile"
+                ID="btnBack"
+                runat="server"
+                Text="← Back"
+                CssClass="btn btn-view"
+                OnClientClick="history.back(); return false;" />
+
+            <asp:Button
+                ID="btnEdit"
                 runat="server"
                 Text="Edit Profile"
-                CssClass="btn btn-edit" />
+                CssClass="btn btn-edit"
+                OnClick="btnEdit_Click" />
+
         </div>
 
     </div>

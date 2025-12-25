@@ -19,6 +19,25 @@
             --dark: #182333;
         }
 
+        .status-badge {
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+            .status-badge:contains("Approved") {
+                color: #0f5132;
+            }
+
+            .status-badge:contains("Pending") {
+                color: #664d03;
+            }
+
+            .status-badge:contains("Blocked") {
+                color: #842029;
+            }
+
         body {
             margin: 0;
             background: var(--light);

@@ -33,8 +33,3 @@ begin
 end
 
 ----- view booking 
-create or alter proc View_Booking_Details
-as
-begin 
-	select * from BookingDetails
-end
