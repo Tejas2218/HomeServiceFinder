@@ -22,7 +22,7 @@ end
 
 --Display Worker Detail by Service--
 create or alter proc Display_Worker_Details_ByService
-@SP_ID int
+@SP_Service int
 as
 begin
 	select * from ServiceProviderDetails SPD 
@@ -31,15 +31,15 @@ begin
 	----25-12-25 Updated-----
 	inner join CityDetails CD
 	on UD.City_ID=CD.City_ID
-	left join StateDetails SD
+	inner join StateDetails SD
 	on UD.State_ID=SD.State_ID
 	inner join ServiceMaster SM
 	on SM.Service_ID=SPD.Service_ID
 	inner join EquipmentMaster EM
 	on EM.Service_ID=SM.Service_ID
-	where SPD.SP_ID=@SP_ID
+	where SPD.SP_Service=@SP_Service
 end
-exec Display_Worker_Details_ByService 4
+exec Display_Worker_Details_ByID 4
 --Display Specific Worker Details--
 create or alter proc Display_Worker_Details_ByID
 @SP_ID int
@@ -48,8 +48,6 @@ begin
 	select * from ServiceProviderDetails SPD 
 	inner join UserDetails UD 
 	on SPD.User_ID=UD.User_ID 
-	inner join BookingDetails BD
-	on SPD.SP_ID=BD.SP_ID
 	----25-12-25 Updated-----
 	inner join CityDetails CD
 	on UD.City_ID=CD.City_ID
@@ -58,7 +56,7 @@ begin
 	inner join ServiceMaster SM
 	on SM.Service_ID=SPD.Service_ID
 	inner join EquipmentMaster EM
-	on EM.Equipment_ID=SPD.Service_ID
+	on EM.Service_ID=SM.Service_ID
 	where SPD.SP_ID=@SP_ID
 end
 ---------------------------------------------------- not executed --------------------------------------------^
