@@ -18,6 +18,11 @@ begin
 	on UD.State_ID=SD.State_ID
 end
 
+EXEC Display_Worker_Details
+
+DELETE FROM ServiceProviderDetails
+WHERE SP_ID IN (1, 2);
+
 --Display Worker Detail by Service--
 create or alter proc Display_Worker_Details_ByService
 @SP_Service varchar(50)
