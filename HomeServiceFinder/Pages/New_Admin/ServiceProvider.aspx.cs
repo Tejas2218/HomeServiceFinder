@@ -63,6 +63,11 @@ namespace HomeServiceFinder.Pages.New_Admin
         // 🔹 EDIT / DELETE BUTTON HANDLER
         protected void UserGrid_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if(e.CommandName== "ViewUser")
+            {
+                int userId = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("~/Pages/New_Admin/ViewServiceProviderDetails.aspx?id=" + userId);
+            }
             if (e.CommandName == "EditUser")
             {
                 int userId = Convert.ToInt32(e.CommandArgument);
@@ -90,6 +95,11 @@ namespace HomeServiceFinder.Pages.New_Admin
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        protected void btnAddWorker_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../login_signup/Worker_SignUp.aspx");
         }
     }
 }

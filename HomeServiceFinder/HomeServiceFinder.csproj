@@ -97,6 +97,7 @@
     <Content Include="Pages\New_Admin\Settings.aspx" />
     <Content Include="Pages\New_Admin\User.aspx" />
     <Content Include="Pages\New_Admin\UserProfile.aspx" />
+    <Content Include="Pages\New_Admin\ViewServiceProviderDetails.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_booking.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_profile.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_user.aspx" />
@@ -217,6 +218,13 @@
     </Compile>
     <Compile Include="Pages\New_Admin\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ViewServiceProviderDetails.aspx.cs">
+      <DependentUpon>ViewServiceProviderDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ViewServiceProviderDetails.aspx.designer.cs">
+      <DependentUpon>ViewServiceProviderDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Service_Provider\service_provider_booking.aspx.cs">
       <DependentUpon>service_provider_booking.aspx</DependentUpon>

@@ -18,17 +18,14 @@
     </div>
 
     <!-- HEADER -->
-    <div class="page-header">
-        <h3>Service Provider List</h3>
-        <a href="../login_signup/Worker_SignUp.aspx" class="btn-add">➕ Add Service Provider
-        </a>
+    <h3>Service Provider List</h3>
+    <div class="page-header" style="margin-top: 10px; float: right; margin-bottom: 10px">
+        <asp:Button Text="➕ Add Service Provider" CssClass="btn btn-edit" ID="btnAddWorker" runat="server"
+            OnClick="btnAddWorker_Click" />
     </div>
 
     <!-- TABLE -->
     <div class="table-box">
-        <h3>Service Provider List</h3>
-        <br />
-
         <asp:GridView
             ID="UserGrid"
             runat="server"
@@ -79,20 +76,18 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Created Date">
-                    <ItemTemplate>
-                        <%# Eval("Created_DateTime", "{0:dd-MM-yyyy hh:mm tt}") %>
-                    </ItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Modified Date">
-                    <ItemTemplate>
-                        <%# Eval("Modified_DateTime", "{0:dd-MM-yyyy hh:mm tt}") %>
-                    </ItemTemplate>
-                </asp:TemplateField>
-
                 <asp:TemplateField HeaderText="Action">
                     <ItemTemplate>
+                        <div class="action-buttons">
+                        <asp:Button
+                            ID="btnView"
+                            runat="server"
+                            Text="View"
+                            CssClass="btn btn-view"
+                            CommandName="ViewUser"
+                            CommandArgument='<%# Eval("User_ID") %>'
+                            CausesValidation="false" />
+
                         <asp:Button
                             ID="btnEdit"
                             runat="server"
@@ -111,6 +106,7 @@
                             CommandArgument='<%# Eval("User_ID") %>'
                             CausesValidation="false"
                             OnClientClick="return confirm('Are you sure you want to remove this user?');" />
+                        </div>
                     </ItemTemplate>
                 </asp:TemplateField>
 
