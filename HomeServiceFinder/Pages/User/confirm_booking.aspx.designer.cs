@@ -11,7 +11,7 @@ namespace HomeServiceFinder.Pages.User
 {
 
 
-    public partial class appointment
+    public partial class service_provider
     {
 
         /// <summary>
@@ -24,30 +24,48 @@ namespace HomeServiceFinder.Pages.User
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// ddlService control.
+        /// lblBookingID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlService;
+        protected global::System.Web.UI.WebControls.Label lblBookingID;
 
         /// <summary>
-        /// ddlequipment control.
+        /// lblProvider control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlequipment;
+        protected global::System.Web.UI.WebControls.Label lblProvider;
 
         /// <summary>
-        /// getAppointment control.
+        /// lblDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button getAppointment;
+        protected global::System.Web.UI.WebControls.Label lblDate;
+
+        /// <summary>
+        /// lblTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTime;
+
+        /// <summary>
+        /// lblAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAmount;
     }
 }

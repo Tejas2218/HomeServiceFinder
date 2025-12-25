@@ -11,7 +11,14 @@ namespace HomeServiceFinder.Pages.User
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
 
+            }
+        }
+        protected void btnBookAppointment_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

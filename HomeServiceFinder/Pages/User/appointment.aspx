@@ -79,7 +79,7 @@
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
                 <h1 class="display-4 text-white animated slideInDown mb-4">Appointment</h1>
-                
+
             </div>
         </div>
         <div class="container-xxl py-5">
@@ -112,10 +112,26 @@
                                     <label for="cname">Your Mobile</label>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-light border-0" id="cage" placeholder="Child Age" />
-                                    <label for="cage">Service Type</label>
+                                    <asp:DropDownList ID="ddlService" runat="server" CssClass="form-select bg-light border-0">
+                                        <asp:ListItem Text="Service Type" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="Plumbing" Value="P"></asp:ListItem>
+                                        <asp:ListItem Text="Electrical" Value="E"></asp:ListItem>
+                                        <asp:ListItem Text="House Cleaning" Value="HC"></asp:ListItem>
+                                    </asp:DropDownList>
+                                    <label for="ddlService">Service</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <asp:DropDownList ID="ddlequipment" runat="server" CssClass="form-select bg-light border-0">
+                                        <asp:ListItem Text="Equipment Type" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="Plumbing" Value="P"></asp:ListItem>
+                                        <asp:ListItem Text="Electrical" Value="E"></asp:ListItem>
+                                        <asp:ListItem Text="House Cleaning" Value="HC"></asp:ListItem>
+                                    </asp:DropDownList>
+                                    <label for="ddlequipment">Equipment</label>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -125,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Get Appointment</button>
+                                <asp:Button runat="server" ID="getAppointment" class="btn btn-primary w-100 py-3" type="submit" Text="get Appointment" OnClick="btnBookAppointment_Click"/>
                             </div>
                         </div>
                     </div>

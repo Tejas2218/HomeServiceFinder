@@ -78,7 +78,7 @@ namespace HomeServiceFinder.Pages.login_signup
                 SqlCommand cmd = new SqlCommand("Display_City", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@State_ID", StateList.SelectedItem.Value);
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -109,7 +109,7 @@ namespace HomeServiceFinder.Pages.login_signup
                 //String gender = Worker_Gender_DropDown.SelectedValue;
                 String address = Worker_Address_TextBox.Text;
                 String ShopAddress = Worker_ShopAddress_TextBox.Text;
-                String service = Worker_ServiceType_DropDown.SelectedValue;
+                //String service = Worker_ServiceType_DropDown.SelectedValue; removed
                 String experience = Worker_Experience_TextBox.Text;
                 String password = Worker_Confirm_Password_TextBox.Text;
                 String city = CityList.SelectedItem.Value;
@@ -131,7 +131,7 @@ namespace HomeServiceFinder.Pages.login_signup
 
                 cmd.Parameters.AddWithValue("@SP_Age", Convert.ToInt32(age));
                 cmd.Parameters.AddWithValue("@SP_ShopAddress", ShopAddress);
-                cmd.Parameters.AddWithValue("@SP_Service", service);
+                //cmd.Parameters.AddWithValue("@SP_Service", service);
                 cmd.Parameters.AddWithValue("@SP_Experience", Convert.ToInt32(experience));
                 cmd.Parameters.AddWithValue("@SP_MinimumPrice", Convert.ToInt32(minPrice));
                 cmd.Parameters.AddWithValue("@SP_AverageRating", Convert.ToInt32("0"));
@@ -143,6 +143,7 @@ namespace HomeServiceFinder.Pages.login_signup
                 int result = cmd.ExecuteNonQuery();
                 if (result > 0)
                 {
+                    Response.Redirect("loginPage.aspx");
                     Response.Write("<script>alert('Data inserted successfully');</script>");
                 }
                 else

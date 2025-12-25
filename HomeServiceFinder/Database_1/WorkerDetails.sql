@@ -53,7 +53,6 @@ Create OR alter proc Insert_Worker_Details
 @Equipment_ID int,
 @SP_Age int ,
 @SP_ShopAddress varchar(200),
-@SP_Service varchar(50),
 @SP_Experience int,
 @SP_MinimumPrice int,
 @SP_AverageRating int
@@ -90,7 +89,6 @@ begin
 		User_ID,
 		SP_Age ,
 		SP_ShopAddress,
-		SP_Service ,
 		SP_Experience,
 		SP_MinimumPrice,
 		SP_AverageRating,
@@ -101,7 +99,6 @@ begin
 		@User_ID,
 		@SP_Age,
 		@SP_ShopAddress,
-		@SP_Service,
 		@SP_Experience,
 		@SP_MinimumPrice,
 		@SP_AverageRating,

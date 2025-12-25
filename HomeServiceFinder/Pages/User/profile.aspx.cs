@@ -117,9 +117,16 @@ namespace HomeServiceFinder.Pages.User
                     {
                         txtName.Text = dr["User_Name"].ToString();
                         txtContact.Text = dr["User_ContactNo"].ToString();
+                        txtEmail.Text = dr["User_EmailID"].ToString();
                         txtAddress.Text = dr["User_Address"].ToString();
                         userState = dr["State_ID"].ToString();
                         userCity = dr["City_ID"].ToString();
+
+                        ltName.Text = dr["User_Name"].ToString();
+                        ltEmail.Text = dr["User_EmailID"].ToString();
+                        ltPhone.Text = dr["User_ContactNo"].ToString();
+                        ltLocation.Text = dr["User_Address"].ToString();
+                        ltJoined.Text = dr["Created_DateTime"].ToString();
                         //lblMessage.Text = "State=" + dr["State_ID"] + " City=" + dr["City_ID"];
 
                     }

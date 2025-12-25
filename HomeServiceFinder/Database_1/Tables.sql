@@ -59,6 +59,17 @@ create table ServiceProviderDetails(
 	Service_ID int Foreign Key References ServiceMaster(Service_ID),
 	Equipment_ID int Foreign Key References EquipmentMaster(Equipment_ID)
 )
+select * from ServiceProviderDetails
+
+alter table ServiceProviderDetails add Service_ID int
+
+alter table ServiceProviderDetails add constraint FK_ServiceProviderDetails_Service_ID Foreign key (Service_ID) References ServiceMaster(Service_ID)
+
+alter table ServiceProviderDetails add Equipment_ID int
+
+alter table ServiceProviderDetails add constraint FK_ServiceProviderDetails_Equipment_ID Foreign key (Equipment_ID) References EquipmentMaster(Equipment_ID)
+
+alter table ServiceProviderDetails drop column SP_Service
 
 create table BookingDetails(
 	Booking_ID int primary key identity(1,1),
@@ -69,6 +80,8 @@ create table BookingDetails(
 	Booking_Rating int,
 	Booking_Decline_Reason varchar(100) null
 )
+
+select * from BookingDetails
 
 
 
