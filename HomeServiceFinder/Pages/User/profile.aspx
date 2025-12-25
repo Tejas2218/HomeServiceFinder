@@ -130,8 +130,7 @@
                             <div class="profile-img-container rounded-circle mb-3">
                                 <img src="img/team-1.jpg" alt="User Image" class="rounded-circle" />
                             </div>
-                            <h4 class="mb-1">John Doe</h4>
-                            <p class="text-muted mb-3">Standard Member</p>
+                            <h4 class="mb-1"><asp:Literal ID="ltName" runat="server"></asp:Literal></h4>
 
                             <div class="d-flex justify-content-center mb-4">
                                 <button type="button" class="btn btn-outline-primary btn-sm me-2">Change Photo</button>
@@ -140,11 +139,35 @@
                             <hr />
 
                             <div class="text-start mt-4">
-                                <p class="mb-2"><strong class="text-dark"><i class="fa fa-envelope text-primary me-2"></i>Email:</strong> john@example.com</p>
-                                <p class="mb-2"><strong class="text-dark"><i class="fa fa-phone-alt text-primary me-2"></i>Phone:</strong> +012 345 6789</p>
-                                <p class="mb-2"><strong class="text-dark"><i class="fa fa-map-marker-alt text-primary me-2"></i>Location:</strong> New York, USA</p>
-                                <p class="mb-0"><strong class="text-dark"><i class="fa fa-calendar-alt text-primary me-2"></i>Joined:</strong> Jan 2023</p>
+                                <p class="mb-2">
+                                    <strong class="text-dark">
+                                        <i class="fa fa-envelope text-primary me-2"></i>Email:
+                                    </strong>
+                                    <asp:Literal ID="ltEmail" runat="server"></asp:Literal>
+                                </p>
+
+                                <p class="mb-2">
+                                    <strong class="text-dark">
+                                        <i class="fa fa-phone-alt text-primary me-2"></i>Phone:
+                                    </strong>
+                                    <asp:Literal ID="ltPhone" runat="server"></asp:Literal>
+                                </p>
+
+                                <p class="mb-2">
+                                    <strong class="text-dark">
+                                        <i class="fa fa-map-marker-alt text-primary me-2"></i>Location:
+                                    </strong>
+                                    <asp:Literal ID="ltLocation" runat="server"></asp:Literal>
+                                </p>
+
+                                <p class="mb-0">
+                                    <strong class="text-dark">
+                                        <i class="fa fa-calendar-alt text-primary me-2"></i>Joined:
+                                    </strong>
+                                    <asp:Literal ID="ltJoined" runat="server"></asp:Literal>
+                                </p>
                             </div>
+
                         </div>
                     </div>
 
@@ -159,39 +182,35 @@
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <asp:TextBox ID="txtFullName" runat="server" CssClass="form-control" placeholder="Full Name" Text="John Doe"></asp:TextBox>
-                                        <label for="txtFullName">Full Name</label>
+                                        <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Full Name" Text=""></asp:TextBox>
+                                        <label for="txtName">Full Name</label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" placeholder="Phone Number" Text="+012 345 6789"></asp:TextBox>
-                                        <label for="txtPhone">Phone Number</label>
+                                        <asp:TextBox ID="txtContact" runat="server" CssClass="form-control" placeholder="Phone Number" Text=""></asp:TextBox>
+                                        <label for="txtContact">Phone Number</label>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email" TextMode="Email" Text="john@example.com" ReadOnly="true"></asp:TextBox>
+                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email" TextMode="Email" Text="" ReadOnly="true"></asp:TextBox>
                                         <label for="txtEmail">Email Address (Cannot be changed)</label>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" placeholder="Address" Text="123 Street, New York, USA"></asp:TextBox>
+                                        <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" placeholder="Address" Text=""></asp:TextBox>
                                         <label for="txtAddress">Address</label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <asp:DropDownList ID="ddlState" runat="server" CssClass="form-select">
-                                            <asp:ListItem Text="Select State" Value="0"></asp:ListItem>
-                                            <asp:ListItem Text="New York" Value="NY"></asp:ListItem>
-                                            <asp:ListItem Text="California" Value="CA"></asp:ListItem>
-                                            <asp:ListItem Text="Texas" Value="TX"></asp:ListItem>
+                                        <asp:DropDownList ID="StateList" runat="server" CssClass="form-select" Enabled="False">
                                         </asp:DropDownList>
                                         <label for="ddlState">State</label>
                                     </div>
@@ -199,18 +218,14 @@
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <asp:DropDownList ID="ddlCity" runat="server" CssClass="form-select">
-                                            <asp:ListItem Text="Select City" Value="0"></asp:ListItem>
-                                            <asp:ListItem Text="New York City" Value="NYC"></asp:ListItem>
-                                            <asp:ListItem Text="Los Angeles" Value="LA"></asp:ListItem>
-                                            <asp:ListItem Text="Houston" Value="HOU"></asp:ListItem>
+                                        <asp:DropDownList ID="CityList" runat="server" CssClass="form-select">
                                         </asp:DropDownList>
                                         <label for="ddlCity">City</label>
                                     </div>
                                 </div>
 
                                 <div class="col-12 mt-4 mb-4">
-                                    <asp:Button ID="btnSaveChanges" runat="server" Text="Save Changes" CssClass="btn btn-primary py-3 px-5" />
+                                    <asp:Button ID="btnSaveChanges" runat="server" Text="Save Changes" CssClass="btn btn-primary py-3 px-5" OnClick="btnUpdate_Click" />
                                     <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-secondary py-3 px-5 ms-2" />
                                 </div>
 
@@ -218,6 +233,10 @@
 
                                 <div class="col-12 mt-2">
                                     <a href="change_password.aspx" class="fw-bold"><i class="fa fa-key me-2"></i>Change Password</a>
+                                </div>
+
+                                <div>
+                                    <asp:Label ID="lblMessage" runat="server" CssClass="text-danger"></asp:Label>
                                 </div>
 
                             </div>
