@@ -9,13 +9,15 @@ begin
 	select * from ServiceProviderDetails SPD 
 	inner join UserDetails UD  
 	on SPD.User_ID=UD.User_ID 
-	left join BookingDetails BD 
-	on SPD.SP_ID=BD.SP_ID
-	----25-12-25 Updated-----
+		----25-12-25 Updated-----
 	inner join CityDetails CD
 	on UD.City_ID=CD.City_ID
-	left join StateDetails SD
+	inner join StateDetails SD
 	on UD.State_ID=SD.State_ID
+	inner join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	inner join EquipmentMaster EM
+	on EM.Service_ID=SM.Service_ID
 end
 
 EXEC Display_Worker_Details
@@ -25,32 +27,43 @@ WHERE SP_ID IN (1, 2);
 
 --Display Worker Detail by Service--
 create or alter proc Display_Worker_Details_ByService
-@SP_Service varchar(50)
+@SP_ID int
 as
 begin
 	select * from ServiceProviderDetails SPD 
 	inner join UserDetails UD 
-	on SPD.User_ID=UD.User_ID 
-	left join BookingDetails BD
-	on SPD.SP_ID=BD.SP_ID	 
+	on SPD.User_ID=UD.User_ID  
 	----25-12-25 Updated-----
 	inner join CityDetails CD
 	on UD.City_ID=CD.City_ID
 	left join StateDetails SD
 	on UD.State_ID=SD.State_ID
-	where SPD.SP_Service=@SP_Service
+	inner join ServiceMaster SM
+	on SM.Service_ID=SPD.Service_ID
+	inner join EquipmentMaster EM
+	on EM.Service_ID=SM.Service_ID
+	where SPD.SP_ID=@SP_ID
 end
-
+exec Display_Worker_Details_ByService 4
 --Display Specific Worker Details--
-alter proc Display_Worker_Details_ByID
+create or alter proc Display_Worker_Details_ByID
 @SP_ID int
 as
 begin
 	select * from ServiceProviderDetails SPD 
 	inner join UserDetails UD 
 	on SPD.User_ID=UD.User_ID 
-	left join BookingDetails BD
+	inner join BookingDetails BD
 	on SPD.SP_ID=BD.SP_ID
+	----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	inner join StateDetails SD
+	on UD.State_ID=SD.State_ID
+	inner join ServiceMaster SM
+	on SM.Service_ID=SPD.Service_ID
+	inner join EquipmentMaster EM
+	on EM.Equipment_ID=SPD.Service_ID
 	where SPD.SP_ID=@SP_ID
 end
 ---------------------------------------------------- not executed --------------------------------------------^

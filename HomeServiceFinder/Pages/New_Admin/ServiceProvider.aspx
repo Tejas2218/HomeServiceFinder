@@ -85,7 +85,7 @@
                             Text="View"
                             CssClass="btn btn-view"
                             CommandName="ViewUser"
-                            CommandArgument='<%# Eval("User_ID") %>'
+                            CommandArgument='<%# Eval("SP_ID") %>'
                             CausesValidation="false" />
 
                         <asp:Button
@@ -94,7 +94,7 @@
                             Text="Edit"
                             CssClass="btn btn-edit"
                             CommandName="EditUser"
-                            CommandArgument='<%# Eval("User_ID") %>'
+                            CommandArgument='<%# Eval("SP_ID") %>'
                             CausesValidation="false" />
 
                         <asp:Button
@@ -103,7 +103,7 @@
                             Text="Remove"
                             CssClass="btn btn-delete"
                             CommandName="Delete"
-                            CommandArgument='<%# Eval("User_ID") %>'
+                            CommandArgument='<%# Eval("SP_ID") %>'
                             CausesValidation="false"
                             OnClientClick="return confirm('Are you sure you want to remove this user?');" />
                         </div>

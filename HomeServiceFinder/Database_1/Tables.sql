@@ -33,8 +33,9 @@ select * from ServiceProviderDetails
 delete from UserDetails
 delete from ServiceProviderDetails
 
-
 alter table UserDetails alter column User_ContactNo varchar(10)
+
+alter table UserDetails alter column State_ID int
 
 alter table UserDetails add constraint FK_UserDetails_State Foreign key (State_ID) References StateDetails(State_ID)
 
@@ -75,6 +76,15 @@ create table BookingDetails(
 	Booking_Rating int,
 	Booking_Decline_Reason varchar(100) null
 )
+
+select * from BookingDetails
+
+alter table BookingDetails add Equipment_ID int
+alter table BookingDetails add constraint FK_BookingDetails_Equipment Foreign key (Equipment_ID) References EquipmentMaster(Equipment_ID)----- column added
+
+alter table BookingDetails add Time_Slot varchar(10) not null----addd column
+
+alter table BookingDetails add Visiting_DateTime datetime not null----addd column
 
 
 
