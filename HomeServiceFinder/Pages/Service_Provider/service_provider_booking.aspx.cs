@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
@@ -32,7 +33,14 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
             using (SqlConnection con = new SqlConnection(constr))
             {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.Connection.Open();
 
+                cmd.CommandText ="";// sp name
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataReader dr = cmd.ExecuteReader();
             }
         }
 
