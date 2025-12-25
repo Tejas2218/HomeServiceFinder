@@ -78,7 +78,7 @@ namespace HomeServiceFinder.Pages.login_signup
                 SqlCommand cmd = new SqlCommand("Display_City", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@State_ID", StateList.SelectedItem.Value);
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
