@@ -32,5 +32,4 @@ begin
 	where Booking_ID=@Booking_ID
 end
 
-select * from BookingDetails
 ----- view booking 
