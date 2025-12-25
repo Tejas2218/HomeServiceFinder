@@ -3,7 +3,7 @@
 
 ---------------------------------------------------- not executed --------------------------------------------
 --Display Worker Details--
-alter proc Display_Worker_Details
+create or alter proc Display_Worker_Details
 as
 begin
 	select * from ServiceProviderDetails SPD 
@@ -11,6 +11,11 @@ begin
 	on SPD.User_ID=UD.User_ID 
 	left join BookingDetails BD 
 	on SPD.SP_ID=BD.SP_ID
+	----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	left join StateDetails SD
+	on UD.State_ID=SD.State_ID
 end
 
 --Display Worker Detail by Service--

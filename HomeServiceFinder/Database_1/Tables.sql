@@ -63,7 +63,7 @@ create table ServiceProviderDetails(
 	Service_ID int Foreign Key References ServiceMaster(Service_ID),
 	Equipment_ID int Foreign Key References EquipmentMaster(Equipment_ID)
 )
-
+select * from ServiceProviderDetails
 alter table ServiceProviderDetails add SP_Status varchar(20)---add
 
 create table BookingDetails(
