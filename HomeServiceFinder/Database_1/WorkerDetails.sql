@@ -3,7 +3,7 @@
 
 ---------------------------------------------------- not executed --------------------------------------------
 --Display Worker Details--
-alter proc Display_Worker_Details
+create or alter proc Display_Worker_Details
 as
 begin
 	select * from ServiceProviderDetails SPD 
@@ -11,10 +11,15 @@ begin
 	on SPD.User_ID=UD.User_ID 
 	left join BookingDetails BD 
 	on SPD.SP_ID=BD.SP_ID
+	----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	left join StateDetails SD
+	on UD.State_ID=SD.State_ID
 end
 
 --Display Worker Detail by Service--
-alter proc Display_Worker_Details_ByService
+create or alter proc Display_Worker_Details_ByService
 @SP_Service varchar(50)
 as
 begin
@@ -23,6 +28,11 @@ begin
 	on SPD.User_ID=UD.User_ID 
 	left join BookingDetails BD
 	on SPD.SP_ID=BD.SP_ID	 
+	----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	left join StateDetails SD
+	on UD.State_ID=SD.State_ID
 	where SPD.SP_Service=@SP_Service
 end
 
@@ -55,7 +65,8 @@ Create OR alter proc Insert_Worker_Details
 @SP_ShopAddress varchar(200),
 @SP_Experience int,
 @SP_MinimumPrice int,
-@SP_AverageRating int
+@SP_AverageRating int,
+@SP_Status varchar(20)
 as
 begin
     DECLARE @User_ID INT;
@@ -93,7 +104,8 @@ begin
 		SP_MinimumPrice,
 		SP_AverageRating,
 		Service_ID,
-		Equipment_ID
+		Equipment_ID,
+		SP_Status
 	)
 	values(
 		@User_ID,
@@ -103,7 +115,8 @@ begin
 		@SP_MinimumPrice,
 		@SP_AverageRating,
 		@Service_ID,
-		@Equipment_ID
+		@Equipment_ID,
+		@SP_Status
 	)
 
 end
@@ -179,3 +192,9 @@ begin
 	where SP_ID=@SP_ID;
 end
 ---------------------------------------------------- not executed --------------------------------------------^
+--Count total user--
+create proc Count_ServiceProvider
+as
+begin
+	select count(*) from ServiceProviderDetails
+end

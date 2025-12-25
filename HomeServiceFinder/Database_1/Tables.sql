@@ -18,7 +18,7 @@ create table UserDetails(
 	User_Name varchar(50) not null,
 	User_EmailID varchar(100) unique,
 	User_Address varchar(200) not null,
-	User_ContactNo bigint not null,
+	User_ContactNo varchar(10) not null,
 	User_Password varchar(50) not null,
 	User_Role varchar(50) not null,
 	City_ID int Foreign Key References CityDetails(City_ID),
@@ -28,9 +28,13 @@ create table UserDetails(
 )---------------created------
 
 select * from UserDetails
+select * from ServiceProviderDetails
+
+delete from UserDetails
+delete from ServiceProviderDetails
 
 
-alter table UserDetails alter column State_ID int
+alter table UserDetails alter column User_ContactNo varchar(10)
 
 alter table UserDetails add constraint FK_UserDetails_State Foreign key (State_ID) References StateDetails(State_ID)
 
@@ -60,16 +64,7 @@ create table ServiceProviderDetails(
 	Equipment_ID int Foreign Key References EquipmentMaster(Equipment_ID)
 )
 select * from ServiceProviderDetails
-
-alter table ServiceProviderDetails add Service_ID int
-
-alter table ServiceProviderDetails add constraint FK_ServiceProviderDetails_Service_ID Foreign key (Service_ID) References ServiceMaster(Service_ID)
-
-alter table ServiceProviderDetails add Equipment_ID int
-
-alter table ServiceProviderDetails add constraint FK_ServiceProviderDetails_Equipment_ID Foreign key (Equipment_ID) References EquipmentMaster(Equipment_ID)
-
-alter table ServiceProviderDetails drop column SP_Service
+alter table ServiceProviderDetails add SP_Status varchar(20)---add
 
 create table BookingDetails(
 	Booking_ID int primary key identity(1,1),
@@ -80,8 +75,6 @@ create table BookingDetails(
 	Booking_Rating int,
 	Booking_Decline_Reason varchar(100) null
 )
-
-select * from BookingDetails
 
 
 
@@ -138,7 +131,60 @@ select * from UserDetails
 delete from UserDetails where User_ID=4
 
 select * from BookingDetails INNER JOIN ServiceProviderDetails on BookingDetails.SP_ID = ServiceProviderDetails.SP_ID 
-INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID where ServiceProviderDetails.User_ID = 1
+INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID 
+
+
+select * from BookingDetails
 
 
 select * from ServiceProviderDetails INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID INNER JOIN CityDetails on UserDetails.City_ID = CityDetails.City_ID where ServiceProviderDetails.User_ID = 1
+
+
+
+--------------------login sp
+CREATE OR ALTER PROC LoginSP
+(
+    @username NVARCHAR(100),
+    @password NVARCHAR(10)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @user_role VARCHAR(50);
+    DECLARE @user_ID INT;
+    SELECT 
+        @user_ID = User_ID, 
+        @user_role = User_Role
+    FROM UserDetails
+    WHERE 
+        (User_EmailID = @username OR User_ContactNo = @username)
+        AND User_Password = @password;
+    IF (@user_ID IS NOT NULL)
+    BEGIN
+        IF (@user_role = 'Worker')
+        BEGIN
+            SELECT 
+                spd.User_ID, 
+                ud.User_Role, 
+                spd.SP_Status 
+            FROM ServiceProviderDetails spd
+            INNER JOIN UserDetails ud ON spd.User_ID = ud.User_ID 
+            WHERE spd.User_ID = @user_ID;
+        END
+        ELSE
+        BEGIN
+            SELECT User_ID, User_Role
+            FROM UserDetails 
+            WHERE User_ID = @user_ID;
+        END
+    END
+    ELSE
+    BEGIN
+        SELECT NULL AS User_ID, NULL AS User_Role WHERE 1=0;
+    END
+END
+select * from ServiceProviderDetails
+select * from UserDetails
+
+exec LoginSP 'dev46408@gmail.com','dev123'

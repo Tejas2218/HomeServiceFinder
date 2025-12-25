@@ -113,27 +113,31 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
     <div class="form-grid">
 
+        <!-- Name -->
         <div class="grid-item full-row">
             <label class="field-label">Full Name</label>
             <div class="input-row">
                 <asp:Image CssClass="input-icon" ID="User_Name_Icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Name_Icon.png" />
                 <asp:TextBox ID="User_Name_TextBox" runat="server" CssClass="textbox" placeholder="Enter Your Name"></asp:TextBox>
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="User_Name_TextBox" CssClass="validation-error" ErrorMessage="Required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+            <asp:RequiredFieldValidator ControlToValidate="User_Name_TextBox" CssClass="validation-error" ErrorMessage="Name is required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+            <asp:RegularExpressionValidator ControlToValidate="User_Name_TextBox" CssClass="validation-error" ErrorMessage="Only letters allowed" ValidationExpression="^[a-zA-Z\s]+$" ValidationGroup="signup" Display="Dynamic" runat="server" />
         </div>
 
+        <!-- Email -->
         <div class="grid-item full-row">
             <label class="field-label">Email Address</label>
             <div class="input-row">
                 <asp:Image CssClass="input-icon" ID="User_Email_Icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Email_Icon.png" />
                 <asp:TextBox ID="User_Email_TextBox" runat="server" CssClass="textbox" TextMode="Email" placeholder="jane@example.com"></asp:TextBox>
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="User_Email_TextBox" CssClass="validation-error" ErrorMessage="Required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+            <asp:RequiredFieldValidator ControlToValidate="User_Email_TextBox" CssClass="validation-error" ErrorMessage="Email is required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+            <asp:RegularExpressionValidator ControlToValidate="User_Email_TextBox" CssClass="validation-error" ErrorMessage="Invalid email format" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="signup" Display="Dynamic" runat="server" />
         </div>
 
+        <!-- State -->
         <div class="grid-item">
             <label class="field-label">State</label>
             <div class="input-row">
@@ -141,8 +145,10 @@
                     <asp:ListItem Text="Select State" Value=""></asp:ListItem>
                 </asp:DropDownList>
             </div>
+            <asp:RequiredFieldValidator ControlToValidate="StateList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a state" ValidationGroup="signup" Display="Dynamic" runat="server" />
         </div>
 
+        <!-- City -->
         <div class="grid-item">
             <label class="field-label">City</label>
             <div class="input-row">
@@ -150,38 +156,72 @@
                     <asp:ListItem Text="Select City" Value=""></asp:ListItem>
                 </asp:DropDownList>
             </div>
+            <asp:RequiredFieldValidator ControlToValidate="CityList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a city" ValidationGroup="signup" Display="Dynamic" runat="server" />
         </div>
 
+        <!-- Phone -->
         <div class="grid-item">
             <label class="field-label">Phone Number</label>
             <div class="input-row">
-                <asp:TextBox ID="User_Contact_TextBox" runat="server" CssClass="textbox" TextMode="Phone" placeholder="Phone" Style="padding-left: 15px;"></asp:TextBox>
+                <asp:TextBox ID="User_Contact_TextBox" runat="server" CssClass="textbox" placeholder="10-digit number" Style="padding-left: 15px;"></asp:TextBox>
             </div>
+            <asp:RequiredFieldValidator ControlToValidate="User_Contact_TextBox" CssClass="validation-error" ErrorMessage="Phone required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+            <asp:RegularExpressionValidator ControlToValidate="User_Contact_TextBox" CssClass="validation-error" ErrorMessage="Enter 10 digits" ValidationExpression="^[0-9]{10}$" ValidationGroup="signup" Display="Dynamic" runat="server" />
         </div>
 
+        <!-- Address -->
         <div class="grid-item">
             <label class="field-label">Address</label>
             <div class="input-row">
                 <asp:TextBox ID="User_Address_TextBox" runat="server" CssClass="textbox" placeholder="Street Address" Style="padding-left: 15px;"></asp:TextBox>
             </div>
+            <asp:RequiredFieldValidator ControlToValidate="User_Address_TextBox" CssClass="validation-error" ErrorMessage="Address required" ValidationGroup="signup" Display="Dynamic" runat="server" />
         </div>
 
+        <!-- Password -->
         <div class="grid-item">
             <label class="field-label">Password</label>
             <div class="input-row">
                 <asp:TextBox ID="User_Password_TextBox" runat="server" CssClass="textbox" TextMode="Password" placeholder="........" Style="padding-left: 15px;"></asp:TextBox>
-                <i id="togglePwd" class="fa-solid fa-eye" style="position: absolute; right: 15px; top: 12px; cursor: pointer;"></i>
+                <i id="togglePwd" class="fa-solid fa-eye"></i>
             </div>
+            <asp:RequiredFieldValidator ControlToValidate="User_Password_TextBox" CssClass="validation-error" ErrorMessage="Password required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+            <asp:RegularExpressionValidator ControlToValidate="User_Password_TextBox" CssClass="validation-error" ErrorMessage="Min 6 chars, 1 letter, 1 number" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" ValidationGroup="signup" Display="Dynamic" runat="server" />
         </div>
 
+        <!-- Confirm Password -->
         <div class="grid-item">
             <label class="field-label">Confirm Password</label>
             <div class="input-row">
                 <asp:TextBox ID="User_Confirm_Password_TextBox" runat="server" CssClass="textbox" TextMode="Password" placeholder="........" Style="padding-left: 15px;"></asp:TextBox>
-                <i id="toggleCPwd" class="fa-solid fa-eye" style="position: absolute; right: 15px; top: 12px; cursor: pointer;"></i>
+                <i id="toggleCPwd" class="fa-solid fa-eye"></i>
             </div>
+            <asp:RequiredFieldValidator ControlToValidate="User_Confirm_Password_TextBox" CssClass="validation-error" ErrorMessage="Please confirm password" ValidationGroup="signup" Display="Dynamic" runat="server" />
+            <asp:CompareValidator ControlToCompare="User_Password_TextBox" ControlToValidate="User_Confirm_Password_TextBox" CssClass="validation-error" ErrorMessage="Passwords do not match" ValidationGroup="signup" Display="Dynamic" runat="server" />
+        </div>
+
+        <div class="grid-item full-row" style="text-align: center;">
+            <asp:Label ID="ErrorLabel" runat="server" CssClass="validation-error" Style="font-size: 14px; font-weight: bold;"></asp:Label>
         </div>
 
     </div>
+
     <asp:Button ID="SignupButton" runat="server" CssClass="signup-btn" Text="Create Account" ValidationGroup="signup" OnClick="btnSignup_Click" />
+
+    <!-- JavaScript for Password Toggle -->
+    <script>
+        document.getElementById('togglePwd').addEventListener('click', function () {
+            const pwdInput = document.getElementById('<%= User_Password_TextBox.ClientID %>');
+            const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            pwdInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('toggleCPwd').addEventListener('click', function () {
+            const cpwdInput = document.getElementById('<%= User_Confirm_Password_TextBox.ClientID %>');
+            const type = cpwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            cpwdInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </asp:Content>

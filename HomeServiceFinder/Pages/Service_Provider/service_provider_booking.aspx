@@ -31,7 +31,7 @@
         <asp:GridView ID="gvBookings" runat="server" AutoGenerateColumns="false"
             CssClass="table" GridLines="None" EmptyDataText="Data Not Available">
             <Columns>
-                <asp:BoundField DataField="BookingID" HeaderText="ID" />
+                <asp:BoundField DataField="Booking_ID" HeaderText="ID" />
                 <asp:BoundField DataField="CustomerName" HeaderText="Customer" />
                 <asp:BoundField DataField="ServiceName" HeaderText="Service" />
                 <asp:BoundField DataField="Schedule" HeaderText="Schedule" />

@@ -7,21 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HomeServiceFinder.Pages.login_signup
+namespace HomeServiceFinder.Pages.New_Admin
 {
 
 
-    public partial class User_SignUp
+    public partial class EditUserDetails
     {
-
-        /// <summary>
-        /// User_Name_Icon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Name_Icon;
 
         /// <summary>
         /// User_Name_TextBox control.
@@ -33,15 +24,6 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.TextBox User_Name_TextBox;
 
         /// <summary>
-        /// User_Email_Icon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image User_Email_Icon;
-
-        /// <summary>
         /// User_Email_TextBox control.
         /// </summary>
         /// <remarks>
@@ -49,6 +31,24 @@ namespace HomeServiceFinder.Pages.login_signup
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox User_Email_TextBox;
+
+        /// <summary>
+        /// User_Address_TextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox User_Address_TextBox;
+
+        /// <summary>
+        /// User_Contact_TextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox User_Contact_TextBox;
 
         /// <summary>
         /// StateList control.
@@ -69,24 +69,6 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.DropDownList CityList;
 
         /// <summary>
-        /// User_Contact_TextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Contact_TextBox;
-
-        /// <summary>
-        /// User_Address_TextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Address_TextBox;
-
-        /// <summary>
         /// User_Password_TextBox control.
         /// </summary>
         /// <remarks>
@@ -96,30 +78,12 @@ namespace HomeServiceFinder.Pages.login_signup
         protected global::System.Web.UI.WebControls.TextBox User_Password_TextBox;
 
         /// <summary>
-        /// User_Confirm_Password_TextBox control.
+        /// btnUpdateProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox User_Confirm_Password_TextBox;
-
-        /// <summary>
-        /// ErrorLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ErrorLabel;
-
-        /// <summary>
-        /// SignupButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SignupButton;
+        protected global::System.Web.UI.WebControls.Button btnUpdateProfile;
     }
 }

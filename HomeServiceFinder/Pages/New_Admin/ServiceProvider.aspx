@@ -1,266 +1,119 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ServiceProvider.aspx.cs"
-    Inherits="HomeServiceFinder.Pages.New_Admin.ServiceProvider" %>
+﻿<%@ Page Language="C#"
+    AutoEventWireup="true"
+    CodeBehind="ServiceProvider.aspx.cs"
+    Inherits="HomeServiceFinder.Pages.New_Admin.ServiceProvider"
+    MasterPageFile="~/MasterPage/AdminMaster.Master" %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Admin | Service Providers</title>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <style>
-        :root {
-            --primary: #FDA12B;
-            --secondary: #8D9297;
-            --light: #F8F9FA;
-            --dark: #182333;
-        }
+    <!-- PAGE TITLE ONLY -->
+    <h2 style="margin-bottom: 20px;">Service Providers</h2>
 
-        body {
-            margin: 0;
-            background: var(--light);
-            font-family: 'Segoe UI', sans-serif;
-            color: var(--dark);
-        }
+    <!-- TOTAL PROVIDERS -->
+    <div class="stat-card">
+        <h3>Total Service Providers</h3>
+        <h2>
+            <asp:Label ID="lblTotalProviders" runat="server" Text="0"></asp:Label>
+        </h2>
+    </div>
 
-        /* Sidebar */
-        .sidebar {
-            width: 240px;
-            background: var(--dark);
-            height: 100vh;
-            position: fixed;
-            padding-top: 20px;
-        }
+    <!-- HEADER -->
+    <h3>Service Provider List</h3>
+    <div class="page-header" style="margin-top: 10px; float: right; margin-bottom: 10px">
+        <asp:Button Text="➕ Add Service Provider" CssClass="btn btn-edit" ID="btnAddWorker" runat="server"
+            OnClick="btnAddWorker_Click" />
+    </div>
 
-            .sidebar h2 {
-                text-align: center;
-                color: var(--primary);
-                margin-bottom: 30px;
-            }
+    <!-- TABLE -->
+    <div class="table-box">
+        <asp:GridView
+            ID="UserGrid"
+            runat="server"
+            CssClass="admin-table"
+            DataKeyNames="User_ID"
+            EmptyDataText="No Data Found"
+            AllowPaging="true"
+            PageSize="10"
+            AutoGenerateColumns="false"
+            OnRowCommand="UserGrid_RowCommand"
+            OnPageIndexChanging="UserGrid_PageIndexChanging">
 
-        .menu-item {
-            padding: 14px 25px;
-        }
+            <Columns>
 
-            .menu-item a {
-                color: var(--light);
-                text-decoration: none;
-                display: block;
-            }
+                <asp:TemplateField HeaderText="Name">
+                    <ItemTemplate>
+                        <%# Eval("User_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-            .menu-item:hover {
-                background: var(--primary);
-            }
+                <asp:TemplateField HeaderText="Email">
+                    <ItemTemplate>
+                        <%# Eval("User_EmailID") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-                .menu-item:hover a {
-                    color: var(--dark);
-                    font-weight: 600;
-                }
+                <asp:TemplateField HeaderText="Address">
+                    <ItemTemplate>
+                        <%# Eval("User_Address") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-        /* Topbar */
-        .topbar {
-            margin-left: 240px;
-            height: 65px;
-            background: #fff;
-            border-bottom: 3px solid var(--primary);
-            display: flex;
-            align-items: center;
-            padding: 0 25px;
-            position: fixed;
-            width: calc(100% - 240px);
-        }
+                <asp:TemplateField HeaderText="State">
+                    <ItemTemplate>
+                        <%# Eval("State_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-        /* Content */
-        .content {
-            margin-left: 240px;
-            padding: 100px 30px 30px;
-        }
+                <asp:TemplateField HeaderText="City">
+                    <ItemTemplate>
+                        <%# Eval("City_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-        /* Stats */
-        .stats {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
+                <asp:TemplateField HeaderText="Contact No.">
+                    <ItemTemplate>
+                        <%# Eval("User_ContactNo") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-        .stat-card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 5px solid var(--primary);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            width: 260px;
-        }
+                <asp:TemplateField HeaderText="Action">
+                    <ItemTemplate>
+                        <div class="action-buttons">
+                        <asp:Button
+                            ID="btnView"
+                            runat="server"
+                            Text="View"
+                            CssClass="btn btn-view"
+                            CommandName="ViewUser"
+                            CommandArgument='<%# Eval("User_ID") %>'
+                            CausesValidation="false" />
 
-           
+                        <asp:Button
+                            ID="btnEdit"
+                            runat="server"
+                            Text="Edit"
+                            CssClass="btn btn-edit"
+                            CommandName="EditUser"
+                            CommandArgument='<%# Eval("User_ID") %>'
+                            CausesValidation="false" />
 
-        /* Header */
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+                        <asp:Button
+                            ID="btnRemove"
+                            runat="server"
+                            Text="Remove"
+                            CssClass="btn btn-delete"
+                            CommandName="Delete"
+                            CommandArgument='<%# Eval("User_ID") %>'
+                            CausesValidation="false"
+                            OnClientClick="return confirm('Are you sure you want to remove this user?');" />
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-        .btn-add {
-            background: var(--primary);
-            color: var(--dark);
-            padding: 10px 18px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-        }
+            </Columns>
 
-            .btn-add:hover {
-                background: #e38c1f;
-            }
+        </asp:GridView>
 
-        /* Table */
-        .table-box {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
+    </div>
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 12px;
-        }
-
-        th {
-            background: var(--dark);
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background: #f2f2f2;
-        }
-
-        .badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .active {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .inactive {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .btn {
-            padding: 6px 12px;
-            border-radius: 5px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            margin-right: 5px;
-        }
-
-        .btn-view {
-            background: var(--primary);
-            color: var(--dark);
-        }
-
-        .btn-edit {
-            background: #0d6efd;
-            color: #fff;
-        }
-
-        .btn-delete {
-            background: #dc3545;
-            color: #fff;
-        }
-    </style>
-</head>
-
-<body>
-    <form id="form1" runat="server">
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <h2>Admin Panel</h2>
-
-            <div class="menu-item"><a href="AdminDashbord.aspx">🏠 Dashboard</a></div>
-            <div class="menu-item"><a href="User.aspx">👥 Users</a></div>
-            <div class="menu-item"><a href="ServiceProvider.aspx">🛠 Service Providers</a></div>
-            <div class="menu-item"><a href="AdminBookings.aspx">📅 Bookings</a></div>
-            <div class="menu-item"><a href="Reports.aspx">📊 Reports</a></div>
-            <div class="menu-item"><a href="Settings.aspx">⚙ Settings</a></div>
-        </div>
-
-        <!-- Topbar -->
-        <div class="topbar">
-            <h3>Service Providers</h3>
-        </div>
-
-        <!-- Content -->
-        <div class="content">
-
-            <!-- TOTAL WORKER CARD -->
-            <div class="stat-card">
-                <h3>Total Service Providers</h3>
-                <h2>
-                    <asp:Label ID="lblTotalProviders" runat="server" Text="0"></asp:Label>
-                </h2>
-            </div>
-
-        <!-- Header -->
-        <div class="page-header">
-            <h3>Service Provider List</h3>
-            <a href="../login_signup/Worker_SignUp.aspx" class="btn-add">➕ Add Service Provider</a>
-        </div>
-
-        <!-- Table -->
-        <div class="table-box">
-            <table>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Service</th>
-                    <th>Mobile</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-
-                <tr>
-                    <td>1</td>
-                    <td>Ramesh Kumar</td>
-                    <td>Plumber</td>
-                    <td>9876543210</td>
-                    <td><span class="badge active">Active</span></td>
-                    <td>
-                        <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                        <a class="btn btn-edit" href="UserProfile.aspx">Edit</a>
-                        <a class="btn btn-delete">Delete</a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>Suresh Patel</td>
-                    <td>Electrician</td>
-                    <td>9123456789</td>
-                    <td><span class="badge inactive">Inactive</span></td>
-                    <td>
-                        <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                        <a class="btn btn-edit" href="UserProfile.aspx">Edit</a>
-                        <a class="btn btn-delete">Delete</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        </div>
-
-    </form>
-</body>
-</html>
+</asp:Content>

@@ -51,7 +51,7 @@
                 <div class="col-lg-5 px-5 text-end">
                     <div class="h-100 d-inline-flex align-items-center">
                         <a class="btn btn-square border-end border-start" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square border-end" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square border-end" href=""><i class="fab fa-youtube"></i></a>
                         <a class="btn btn-square border-end" href=""><i class="fab fa-linkedin-in"></i></a>
                         <a class="btn btn-square border-end" href=""><i class="fab fa-instagram"></i></a>
                     </div>
@@ -155,7 +155,7 @@
                         <h1 class="text-white mb-4"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
                         <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita</p>
                         <div class="d-flex pt-2">
-                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-instagram"></i></a>
                             <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-youtube"></i></a>
                             <a class="btn btn-square btn-outline-primary me-0" href=""><i class="fab fa-linkedin-in"></i></a>

@@ -91,17 +91,44 @@ namespace HomeServiceFinder.Pages.login_signup
                     cmd.Parameters.AddWithValue("@User_ContactNo", User_Contact_TextBox.Text);
                     cmd.Parameters.AddWithValue("@User_Password", User_Password_TextBox.Text);
                     cmd.Parameters.AddWithValue("@User_Role", "User");
-                    cmd.Parameters.AddWithValue("@City_ID", CityList.SelectedItem.Value);
-                    cmd.Parameters.AddWithValue("@State_ID", StateList.SelectedItem.Value);
+                    cmd.Parameters.AddWithValue("@City_Name", CityList.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
                     Response.Redirect("loginPage.aspx");
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                Response.Write(ex.Message);
+                string message = "";
+                ErrorLabel.Enabled = true;
+                switch (ex.Number)
+                {
+                    case 2601:     // Cannot insert duplicate key row
+                    case 2627:     // Unique constraint violation
+                        message = "Duplicate entry! Email or phone already exists.";
+                        break;
+
+                    case 547:      // Foreign key violation
+                        message = "Invalid reference! Cannot insert because of related records.";
+                        break;
+
+                    case 4060:     // Cannot open database
+                        message = "Database not reachable! Please contact support.";
+                        break;
+
+                    case 18456:    // Invalid login
+                        message = "Database login failed!";
+                        break;
+
+                    default:
+                        message = "Unexpected error: " + ex.Message;
+                        break;
+                }
+
+                ErrorLabel.Text = message;
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
             }
         }
     }

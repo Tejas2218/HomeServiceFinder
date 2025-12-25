@@ -7,29 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HomeServiceFinder.Pages.New_Admin
+namespace HomeServiceFinder.Pages.login_signup
 {
 
 
-    public partial class User
+    public partial class Waiting_ServiceProvider
     {
 
         /// <summary>
-        /// lblUserCount control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserCount;
-
-        /// <summary>
-        /// UserGrid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView UserGrid;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }
