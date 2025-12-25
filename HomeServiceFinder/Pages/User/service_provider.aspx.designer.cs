@@ -33,6 +33,15 @@ namespace HomeServiceFinder.Pages.User
         protected global::System.Web.UI.WebControls.Repeater rptProviders;
 
         /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
         /// txtDate control.
         /// </summary>
         /// <remarks>

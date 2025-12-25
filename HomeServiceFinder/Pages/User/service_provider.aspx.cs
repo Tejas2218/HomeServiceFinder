@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,29 +16,56 @@ namespace HomeServiceFinder.Pages.User
         {
             if (!IsPostBack)
             {
-                // Create Dummy Provider Data
-                var providerList = new System.Collections.Generic.List<object>
-            {
-                new { Id = "101", Name = "Rajesh Kumar", Role = "Senior Expert", Rating = "4.9", Jobs = "520", Img = "img/team-1.jpg" },
-                new { Id = "102", Name = "Anita Desai", Role = "Cleaning Pro", Rating = "4.8", Jobs = "310", Img = "img/team-2.jpg" },
-                new { Id = "103", Name = "Vikram Singh", Role = "Technician", Rating = "4.7", Jobs = "150", Img = "img/team-3.jpg" },
-                new { Id = "104", Name = "Priya Sharma", Role = "Home Care", Rating = "5.0", Jobs = "800", Img = "img/team-4.jpg" }
-            };
+                LoadProviders();
+                //rptProviders.DataSource = providerList;
+                //rptProviders.DataBind();
+            }
+        }
 
-                rptProviders.DataSource = providerList;
-                rptProviders.DataBind();
+        public string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+        public SqlDataAdapter sda;
+        public SqlCommand cmd;
+        public DataSet sd;
+
+        private void LoadProviders()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        rptProviders.DataSource = dt;
+                        rptProviders.DataBind();
+                    }
+                    else
+                    {
+                        lblMessage.Text = "No service providers found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = "No user data found." + ex;
             }
         }
 
         protected void btnBook_Click(object sender, EventArgs e)
         {
-            string pName = hfProviderName.Value;
-            string date = txtDate.Text;
-            string time = hfSelectedTime.Value;
+            //string pName = hfProviderName.Value;
+            //string date = txtDate.Text;
+            //string time = hfSelectedTime.Value;
 
             // Show Success Alert
-            string script = $"alert('BOOKING SUCCESSFUL!\\nProvider: {pName}\\nDate: {date}\\nTime: {time}');";
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+            //string script = $"alert('BOOKING SUCCESSFUL!\\nProvider: {pName}\\nDate: {date}\\nTime: {time}');";
+            //ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
         }
     }
 }
