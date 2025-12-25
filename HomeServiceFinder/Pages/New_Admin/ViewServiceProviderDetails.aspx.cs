@@ -2,6 +2,10 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using static System.Net.Mime.MediaTypeNames;
+using System.Net;
+using System.Net.Mail;
+
 
 namespace HomeServiceFinder.Pages.New_Admin
 {
@@ -17,7 +21,7 @@ namespace HomeServiceFinder.Pages.New_Admin
                 ViewState["UserId"] = userId;
                 LoadUserData(userId);
 
-                if (SP_Status.Text == "Pending")
+                if (SP_Status.Text == "Pending" || SP_Status.Text == "Rejected")
                 {
                     btnApprove.Visible = true;
                     btnReject.Visible = true;
@@ -72,6 +76,105 @@ namespace HomeServiceFinder.Pages.New_Admin
         {
             int userId = Convert.ToInt32(ViewState["UserId"]);
             Response.Redirect("~/Pages/New_Admin/EditUserDetails.aspx?id=" + userId);
+        }
+
+        protected void btnApprove_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(ViewState["UserId"]);
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("Update_Worker_Status", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@SP_ID", ViewState["UserId"]);
+                cmd.Parameters.AddWithValue("@SP_Status", "Approved");
+
+                SqlCommand cmd2 = new SqlCommand("", con);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                LoadUserData(id);
+
+                SqlCommand cmdn = new SqlCommand("Display_Worker_Details_ByID", con);
+                cmdn.CommandType = CommandType.StoredProcedure;
+                cmdn.Parameters.AddWithValue("@SP_ID", id);
+
+                SqlDataReader dr = cmdn.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    SendEmail(id, "Approved", dr["User_Name"].ToString().ToString(), dr["User_EmailID"].ToString());
+                }
+            }
+            btnApprove.Visible = false;
+
+        }
+
+        protected void btnReject_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(ViewState["UserId"]);
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("Update_Worker_Status", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@SP_ID", ViewState["UserId"]);
+                cmd.Parameters.AddWithValue("@SP_Status", "Rejected");
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                LoadUserData(id);
+
+                SqlCommand cmdn = new SqlCommand("Display_Worker_Details_ByID", con);
+                cmdn.CommandType = CommandType.StoredProcedure;
+                cmdn.Parameters.AddWithValue("@SP_ID", id);
+
+                SqlDataReader dr = cmdn.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    SendEmail(id, "Rejected", dr["User_Name"].ToString(), dr["User_EmailID"].ToString());
+                }
+            }
+            btnApprove.Visible = true;
+        }
+
+        void SendEmail(int id, string msg, string name, string email)
+        {
+            string subject = "Service Provider Account Status";
+            string body;
+
+            if (msg == "Approved")
+            {
+                body = $@"
+                <p>Hello <b>{name}</b>,</p>
+                <p>🎉 Your service provider account has been <b style='color:green;'>APPROVED</b>.</p>
+                <p>You can now log in and start accepting service requests.</p>
+                <br/>
+                <p>Regards,<br/>Home Service Finder Team</p>";
+            }
+            else
+            {
+                body = $@"
+                <p>Hello <b>{name}</b>,</p>
+                <p>❌ Your service provider account has been <b style='color:red;'>REJECTED</b>.</p>
+                <p>If you believe this is a mistake, please contact support.</p>
+                <br/>
+                <p>Regards,<br/>Home Service Finder Team</p>";
+            }
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("dev46408@gmail.com", "Home Service Finder");
+            mail.To.Add(email);
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential(
+                "dev46408@gmail.com",
+                "rkufrzzdzhpfxltb"
+            );
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+            
         }
     }
 }

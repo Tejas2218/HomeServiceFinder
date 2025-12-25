@@ -9,9 +9,9 @@
     <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
 
 
-    <div class="profile-card">
+    <div class="profile-card" style="width:100%">
 
-        <div class="profile-grid">
+        <div class="profile-grid" style="width:100%">
 
             <!-- USER INFO -->
             <div class="profile-item">
@@ -130,13 +130,14 @@
                     ID="btnApprove"
                     runat="server"
                     Visible="false"
+                    OnClick="btnApprove_Click"
                     Text="✔ Approve Provider"
                     CssClass="btn btn-approve" />
 
                 <asp:Button
                     ID="btnReject"
-                    Visible="false"
                     runat="server"
+                    OnClick="btnReject_Click"
                     Text="✖ Reject Provider"
                     CssClass="btn btn-reject"
                     OnClientClick="return confirm('Are you sure you want to reject this provider?');" />

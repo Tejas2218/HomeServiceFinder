@@ -498,6 +498,21 @@
                 background: #ff9800;
                 color: white;
             }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            width: 100%;
+        }
+
+        .profile-item {
+            width: 100%;
+        }
+
+            .profile-item.full-width {
+                grid-column: span 2;
+            }
     </style>
 </head>
 

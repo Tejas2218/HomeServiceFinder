@@ -209,3 +209,23 @@ as
 begin
 	select count(*) from ServiceProviderDetails
 end
+
+--Update Worker Status--  25-12-25
+create or alter proc Update_Worker_Status
+@SP_ID int,
+@SP_Status varchar(50)
+as
+begin
+	declare @User_ID int;
+
+	select @User_ID=User_ID from ServiceProviderDetails 
+	where SP_ID=@SP_ID
+
+	update ServiceProviderDetails
+	set SP_Status=@SP_Status
+	where SP_ID=@SP_ID
+
+	update UserDetails
+	set Modified_DateTime=GETDATE()
+	where User_ID=@User_ID
+end
