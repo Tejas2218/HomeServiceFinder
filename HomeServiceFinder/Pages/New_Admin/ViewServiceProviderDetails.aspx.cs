@@ -16,6 +16,12 @@ namespace HomeServiceFinder.Pages.New_Admin
                 int userId = Convert.ToInt32(Request.QueryString["id"]);
                 ViewState["UserId"] = userId;
                 LoadUserData(userId);
+
+                if (SP_Status.Text == "Pending")
+                {
+                    btnApprove.Visible = true;
+                    btnReject.Visible = true;
+                }
             }
         }
 
@@ -53,8 +59,11 @@ namespace HomeServiceFinder.Pages.New_Admin
                     SP_Status.Text = dr["SP_Status"].ToString();
                     SP_ShopAddress.Text = dr["SP_ShopAddress"].ToString();
 
-                    // BOOKINGS SUMMARY
-                    
+                    // Created
+                    Created_At.Text = dr["Created_DateTime"].ToString();
+                    Modified_At.Text = dr["Modified_DateTime"].ToString();
+
+
                 }
             }
         }

@@ -6,7 +6,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2 style="margin-bottom:20px;">Service Provider Profile</h2>
+    <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
+
 
     <div class="profile-card">
 
@@ -88,13 +89,20 @@
                 <label>Shop Address</label>
                 <asp:Label ID="SP_ShopAddress" runat="server" CssClass="profile-value" />
             </div>
+            <!-- CREATED & MODIFIED INFO -->
+            <div class="profile-item">
+                <label>Created At</label>
+                <asp:Label ID="Created_At" runat="server" CssClass="profile-value" />
+            </div>
 
-            
-
+            <div class="profile-item">
+                <label>Modified At</label>
+                <asp:Label ID="Modified_At" runat="server" CssClass="profile-value" />
+            </div>
         </div>
 
         <!-- ACTION BUTTONS -->
-        <div style="text-align:center; margin-top:20px;">
+        <div style="text-align: center; margin-top: 20px;">
 
             <asp:Button
                 ID="btnBack"
@@ -111,6 +119,31 @@
                 OnClick="btnEdit_Click" />
 
         </div>
+        <!-- APPROVAL ACTION BOX -->
+        <div class="approval-box">
+
+            <h4>Admin Action</h4>
+            <p>Please review the service provider details before taking action.</p>
+
+            <div class="approval-actions">
+                <asp:Button
+                    ID="btnApprove"
+                    runat="server"
+                    Visible="false"
+                    Text="✔ Approve Provider"
+                    CssClass="btn btn-approve" />
+
+                <asp:Button
+                    ID="btnReject"
+                    Visible="false"
+                    runat="server"
+                    Text="✖ Reject Provider"
+                    CssClass="btn btn-reject"
+                    OnClientClick="return confirm('Are you sure you want to reject this provider?');" />
+            </div>
+
+        </div>
+
 
     </div>
 
