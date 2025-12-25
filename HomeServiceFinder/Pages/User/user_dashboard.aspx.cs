@@ -19,28 +19,54 @@ namespace HomeServiceFinder.Pages.User
         public DataSet sd;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!IsPostBack)
-            //{
-            //    if (Session["UserID"] != null)
-            //    {
-            //        // User is logged in
-            //        phProfileBtn.Visible = true;
-            //        phSignupBtn.Visible = false;
-            //    }
-            //    else
-            //    {
-            //        // User not logged in
-            //        phProfileBtn.Visible = false;
-            //        phSignupBtn.Visible = true;
-            //    }
+            if (!IsPostBack)
+            {
+                LoadProviders();
+                //    if (Session["UserID"] != null)
+                //    {
+                //        // User is logged in
+                //        phProfileBtn.Visible = true;
+                //        phSignupBtn.Visible = false;
+                //    }
+                //    else
+                //    {
+                //        // User not logged in
+                //        phProfileBtn.Visible = false;
+                //        phSignupBtn.Visible = true;
+                //    }
 
-            //    //LoadProviders();
-            //}
+                //    
+            }
         }
 
         private void LoadProviders()
         {
-            
+            try
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        rptWorkers.DataSource = dt;
+                        rptWorkers.DataBind();
+                    }
+                    else
+                    {
+                        lblMessage.Text = "No service providers found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = "No user data found." + ex;
+            }
         }
 
         //private void LoadBookings()

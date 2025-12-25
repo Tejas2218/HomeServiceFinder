@@ -110,6 +110,8 @@
     <Content Include="Pages\User\more_services.aspx" />
     <Content Include="Pages\User\profile.aspx" />
     <Content Include="Pages\User\service.aspx" />
+    <Content Include="Pages\User\confirm_booking.aspx" />
+    <Content Include="Pages\User\service_provider.aspx" />
     <Content Include="Pages\User\user_booking.aspx" />
     <Content Include="Pages\User\user_dashboard.aspx" />
   </ItemGroup>
@@ -316,6 +318,20 @@
     </Compile>
     <Compile Include="Pages\User\service.aspx.designer.cs">
       <DependentUpon>service.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\confirm_booking.aspx.cs">
+      <DependentUpon>confirm_booking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\confirm_booking.aspx.designer.cs">
+      <DependentUpon>confirm_booking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\service_provider.aspx.cs">
+      <DependentUpon>service_provider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\service_provider.aspx.designer.cs">
+      <DependentUpon>service_provider.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\user_booking.aspx.cs">
       <DependentUpon>user_booking.aspx</DependentUpon>

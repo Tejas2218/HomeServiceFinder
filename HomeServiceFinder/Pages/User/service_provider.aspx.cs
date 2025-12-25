@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace HomeServiceFinder.Pages.User
 {
-    public partial class service : System.Web.UI.Page
+    public partial class service_provider1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LoadProviders();
+                //rptProviders.DataSource = providerList;
+                //rptProviders.DataBind();
             }
         }
 
@@ -40,8 +42,8 @@ namespace HomeServiceFinder.Pages.User
 
                     if (dt.Rows.Count > 0)
                     {
-                        rptWorkers.DataSource = dt;
-                        rptWorkers.DataBind();
+                        rptProviders.DataSource = dt;
+                        rptProviders.DataBind();
                     }
                     else
                     {
@@ -53,6 +55,17 @@ namespace HomeServiceFinder.Pages.User
             {
                 lblMessage.Text = "No user data found." + ex;
             }
+        }
+
+        protected void btnBook_Click(object sender, EventArgs e)
+        {
+            //string pName = hfProviderName.Value;
+            //string date = txtDate.Text;
+            //string time = hfSelectedTime.Value;
+
+            // Show Success Alert
+            //string script = $"alert('BOOKING SUCCESSFUL!\\nProvider: {pName}\\nDate: {date}\\nTime: {time}');";
+            //ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
         }
     }
 }
