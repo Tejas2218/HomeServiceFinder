@@ -135,6 +135,9 @@ select * from BookingDetails INNER JOIN ServiceProviderDetails on BookingDetails
 INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID 
 
 
+select * from BookingDetails
+
+
 select * from ServiceProviderDetails INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID INNER JOIN CityDetails on UserDetails.City_ID = CityDetails.City_ID where ServiceProviderDetails.User_ID = 1
 
 
