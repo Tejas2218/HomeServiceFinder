@@ -22,7 +22,7 @@ end
 
 --Display Worker Detail by Service--
 create or alter proc Display_Worker_Details_ByService
-@SP_Service varchar(50)
+@SP_ID varchar(50)
 as
 begin
 	select * from ServiceProviderDetails SPD 
@@ -37,7 +37,7 @@ begin
 	on SPD.Service_ID=SM.Service_ID
 	inner join EquipmentMaster EM
 	on EM.Service_ID=SM.Service_ID
-	where SPD.SP_Service=@SP_Service
+	where SPD.SP_ID=@SP_ID
 end
 
 --Display Specific Worker Details--
