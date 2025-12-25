@@ -15,75 +15,156 @@ namespace HomeServiceFinder.Pages.New_Admin
     {
 
         /// <summary>
-        /// User_Name_TextBox control.
+        /// User_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Name_TextBox;
+        protected global::System.Web.UI.WebControls.Label User_Name;
 
         /// <summary>
-        /// User_Email_TextBox control.
+        /// User_Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Email_TextBox;
+        protected global::System.Web.UI.WebControls.Label User_Email;
 
         /// <summary>
-        /// User_Contact_TextBox control.
+        /// User_Contact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Contact_TextBox;
+        protected global::System.Web.UI.WebControls.Label User_Contact;
 
         /// <summary>
-        /// State control.
+        /// User_Role control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label State;
+        protected global::System.Web.UI.WebControls.Label User_Role;
 
         /// <summary>
-        /// City control.
+        /// State_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label City;
+        protected global::System.Web.UI.WebControls.Label State_Name;
 
         /// <summary>
-        /// User_Address_TextBox control.
+        /// City_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Address_TextBox;
+        protected global::System.Web.UI.WebControls.Label City_Name;
 
         /// <summary>
-        /// User_Password_TextBox control.
+        /// User_Address control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Password_TextBox;
+        protected global::System.Web.UI.WebControls.Label User_Address;
 
         /// <summary>
-        /// btnUpdateProfile control.
+        /// Service_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateProfile;
+        protected global::System.Web.UI.WebControls.Label Service_Name;
+
+        /// <summary>
+        /// Equipment_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Equipment_Name;
+
+        /// <summary>
+        /// SP_Age control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SP_Age;
+
+        /// <summary>
+        /// SP_Experience control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SP_Experience;
+
+        /// <summary>
+        /// SP_MinimumPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SP_MinimumPrice;
+
+        /// <summary>
+        /// SP_AverageRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SP_AverageRating;
+
+        /// <summary>
+        /// SP_Status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SP_Status;
+
+        /// <summary>
+        /// SP_ShopAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SP_ShopAddress;
+
+        /// <summary>
+        /// btnBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBack;
+
+        /// <summary>
+        /// btnEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEdit;
     }
 }

@@ -33,8 +33,9 @@ select * from ServiceProviderDetails
 delete from UserDetails
 delete from ServiceProviderDetails
 
-
 alter table UserDetails alter column User_ContactNo varchar(10)
+
+alter table UserDetails alter column State_ID int
 
 alter table UserDetails add constraint FK_UserDetails_State Foreign key (State_ID) References StateDetails(State_ID)
 

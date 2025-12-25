@@ -58,12 +58,25 @@
             runat="server"
             CssClass="input" />
 
-        <asp:Button
-            ID="btnUpdateProfile"
-            runat="server"
-            Text="Save Changes"
-            CssClass="btn-save"
-            OnClick="btnUpdateProfile_Click" />
+        <center>
+            <div>
+                <asp:Button
+                    ID="btnBack"
+                    runat="server"
+                    Text="← Back"
+                    CssClass="btn-view"
+                    OnClientClick="history.back(); return false;" />
+
+                <asp:Button
+                    ID="btnUpdateProfile"
+                    runat="server"
+                    Text="Save Changes"
+                    CssClass="btn-save"
+                    OnClick="btnUpdateProfile_Click" />
+            </div>
+
+        </center>
+
     </div>
 
 </asp:Content>
