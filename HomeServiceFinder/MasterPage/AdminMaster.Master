@@ -19,6 +19,58 @@
             --dark: #182333;
         }
 
+        .approval-box {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #fff6e5;
+            border: 1px solid #ffcc80;
+            text-align: center;
+        }
+
+            .approval-box h4 {
+                margin-bottom: 5px;
+                color: #ff9800;
+            }
+
+            .approval-box p {
+                font-size: 14px;
+                color: #555;
+                margin-bottom: 15px;
+            }
+
+        .approval-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-approve {
+            background: #28a745;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+        }
+
+            .btn-approve:hover {
+                background: #218838;
+            }
+
+        .btn-reject {
+            background: #dc3545;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+        }
+
+            .btn-reject:hover {
+                background: #c82333;
+            }
+
         .status-badge {
             font-weight: 600;
             padding: 4px 10px;
@@ -420,6 +472,48 @@
                 grid-column: span 1;
             }
         }
+
+        .filter-tabs {
+            display: flex;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border-radius: 25px;
+            border: none;
+            background: #f1f1f1;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+            .filter-btn:hover {
+                background: #ff9800;
+                color: white;
+            }
+
+            .filter-btn.active {
+                background: #ff9800;
+                color: white;
+            }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            width: 100%;
+        }
+
+        .profile-item {
+            width: 100%;
+        }
+
+            .profile-item.full-width {
+                grid-column: span 2;
+            }
+
     </style>
 </head>
 

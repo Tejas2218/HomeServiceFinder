@@ -1,8 +1,9 @@
-﻿<%@ Page Language="C#"
-    AutoEventWireup="true"
-    CodeBehind="ViewServiceProviderDetails.aspx.cs"
+﻿<%@ Page Language="C#" 
+    AutoEventWireup="true" 
+    CodeBehind="AddServiceProvider.aspx.cs" 
     MasterPageFile="~/MasterPage/AdminMaster.Master"
-    Inherits="HomeServiceFinder.Pages.New_Admin.ViewServiceProviderDetails" %>
+    Inherits="HomeServiceFinder.Pages.New_Admin.AddServiceProvider" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -114,37 +115,12 @@
             <asp:Button
                 ID="btnEdit"
                 runat="server"
-                Text="Edit Profile"
+                Text="Add Service Provider"
                 CssClass="btn btn-edit"
-                OnClick="btnEdit_Click" />
+                />
 
         </div>
-        <!-- APPROVAL ACTION BOX -->
-        <div class="approval-box">
-
-            <h4>Admin Action</h4>
-            <p>Please review the service provider details before taking action.</p>
-
-            <div class="approval-actions">
-                <asp:Button
-                    ID="btnApprove"
-                    runat="server"
-                    Visible="false"
-                    OnClick="btnApprove_Click"
-                    Text="✔ Approve Provider"
-                    CssClass="btn btn-approve" />
-
-                <asp:Button
-                    ID="btnReject"
-                    runat="server"
-                    OnClick="btnReject_Click"
-                    Text="✖ Reject Provider"
-                    CssClass="btn btn-reject"
-                    OnClientClick="return confirm('Are you sure you want to reject this provider?');" />
-            </div>
-
-        </div>
-
+      
 
     </div>
 

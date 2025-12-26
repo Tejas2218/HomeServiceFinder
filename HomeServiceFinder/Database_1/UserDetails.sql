@@ -111,10 +111,11 @@ begin
 end
 
 --Count total user--
-create proc Count_User
+create or alter proc Count_User
 as
 begin
-	select count(*) from UserDetails
+	select count(*) from UserDetails 
+	where User_Role='User'
 end
 
 
