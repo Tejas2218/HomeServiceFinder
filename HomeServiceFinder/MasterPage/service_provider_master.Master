@@ -5,6 +5,7 @@
 <html>
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         .search-bar {
             background: #fff;
@@ -281,6 +282,27 @@
             color: var(--dark);
             font-weight: 600;
         }
+
+        /* for user name more info in booking details page*/
+        .customer-info-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Space between name and icon */
+        }
+
+        .info-icon-btn {
+            color: #0d6efd; /* Primary blue color */
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+
+            .info-icon-btn:hover {
+                color: #0a58ca;
+                transform: scale(1.2);
+            }
+
+
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
