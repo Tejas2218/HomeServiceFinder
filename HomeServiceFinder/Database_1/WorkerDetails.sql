@@ -19,6 +19,68 @@ begin
 	inner join EquipmentMaster EM
 	on EM.Service_ID=SM.Service_ID
 end
+--26-12-25--
+---Display Worker Details Pending--
+create or alter proc Display_Worker_Details_Pending
+as
+begin
+	select * from ServiceProviderDetails SPD 
+	inner join UserDetails UD  
+	on SPD.User_ID=UD.User_ID 
+		----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	inner join StateDetails SD
+	on UD.State_ID=SD.State_ID
+	inner join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	inner join EquipmentMaster EM
+	on EM.Service_ID=SM.Service_ID
+	where SPD.SP_Status='Pending'
+end
+
+--26-12-25--
+---Display Worker Details Approved--
+create or alter proc Display_Worker_Details_Approved
+as
+begin
+	select * from ServiceProviderDetails SPD 
+	inner join UserDetails UD  
+	on SPD.User_ID=UD.User_ID 
+		----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	inner join StateDetails SD
+	on UD.State_ID=SD.State_ID
+	inner join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	inner join EquipmentMaster EM
+	on EM.Service_ID=SM.Service_ID
+	where SPD.SP_Status='Approved'
+end
+
+
+--26-12-25--
+---Display Worker Details Decline--
+create or alter proc Display_Worker_Details_Decline
+as
+begin
+	select * from ServiceProviderDetails SPD 
+	inner join UserDetails UD  
+	on SPD.User_ID=UD.User_ID 
+		----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	inner join StateDetails SD
+	on UD.State_ID=SD.State_ID
+	inner join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	inner join EquipmentMaster EM
+	on EM.Service_ID=SM.Service_ID
+	where SPD.SP_Status='Rejected'
+end
+
+
 
 --Display Worker Detail by Service--
 create or alter proc Display_Worker_Details_ByService

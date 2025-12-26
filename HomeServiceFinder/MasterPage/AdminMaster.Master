@@ -513,6 +513,7 @@
             .profile-item.full-width {
                 grid-column: span 2;
             }
+
     </style>
 </head>
 

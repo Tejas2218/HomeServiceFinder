@@ -19,16 +19,16 @@ namespace HomeServiceFinder.Pages.New_Admin
             if (!IsPostBack)
             {
                 CountUser();
-                LoadUserData();
+                btnPending_Click(null,null);
             }
         }
 
-        // 🔹 LOAD USER GRID
-        protected void LoadUserData()
+        //Load User Data
+        void LoadWorkerData(string sp)
         {
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("Display_Worker_Details", con);
+                SqlCommand cmd = new SqlCommand(sp, con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -57,7 +57,7 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected void UserGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             UserGrid.PageIndex = e.NewPageIndex;
-            LoadUserData();
+            btnPending_Click(null,null);
         }
 
         // 🔹 EDIT / DELETE BUTTON HANDLER
@@ -78,7 +78,7 @@ namespace HomeServiceFinder.Pages.New_Admin
             {
                 int userId = Convert.ToInt32(e.CommandArgument);
                 DeleteUser(userId);
-                LoadUserData();
+                btnPending_Click(null,null);
                 CountUser();
             }
         }
@@ -99,7 +99,31 @@ namespace HomeServiceFinder.Pages.New_Admin
 
         protected void btnAddWorker_Click(object sender, EventArgs e)
         {
-            Response.Redirect("../login_signup/Worker_SignUp.aspx");
+            Response.Redirect("AddServiceProvider.aspx");
+        }
+
+        protected void btnPending_Click(object sender, EventArgs e)
+        {
+            LoadWorkerData("Display_Worker_Details_Pending");
+            btnPending.CssClass = "filter-btn active";
+            btnApproved.CssClass = "filter-btn";
+            btnRejected.CssClass = "filter-btn";
+        }
+
+        protected void btnApproved_Click(object sender, EventArgs e)
+        {
+            LoadWorkerData("Display_Worker_Details_Approved");
+            btnPending.CssClass = "filter-btn";
+            btnApproved.CssClass = "filter-btn active";
+            btnRejected.CssClass = "filter-btn";
+        }
+
+        protected void btnRejected_Click(object sender, EventArgs e)
+        {
+            LoadWorkerData("Display_Worker_Details_Decline");
+            btnPending.CssClass = "filter-btn";
+            btnApproved.CssClass = "filter-btn";
+            btnRejected.CssClass = "filter-btn active";
         }
     }
 }

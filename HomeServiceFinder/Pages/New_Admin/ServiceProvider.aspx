@@ -26,22 +26,25 @@
             ID="btnPending"
             runat="server"
             Text="Pending Requests"
-            CssClass="filter-btn active"
-            CommandArgument="Pending" />
+            CssClass="filter-btn "
+            OnClick="btnPending_Click"
+            />
 
         <asp:Button
             ID="btnApproved"
             runat="server"
             Text="Approved"
             CssClass="filter-btn"
-            CommandArgument="Approved" />
+            OnClick="btnApproved_Click"
+            />
 
         <asp:Button
             ID="btnRejected"
             runat="server"
             Text="Declined"
             CssClass="filter-btn"
-            CommandArgument="Rejected" />
+            OnClick="btnRejected_Click"
+            />
 
     </div>
 
