@@ -15,16 +15,16 @@ create table CityDetails(
 
 create table UserDetails(
 	User_ID int primary key identity(1,1),
-	User_Name varchar(50) not null,
-	User_EmailID varchar(100) unique,
-	User_Address varchar(200) not null,
-	User_ContactNo varchar(10) not null,
-	User_Password varchar(50) not null,
-	User_Role varchar(50) not null,
+	User_Name varchar(50) not null,--
+	User_EmailID varchar(100) unique,--
+	User_Address varchar(200) not null,--
+	User_ContactNo varchar(10) not null,--
+	User_Password varchar(50) not null,--
+	User_Role varchar(50) not null,--
 	City_ID int Foreign Key References CityDetails(City_ID),
 	Created_DateTime DateTime DEFAULT Getdate(),
 	Modified_DateTime DateTime DEFAULT Getdate(),
-	State_ID varchar(50)-------changes 
+	State_ID varchar(50)-------changed to int  
 )---------------created------
 
 select * from UserDetails

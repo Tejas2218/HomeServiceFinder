@@ -75,7 +75,7 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             int userId = Convert.ToInt32(ViewState["UserId"]);
-            Response.Redirect("~/Pages/New_Admin/EditUserDetails.aspx?id=" + userId);
+            Response.Redirect("~/Pages/New_Admin/AddServiceProvider.aspx?id=" + userId);
         }
 
         protected void btnApprove_Click(object sender, EventArgs e)
@@ -161,7 +161,7 @@ namespace HomeServiceFinder.Pages.New_Admin
                 <p>Regards,<br/>Home Service Finder Team</p>";
             }
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("dev46408@gmail.com", "Home Service Finder");
+            mail.From = new MailAddress("homeservicefinder999@gmail.com", "Home Service Finder");
             mail.To.Add(email);
             mail.Subject = subject;
             mail.Body = body;
@@ -169,8 +169,8 @@ namespace HomeServiceFinder.Pages.New_Admin
 
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
             smtp.Credentials = new NetworkCredential(
-                "dev46408@gmail.com",
-                "rkufrzzdzhpfxltb"
+                "homeservicefinder999@gmail.com",
+                "cvquixtqamspxxjp"
             );
             smtp.EnableSsl = true;
             smtp.Send(mail);

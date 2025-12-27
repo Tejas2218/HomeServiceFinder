@@ -19,7 +19,7 @@ namespace HomeServiceFinder.Pages.New_Admin
             if (!IsPostBack)
             {
                 CountUser();
-                btnPending_Click(null,null);
+                btnAll_Click(null, null);
             }
         }
 
@@ -71,14 +71,15 @@ namespace HomeServiceFinder.Pages.New_Admin
             if (e.CommandName == "EditUser")
             {
                 int userId = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("~/Pages/New_Admin/EditUserDetails.aspx?id=" + userId);
+                Response.Redirect("~/Pages/New_Admin/AddServiceProvider.aspx?id=" + userId);
             }
 
-            if (e.CommandName == "Delete")
+            if (e.CommandName == "DeleteUser")
             {
                 int userId = Convert.ToInt32(e.CommandArgument);
                 DeleteUser(userId);
-                btnPending_Click(null,null);
+                UserGrid.PageIndex = 0;
+                btnAll_Click(null,null);
                 CountUser();
             }
         }
@@ -88,9 +89,9 @@ namespace HomeServiceFinder.Pages.New_Admin
         {
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("Delete_User_Details", con);
+                SqlCommand cmd = new SqlCommand("Delete_Worker_Details", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@User_ID", userId);
+                cmd.Parameters.AddWithValue("@SP_ID", userId);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -108,6 +109,7 @@ namespace HomeServiceFinder.Pages.New_Admin
             btnPending.CssClass = "filter-btn active";
             btnApproved.CssClass = "filter-btn";
             btnRejected.CssClass = "filter-btn";
+            btnAll.CssClass = "filter-btn";
         }
 
         protected void btnApproved_Click(object sender, EventArgs e)
@@ -116,6 +118,7 @@ namespace HomeServiceFinder.Pages.New_Admin
             btnPending.CssClass = "filter-btn";
             btnApproved.CssClass = "filter-btn active";
             btnRejected.CssClass = "filter-btn";
+            btnAll.CssClass = "filter-btn";
         }
 
         protected void btnRejected_Click(object sender, EventArgs e)
@@ -124,6 +127,16 @@ namespace HomeServiceFinder.Pages.New_Admin
             btnPending.CssClass = "filter-btn";
             btnApproved.CssClass = "filter-btn";
             btnRejected.CssClass = "filter-btn active";
+            btnAll.CssClass = "filter-btn";
+        }
+
+        protected void btnAll_Click(object sender, EventArgs e)
+        {
+            LoadWorkerData("Display_Worker_Details");
+            btnPending.CssClass = "filter-btn";
+            btnApproved.CssClass = "filter-btn";
+            btnRejected.CssClass = "filter-btn";
+            btnAll.CssClass = "filter-btn active";
         }
     }
 }

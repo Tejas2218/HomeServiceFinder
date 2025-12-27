@@ -4,16 +4,33 @@
     MasterPageFile="~/MasterPage/AdminMaster.Master"
     Inherits="HomeServiceFinder.Pages.New_Admin.ViewServiceProviderDetails" %>
 
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <style>
+        .section-title {
+            grid-column: span 2;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e5e7eb;
+            margin-top: 10px;
+    </style>
 
     <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
 
 
-    <div class="profile-card" style="width:100%">
+    <div class="profile-card" style="width: 100%">
 
-        <div class="profile-grid" style="width:100%">
+        <div class="profile-grid" style="width: 100%">
 
             <!-- USER INFO -->
+            <div class="section-title full-width">
+                Personal Information
+            </div>
+
             <div class="profile-item">
                 <label>Name</label>
                 <asp:Label ID="User_Name" runat="server" CssClass="profile-value" />
@@ -47,6 +64,10 @@
             <div class="profile-item full-width">
                 <label>Address</label>
                 <asp:Label ID="User_Address" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="section-title full-width">
+                Working Information
             </div>
 
             <!-- SERVICE PROVIDER INFO -->
@@ -89,6 +110,11 @@
                 <label>Shop Address</label>
                 <asp:Label ID="SP_ShopAddress" runat="server" CssClass="profile-value" />
             </div>
+
+            <div class="section-title full-width">
+                Audit Information
+            </div>
+
             <!-- CREATED & MODIFIED INFO -->
             <div class="profile-item">
                 <label>Created At</label>
