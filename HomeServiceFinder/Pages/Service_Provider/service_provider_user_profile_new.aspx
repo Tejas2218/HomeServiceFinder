@@ -1,36 +1,43 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/service_provider_master.Master" AutoEventWireup="true" CodeBehind="WebForm3.aspx.cs" Inherits="HomeServiceFinder.Pages.Service_Provider.WebForm3" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/service_provider_master.Master" AutoEventWireup="true" CodeBehind="service_provider_user_profile_new.aspx.cs" Inherits="HomeServiceFinder.Pages.Service_Provider.WebForm3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <a href="service_provider_user.aspx" class="btn-back">← Back to Dashboard</a>
-
+    <asp:Button ID="btnBack" runat="server" Text="← Back to Dashboard" OnClick="btnBack_Click" CssClass="btn-back" />
+    <asp:HiddenField ID="hfwebpage" runat="server" />
     <div class="profile-container">
         <div class="card">
             <div class="user-info-header">
-                <div class="user-avatar">RP</div>
-                <h2>Rahul Patel</h2>
+                <div class="user-avatar">
+                    <asp:Literal ID="AvatarInitials" runat="server">User</asp:Literal>
+                </div>
+                <h2><asp:Label ID="User_Name" runat="server" Text=""></asp:Label></h2>
                 <span class="status-pill completed">Verified Customer</span>
             </div>
 
             <div class="info-group">
                 <span class="info-label">Email Address</span>
-                <span class="info-value">rahul@gmail.com</span>
+                <span class="info-value"><asp:Label ID="User_Email" runat="server"></asp:Label></span>
             </div>
 
             <div class="info-group">
                 <span class="info-label">Mobile Number</span>
-                <span class="info-value">+91 9876543210</span>
+                <span class="info-value"><asp:Label ID="User_Contact" runat="server"></asp:Label></span>
             </div>
 
             <div class="info-group">
                 <span class="info-label">Address</span>
-                <span class="info-value">123, Silver Heights, Near Akshar Chowk, Rajkot, Gujarat.</span>
+                <span class="info-value">
+                    <asp:Label ID="User_Address" runat="server"></asp:Label>, 
+                    <asp:Label ID="City_Name" runat="server"></asp:Label>, 
+                    <asp:Label ID="State_Name" runat="server"></asp:Label>
+                </span>
             </div>
         </div>
 
         <div class="card">
             <h3>Booking History (with you)</h3>
+            <%-- Suggestion: Use an asp:GridView or Repeater here to bind real history data --%>
             <table class="history-table">
                 <thead>
                     <tr>
@@ -47,13 +54,7 @@
                         <td>₹ 450</td>
                         <td><span class="status-pill completed">Completed</span></td>
                     </tr>
-                    <tr>
-                        <td>05 Nov 2025</td>
-                        <td>Tap Installation</td>
-                        <td>₹ 200</td>
-                        <td><span class="status-pill completed">Completed</span></td>
-                    </tr>
-                </tbody>
+                    </tbody>
             </table>
         </div>
     </div>

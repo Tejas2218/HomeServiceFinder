@@ -229,12 +229,12 @@
             color: #856404;
         }
 
-        .bg-active {
+        .bg-accept {
             background: #d4edda;
             color: #155724;
         }
 
-        .bg-danger {
+        .bg-decline {
             background: #f8d7da;
             color: #721c24;
         }
@@ -302,7 +302,44 @@
                 transform: scale(1.2);
             }
 
+        /* Base style for the toggle buttons */
+        .tab-btn {
+            padding: 10px 25px;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+            color: #333;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0; /* Rounded top corners */
+            margin-right: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            outline: none;
+            text-decoration:none;
+        }
 
+            /* Hover effect */
+            .tab-btn:hover {
+                background-color: #e2e6ea;
+            }
+
+        .notification-badge {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 11px;
+            margin-left: 8px;
+            display: inline-block;
+            
+        }
+
+        /* The Active State - applies when selected */
+        .active-tab {
+            background-color: var(--primary);
+            color: white !important;
+            border-color: var(--primary);
+            box-shadow: 0px -2px 5px rgba(0,0,0,0.1);
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>

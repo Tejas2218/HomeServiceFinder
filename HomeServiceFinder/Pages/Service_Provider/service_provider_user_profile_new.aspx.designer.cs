@@ -11,61 +11,88 @@ namespace HomeServiceFinder.Pages.Service_Provider
 {
 
 
-    public partial class service_provider_booking
+    public partial class WebForm3
     {
 
         /// <summary>
-        /// lblTotalBooking control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalBooking;
+        protected global::System.Web.UI.WebControls.Button btnBack;
 
         /// <summary>
-        /// lblPendingTask control.
+        /// hfwebpage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPendingTask;
+        protected global::System.Web.UI.WebControls.HiddenField hfwebpage;
 
         /// <summary>
-        /// lblAvgRating control.
+        /// AvatarInitials control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAvgRating;
+        protected global::System.Web.UI.WebControls.Literal AvatarInitials;
 
         /// <summary>
-        /// btnFetchAccepted control.
+        /// User_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnFetchAccepted;
+        protected global::System.Web.UI.WebControls.Label User_Name;
 
         /// <summary>
-        /// btnFetchPending control.
+        /// User_Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnFetchPending;
+        protected global::System.Web.UI.WebControls.Label User_Email;
 
         /// <summary>
-        /// gvBookings control.
+        /// User_Contact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvBookings;
+        protected global::System.Web.UI.WebControls.Label User_Contact;
+
+        /// <summary>
+        /// User_Address control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label User_Address;
+
+        /// <summary>
+        /// City_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label City_Name;
+
+        /// <summary>
+        /// State_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label State_Name;
     }
 }

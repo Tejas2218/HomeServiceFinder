@@ -100,7 +100,7 @@
     <Content Include="Pages\Service_Provider\service_provider_profile.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_user.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_user_profile.aspx" />
-    <Content Include="Pages\Service_Provider\WebForm3.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_user_profile_new.aspx" />
     <Content Include="Pages\User\about_us.aspx" />
     <Content Include="Pages\User\appointment.aspx" />
     <Content Include="Pages\User\change_password.aspx" />
@@ -269,12 +269,12 @@
     <Compile Include="Pages\Service_Provider\service_provider_user_profile.aspx.designer.cs">
       <DependentUpon>service_provider_user_profile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Service_Provider\WebForm3.aspx.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
+    <Compile Include="Pages\Service_Provider\service_provider_user_profile_new.aspx.cs">
+      <DependentUpon>service_provider_user_profile_new.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Service_Provider\WebForm3.aspx.designer.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
+    <Compile Include="Pages\Service_Provider\service_provider_user_profile_new.aspx.designer.cs">
+      <DependentUpon>service_provider_user_profile_new.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\about_us.aspx.cs">
       <DependentUpon>about_us.aspx</DependentUpon>
