@@ -11,35 +11,17 @@ namespace HomeServiceFinder.Pages.Service_Provider
 {
 
 
-    public partial class service_provider_booking
+    public partial class service_provider_Booking_History
     {
 
         /// <summary>
-        /// lblTotalBooking control.
+        /// btnFetchAll control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalBooking;
-
-        /// <summary>
-        /// lblPendingTask control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPendingTask;
-
-        /// <summary>
-        /// lblAvgRating control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAvgRating;
+        protected global::System.Web.UI.WebControls.LinkButton btnFetchAll;
 
         /// <summary>
         /// btnFetchAccepted control.
@@ -51,13 +33,13 @@ namespace HomeServiceFinder.Pages.Service_Provider
         protected global::System.Web.UI.WebControls.LinkButton btnFetchAccepted;
 
         /// <summary>
-        /// btnFetchPending control.
+        /// btnFetchDeclined control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnFetchPending;
+        protected global::System.Web.UI.WebControls.LinkButton btnFetchDeclined;
 
         /// <summary>
         /// gvBookings control.

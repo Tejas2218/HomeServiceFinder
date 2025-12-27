@@ -11,70 +11,97 @@ namespace HomeServiceFinder.Pages.Service_Provider
 {
 
 
-    public partial class Site1
+    public partial class WebForm3
     {
 
         /// <summary>
-        /// head control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Button btnBack;
 
         /// <summary>
-        /// form1 control.
+        /// hfwebpage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.HiddenField hfwebpage;
 
         /// <summary>
-        /// lnkBookings control.
+        /// AvatarInitials control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkBookings;
+        protected global::System.Web.UI.WebControls.Literal AvatarInitials;
 
         /// <summary>
-        /// lnkHistory control.
+        /// User_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkHistory;
+        protected global::System.Web.UI.WebControls.Label User_Name;
 
         /// <summary>
-        /// lnkCustomers control.
+        /// User_Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkCustomers;
+        protected global::System.Web.UI.WebControls.Label User_Email;
 
         /// <summary>
-        /// lnkProfile control.
+        /// User_Contact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkProfile;
+        protected global::System.Web.UI.WebControls.Label User_Contact;
 
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// User_Address control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Label User_Address;
+
+        /// <summary>
+        /// City_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label City_Name;
+
+        /// <summary>
+        /// State_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label State_Name;
+
+        /// <summary>
+        /// gvBookingHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvBookingHistory;
     }
 }

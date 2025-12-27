@@ -6,56 +6,82 @@
 
     <div class="stats-grid">
         <div class="stat-card">
-            <h3>Total Earnings</h3>
-            <h2>₹ 12,450</h2>
-        </div>
-        <div class="stat-card">
             <h3>Total Bookings</h3>
-            <h2>120</h2>
+            <asp:Label ID="lblTotalBooking" runat="server"></asp:Label>
         </div>
         <div class="stat-card">
             <h3>Pending Tasks</h3>
-            <h2>05</h2>
+            <asp:Label ID="lblPendingTask" runat="server"></asp:Label>
         </div>
         <div class="stat-card">
             <h3>Rating</h3>
-            <h2>4.8 ⭐</h2>
+            <asp:Label ID="lblAvgRating" runat="server"></asp:Label>
         </div>
     </div>
 
     <div id="bookings" class="section-box">
+
         <div class="section-header">
             <h3>Bookings</h3>
         </div>
-        <!--OnRowCommand="gvBookings_RowCommand"-->
-        <asp:GridView ID="gvBookings" runat="server" AutoGenerateColumns="false"
-            CssClass="table" GridLines="None" EmptyDataText="Data Not Available">
-            <Columns>
-                <asp:BoundField DataField="Booking_ID" HeaderText="ID" />
-                <asp:BoundField DataField="CustomerName" HeaderText="Customer" />
-                <asp:BoundField DataField="ServiceName" HeaderText="Service" />
-                <asp:BoundField DataField="Schedule" HeaderText="Schedule" />
 
-                <asp:TemplateField HeaderText="Status">
-                    <ItemTemplate>
-                        <span class='<%# "badge bg-" + Eval("Status").ToString().ToLower() %>'>
-                            <%# Eval("Status") %>
-                        </span>
-                    </ItemTemplate>
-                </asp:TemplateField>
+        <div class="tabs-container">
+            <asp:LinkButton ID="btnFetchAccepted" runat="server"
+                CssClass="tab-btn  active-tab" OnClick="btnFetchAccepted_Click">
+                Accepted
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnFetchPending" runat="server"
+                CssClass="tab-btn" OnClick="btnFetchPending_Click">
+        
+            </asp:LinkButton>
+        </div>
+        <br />
 
-                <asp:TemplateField HeaderText="Action">
-                    <ItemTemplate>
-                        <asp:Button ID="btnAccept" runat="server" Text="Accept"
-                            CommandName="Accept" CommandArgument='<%# Eval("BookingID") %>'
-                            CssClass="btn btn-primary" />
-                        <asp:Button ID="btnDecline" runat="server" Text="Decline"
-                            CommandName="Decline" CommandArgument='<%# Eval("BookingID") %>'
-                            CssClass="btn btn-danger" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
+        <table>
+            <!--OnRowCommand="gvBookings_RowCommand"-->
+            <asp:GridView ID="gvBookings" runat="server" AutoGenerateColumns="false"
+                CssClass="table" GridLines="None" EmptyDataText="Data Not Available">
+                <Columns>
+                    <asp:BoundField DataField="Booking_ID" HeaderText="ID" />
+                    <asp:TemplateField HeaderText="Customer">
+                        <ItemTemplate>
+                            <div class="customer-info-cell">
+                                <%# Eval("User_Name") %>
+                                <asp:LinkButton ID="btnMoreInfo" runat="server"
+                                    OnClick="btnMoreInfo_Click"
+                                    CommandArgument='<%#Eval("User_ID")%>'
+                                    CommandName="User_ID"
+                                    CssClass="info-icon-btn"
+                                    ToolTip="View More Details">
+                            <i class="bi bi-info-circle-fill"></i> </asp:LinkButton>
+                            </div>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="Equipment_Name" HeaderText="Service" />
+                    <asp:BoundField DataField="Time_Slot" HeaderText="Schedule" />
+
+                    <asp:TemplateField HeaderText="Status">
+                        <ItemTemplate>
+                            <span class='<%# "badge bg-" + Eval("Booking_Status").ToString().ToLower() %>'>
+                                <%# Eval("Booking_Status") %>
+                            </span>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Action">
+                        <ItemTemplate>
+                            <asp:Button ID="btnAccept" runat="server" Text="Accept"
+                                CommandName="Accept" CommandArgument='<%# Eval("Booking_ID") %>'
+                                CssClass="btn btn-primary" OnClick="btnAccept_Click" />
+                            <asp:Button ID="btnDecline" runat="server" Text="Decline"
+                                CommandName="Decline" CommandArgument='<%# Eval("Booking_ID") %>'
+                                CssClass="btn btn-danger" OnClick="btnDecline_Click" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+        </table>
     </div>
+
 
 </asp:Content>
