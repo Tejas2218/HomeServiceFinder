@@ -7,65 +7,74 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HomeServiceFinder.Pages.New_Admin
+namespace HomeServiceFinder.Pages.Service_Provider
 {
 
 
-    public partial class ServiceProvider
+    public partial class WebForm1
     {
 
         /// <summary>
-        /// lblTotalProviders control.
+        /// User_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalProviders;
+        protected global::System.Web.UI.WebControls.Label User_Name;
 
         /// <summary>
-        /// btnPending control.
+        /// User_Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPending;
+        protected global::System.Web.UI.WebControls.Label User_Email;
 
         /// <summary>
-        /// btnApproved control.
+        /// User_Contact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnApproved;
+        protected global::System.Web.UI.WebControls.Label User_Contact;
 
         /// <summary>
-        /// btnRejected control.
+        /// State_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRejected;
+        protected global::System.Web.UI.WebControls.Label State_Name;
 
         /// <summary>
-        /// btnAddWorker control.
+        /// City_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddWorker;
+        protected global::System.Web.UI.WebControls.Label City_Name;
 
         /// <summary>
-        /// UserGrid control.
+        /// User_Address control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView UserGrid;
+        protected global::System.Web.UI.WebControls.Label User_Address;
+
+        /// <summary>
+        /// btnBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBack;
     }
 }

@@ -19,6 +19,35 @@
 
     <!-- HEADER -->
     <h3>Service Provider List</h3>
+
+    <div class="filter-tabs">
+
+        <asp:Button
+            ID="btnPending"
+            runat="server"
+            Text="Pending Requests"
+            CssClass="filter-btn "
+            OnClick="btnPending_Click"
+            />
+
+        <asp:Button
+            ID="btnApproved"
+            runat="server"
+            Text="Approved"
+            CssClass="filter-btn"
+            OnClick="btnApproved_Click"
+            />
+
+        <asp:Button
+            ID="btnRejected"
+            runat="server"
+            Text="Declined"
+            CssClass="filter-btn"
+            OnClick="btnRejected_Click"
+            />
+
+    </div>
+
     <div class="page-header" style="margin-top: 10px; float: right; margin-bottom: 10px">
         <asp:Button Text="➕ Add Service Provider" CssClass="btn btn-edit" ID="btnAddWorker" runat="server"
             OnClick="btnAddWorker_Click" />
@@ -79,33 +108,33 @@
                 <asp:TemplateField HeaderText="Action">
                     <ItemTemplate>
                         <div class="action-buttons">
-                        <asp:Button
-                            ID="btnView"
-                            runat="server"
-                            Text="View"
-                            CssClass="btn btn-view"
-                            CommandName="ViewUser"
-                            CommandArgument='<%# Eval("SP_ID") %>'
-                            CausesValidation="false" />
+                            <asp:Button
+                                ID="btnView"
+                                runat="server"
+                                Text="View"
+                                CssClass="btn btn-view"
+                                CommandName="ViewUser"
+                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CausesValidation="false" />
 
-                        <asp:Button
-                            ID="btnEdit"
-                            runat="server"
-                            Text="Edit"
-                            CssClass="btn btn-edit"
-                            CommandName="EditUser"
-                            CommandArgument='<%# Eval("SP_ID") %>'
-                            CausesValidation="false" />
+                            <asp:Button
+                                ID="btnEdit"
+                                runat="server"
+                                Text="Edit"
+                                CssClass="btn btn-edit"
+                                CommandName="EditUser"
+                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CausesValidation="false" />
 
-                        <asp:Button
-                            ID="btnRemove"
-                            runat="server"
-                            Text="Remove"
-                            CssClass="btn btn-delete"
-                            CommandName="Delete"
-                            CommandArgument='<%# Eval("SP_ID") %>'
-                            CausesValidation="false"
-                            OnClientClick="return confirm('Are you sure you want to remove this user?');" />
+                            <asp:Button
+                                ID="btnRemove"
+                                runat="server"
+                                Text="Remove"
+                                CssClass="btn btn-delete"
+                                CommandName="Delete"
+                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CausesValidation="false"
+                                OnClientClick="return confirm('Are you sure you want to remove this user?');" />
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>

@@ -11,7 +11,7 @@ namespace HomeServiceFinder.Pages.New_Admin
 {
 
 
-    public partial class ViewServiceProviderDetails
+    public partial class AddServiceProvider
     {
 
         /// <summary>
@@ -184,23 +184,5 @@ namespace HomeServiceFinder.Pages.New_Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEdit;
-
-        /// <summary>
-        /// btnApprove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnApprove;
-
-        /// <summary>
-        /// btnReject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReject;
     }
 }

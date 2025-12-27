@@ -96,7 +96,8 @@ namespace HomeServiceFinder.Pages.login_signup
 
         protected void Worker_Signup_Button_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 SqlConnection con = new SqlConnection(constr);
                 cmd = new SqlCommand();
                 cmd.Connection = con;
@@ -193,14 +194,15 @@ namespace HomeServiceFinder.Pages.login_signup
 
         protected void Worker_ServiceType_DropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection(constr)) { 
-                if(Worker_ServiceType_DropDown.SelectedIndex<=0)
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                if (Worker_ServiceType_DropDown.SelectedIndex <= 0)
                 {
                     return;
                 }
-                SqlCommand cmd = new SqlCommand("View_Equipment_ByID",con);
+                SqlCommand cmd = new SqlCommand("View_Equipment_ByID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Service_ID",Worker_ServiceType_DropDown.SelectedValue);
+                cmd.Parameters.AddWithValue("@Service_ID", Worker_ServiceType_DropDown.SelectedValue);
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 Worker_Equipment_DropDown.DataSource = dr;

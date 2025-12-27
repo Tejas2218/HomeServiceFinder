@@ -1,5 +1,4 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -43,6 +42,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -60,11 +62,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assests\Login_SignUp\317830.png" />
@@ -89,6 +86,7 @@
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
     <Content Include="Pages\login_signup\Waiting_ServiceProvider.aspx" />
     <Content Include="Pages\login_signup\Worker_SignUp.aspx" />
+    <Content Include="Pages\New_Admin\AddServiceProvider.aspx" />
     <Content Include="Pages\New_Admin\AdminBookings.aspx" />
     <Content Include="Pages\New_Admin\AdminDashbord.aspx" />
     <Content Include="Pages\New_Admin\EditUserDetails.aspx" />
@@ -101,7 +99,8 @@
     <Content Include="Pages\Service_Provider\service_provider_booking.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_profile.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_user.aspx" />
-    <Content Include="Pages\Service_Provider\WebForm3.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_user_profile.aspx" />
+    <Content Include="Pages\Service_Provider\service_provider_user_profile_new.aspx" />
     <Content Include="Pages\User\about_us.aspx" />
     <Content Include="Pages\User\appointment.aspx" />
     <Content Include="Pages\User\change_password.aspx" />
@@ -164,6 +163,13 @@
     </Compile>
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.designer.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AddServiceProvider.aspx.cs">
+      <DependentUpon>AddServiceProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AddServiceProvider.aspx.designer.cs">
+      <DependentUpon>AddServiceProvider.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\New_Admin\AdminBookings.aspx.cs">
       <DependentUpon>AdminBookings.aspx</DependentUpon>
@@ -256,12 +262,19 @@
     <Compile Include="Pages\Service_Provider\service_provider_user.aspx.designer.cs">
       <DependentUpon>service_provider_user.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Service_Provider\WebForm3.aspx.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
+    <Compile Include="Pages\Service_Provider\service_provider_user_profile.aspx.cs">
+      <DependentUpon>service_provider_user_profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Service_Provider\WebForm3.aspx.designer.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
+    <Compile Include="Pages\Service_Provider\service_provider_user_profile.aspx.designer.cs">
+      <DependentUpon>service_provider_user_profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_user_profile_new.aspx.cs">
+      <DependentUpon>service_provider_user_profile_new.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Service_Provider\service_provider_user_profile_new.aspx.designer.cs">
+      <DependentUpon>service_provider_user_profile_new.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\about_us.aspx.cs">
       <DependentUpon>about_us.aspx</DependentUpon>
@@ -352,9 +365,9 @@
   <ItemGroup>
     <Content Include="MasterPage\SignUp_Master.Master" />
     <Content Include="MasterPage\AdminMaster.Master" />
-    <None Include="packages.config" />
     <Content Include="MasterPage\service_provider_master.Master" />
     <Content Include="Web.config" />
+    <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -397,10 +410,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
 </Project>

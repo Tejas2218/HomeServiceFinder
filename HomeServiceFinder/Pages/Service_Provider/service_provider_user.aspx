@@ -45,7 +45,7 @@
                     <td>+91 9123456780</td>
                     <td>10 Nov 2025</td>
                     <td>₹ 450</td>
-                    <td><a href="WebForm3.aspx" class="btn-view">Details</a></td>
+                    <td><a href="service_provider_user_profile_new.aspx" class="btn-view">Details</a></td>
                 </tr>
             </tbody>
         </table>
