@@ -11,51 +11,50 @@
                 <div class="user-avatar">
                     <asp:Literal ID="AvatarInitials" runat="server">User</asp:Literal>
                 </div>
-                <h2><asp:Label ID="User_Name" runat="server" Text=""></asp:Label></h2>
+                <h2>
+                    <asp:Label ID="User_Name" runat="server" Text=""></asp:Label></h2>
                 <span class="status-pill completed">Verified Customer</span>
             </div>
 
             <div class="info-group">
                 <span class="info-label">Email Address</span>
-                <span class="info-value"><asp:Label ID="User_Email" runat="server"></asp:Label></span>
+                <span class="info-value">
+                    <asp:Label ID="User_Email" runat="server"></asp:Label></span>
             </div>
 
             <div class="info-group">
                 <span class="info-label">Mobile Number</span>
-                <span class="info-value"><asp:Label ID="User_Contact" runat="server"></asp:Label></span>
+                <span class="info-value">
+                    <asp:Label ID="User_Contact" runat="server"></asp:Label></span>
             </div>
 
             <div class="info-group">
                 <span class="info-label">Address</span>
                 <span class="info-value">
                     <asp:Label ID="User_Address" runat="server"></asp:Label>, 
+                   
                     <asp:Label ID="City_Name" runat="server"></asp:Label>, 
+                   
                     <asp:Label ID="State_Name" runat="server"></asp:Label>
                 </span>
             </div>
         </div>
 
         <div class="card">
-            <h3>Booking History (with you)</h3>
-            <%-- Suggestion: Use an asp:GridView or Repeater here to bind real history data --%>
-            <table class="history-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Service</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>12 Dec 2025</td>
-                        <td>Pipe Leakage Repair</td>
-                        <td>₹ 450</td>
-                        <td><span class="status-pill completed">Completed</span></td>
-                    </tr>
-                    </tbody>
-            </table>
+                <h3>Booking History (with you)</h3>
+                <asp:GridView ID="gvBookingHistory" runat="server" AutoGenerateColumns="false" CssClass="history-table" GridLines="None" EmptyDataText="No Previous Records">
+                    <Columns>
+                        <asp:BoundField DataField="Visiting_DateTime" HeaderText="Date" DataFormatString="{0:dd MMM yyyy}" />
+                        <asp:BoundField DataField="Equipment_Name" HeaderText="Service" />
+                        <asp:TemplateField HeaderText="Status">
+                            <ItemTemplate>
+                                <span class='<%# "badge bg-" + Eval("Booking_Status").ToString().ToLower() %>'>
+                                    <%# Eval("Booking_Status") %>
+                                </span>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
         </div>
     </div>
 </asp:Content>

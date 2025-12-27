@@ -21,20 +21,17 @@ namespace HomeServiceFinder.Pages.Service_Provider
             //loadData();
             if (!IsPostBack)
             {
-                loadData("Accept");
                 //pending_notification();
                 if (Session["UserID"] != null)
                 {
-                    
+                    loadData("Accept");
                 }
                 else
                 {
-                    //Response.Redirect("~/Pages/login_signup/loginPage.aspx");
+                    Response.Redirect("~/Pages/login_signup/loginPage.aspx");
                 }
             }
         }
-
-        protected void 
 
         protected void loadData(string status)
         {
@@ -45,7 +42,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                     using (SqlCommand cmd = new SqlCommand("View_Booking_Details", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@SP_ID", 7);
+                        cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
                         cmd.Parameters.AddWithValue("@Booking_Status", status);
                         SqlDataAdapter sda = new SqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
@@ -55,6 +52,38 @@ namespace HomeServiceFinder.Pages.Service_Provider
                         gvBookings.DataSource = dt;
                         gvBookings.DataBind();
                         pending_notification();
+                    }
+                    using (SqlCommand cmd = new SqlCommand("Total_Booking", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
+                        con.Open();
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            lblTotalBooking.Text = dr["Total"].ToString();
+                        }
+                        else
+                        {
+                            lblTotalBooking.Text = "Data not found";
+                        }
+                        con.Close();
+                    }
+                    using (SqlCommand cmd = new SqlCommand("Avg_Rating", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
+                        con.Open();
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            lblAvgRating.Text = dr["SP_AverageRating"].ToString();
+                        }
+                        else
+                        {
+                            lblAvgRating.Text = "Data not found";
+                        }
+                        con.Close();
                     }
                 }
             }
@@ -68,8 +97,8 @@ namespace HomeServiceFinder.Pages.Service_Provider
         protected void btnMoreInfo_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
-            string bookingID = btn.CommandArgument;
-            Response.Redirect("service_provider_user_profile_new.aspx?id="+bookingID);
+            string UserID = btn.CommandArgument;
+            Response.Redirect("service_provider_user_profile_new.aspx?id=" + UserID);
         }
 
         protected void btnAccept_Click(object sender, EventArgs e)
@@ -84,8 +113,8 @@ namespace HomeServiceFinder.Pages.Service_Provider
                     {
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Booking_ID",Booking_ID);
-                        cmd.Parameters.AddWithValue("@Booking_Status","Accept");
+                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Accept");
                         int result = cmd.ExecuteNonQuery();
                         loadData("Pending");
                     }
@@ -151,16 +180,17 @@ namespace HomeServiceFinder.Pages.Service_Provider
                     {
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@SP_ID", 7);
+                        cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
                         SqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            btnFetchPending.Text = "Pending"+ "<span id=\"spanNotification\" runat=\"server\" class=\"notification-badge\">"+ dr["noti"].ToString() + "</span>";
-
+                            btnFetchPending.Text = "Pending" + "<span id=\"spanNotification\" runat=\"server\" class=\"notification-badge\">" + dr["noti"].ToString() + "</span>";
+                            lblPendingTask.Text = dr["noti"].ToString();
                         }
                         else
                         {
                             btnFetchPending.Text = "Data not found";
+                            lblPendingTask.Text = "Data not found";
                         }
                     }
                 }

@@ -4,50 +4,36 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="search-bar">
-        <input type="text" placeholder="Search by name or email..." />
-        <button type="button" class="btn-view" style="background: var(--dark); color: white;">Search</button>
+        <asp:TextBox ID="txtSearch" runat="server" placeholder="Search by name or email..."
+            CssClass="form-control" AutoPostBack="true" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
     </div>
 
     <div class="customer-table-card">
-        <table>
-            <thead>
-                <tr>
-                    <th>Customer</th>
-                    <th>Email</th>
-                    <th>Contact</th>
-                    <th>Last Service</th>
-                    <th>Total Spent</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
+        <asp:GridView ID="gvCustomers" runat="server" AutoGenerateColumns="false"
+            CssClass="table" GridLines="None" DataKeyNames="User_ID" EmptyDataText="No customers found">
+            <Columns>
+                <%-- Customer Column with Avatar --%>
+                <asp:TemplateField HeaderText="Customer">
+                    <ItemTemplate>
                         <div style="display: flex; align-items: center;">
-                            <div class="avatar-circle">RP</div>
-                            <b>Rahul Patel</b>
+                            <b><%# Eval("User_Name") %></b>
                         </div>
-                    </td>
-                    <td>rahul@gmail.com</td>
-                    <td>+91 9876543210</td>
-                    <td>12 Dec 2025</td>
-                    <td>₹ 1,200</td>
-                    <td><a href="WebForm3.aspx" class="btn-view">Details</a></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div style="display: flex; align-items: center;">
-                            <div class="avatar-circle">AS</div>
-                            <b>Anita Shah</b>
-                        </div>
-                    </td>
-                    <td>anita@gmail.com</td>
-                    <td>+91 9123456780</td>
-                    <td>10 Nov 2025</td>
-                    <td>₹ 450</td>
-                    <td><a href="service_provider_user_profile_new.aspx" class="btn-view">Details</a></td>
-                </tr>
-            </tbody>
-        </table>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <%-- Simple Text Columns --%>
+                <asp:BoundField DataField="User_EmailID" HeaderText="Email" />
+                <asp:BoundField DataField="User_ContactNo" HeaderText="Contact" />
+
+                <%-- Action Column --%>
+                <asp:TemplateField HeaderText="Action">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnDetails" runat="server" CssClass="btn-view"
+                            OnClick="btnDetails_Click"
+                            CommandArgument='<%# Eval("User_ID") %>'>Details</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
     </div>
 </asp:Content>

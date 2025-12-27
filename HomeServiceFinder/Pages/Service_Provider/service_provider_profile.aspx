@@ -66,15 +66,15 @@
     <div class="stats-grid">
         <div class="stat-card" style="border-left-color: var(--success);">
             <h3>Profile Status</h3>
-            <h2 style="color: var(--success);">Verified</h2>
+            <h2 style="color: var(--success);"><asp:Literal ID="litStatus" runat="server" Text="Verified" /></h2>
         </div>
         <div class="stat-card">
             <h3>Member Since</h3>
-            <h2>Jan 2025</h2>
+            <h2><asp:Literal ID="litMemberSince" runat="server" /></h2>
         </div>
         <div class="stat-card">
             <h3>Completed Jobs</h3>
-            <h2>115</h2>
+            <h2><asp:Literal ID="litCompletedJobs" runat="server" /></h2>
         </div>
     </div>
 
@@ -82,14 +82,15 @@
         <div class="section-box">
             <div class="profile-upload">
                 <div class="profile-img-container">
-                    <span style="font-size: 50px; color: #ccc;">👤</span>
+                    <asp:Image ID="imgProfile" runat="server" ImageUrl="~/Images/default-user.png" AlternateText="Profile" />
                 </div>
-                <button type="button" class="btn btn-outline" style="width: 100%;">Change Photo</button>
+                <asp:FileUpload ID="fuProfilePic" runat="server" CssClass="form-control" style="margin-bottom:10px;" />
+                <asp:Button ID="btnUpload" runat="server" Text="Change Photo" CssClass="btn btn-outline" style="width: 100%;" />
                 <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;" />
                 <div class="info-group" style="text-align: left;">
                     <label style="font-weight: bold; font-size: 13px; color: var(--secondary);">AVAILABILITY</label>
                     <div style="margin-top: 5px;">
-                        <span class="badge bg-active">Currently Active</span>
+                        <asp:CheckBox ID="chkActive" runat="server" Text=" &nbsp; Currently Active" CssClass="badge bg-active" AutoPostBack="true" />
                     </div>
                 </div>
             </div>
@@ -103,49 +104,49 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" class="form-control" value="Suresh Prajapati" />
+                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" />
                 </div>
                 <div class="form-group">
                     <label>Service Category</label>
-                    <select class="form-control">
-                        <option>Electrician</option>
-                        <option>Plumber</option>
-                        <option>Carpenter</option>
-                        <option>Cleaning</option>
-                    </select>
+                    <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control">
+                        <asp:ListItem>Electrician</asp:ListItem>
+                        <asp:ListItem>Plumber</asp:ListItem>
+                        <asp:ListItem>Carpenter</asp:ListItem>
+                        <asp:ListItem>Cleaning</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label>Email ID</label>
-                    <input type="email" class="form-control" value="suresh.electric@gmail.com" />
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" />
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="text" class="form-control" value="+91 98980 12345" />
+                    <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Business Address</label>
-                <textarea class="form-control" rows="3">Shop No. 12, Orbit Mall, Rajkot, Gujarat</textarea>
+                <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" />
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label>Base Visit Charges (₹)</label>
-                    <input type="number" class="form-control" value="250" />
+                    <asp:TextBox ID="txtCharges" runat="server" CssClass="form-control" TextMode="Number" />
                 </div>
                 <div class="form-group">
                     <label>Experience (Years)</label>
-                    <input type="number" class="form-control" value="8" />
+                    <asp:TextBox ID="txtExp" runat="server" CssClass="form-control" TextMode="Number" />
                 </div>
             </div>
 
             <div class="save-banner">
                 <span>Keep your profile updated to get more bookings!</span>
-                <button type="button" class="btn btn-primary">Update Profile</button>
+                <asp:Button ID="btnUpdate" runat="server" Text="Update Profile" CssClass="btn btn-primary"  />
             </div>
         </div>
     </div>

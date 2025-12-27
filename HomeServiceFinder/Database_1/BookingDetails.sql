@@ -47,9 +47,31 @@ create or alter proc View_Booking_Details
 @Booking_Status varchar(10)
 as 
 begin 
-	select * from BookingDetails as BD inner join UserDetails as UD on BD.User_ID=UD.User_ID 
-	inner join EquipmentMaster as EM on BD.Equipment_ID = EM.Equipment_ID 
-	where BD.SP_ID=@SP_ID and BD.Booking_Status=@Booking_Status and BD.Visiting_DateTime > GetDate() --- reexecute
+	if(@Booking_Status = 'none')
+	Begin
+		select * from BookingDetails as BD inner join UserDetails as UD on BD.User_ID=UD.User_ID 
+			inner join EquipmentMaster as EM on BD.Equipment_ID = EM.Equipment_ID 
+			where BD.SP_ID=@SP_ID
+	end
+	else if(@Booking_Status = 'Accepted')
+	begin
+		select * from BookingDetails as BD inner join UserDetails as UD on BD.User_ID=UD.User_ID 
+			inner join EquipmentMaster as EM on BD.Equipment_ID = EM.Equipment_ID 
+			where BD.SP_ID=@SP_ID and BD.Booking_Status='Accept'
+	end
+	else if (@Booking_Status = 'Declined')
+	begin
+		select * from BookingDetails as BD inner join UserDetails as UD on BD.User_ID=UD.User_ID 
+			inner join EquipmentMaster as EM on BD.Equipment_ID = EM.Equipment_ID 
+			where BD.SP_ID=@SP_ID and BD.Booking_Status='Decline'
+	end
+	else
+	begin
+		select * from BookingDetails as BD inner join UserDetails as UD on BD.User_ID=UD.User_ID 
+			inner join EquipmentMaster as EM on BD.Equipment_ID = EM.Equipment_ID 
+			where BD.SP_ID=@SP_ID and BD.Booking_Status=@Booking_Status and BD.Visiting_DateTime > GetDate() --- reexecute
+	end
+	
 end
 
 
@@ -89,3 +111,58 @@ as
 begin
 	Select SP_AverageRating from ServiceProviderDetails where SP_ID = @SP_ID
 end
+
+------------User Booking Records
+create or alter proc User_Booking_Records
+@User_ID int
+as 
+begin
+	select * from BookingDetails as BD inner join EquipmentMaster as EM on BD.Equipment_ID = EM.Equipment_ID where BD.User_ID = @User_ID 
+end
+
+----------service provider's customers fetch
+CREATE or alter PROCEDURE Get_Unique_Customers_By_SP
+    @SP_ID INT,
+	@search varchar(20) = 'none'
+AS
+BEGIN
+    if(@search = 'none')
+	Begin
+		SELECT
+		U.User_ID, 
+        U.User_Name,
+        U.User_EmailID,
+        U.User_ContactNo 
+    FROM BookingDetails B
+    INNER JOIN UserDetails U ON B.User_ID = U.User_ID
+    INNER JOIN EquipmentMaster E ON B.Equipment_ID = E.Equipment_ID
+    WHERE B.SP_ID = @SP_ID 
+      AND B.Booking_Status = 'Accept' -- Only count customers you actually served
+    GROUP BY 
+        U.User_ID, 
+        U.User_Name, 
+        U.User_EmailID, 
+        U.User_ContactNo
+	end
+	else
+	Begin
+		SELECT
+		U.User_ID, 
+        U.User_Name,
+        U.User_EmailID,
+        U.User_ContactNo 
+		FROM BookingDetails B
+		INNER JOIN UserDetails U ON B.User_ID = U.User_ID
+		INNER JOIN EquipmentMaster E ON B.Equipment_ID = E.Equipment_ID
+		WHERE B.SP_ID = @SP_ID 
+		  AND B.Booking_Status = 'Accept' and (u.User_Name=@search or u.User_EmailID=@search) -- Only count customers you actually served
+		GROUP BY 
+			U.User_ID, 
+			U.User_Name, 
+			U.User_EmailID, 
+			U.User_ContactNo
+	End
+END
+
+
+
