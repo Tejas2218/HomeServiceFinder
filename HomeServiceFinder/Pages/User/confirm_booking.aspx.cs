@@ -17,10 +17,10 @@ namespace HomeServiceFinder.Pages.User
                 // In a real app, you would query the Database using the Booking ID.
 
                 lblBookingID.Text = Request.QueryString["id"] ?? "APX-" + new Random().Next(1000, 9999);
-                lblProvider.Text = Request.QueryString["provider"] ?? "Rajesh Kumar";
-                lblDate.Text = DateTime.Now.AddDays(1).ToString("dd MMM yyyy"); // Dummy date
-                lblTime.Text = "10:00 AM";
-                lblAmount.Text = "₹ 499.00";
+                lblProvider.Text = Request.QueryString["provider"] ?? "xxxxx";
+                lblDate.Text = Request.QueryString["date"]; // Dummy date 
+                lblTime.Text = Request.QueryString["date"];
+                lblAmount.Text = Request.QueryString["amount"];
             }
         }
     }

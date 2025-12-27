@@ -139,78 +139,50 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><strong>#BK-2023001</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="btn-square bg-light rounded-circle me-2">
-                                                        <i class="fa fa-paint-roller text-primary"></i>
-                                                    </div>
-                                                    <span>Wall Painting</span>
-                                                </div>
-                                            </td>
-                                            <td>24 Oct 2023, 10:00 AM</td>
-                                            <td>$150.00</td>
-                                            <td><span class="status-badge status-pending">Pending</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-outline-danger">Cancel</button>
-                                            </td>
-                                        </tr>
+                                        <asp:Repeater ID="rptBookings" runat="server">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td>
+                                                        <strong>#BK-<%# Eval("Booking_ID") %></strong>
+                                                    </td>
 
-                                        <tr>
-                                            <td><strong>#BK-2023002</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="btn-square bg-light rounded-circle me-2">
-                                                        <i class="fa fa-wrench text-primary"></i>
-                                                    </div>
-                                                    <span>Plumbing Service</span>
-                                                </div>
-                                            </td>
-                                            <td>15 Sep 2023, 02:30 PM</td>
-                                            <td>$80.00</td>
-                                            <td><span class="status-badge status-completed">Completed</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-outline-primary">Invoice</button>
-                                            </td>
-                                        </tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="btn-square bg-light rounded-circle me-2">
+                                                                <i class="fa fa-tools text-primary"></i>
+                                                            </div>
+                                                            <span>Service ID: <%# Eval("Equipment_ID") %></span>
+                                                        </div>
+                                                    </td>
 
-                                        <tr>
-                                            <td><strong>#BK-2023003</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="btn-square bg-light rounded-circle me-2">
-                                                        <i class="fa fa-bolt text-primary"></i>
-                                                    </div>
-                                                    <span>Electrical Repair</span>
-                                                </div>
-                                            </td>
-                                            <td>10 Aug 2023, 11:00 AM</td>
-                                            <td>$120.00</td>
-                                            <td><span class="status-badge status-cancelled">Cancelled</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-primary">Rebook</button>
-                                            </td>
-                                        </tr>
+                                                    <td>
+                                                        <%# Convert.ToDateTime(Eval("Visiting_DateTime")).ToString("dd MMM yyyy") %>,
+                    <%# Eval("Time_Slot") %>
+                                                    </td>
 
-                                        <tr>
-                                            <td><strong>#BK-2023004</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="btn-square bg-light rounded-circle me-2">
-                                                        <i class="fa fa-tools text-primary"></i>
-                                                    </div>
-                                                    <span>Furniture Assembly</span>
-                                                </div>
-                                            </td>
-                                            <td>01 Aug 2023, 09:00 AM</td>
-                                            <td>$200.00</td>
-                                            <td><span class="status-badge status-completed">Completed</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-outline-primary">Invoice</button>
-                                            </td>
-                                        </tr>
+                                                    <td>₹ --</td>
+
+                                                    <td>
+                                                        <span class='status-badge <%# Eval("StatusClass") %>'>
+                                                            <%# Eval("Booking_Status") %>
+                                                        </span>
+                                                    </td>
+
+                                                    <td>
+                                                        <asp:Button
+                                                            ID="btnAction"
+                                                            runat="server"
+                                                            Text='<%# Eval("ActionText") %>'
+                                                            CssClass='<%# Eval("ActionClass") %>'
+                                                            CommandArgument='<%# Eval("Booking_ID") %>'
+                                                            OnCommand="BookingAction_Command" />
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <asp:Label ID="lblMessage" runat="server"></asp:Label>
                                     </tbody>
+
                                 </table>
                             </div>
 

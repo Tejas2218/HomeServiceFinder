@@ -54,6 +54,7 @@ namespace HomeServiceFinder.login_signup
                     {
                         Session["UserID"] = dr["User_ID"].ToString();
                         Session["UserRole"] = dr["User_Role"].ToString();
+                        Session["UserEmail"] = username.ToString();
                         
 
                         lblMessage.CssClass = "success-msg";
