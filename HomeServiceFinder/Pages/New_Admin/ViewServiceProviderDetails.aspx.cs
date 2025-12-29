@@ -21,10 +21,20 @@ namespace HomeServiceFinder.Pages.New_Admin
                 ViewState["UserId"] = userId;
                 LoadUserData(userId);
 
-                if (SP_Status.Text == "Pending" || SP_Status.Text == "Rejected")
+                if (SP_Status.Text == "Pending" )
                 {
                     btnApprove.Visible = true;
                     btnReject.Visible = true;
+                }
+                else if(SP_Status.Text== "Approved")
+                {
+                    btnApprove.Visible = false;
+                    btnReject.Visible = true;
+                }
+                else
+                {
+                    btnApprove.Visible = true;
+                    btnReject.Visible = false;
                 }
             }
         }
@@ -108,7 +118,6 @@ namespace HomeServiceFinder.Pages.New_Admin
             btnApprove.Visible = false;
             btnReject.Visible = true;
             Response.Redirect("ServiceProvider.aspx");
-
         }
 
         protected void btnReject_Click(object sender, EventArgs e)
@@ -140,7 +149,7 @@ namespace HomeServiceFinder.Pages.New_Admin
                 }
                 btnReject.Visible = false;
                 btnApprove.Visible = true;
-                //Response.Redirect("ServiceProvider.aspx");
+                Response.Redirect("ServiceProvider.aspx");
             }
             
         }
