@@ -106,35 +106,43 @@ namespace HomeServiceFinder.Pages.New_Admin
                 }
             }
             btnApprove.Visible = false;
+            btnReject.Visible = true;
+            Response.Redirect("ServiceProvider.aspx");
 
         }
 
         protected void btnReject_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(ViewState["UserId"]);
-            using (SqlConnection con = new SqlConnection(connString))
+            if (SP_Status.Text != "Rejected")
             {
-                SqlCommand cmd = new SqlCommand("Update_Worker_Status", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@SP_ID", ViewState["UserId"]);
-                cmd.Parameters.AddWithValue("@SP_Status", "Rejected");
-
-                con.Open();
-                cmd.ExecuteNonQuery();
-                LoadUserData(id);
-
-                SqlCommand cmdn = new SqlCommand("Display_Worker_Details_ByID", con);
-                cmdn.CommandType = CommandType.StoredProcedure;
-                cmdn.Parameters.AddWithValue("@SP_ID", id);
-
-                SqlDataReader dr = cmdn.ExecuteReader();
-
-                if (dr.Read())
+                using (SqlConnection con = new SqlConnection(connString))
                 {
-                    SendEmail(id, "Rejected", dr["User_Name"].ToString(), dr["User_EmailID"].ToString());
+                    SqlCommand cmd = new SqlCommand("Update_Worker_Status", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@SP_ID", ViewState["UserId"]);
+                    cmd.Parameters.AddWithValue("@SP_Status", "Rejected");
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    LoadUserData(id);
+
+                    SqlCommand cmdn = new SqlCommand("Display_Worker_Details_ByID", con);
+                    cmdn.CommandType = CommandType.StoredProcedure;
+                    cmdn.Parameters.AddWithValue("@SP_ID", id);
+
+                    SqlDataReader dr = cmdn.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        SendEmail(id, "Rejected", dr["User_Name"].ToString(), dr["User_EmailID"].ToString());
+                    }
                 }
+                btnReject.Visible = false;
+                btnApprove.Visible = true;
+                //Response.Redirect("ServiceProvider.aspx");
             }
-            btnApprove.Visible = true;
+            
         }
 
         void SendEmail(int id, string msg, string name, string email)
