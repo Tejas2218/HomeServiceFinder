@@ -19,28 +19,33 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
             if (!IsPostBack)
             {
-                //if (Session["UserID"] != null && Request.QueryString["id"] != null)
-                if (Request.QueryString["id"] != null)
+                if (Session["UserID"] != null && Request.QueryString["id"] != null)
+                //if (Request.QueryString["id"] != null)
                 {
                     int userID = Convert.ToInt32(Request.QueryString["id"]);
                     ViewState["UserID"] = userID;
                     LoadUserData();
                     LoadBookingHistory();
-                }
-                //Console.WriteLine(Session["UserID"] + Request.QueryString["id"]);
-                string previousPageName = Path.GetFileName(Request.UrlReferrer.AbsolutePath).ToLower();
-                if (previousPageName.Contains("service_provider_booking.aspx"))
-                {
-                    hfwebpage.Value= previousPageName;
-                }
-                else if(previousPageName.Contains("service_provider_Booking_History.aspx"))
-                {
-                    hfwebpage.Value = previousPageName;
+                    string previousPageName = Path.GetFileName(Request.UrlReferrer.AbsolutePath).ToLower();
+                    if (previousPageName.Contains("service_provider_booking.aspx"))
+                    {
+                        hfwebpage.Value = previousPageName;
+                    }
+                    else if (previousPageName.Contains("service_provider_Booking_History.aspx"))
+                    {
+                        hfwebpage.Value = previousPageName;
+                    }
+                    else
+                    {
+                        hfwebpage.Value = previousPageName;
+                    }
                 }
                 else
                 {
-                    hfwebpage.Value = previousPageName;
+                    Response.Redirect("~/Pages/login_signup/loginPage.aspx");
                 }
+                    //Console.WriteLine(Session["UserID"] + Request.QueryString["id"]);
+                    
             }
         }
 

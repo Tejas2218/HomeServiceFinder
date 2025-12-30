@@ -17,15 +17,14 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
             if (!IsPostBack)
             {
-                loadData("none");
                 //pending_notification();
                 if (Session["UserID"] != null)
                 {
-                    
+                    loadData("none");
                 }
                 else
                 {
-                    //Response.Redirect("~/Pages/login_signup/loginPage.aspx");
+                    Response.Redirect("~/Pages/login_signup/loginPage.aspx");
                 }
             }
         }
@@ -37,8 +36,8 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@SP_ID", 7);
-                    //cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
-                    cmd.Parameters.AddWithValue("@Booking_Status", status);
+                    cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
+                    //cmd.Parameters.AddWithValue("@Booking_Status", status);
                     SqlDataAdapter sda = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     sda.Fill(dt);
