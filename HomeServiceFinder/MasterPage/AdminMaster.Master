@@ -258,6 +258,8 @@
             background: #fff;
             border-radius: 12px;
             overflow: hidden;
+            user-select: none;
+            cursor: default;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 

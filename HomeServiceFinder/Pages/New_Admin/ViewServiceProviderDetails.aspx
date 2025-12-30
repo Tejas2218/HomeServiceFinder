@@ -157,8 +157,8 @@
                     runat="server"
                     OnClick="btnApprove_Click"
                     Text="✔ Approve Provider"
-                    CssClass="btn btn-approve" 
-                    OnClientClick="return confirm('Are you sure you want to accept this provider?');"/>
+                    CssClass="btn btn-approve"
+                    OnClientClick="confirmaAction()" />
 
                 <asp:Button
                     ID="btnReject"
@@ -166,12 +166,50 @@
                     OnClick="btnReject_Click"
                     Text="✖ Reject Provider"
                     CssClass="btn btn-reject"
-                    OnClientClick="return confirm('Are you sure you want to reject this provider?');" />
+                    OnClientClick="confirmaAction()" />
             </div>
 
         </div>
 
+        <script>
+            function confirmAction(button, titleText) {
+                if (button.dataset.confirmed === "true") {
+                    return true;
+                }
 
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#198754',
+                    cancelButtonColor: '#dc3545',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Your file has been deleted.',
+                            icon: 'success',
+                            confirmButtonColor: '#198754'
+                        }).then(() => {
+                            button.dataset.confirmed = "true";
+                            button.click();
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire({
+                            title: 'Cancelled',
+                            text: 'Your imaginary file is safe :)',
+                            icon: 'error',
+                            confirmButtonColor: '#198754'
+                        });
+                    }
+                });
+                return false;
+            }
+        </script>
     </div>
 
 </asp:Content>
