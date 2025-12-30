@@ -2,7 +2,7 @@
 use Home_Service_Finder
 
 --Insert Booking Detail--
-alter proc Insert_Booking_Details
+create or alter proc Insert_Booking_Details
 @Booking_Status varchar(50),
 @User_ID int,
 @SP_ID int,
@@ -22,7 +22,9 @@ select * from ServiceProviderDetails
 select * from EquipmentMaster
 
 insert into BookingDetails(Booking_Status,User_ID,SP_ID,Booking_Rating,Booking_Decline_Reason,Equipment_ID,Time_Slot,Visiting_DateTime)
-	values('Pending',14,7,4,null,1,'4-5',GETDATE())
+values('Pending',14,7,4,null,1,'4-5',GETDATE())
+
+Insert_Booking_Details 'Pending',14,7,4;
 
 --Update Booking Detail--
 create proc Update_Booking_Details
@@ -96,7 +98,7 @@ Begin
 	Select Count(*) as noti from BookingDetails where SP_ID = @SP_ID  and Booking_Status = 'Pending'; 
 end
 
------------------Total booking
+-----------------Total booking Accept
 create or alter proc Total_Booking
 @SP_ID int 
 as 
@@ -163,6 +165,4 @@ BEGIN
 			U.User_ContactNo
 	End
 END
-
-
 

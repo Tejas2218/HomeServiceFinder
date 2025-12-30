@@ -109,6 +109,16 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
+                <asp:TemplateField HeaderText="Status">
+                    <ItemTemplate>
+                        <span class='<%# GetStatusClass(Eval("SP_Status").ToString()) %>'>
+                            <%# Eval("SP_Status") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+
+
                 <asp:TemplateField HeaderText="Action">
                     <ItemTemplate>
                         <div class="action-buttons">
@@ -121,7 +131,7 @@
                                 CommandArgument='<%# Eval("SP_ID") %>'
                                 CausesValidation="false" />
 
-                            
+
                             <asp:Button
                                 ID="btnRemove"
                                 runat="server"

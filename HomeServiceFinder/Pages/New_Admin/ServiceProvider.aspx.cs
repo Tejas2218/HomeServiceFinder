@@ -39,6 +39,18 @@ namespace HomeServiceFinder.Pages.New_Admin
                 UserGrid.DataBind();
             }
         }
+        protected string GetStatusClass(string status)
+        {
+            status = status.Trim();
+
+            if (status == "Approved")
+                return "status-badge approved";
+            else if (status == "Rejected")
+                return "status-badge rejected";
+            else
+                return "status-badge pending";
+        }
+
 
         // 🔹 COUNT TOTAL USERS
         protected void CountUser()
@@ -68,12 +80,7 @@ namespace HomeServiceFinder.Pages.New_Admin
                 int userId = Convert.ToInt32(e.CommandArgument);
                 Response.Redirect("~/Pages/New_Admin/ViewServiceProviderDetails.aspx?id=" + userId);
             }
-            if (e.CommandName == "EditUser")
-            {
-                int userId = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("~/Pages/New_Admin/AddServiceProvider.aspx?id=" + userId);
-            }
-
+          
             if (e.CommandName == "DeleteUser")
             {
                 int userId = Convert.ToInt32(e.CommandArgument);

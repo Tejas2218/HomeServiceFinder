@@ -18,7 +18,15 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
             if (!IsPostBack)
             {
-                BindCustomerGrid(null);
+                if (Session["UserID"] != null)
+                {
+                    BindCustomerGrid(null);
+                }
+                else
+                {
+                    Response.Redirect("~/Pages/login_signup/loginPage.aspx");
+                }
+                
             }
 
         }
@@ -36,7 +44,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                     {
                         cmd.Parameters.AddWithValue("@search",search);
                     }
-                    //cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
+                    cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
                     SqlDataAdapter sda = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     sda.Fill(dt);

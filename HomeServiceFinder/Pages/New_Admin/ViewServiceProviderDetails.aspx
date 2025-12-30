@@ -155,10 +155,10 @@
                 <asp:Button
                     ID="btnApprove"
                     runat="server"
-                    Visible="false"
                     OnClick="btnApprove_Click"
                     Text="✔ Approve Provider"
-                    CssClass="btn btn-approve" />
+                    CssClass="btn btn-approve" 
+                    OnClientClick="return confirm('Are you sure you want to accept this provider?');"/>
 
                 <asp:Button
                     ID="btnReject"
