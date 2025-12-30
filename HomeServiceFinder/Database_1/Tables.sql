@@ -1,5 +1,5 @@
 use Home_Service_Finder
-
+create database Home_Service_Finder
 --All Tables--
 create table StateDetails(
 	State_ID int primary key identity(1,1),

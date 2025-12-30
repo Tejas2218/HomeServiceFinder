@@ -1,24 +1,45 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/SignUp_Master.Master"
-    AutoEventWireup="true" CodeBehind="User_SignUp.aspx.cs"
+﻿<%@ Page Title="User Sign Up" Language="C#" MasterPageFile="~/MasterPage/SignUp_Master.Master" 
+    AutoEventWireup="true" CodeBehind="User_SignUp.aspx.cs" 
     Inherits="HomeServiceFinder.Pages.login_signup.User_SignUp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
+        /* 1. Background Setup - Necessary for Glass effect to be visible */
+        body {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 2. The Glass Container */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            max-width: 650px;
+            width: 100%;
+            margin: 20px;
+        }
+
         .form-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 2px 20px;
+            gap: 15px 20px;
             text-align: left;
-            margin-top: 5px;
         }
 
         .grid-item {
             flex: 1 1 calc(50% - 25px);
             min-width: 250px;
-            margin-bottom: 3px;
         }
 
         .full-row {
@@ -26,78 +47,100 @@
         }
 
         .field-label {
-            font-weight: 600;
-            font-size: 12px;
-            color: #444;
-            margin-bottom: 2px;
+            font-weight: 500;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 6px;
             display: block;
+            margin-left: 5px;
         }
 
         .input-row {
             position: relative;
         }
 
+        /* 3. Glass Input Styling */
         .textbox {
             width: 100%;
-            padding: 6px 12px 6px 40px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background: #fcfcfc;
+            padding: 10px 12px 10px 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
             box-sizing: border-box;
-            font-size: 13px;
-            height: 34px;
-            transition: border-color 0.3s;
+            font-size: 14px;
+            height: 42px;
+            transition: all 0.3s ease;
         }
 
-            /* Orange Focus Effect */
-            .textbox:focus {
-                border-color: #FF8C00 !important;
-                outline: none;
-                box-shadow: 0 0 5px rgba(255, 140, 0, 0.2);
-            }
+        .textbox::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
 
+        .textbox:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #FF8C00 !important;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+        }
+
+        /* Dropdown specific styling */
         select.textbox {
             padding-left: 10px !important;
-            height: 34px !important;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 1em;
+        }
+
+        select.textbox option {
+            background: #4b3d8a; /* Dark background for dropdown options */
+            color: #fff;
         }
 
         .input-icon {
             position: absolute;
-            left: 12px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            width: 14px;
+            width: 16px;
+            filter: brightness(0) invert(1); /* Makes icons white */
             opacity: 0.8;
+            z-index: 2;
         }
 
         .validation-error {
-            color: #e74c3c;
-            font-size: 10px;
-            margin-top: 0px;
+            color: #ff6b6b;
+            font-size: 11px;
+            margin-top: 4px;
             display: block;
+            font-weight: 600;
         }
 
-        /* 5. Orange Button Optimization */
+        /* 4. Glass Button Styling */
         .signup-btn {
             width: 100%;
-            background: #FF8C00; /* Solid Orange */
+            background: #FF8C00;
             color: #fff;
             font-weight: bold;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 25px;
+            border-radius: 12px;
             cursor: pointer;
-            margin-top: 12px;
-            font-size: 15px;
+            margin-top: 20px;
+            font-size: 16px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
-            transition: background 0.3s ease;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+            transition: all 0.3s ease;
         }
 
-            .signup-btn:hover {
-                background: #E67E00; /* Slightly darker orange */
-            }
+        .signup-btn:hover {
+            background: #E67E00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
+        }
 
         #togglePwd, #toggleCPwd {
             position: absolute;
@@ -105,110 +148,100 @@
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            font-size: 13px;
-            color: #888;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
         }
     </style>
 </asp:Content>
 
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="form-grid">
-
-        <!-- Name -->
-        <div class="grid-item full-row">
-            <label class="field-label">Full Name</label>
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" ID="User_Name_Icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Name_Icon.png" />
-                <asp:TextBox ID="User_Name_TextBox" runat="server" CssClass="textbox" placeholder="Enter Your Name"></asp:TextBox>
+    <div class="glass-container">
+        <h2 style="color: white; text-align: center; margin-bottom: 25px; font-weight: 300; letter-spacing: 2px;">USER SIGN UP</h2>
+        
+        <div class="form-grid">
+            <div class="grid-item full-row">
+                <label class="field-label">Full Name</label>
+                <div class="input-row">
+                    <asp:Image CssClass="input-icon" ID="User_Name_Icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Name_Icon.png" />
+                    <asp:TextBox ID="User_Name_TextBox" runat="server" CssClass="textbox" placeholder="Enter Your Name"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="User_Name_TextBox" CssClass="validation-error" ErrorMessage="Name is required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+                <asp:RegularExpressionValidator ControlToValidate="User_Name_TextBox" CssClass="validation-error" ErrorMessage="Only letters allowed" ValidationExpression="^[a-zA-Z\s]+$" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="User_Name_TextBox" CssClass="validation-error" ErrorMessage="Name is required" ValidationGroup="signup" Display="Dynamic" runat="server" />
-            <asp:RegularExpressionValidator ControlToValidate="User_Name_TextBox" CssClass="validation-error" ErrorMessage="Only letters allowed" ValidationExpression="^[a-zA-Z\s]+$" ValidationGroup="signup" Display="Dynamic" runat="server" />
-        </div>
 
-        <!-- Email -->
-        <div class="grid-item full-row">
-            <label class="field-label">Email Address</label>
-            <div class="input-row">
-                <asp:Image CssClass="input-icon" ID="User_Email_Icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Email_Icon.png" />
-                <asp:TextBox ID="User_Email_TextBox" runat="server" CssClass="textbox" TextMode="Email" placeholder="jane@example.com"></asp:TextBox>
+            <div class="grid-item full-row">
+                <label class="field-label">Email Address</label>
+                <div class="input-row">
+                    <asp:Image CssClass="input-icon" ID="User_Email_Icon" runat="server" ImageUrl="~/Assests/Login_SignUp/User_Email_Icon.png" />
+                    <asp:TextBox ID="User_Email_TextBox" runat="server" CssClass="textbox" TextMode="Email" placeholder="jane@example.com"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="User_Email_TextBox" CssClass="validation-error" ErrorMessage="Email is required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+                <asp:RegularExpressionValidator ControlToValidate="User_Email_TextBox" CssClass="validation-error" ErrorMessage="Invalid email format" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="User_Email_TextBox" CssClass="validation-error" ErrorMessage="Email is required" ValidationGroup="signup" Display="Dynamic" runat="server" />
-            <asp:RegularExpressionValidator ControlToValidate="User_Email_TextBox" CssClass="validation-error" ErrorMessage="Invalid email format" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="signup" Display="Dynamic" runat="server" />
-        </div>
 
-        <!-- State -->
-        <div class="grid-item">
-            <label class="field-label">State</label>
-            <div class="input-row">
-                <asp:DropDownList ID="StateList" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="BindCityList" Style="padding-left: 15px;">
-                    <asp:ListItem Text="Select State" Value=""></asp:ListItem>
-                </asp:DropDownList>
+            <div class="grid-item">
+                <label class="field-label">State</label>
+                <div class="input-row">
+                    <asp:DropDownList ID="StateList" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="BindCityList">
+                        <asp:ListItem Text="Select State" Value=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="StateList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a state" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="StateList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a state" ValidationGroup="signup" Display="Dynamic" runat="server" />
-        </div>
 
-        <!-- City -->
-        <div class="grid-item">
-            <label class="field-label">City</label>
-            <div class="input-row">
-                <asp:DropDownList ID="CityList" runat="server" CssClass="textbox" Style="padding-left: 15px;">
-                    <asp:ListItem Text="Select City" Value=""></asp:ListItem>
-                </asp:DropDownList>
+            <div class="grid-item">
+                <label class="field-label">City</label>
+                <div class="input-row">
+                    <asp:DropDownList ID="CityList" runat="server" CssClass="textbox">
+                        <asp:ListItem Text="Select City" Value=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="CityList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a city" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="CityList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a city" ValidationGroup="signup" Display="Dynamic" runat="server" />
-        </div>
 
-        <!-- Phone -->
-        <div class="grid-item">
-            <label class="field-label">Phone Number</label>
-            <div class="input-row">
-                <asp:TextBox ID="User_Contact_TextBox" runat="server" CssClass="textbox" placeholder="10-digit number" Style="padding-left: 15px;"></asp:TextBox>
+            <div class="grid-item">
+                <label class="field-label">Phone Number</label>
+                <div class="input-row">
+                    <asp:TextBox ID="User_Contact_TextBox" runat="server" CssClass="textbox" placeholder="10-digit number" Style="padding-left: 15px;"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="User_Contact_TextBox" CssClass="validation-error" ErrorMessage="Phone required" ValidationGroup="signup" Display="Dynamic" runat="server" />
+                <asp:RegularExpressionValidator ControlToValidate="User_Contact_TextBox" CssClass="validation-error" ErrorMessage="Enter 10 digits" ValidationExpression="^[0-9]{10}$" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="User_Contact_TextBox" CssClass="validation-error" ErrorMessage="Phone required" ValidationGroup="signup" Display="Dynamic" runat="server" />
-            <asp:RegularExpressionValidator ControlToValidate="User_Contact_TextBox" CssClass="validation-error" ErrorMessage="Enter 10 digits" ValidationExpression="^[0-9]{10}$" ValidationGroup="signup" Display="Dynamic" runat="server" />
-        </div>
 
-        <!-- Address -->
-        <div class="grid-item">
-            <label class="field-label">Address</label>
-            <div class="input-row">
-                <asp:TextBox ID="User_Address_TextBox" runat="server" CssClass="textbox" placeholder="Street Address" Style="padding-left: 15px;"></asp:TextBox>
+            <div class="grid-item">
+                <label class="field-label">Address</label>
+                <div class="input-row">
+                    <asp:TextBox ID="User_Address_TextBox" runat="server" CssClass="textbox" placeholder="Street Address" Style="padding-left: 15px;"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="User_Address_TextBox" CssClass="validation-error" ErrorMessage="Address required" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="User_Address_TextBox" CssClass="validation-error" ErrorMessage="Address required" ValidationGroup="signup" Display="Dynamic" runat="server" />
-        </div>
 
-        <!-- Password -->
-        <div class="grid-item">
-            <label class="field-label">Password</label>
-            <div class="input-row">
-                <asp:TextBox ID="User_Password_TextBox" runat="server" CssClass="textbox" TextMode="Password" placeholder="........" Style="padding-left: 15px;"></asp:TextBox>
-                <i id="togglePwd" class="fa-solid fa-eye"></i>
+            <div class="grid-item">
+                <label class="field-label">Password</label>
+                <div class="input-row">
+                    <asp:TextBox ID="User_Password_TextBox" runat="server" CssClass="textbox" TextMode="Password" placeholder="........" Style="padding-left: 15px;"></asp:TextBox>
+                    <i id="togglePwd" class="fa-solid fa-eye"></i>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="User_Password_TextBox" CssClass="validation-error" ErrorMessage="Password required" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="User_Password_TextBox" CssClass="validation-error" ErrorMessage="Password required" ValidationGroup="signup" Display="Dynamic" runat="server" />
-            <asp:RegularExpressionValidator ControlToValidate="User_Password_TextBox" CssClass="validation-error" ErrorMessage="Min 6 chars, 1 letter, 1 number" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" ValidationGroup="signup" Display="Dynamic" runat="server" />
-        </div>
 
-        <!-- Confirm Password -->
-        <div class="grid-item">
-            <label class="field-label">Confirm Password</label>
-            <div class="input-row">
-                <asp:TextBox ID="User_Confirm_Password_TextBox" runat="server" CssClass="textbox" TextMode="Password" placeholder="........" Style="padding-left: 15px;"></asp:TextBox>
-                <i id="toggleCPwd" class="fa-solid fa-eye"></i>
+            <div class="grid-item">
+                <label class="field-label">Confirm Password</label>
+                <div class="input-row">
+                    <asp:TextBox ID="User_Confirm_Password_TextBox" runat="server" CssClass="textbox" TextMode="Password" placeholder="........" Style="padding-left: 15px;"></asp:TextBox>
+                    <i id="toggleCPwd" class="fa-solid fa-eye"></i>
+                </div>
+                <asp:CompareValidator ControlToCompare="User_Password_TextBox" ControlToValidate="User_Confirm_Password_TextBox" CssClass="validation-error" ErrorMessage="Passwords do not match" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
-            <asp:RequiredFieldValidator ControlToValidate="User_Confirm_Password_TextBox" CssClass="validation-error" ErrorMessage="Please confirm password" ValidationGroup="signup" Display="Dynamic" runat="server" />
-            <asp:CompareValidator ControlToCompare="User_Password_TextBox" ControlToValidate="User_Confirm_Password_TextBox" CssClass="validation-error" ErrorMessage="Passwords do not match" ValidationGroup="signup" Display="Dynamic" runat="server" />
+
+            <div class="grid-item full-row" style="text-align: center;">
+                <asp:Label ID="ErrorLabel" runat="server" CssClass="validation-error" Style="font-size: 14px; font-weight: bold;"></asp:Label>
+            </div>
         </div>
 
-        <div class="grid-item full-row" style="text-align: center;">
-            <asp:Label ID="ErrorLabel" runat="server" CssClass="validation-error" Style="font-size: 14px; font-weight: bold;"></asp:Label>
-        </div>
-
+        <asp:Button ID="SignupButton" runat="server" CssClass="signup-btn" Text="Create Account" ValidationGroup="signup" OnClick="btnSignup_Click" />
     </div>
 
-    <asp:Button ID="SignupButton" runat="server" CssClass="signup-btn" Text="Create Account" ValidationGroup="signup" OnClick="btnSignup_Click" />
-
-    <!-- JavaScript for Password Toggle -->
     <script>
         document.getElementById('togglePwd').addEventListener('click', function () {
             const pwdInput = document.getElementById('<%= User_Password_TextBox.ClientID %>');
