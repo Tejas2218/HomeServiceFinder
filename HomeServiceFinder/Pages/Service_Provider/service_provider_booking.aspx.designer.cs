@@ -15,6 +15,51 @@ namespace HomeServiceFinder.Pages.Service_Provider
     {
 
         /// <summary>
+        /// lblTotalBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalBooking;
+
+        /// <summary>
+        /// lblPendingTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPendingTask;
+
+        /// <summary>
+        /// lblAvgRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAvgRating;
+
+        /// <summary>
+        /// btnFetchAccepted control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnFetchAccepted;
+
+        /// <summary>
+        /// btnFetchPending control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnFetchPending;
+
+        /// <summary>
         /// gvBookings control.
         /// </summary>
         /// <remarks>

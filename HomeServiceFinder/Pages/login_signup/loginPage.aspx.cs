@@ -69,7 +69,19 @@ namespace HomeServiceFinder.login_signup
                         }
                         else if (dr["User_Role"].ToString() == "Worker")
                         {
-                            Response.Redirect("~/Pages/Service_Provider/service_provider_dashboard.aspx");
+                            if (dr["SP_Status"].ToString() == "Pending")
+                            {
+                                Response.Redirect("Waiting_ServiceProvider.aspx");
+                            }
+                            else if (dr["SP_Status"].ToString() == "Decline")
+                            {
+                                Response.Write("<script>Swal.fire({\r\n  icon: 'error',\r\n  title: 'Request Declined',\r\n  text: 'Your request could not be approved at this time.',\r\n  confirmButtonColor: '#d33',\r\n  confirmButtonText: 'Understood'\r\n});</script>");
+                            }
+                            else if (dr["SP_Status"].ToString() == "Accept")
+                            {
+                                Response.Redirect("~/Pages/Service_Provider/service_provider_dashboard.aspx");
+                            }
+
                         }
                         
 

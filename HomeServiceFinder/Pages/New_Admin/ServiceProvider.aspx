@@ -7,7 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <!-- PAGE TITLE ONLY -->
-    <h2 style="margin-bottom:20px;">Service Providers</h2>
+    <h2 style="margin-bottom: 20px;">Service Providers</h2>
 
     <!-- TOTAL PROVIDERS -->
     <div class="stat-card">
@@ -18,51 +18,137 @@
     </div>
 
     <!-- HEADER -->
-    <div class="page-header">
-        <h3>Service Provider List</h3>
-        <a href="../login_signup/Worker_SignUp.aspx" class="btn-add">
-            ➕ Add Service Provider
-        </a>
+    <h3>Service Provider List</h3>
+
+    <div class="filter-tabs">
+
+        <asp:Button
+            ID="btnAll"
+            runat="server"
+            Text="All"
+            CssClass="filter-btn "
+            OnClick="btnAll_Click" />
+
+        <asp:Button
+            ID="btnPending"
+            runat="server"
+            Text="Pending Requests"
+            CssClass="filter-btn "
+            OnClick="btnPending_Click" />
+
+        <asp:Button
+            ID="btnApproved"
+            runat="server"
+            Text="Approved"
+            CssClass="filter-btn"
+            OnClick="btnApproved_Click" />
+
+        <asp:Button
+            ID="btnRejected"
+            runat="server"
+            Text="Declined"
+            CssClass="filter-btn"
+            OnClick="btnRejected_Click" />
+
+    </div>
+
+    <div class="page-header" style="margin-top: 10px; float: right; margin-bottom: 10px">
+        <asp:Button Text="➕ Add Service Provider" CssClass="btn btn-edit" ID="btnAddWorker" runat="server"
+            OnClick="btnAddWorker_Click" />
     </div>
 
     <!-- TABLE -->
     <div class="table-box">
-        <table class="admin-table">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Service</th>
-                <th>Mobile</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+        <asp:GridView
+            ID="UserGrid"
+            runat="server"
+            CssClass="admin-table"
+            DataKeyNames="User_ID"
+            EmptyDataText="No Data Found"
+            AllowPaging="true"
+            PageSize="10"
+            AutoGenerateColumns="false"
+            OnRowCommand="UserGrid_RowCommand"
+            OnPageIndexChanging="UserGrid_PageIndexChanging">
 
-            <tr>
-                <td>1</td>
-                <td>Ramesh Kumar</td>
-                <td>Plumber</td>
-                <td>9876543210</td>
-                <td><span class="badge active">Active</span></td>
-                <td>
-                    <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                    <a class="btn btn-edit" href="UserProfile.aspx">Edit</a>
-                    <a class="btn btn-delete">Delete</a>
-                </td>
-            </tr>
+            <Columns>
 
-            <tr>
-                <td>2</td>
-                <td>Suresh Patel</td>
-                <td>Electrician</td>
-                <td>9123456789</td>
-                <td><span class="badge inactive">Inactive</span></td>
-                <td>
-                    <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                    <a class="btn btn-edit" href="UserProfile.aspx">Edit</a>
-                    <a class="btn btn-delete">Delete</a>
-                </td>
-            </tr>
-        </table>
+                <asp:TemplateField HeaderText="Name">
+                    <ItemTemplate>
+                        <%# Eval("User_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Email">
+                    <ItemTemplate>
+                        <%# Eval("User_EmailID") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Address">
+                    <ItemTemplate>
+                        <%# Eval("User_Address") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="State">
+                    <ItemTemplate>
+                        <%# Eval("State_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="City">
+                    <ItemTemplate>
+                        <%# Eval("City_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Contact No.">
+                    <ItemTemplate>
+                        <%# Eval("User_ContactNo") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Status">
+                    <ItemTemplate>
+                        <span class='<%# GetStatusClass(Eval("SP_Status").ToString()) %>'>
+                            <%# Eval("SP_Status") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+
+
+                <asp:TemplateField HeaderText="Action">
+                    <ItemTemplate>
+                        <div class="action-buttons">
+                            <asp:Button
+                                ID="btnView"
+                                runat="server"
+                                Text="View"
+                                CssClass="btn btn-view"
+                                CommandName="ViewUser"
+                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CausesValidation="false" />
+
+
+                            <asp:Button
+                                ID="btnRemove"
+                                runat="server"
+                                Text="Remove"
+                                CssClass="btn btn-delete"
+                                CommandName="DeleteUser"
+                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CausesValidation="false"
+                                OnClientClick="return confirm('Are you sure you want to remove this user?');" />
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+            </Columns>
+
+        </asp:GridView>
+
     </div>
 
 </asp:Content>

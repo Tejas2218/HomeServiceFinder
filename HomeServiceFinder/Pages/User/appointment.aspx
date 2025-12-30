@@ -141,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Get Appointment</button>
+                                <asp:Button runat="server" ID="getAppointment" class="btn btn-primary w-100 py-3" type="submit" Text="get Appointment" OnClick="btnBookAppointment_Click"/>
                             </div>
                         </div>
                     </div>

@@ -79,6 +79,7 @@
     <Content Include="Assests\Login_SignUp\User_Password_Icon.png" />
     <Content Include="background_img.png" />
     <Content Include="Database_1\Address.sql" />
+    <Content Include="Database_1\BookingDetails - Admin.sql" />
     <Content Include="Database_1\BookingDetails.sql" />
     <Content Include="Database_1\Tables.sql" />
     <Content Include="Database_1\UserDetails.sql" />
@@ -89,18 +90,19 @@
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
     <Content Include="Pages\login_signup\Waiting_ServiceProvider.aspx" />
     <Content Include="Pages\login_signup\Worker_SignUp.aspx" />
-    <Content Include="Pages\New_Admin\Admin.aspx" />
+    <Content Include="Pages\New_Admin\AddServiceProvider.aspx" />
     <Content Include="Pages\New_Admin\AdminBookings.aspx" />
     <Content Include="Pages\New_Admin\AdminDashbord.aspx" />
+    <Content Include="Pages\New_Admin\EditUserDetails.aspx" />
     <Content Include="Pages\New_Admin\Reports.aspx" />
     <Content Include="Pages\New_Admin\ServiceProvider.aspx" />
     <Content Include="Pages\New_Admin\Settings.aspx" />
     <Content Include="Pages\New_Admin\User.aspx" />
     <Content Include="Pages\New_Admin\UserProfile.aspx" />
+    <Content Include="Pages\New_Admin\ViewServiceProviderDetails.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_booking.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_profile.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_user.aspx" />
-    <Content Include="Pages\Service_Provider\WebForm3.aspx" />
     <Content Include="Pages\User\about_us.aspx" />
     <Content Include="Pages\User\appointment.aspx" />
     <Content Include="Pages\User\change_password.aspx" />
@@ -109,6 +111,8 @@
     <Content Include="Pages\User\more_services.aspx" />
     <Content Include="Pages\User\profile.aspx" />
     <Content Include="Pages\User\service.aspx" />
+    <Content Include="Pages\User\confirm_booking.aspx" />
+    <Content Include="Pages\User\service_provider.aspx" />
     <Content Include="Pages\User\user_booking.aspx" />
     <Content Include="Pages\User\user_dashboard.aspx" />
   </ItemGroup>
@@ -162,12 +166,12 @@
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.designer.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\New_Admin\Admin.aspx.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="Pages\New_Admin\AddServiceProvider.aspx.cs">
+      <DependentUpon>AddServiceProvider.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\New_Admin\Admin.aspx.designer.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="Pages\New_Admin\AddServiceProvider.aspx.designer.cs">
+      <DependentUpon>AddServiceProvider.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\New_Admin\AdminBookings.aspx.cs">
       <DependentUpon>AdminBookings.aspx</DependentUpon>
@@ -182,6 +186,13 @@
     </Compile>
     <Compile Include="Pages\New_Admin\AdminDashbord.aspx.designer.cs">
       <DependentUpon>AdminDashbord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\EditUserDetails.aspx.cs">
+      <DependentUpon>EditUserDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\EditUserDetails.aspx.designer.cs">
+      <DependentUpon>EditUserDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\New_Admin\Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
@@ -218,6 +229,13 @@
     <Compile Include="Pages\New_Admin\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\New_Admin\ViewServiceProviderDetails.aspx.cs">
+      <DependentUpon>ViewServiceProviderDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ViewServiceProviderDetails.aspx.designer.cs">
+      <DependentUpon>ViewServiceProviderDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Service_Provider\service_provider_booking.aspx.cs">
       <DependentUpon>service_provider_booking.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -245,13 +263,6 @@
     </Compile>
     <Compile Include="Pages\Service_Provider\service_provider_user.aspx.designer.cs">
       <DependentUpon>service_provider_user.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Service_Provider\WebForm3.aspx.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Service_Provider\WebForm3.aspx.designer.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\about_us.aspx.cs">
       <DependentUpon>about_us.aspx</DependentUpon>
@@ -308,6 +319,20 @@
     </Compile>
     <Compile Include="Pages\User\service.aspx.designer.cs">
       <DependentUpon>service.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\confirm_booking.aspx.cs">
+      <DependentUpon>confirm_booking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\confirm_booking.aspx.designer.cs">
+      <DependentUpon>confirm_booking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\service_provider.aspx.cs">
+      <DependentUpon>service_provider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\service_provider.aspx.designer.cs">
+      <DependentUpon>service_provider.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\user_booking.aspx.cs">
       <DependentUpon>user_booking.aspx</DependentUpon>

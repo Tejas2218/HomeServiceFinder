@@ -15,22 +15,27 @@ create table CityDetails(
 
 create table UserDetails(
 	User_ID int primary key identity(1,1),
-	User_Name varchar(50) not null,
-	User_EmailID varchar(100) unique,
-	User_Address varchar(200) not null,
-	User_ContactNo varchar(10) not null,
-	User_Password varchar(50) not null,
-	User_Role varchar(50) not null,
+	User_Name varchar(50) not null,--
+	User_EmailID varchar(100) unique,--
+	User_Address varchar(200) not null,--
+	User_ContactNo varchar(10) not null,--
+	User_Password varchar(50) not null,--
+	User_Role varchar(50) not null,--
 	City_ID int Foreign Key References CityDetails(City_ID),
 	Created_DateTime DateTime DEFAULT Getdate(),
 	Modified_DateTime DateTime DEFAULT Getdate(),
-	State_ID varchar(50)-------changes 
+	State_ID varchar(50)-------changed to int  
 )---------------created------
 
 select * from UserDetails
+select * from ServiceProviderDetails
 
+delete from UserDetails
+delete from ServiceProviderDetails
 
 alter table UserDetails alter column User_ContactNo varchar(10)
+
+alter table UserDetails alter column State_ID int
 
 alter table UserDetails add constraint FK_UserDetails_State Foreign key (State_ID) References StateDetails(State_ID)
 
@@ -59,7 +64,7 @@ create table ServiceProviderDetails(
 	Service_ID int Foreign Key References ServiceMaster(Service_ID),
 	Equipment_ID int Foreign Key References EquipmentMaster(Equipment_ID)
 )
-
+select * from ServiceProviderDetails
 alter table ServiceProviderDetails add SP_Status varchar(20)---add
 
 create table BookingDetails(
@@ -71,6 +76,15 @@ create table BookingDetails(
 	Booking_Rating int,
 	Booking_Decline_Reason varchar(100) null
 )
+
+select * from BookingDetails
+
+alter table BookingDetails add Equipment_ID int
+alter table BookingDetails add constraint FK_BookingDetails_Equipment Foreign key (Equipment_ID) References EquipmentMaster(Equipment_ID)----- column added
+
+alter table BookingDetails add Time_Slot varchar(10) not null----addd column
+
+alter table BookingDetails add Visiting_DateTime datetime not null----addd column
 
 
 
@@ -127,7 +141,10 @@ select * from UserDetails
 delete from UserDetails where User_ID=4
 
 select * from BookingDetails INNER JOIN ServiceProviderDetails on BookingDetails.SP_ID = ServiceProviderDetails.SP_ID 
-INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID where ServiceProviderDetails.User_ID = 1
+INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID 
+
+
+select * from BookingDetails
 
 
 select * from ServiceProviderDetails INNER JOIN UserDetails on ServiceProviderDetails.User_ID = UserDetails.User_ID INNER JOIN CityDetails on UserDetails.City_ID = CityDetails.City_ID where ServiceProviderDetails.User_ID = 1
@@ -180,4 +197,4 @@ END
 select * from ServiceProviderDetails
 select * from UserDetails
 
-exec LoginSP 'anujmehta1107@gmail.com','anujhitu'
+exec LoginSP 'dev46408@gmail.com','dev123'

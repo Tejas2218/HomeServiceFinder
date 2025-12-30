@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace HomeServiceFinder.Pages.User
+{
+    public partial class service_provider1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                LoadProviders();
+                //rptProviders.DataSource = providerList;
+                //rptProviders.DataBind();
+            }
+        }
+
+        public string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+        public SqlDataAdapter sda;
+        public SqlCommand cmd;
+        public DataSet sd;
+
+        private void LoadProviders()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        rptProviders.DataSource = dt;
+                        rptProviders.DataBind();
+                    }
+                    else
+                    {
+                        lblMessage.Text = "No service providers found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = "No user data found." + ex;
+            }
+        }
+
+        protected void btnBook_Click(object sender, EventArgs e)
+        {
+            //string pName = hfProviderName.Value;
+            //string date = txtDate.Text;
+            //string time = hfSelectedTime.Value;
+
+            // Show Success Alert
+            //string script = $"alert('BOOKING SUCCESSFUL!\\nProvider: {pName}\\nDate: {date}\\nTime: {time}');";
+            //ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+        }
+    }
+}

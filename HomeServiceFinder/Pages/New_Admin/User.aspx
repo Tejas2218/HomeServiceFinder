@@ -38,49 +38,53 @@
 
                 <asp:TemplateField HeaderText="Name">
                     <ItemTemplate>
-                        <%# Eval("User_Name") %>
+                        <%# Eval("User_Name") == DBNull.Value ? "" : Eval("User_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Email">
                     <ItemTemplate>
-                        <%# Eval("User_EmailID") %>
+                        <%# Eval("User_EmailID") == DBNull.Value ? "" : Eval("User_EmailID") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Address">
                     <ItemTemplate>
-                        <%# Eval("User_Address") %>
+                        <%# Eval("User_Address") == DBNull.Value ? "" : Eval("User_Address") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="State">
                     <ItemTemplate>
-                        <%# Eval("State_Name") %>
+                        <%# Eval("State_Name") == DBNull.Value ? "" : Eval("State_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="City">
                     <ItemTemplate>
-                        <%# Eval("City_Name") %>
+                        <%# Eval("City_Name") == DBNull.Value ? "" : Eval("City_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Contact No.">
                     <ItemTemplate>
-                        <%# Eval("User_ContactNo") %>
+                        <%# Eval("User_ContactNo") == DBNull.Value ? "" : Eval("User_ContactNo") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Created Date">
                     <ItemTemplate>
-                        <%# Eval("Created_DateTime", "{0:dd-MM-yyyy hh:mm tt}") %>
+                        <%# Eval("Created_DateTime") == DBNull.Value 
+                ? "" 
+                : Eval("Created_DateTime", "{0:dd-MM-yyyy hh:mm tt}") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Modified Date">
                     <ItemTemplate>
-                        <%# Eval("Modified_DateTime", "{0:dd-MM-yyyy hh:mm tt}") %>
+                        <%# Eval("Modified_DateTime") == DBNull.Value 
+                ? "" 
+                : Eval("Modified_DateTime", "{0:dd-MM-yyyy hh:mm tt}") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
@@ -89,8 +93,8 @@
                         <asp:Button
                             ID="btnEdit"
                             runat="server"
-                            Text="Edit"
-                            CssClass="btn btn-edit"
+                            Text="View"
+                            CssClass="btn btn-view"
                             CommandName="EditUser"
                             CommandArgument='<%# Eval("User_ID") %>'
                             CausesValidation="false" />
@@ -108,6 +112,7 @@
                 </asp:TemplateField>
 
             </Columns>
+
 
         </asp:GridView>
 

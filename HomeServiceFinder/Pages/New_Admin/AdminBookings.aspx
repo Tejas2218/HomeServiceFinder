@@ -7,68 +7,146 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <!-- PAGE TITLE -->
-    <h2 style="margin-bottom:20px;">Bookings</h2>
+    <h2 style="margin-bottom: 20px;">Bookings</h2>
 
     <!-- STATS -->
     <div class="stats">
         <div class="stat-card">
             <h3>Total Bookings</h3>
-            <h2>120</h2>
+            <h2>
+                <asp:Label ID="lblTotalBookings" runat="server" Text="0"></asp:Label>
+            </h2>
         </div>
 
         <div class="stat-card">
             <h3>Today’s Bookings</h3>
-            <h2>8</h2>
+            <h2>
+                <asp:Label ID="lblTodayBookings" runat="server" Text="0"></asp:Label>
+            </h2>
         </div>
 
         <div class="stat-card">
             <h3>Pending</h3>
-            <h2>25</h2>
+            <h2>
+                <asp:Label ID="lblPendingBookings" runat="server" Text="0"></asp:Label>
+            </h2>
         </div>
     </div>
 
     <!-- TABLE -->
+    <div class="filter-tabs">
+
+        <asp:Button
+            ID="btnAll"
+            runat="server"
+            Text="All"
+            CssClass="filter-btn "
+             />
+
+        <asp:Button
+            ID="btnPending"
+            runat="server"
+            Text="Pending Requests"
+            CssClass="filter-btn "
+             />
+
+        <asp:Button
+            ID="btnApproved"
+            runat="server"
+            Text="Approved"
+            CssClass="filter-btn"
+             />
+
+        <asp:Button
+            ID="btnRejected"
+            runat="server"
+            Text="Declined"
+            CssClass="filter-btn"
+             />
+
+    </div>
+
+    <!-- TABLE -->
     <div class="table-box">
-        <h3>Booking List</h3>
-        <br />
+        <asp:GridView
+            ID="UserGrid"
+            runat="server"
+            CssClass="admin-table"
+            DataKeyNames="User_ID"
+            EmptyDataText="No Data Found"
+            AllowPaging="true"
+            PageSize="10"
+            AutoGenerateColumns="false"
+            >
 
-        <table class="admin-table">
-            <tr>
-                <th>#</th>
-                <th>User</th>
-                <th>Service</th>
-                <th>Provider</th>
-                <th>Date & Time</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+            <Columns>
 
-            <tr>
-                <td>1</td>
-                <td>Rahul Patel</td>
-                <td>Plumber</td>
-                <td>Ramesh</td>
-                <td>18 Dec 2025 | 10:30 AM</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>
-                    <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                    <a class="btn btn-edit" href="#">Update</a>
-                    <a class="btn btn-delete" href="#">Cancel</a>
-                </td>
-            </tr>
+                <asp:TemplateField HeaderText="Name">
+                    <ItemTemplate>
+                        <%# Eval("User_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-            <tr>
-                <td>2</td>
-                <td>Anita Shah</td>
-                <td>Electrician</td>
-                <td>Suresh</td>
-                <td>17 Dec 2025 | 04:00 PM</td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>
-                    <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                </td>
-            </tr>
-        </table>
+                <asp:TemplateField HeaderText="Email">
+                    <ItemTemplate>
+                        <%# Eval("User_EmailID") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Address">
+                    <ItemTemplate>
+                        <%# Eval("User_Address") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="State">
+                    <ItemTemplate>
+                        <%# Eval("State_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="City">
+                    <ItemTemplate>
+                        <%# Eval("City_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Contact No.">
+                    <ItemTemplate>
+                        <%# Eval("User_ContactNo") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Action">
+                    <ItemTemplate>
+                        <div class="action-buttons">
+                            <asp:Button
+                                ID="btnView"
+                                runat="server"
+                                Text="View"
+                                CssClass="btn btn-view"
+                                CommandName="ViewUser"
+                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CausesValidation="false" />
+
+
+                            <asp:Button
+                                ID="btnRemove"
+                                runat="server"
+                                Text="Remove"
+                                CssClass="btn btn-delete"
+                                CommandName="DeleteUser"
+                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CausesValidation="false"
+                                OnClientClick="return confirm('Are you sure you want to remove this user?');" />
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+            </Columns>
+
+        </asp:GridView>
+
     </div>
 
 </asp:Content>
