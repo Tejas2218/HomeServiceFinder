@@ -72,7 +72,7 @@
             </div>
         </div>
         <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
-            <a href="index.aspx" class="navbar-brand d-flex align-items-center">
+            <a href="user_dashboard.aspx" class="navbar-brand d-flex align-items-center">
                 <h1 class="m-0"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

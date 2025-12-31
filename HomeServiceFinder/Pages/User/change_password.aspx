@@ -14,6 +14,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         .form-control:focus {
             border-color: var(--primary);
@@ -151,7 +153,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 mt-4">
-                                    <asp:Button ID="btnUpdatePassword" runat="server" Text="Update Password" CssClass="btn btn-primary w-100 py-3" />
+                                    <asp:Button ID="btnUpdatePassword" runat="server" Text="Update Password" CssClass="btn btn-primary w-100 py-3" OnClientClick="return confirmAction(this, 'Update Password?');" />
                                 </div>
                             </div>
                         </div>

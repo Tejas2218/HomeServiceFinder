@@ -23,28 +23,32 @@
     <div class="filter-tabs">
 
         <asp:Button
+            ID="btnAll"
+            runat="server"
+            Text="All"
+            CssClass="filter-btn "
+            OnClick="btnAll_Click" />
+
+        <asp:Button
             ID="btnPending"
             runat="server"
             Text="Pending Requests"
             CssClass="filter-btn "
-            OnClick="btnPending_Click"
-            />
+            OnClick="btnPending_Click" />
 
         <asp:Button
             ID="btnApproved"
             runat="server"
             Text="Approved"
             CssClass="filter-btn"
-            OnClick="btnApproved_Click"
-            />
+            OnClick="btnApproved_Click" />
 
         <asp:Button
             ID="btnRejected"
             runat="server"
             Text="Declined"
             CssClass="filter-btn"
-            OnClick="btnRejected_Click"
-            />
+            OnClick="btnRejected_Click" />
 
     </div>
 
@@ -105,6 +109,16 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
+                <asp:TemplateField HeaderText="Status">
+                    <ItemTemplate>
+                        <span class='<%# GetStatusClass(Eval("SP_Status").ToString()) %>'>
+                            <%# Eval("SP_Status") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+
+
                 <asp:TemplateField HeaderText="Action">
                     <ItemTemplate>
                         <div class="action-buttons">
@@ -117,21 +131,13 @@
                                 CommandArgument='<%# Eval("SP_ID") %>'
                                 CausesValidation="false" />
 
-                            <asp:Button
-                                ID="btnEdit"
-                                runat="server"
-                                Text="Edit"
-                                CssClass="btn btn-edit"
-                                CommandName="EditUser"
-                                CommandArgument='<%# Eval("SP_ID") %>'
-                                CausesValidation="false" />
 
                             <asp:Button
                                 ID="btnRemove"
                                 runat="server"
                                 Text="Remove"
                                 CssClass="btn btn-delete"
-                                CommandName="Delete"
+                                CommandName="DeleteUser"
                                 CommandArgument='<%# Eval("SP_ID") %>'
                                 CausesValidation="false"
                                 OnClientClick="return confirm('Are you sure you want to remove this user?');" />

@@ -15,157 +15,121 @@ namespace HomeServiceFinder.Pages.New_Admin
     {
 
         /// <summary>
-        /// User_Name control.
+        /// UserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Name;
+        protected global::System.Web.UI.WebControls.TextBox UserName;
 
         /// <summary>
-        /// User_Email control.
+        /// UserEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Email;
+        protected global::System.Web.UI.WebControls.TextBox UserEmail;
 
         /// <summary>
-        /// User_Contact control.
+        /// UserContact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Contact;
+        protected global::System.Web.UI.WebControls.TextBox UserContact;
 
         /// <summary>
-        /// User_Role control.
+        /// StateList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Role;
+        protected global::System.Web.UI.WebControls.DropDownList StateList;
 
         /// <summary>
-        /// State_Name control.
+        /// CityList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label State_Name;
+        protected global::System.Web.UI.WebControls.DropDownList CityList;
 
         /// <summary>
-        /// City_Name control.
+        /// UserAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label City_Name;
+        protected global::System.Web.UI.WebControls.TextBox UserAddress;
 
         /// <summary>
-        /// User_Address control.
+        /// ServiceList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label User_Address;
+        protected global::System.Web.UI.WebControls.DropDownList ServiceList;
 
         /// <summary>
-        /// Service_Name control.
+        /// EquipmentList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Service_Name;
+        protected global::System.Web.UI.WebControls.DropDownList EquipmentList;
 
         /// <summary>
-        /// Equipment_Name control.
+        /// SPAge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Equipment_Name;
+        protected global::System.Web.UI.WebControls.TextBox SPAge;
 
         /// <summary>
-        /// SP_Age control.
+        /// SPExperience control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SP_Age;
+        protected global::System.Web.UI.WebControls.TextBox SPExperience;
 
         /// <summary>
-        /// SP_Experience control.
+        /// SPMinimumPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SP_Experience;
+        protected global::System.Web.UI.WebControls.TextBox SPMinimumPrice;
 
         /// <summary>
-        /// SP_MinimumPrice control.
+        /// SPShopAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SP_MinimumPrice;
+        protected global::System.Web.UI.WebControls.TextBox SPShopAddress;
 
         /// <summary>
-        /// SP_AverageRating control.
+        /// Password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SP_AverageRating;
-
-        /// <summary>
-        /// SP_Status control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SP_Status;
-
-        /// <summary>
-        /// SP_ShopAddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SP_ShopAddress;
-
-        /// <summary>
-        /// Created_At control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Created_At;
-
-        /// <summary>
-        /// Modified_At control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Modified_At;
+        protected global::System.Web.UI.WebControls.TextBox Password;
 
         /// <summary>
         /// btnBack control.
@@ -184,5 +148,14 @@ namespace HomeServiceFinder.Pages.New_Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEdit;
+
+        /// <summary>
+        /// btnUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
     }
 }

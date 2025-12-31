@@ -64,7 +64,7 @@
                         <ItemTemplate>
                             <span class='<%# "badge bg-" + Eval("Booking_Status").ToString().ToLower() %>'>
                                 <%# Eval("Booking_Status") %>
-            </span>
+                            </span>
                         </ItemTemplate>
                     </asp:TemplateField>
 

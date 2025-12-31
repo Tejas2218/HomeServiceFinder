@@ -7,68 +7,156 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <!-- PAGE TITLE -->
-    <h2 style="margin-bottom:20px;">Bookings</h2>
+    <h2 style="margin-bottom: 20px;">Bookings</h2>
 
     <!-- STATS -->
     <div class="stats">
         <div class="stat-card">
             <h3>Total Bookings</h3>
-            <h2>120</h2>
+            <h2>
+                <asp:Label ID="lblTotalBookings" runat="server" Text="0"></asp:Label>
+            </h2>
         </div>
 
         <div class="stat-card">
             <h3>Today’s Bookings</h3>
-            <h2>8</h2>
+            <h2>
+                <asp:Label ID="lblTodayBookings" runat="server" Text="0"></asp:Label>
+            </h2>
         </div>
 
         <div class="stat-card">
             <h3>Pending</h3>
-            <h2>25</h2>
+            <h2>
+                <asp:Label ID="lblPendingBookings" runat="server" Text="0"></asp:Label>
+            </h2>
         </div>
     </div>
 
     <!-- TABLE -->
-    <div class="table-box">
-        <h3>Booking List</h3>
-        <br />
+    <div class="filter-tabs">
 
-        <table class="admin-table">
-            <tr>
-                <th>#</th>
-                <th>User</th>
-                <th>Service</th>
-                <th>Provider</th>
-                <th>Date & Time</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+        <asp:Button
+            ID="btnAll"
+            runat="server"
+            Text="All"
+            OnClick="btnAll_Click"
+            CssClass="filter-btn " />
 
-            <tr>
-                <td>1</td>
-                <td>Rahul Patel</td>
-                <td>Plumber</td>
-                <td>Ramesh</td>
-                <td>18 Dec 2025 | 10:30 AM</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td>
-                    <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                    <a class="btn btn-edit" href="#">Update</a>
-                    <a class="btn btn-delete" href="#">Cancel</a>
-                </td>
-            </tr>
+        <asp:Button
+            ID="btnPending"
+            runat="server"
+            Text="Pending Requests"
+            OnClick="btnPending_Click"
+            CssClass="filter-btn " />
 
-            <tr>
-                <td>2</td>
-                <td>Anita Shah</td>
-                <td>Electrician</td>
-                <td>Suresh</td>
-                <td>17 Dec 2025 | 04:00 PM</td>
-                <td><span class="badge completed">Completed</span></td>
-                <td>
-                    <a class="btn btn-view" href="UserProfile.aspx">View</a>
-                </td>
-            </tr>
-        </table>
+        <asp:Button
+            ID="btnCompleted"
+            runat="server"
+            Text="Approved"
+            OnClick="btnCompleted_Click"
+            CssClass="filter-btn" />
+
+        <asp:Button
+            ID="btnUserDecline"
+            runat="server"
+            Text="Declined"
+            OnClick="btnUserDecline_Click"
+            CssClass="filter-btn" />
+
+        <asp:Button
+            ID="btnWorkerDecline"
+            runat="server"
+            Text="Declined"
+            OnClick="btnWorkerDecline_Click"
+            CssClass="filter-btn" />
+
     </div>
+
+    <!-- TABLE -->
+    <div class="table-box">
+        <asp:GridView
+            ID="BookingGrid"
+            runat="server"
+            CssClass="admin-table"
+            DataKeyNames="Booking_ID"
+            EmptyDataText="No Data Found"
+            AllowPaging="true"
+            PageSize="10"
+            AutoGenerateColumns="false"
+            OnRowCommand="UserGrid_RowCommand"
+            OnPageIndexChanging="UserGrid_PageIndexChanging">
+
+            <Columns>
+
+                <asp:TemplateField HeaderText="User ">
+                    <ItemTemplate>
+                        <%# Eval("User_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Woker ">
+                    <ItemTemplate>
+                        <%# Eval("Worker_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Status">
+                    <ItemTemplate>
+                        <%# Eval("Booking_Status") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Booking Time">
+                    <ItemTemplate>
+                        <%# Eval("Booking_DateTime") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Rating">
+                    <ItemTemplate>
+                        <%# Eval("Booking_Rating") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Service">
+                    <ItemTemplate>
+                        <%# Eval("Service_Name") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+
+                <asp:TemplateField HeaderText="Action">
+                    <ItemTemplate>
+                        <div class="action-buttons">
+                            <asp:Button
+                                ID="btnView"
+                                runat="server"
+                                Text="View"
+                                CssClass="btn btn-view"
+                                CommandName="ViewUser"
+                                CommandArgument='<%# Eval("Booking_ID") %>'
+                                CausesValidation="false" />
+
+
+                            <asp:Button
+                                ID="btnRemove"
+                                runat="server"
+                                Text="Remove"
+                                CssClass="btn btn-delete"
+                                CommandName="DeleteUser"
+                                CommandArgument='<%# Eval("Booking_ID") %>'
+                                CausesValidation="false"
+                                OnClientClick="return confirm('Are you sure you want to remove this user?');" />
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+            </Columns>
+
+        </asp:GridView>
+
+    </div>
+
 
 </asp:Content>

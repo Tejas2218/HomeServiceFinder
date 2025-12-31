@@ -19,23 +19,33 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
             if (!IsPostBack)
             {
-                //if (Session["UserID"] != null && Request.QueryString["id"] != null)
-                if (Request.QueryString["id"] != null)
+                if (Session["UserID"] != null && Request.QueryString["id"] != null)
+                //if (Request.QueryString["id"] != null)
                 {
-                    int userId = Convert.ToInt32(Request.QueryString["id"]);
-                    ViewState["UserId"] = userId;
+                    int userID = Convert.ToInt32(Request.QueryString["id"]);
+                    ViewState["UserID"] = userID;
                     LoadUserData();
-                }
-                //Console.WriteLine(Session["UserID"] + Request.QueryString["id"]);
-                string previousPageName = Path.GetFileName(Request.UrlReferrer.AbsolutePath).ToLower();
-                if (previousPageName.Contains("service_provider_booking.aspx"))
-                {
-                    hfwebpage.Value= previousPageName;
+                    LoadBookingHistory();
+                    string previousPageName = Path.GetFileName(Request.UrlReferrer.AbsolutePath).ToLower();
+                    if (previousPageName.Contains("service_provider_booking.aspx"))
+                    {
+                        hfwebpage.Value = previousPageName;
+                    }
+                    else if (previousPageName.Contains("service_provider_Booking_History.aspx"))
+                    {
+                        hfwebpage.Value = previousPageName;
+                    }
+                    else
+                    {
+                        hfwebpage.Value = previousPageName;
+                    }
                 }
                 else
                 {
-                    hfwebpage.Value=previousPageName;
+                    Response.Redirect("~/Pages/login_signup/loginPage.aspx");
                 }
+                    //Console.WriteLine(Session["UserID"] + Request.QueryString["id"]);
+                    
             }
         }
 
@@ -45,7 +55,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
             {
                 SqlCommand cmd = new SqlCommand("Display_User_Details_ByID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(ViewState["UserId"]));
+                cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(ViewState["UserID"]));
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -62,6 +72,23 @@ namespace HomeServiceFinder.Pages.Service_Provider
                     State_Name.Text = dr["State_Name"].ToString();
                     City_Name.Text = dr["City_Name"].ToString();
                 }
+            }
+        }
+        protected void LoadBookingHistory()
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                // Assuming you have a stored procedure for history
+                SqlCommand cmd = new SqlCommand("User_Booking_Records", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@User_ID",Convert.ToInt32(ViewState["User_ID"]));
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                gvBookingHistory.DataSource = dt;
+                gvBookingHistory.DataBind();
             }
         }
 

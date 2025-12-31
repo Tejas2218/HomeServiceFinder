@@ -74,8 +74,23 @@
                 color: var(--light);
                 text-decoration: none;
                 display: block;
+                padding: 10px;
                 transition: 0.3s;
             }
+
+                .menu-item a.active {
+                    /*background-color: #007bff;*/ /* Bootstrap Blue */
+                    color: var(--primary);
+                    border-radius: 5px;
+                }
+
+                    .menu-item a.active i {
+                        color: white;
+                    }
+
+                    .menu-item a.active i {
+                        color: var(--primary); /* Icon color becomes white */
+                    }
 
             .menu-item:hover {
                 color: var(--primary);
@@ -314,7 +329,7 @@
             transition: all 0.3s ease;
             font-weight: 600;
             outline: none;
-            text-decoration:none;
+            text-decoration: none;
         }
 
             /* Hover effect */
@@ -330,7 +345,6 @@
             font-size: 11px;
             margin-left: 8px;
             display: inline-block;
-            
         }
 
         /* The Active State - applies when selected */
@@ -350,16 +364,24 @@
             <div class="sidebar">
                 <h2>Provider Pro</h2>
                 <div class="menu-item">
-                    <a id="lnkBookings" runat="server" href="~/Pages/Service_Provider/service_provider_booking.aspx">📅 My Bookings</a>
+                    <a id="lnkBookings" runat="server" href="~/Pages/Service_Provider/service_provider_booking.aspx">
+                        <i class="bi bi-calendar3"></i> My Bookings
+                    </a>
                 </div>
                 <div class="menu-item">
-                    <a id="lnkCustomers" runat="server" href="~/Pages/Service_Provider/service_provider_user.aspx">👥 My Customers</a>
+                    <a id="lnkHistory" runat="server" href="~/Pages/Service_Provider/service_provider_Booking_History.aspx">
+                        <i class="bi bi-clock-history"></i> My Booking History
+                    </a>
                 </div>
-                <!--<div class="menu-item">
-                    <a href="#">⭐ My Reviews</a>
-                </div>-->
                 <div class="menu-item">
-                    <a id="lnkProfile" runat="server" href="~/Pages/Service_Provider/service_provider_profile.aspx">&nbsp;⚙ Profile Settings</a>
+                    <a id="lnkCustomers" runat="server" href="~/Pages/Service_Provider/service_provider_user.aspx">
+                        <i class="bi bi-person-circle"></i> My Customers
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a id="lnkProfile" runat="server" href="~/Pages/Service_Provider/service_provider_profile.aspx">
+                        <i class="bi bi-sliders"></i> Profile Settings
+                    </a>
                 </div>
             </div>
             <div class="topbar">

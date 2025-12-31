@@ -93,8 +93,8 @@
                         <asp:Button
                             ID="btnEdit"
                             runat="server"
-                            Text="Edit"
-                            CssClass="btn btn-edit"
+                            Text="View"
+                            CssClass="btn btn-view"
                             CommandName="EditUser"
                             CommandArgument='<%# Eval("User_ID") %>'
                             CausesValidation="false" />

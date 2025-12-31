@@ -1,6 +1,4 @@
 --WorkerDetails--
-
-
 ---------------------------------------------------- not executed --------------------------------------------
 --Display Worker Details--
 create or alter proc Display_Worker_Details
@@ -19,8 +17,6 @@ begin
 	inner join EquipmentMaster EM
 	on EM.Service_ID=SM.Service_ID
 end
-
-exec Display_Worker_Details
 --26-12-25--
 ---Display Worker Details Pending--
 create or alter proc Display_Worker_Details_Pending
@@ -84,11 +80,6 @@ end
 
 
 
-EXEC Display_Worker_Details
-
-DELETE FROM ServiceProviderDetails
-WHERE SP_ID IN (1, 2);
-
 --Display Worker Detail by Service--
 create or alter proc Display_Worker_Details_ByService
 @SP_ID int
@@ -134,6 +125,7 @@ exec Display_Worker_Details_ByService 9
 select * from ServiceProviderDetails
 
 exec Display_Worker_Details_ByID 4
+
 --Display Specific Worker Details--
 create or alter proc Display_Worker_Details_ByID
 @SP_ID int
@@ -153,7 +145,10 @@ begin
 	on EM.Service_ID=SM.Service_ID
 	where SPD.SP_ID=@SP_ID
 end
+
 ---------------------------------------------------- not executed --------------------------------------------^
+
+alter table ServiceProviderDetails drop column SP_Service 
 --Insert Worker Detail--
 Create OR alter proc Insert_Worker_Details
 @User_Name varchar(50),
@@ -225,12 +220,12 @@ begin
 	)
 
 end
-select * from ServiceProviderDetails
- 
- Delete from UserDetails;
- Delete from ServiceProviderDetails;
 
-alter proc Insert_User_Details
+---------------------------------------------------- not executed --------------------------------------------
+
+--Update Worker Detail--
+create or alter proc Update_Worker_Details
+@SP_ID int,
 @User_Name varchar(50),
 @User_EmailID varchar(100),
 @User_Address varchar(200),
@@ -261,19 +256,7 @@ begin
 	select SCOPE_IDENTITY() as User_ID
 end
 
------------get provider email
-CREATE OR ALTER PROCEDURE Get_Provider_Email
-    @SP_ID INT
-AS
-BEGIN
-    SET NOCOUNT ON;
 
-    SELECT ud.User_EmailID
-    FROM ServiceProviderDetails spd
-    INNER JOIN UserDetails ud
-        ON spd.User_ID = ud.User_ID
-    WHERE spd.SP_ID = @SP_ID;
-END
 
 ---------------------------------------------------- not executed --------------------------------------------
 
@@ -282,22 +265,32 @@ alter proc Update_Worker_Details
 @SP_ID int,
 @SP_Age int ,
 @SP_ShopAddress varchar(200),
-@SP_Service varchar(50),
 @SP_Experience int,
-@SP_Password varchar(50),
-@SP_MinimumPrice int,
-@SP_AverageRating int
+@SP_MinimumPrice int
 as
 begin
 	update ServiceProviderDetails
-	set SP_Age =@SP_Age,
-		SP_ShopAddress=@SP_ShopAddress,
-		SP_Service =@SP_Service,
-		SP_Experience =@SP_Experience,
-		SP_Password =@SP_Password,
+	set Service_ID=@Service_ID,
+		Equipment_ID=@Equipment_ID,
+		SP_Age=@SP_Age,
+		SP_Experience=@SP_Experience,
 		SP_MinimumPrice=@SP_MinimumPrice,
-		SP_AverageRating=@SP_AverageRating
+		SP_ShopAddress=@SP_ShopAddress
 	where SP_ID=@SP_ID
+
+	declare @User_ID int;
+	select @User_ID=User_ID from ServiceProviderDetails
+	where SP_ID=@SP_ID
+
+	update UserDetails
+	set User_Name=@User_Name,
+		User_EmailID=@User_EmailID,
+		User_ContactNo=@User_ContactNo,
+		State_ID=@State_ID,
+		City_ID=@City_ID,
+		User_Address=@User_Address,
+		User_Password=@User_Password
+	where User_ID=@User_ID
 end
 
 --Delete Worker Detail--

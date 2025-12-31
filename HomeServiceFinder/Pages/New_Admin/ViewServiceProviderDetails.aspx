@@ -4,16 +4,33 @@
     MasterPageFile="~/MasterPage/AdminMaster.Master"
     Inherits="HomeServiceFinder.Pages.New_Admin.ViewServiceProviderDetails" %>
 
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <style>
+        .section-title {
+            grid-column: span 2;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e5e7eb;
+            margin-top: 10px;
+    </style>
 
     <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
 
 
-    <div class="profile-card" style="width:100%">
+    <div class="profile-card" style="width: 100%">
 
-        <div class="profile-grid" style="width:100%">
+        <div class="profile-grid" style="width: 100%">
 
             <!-- USER INFO -->
+            <div class="section-title full-width">
+                Personal Information
+            </div>
+
             <div class="profile-item">
                 <label>Name</label>
                 <asp:Label ID="User_Name" runat="server" CssClass="profile-value" />
@@ -47,6 +64,10 @@
             <div class="profile-item full-width">
                 <label>Address</label>
                 <asp:Label ID="User_Address" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="section-title full-width">
+                Working Information
             </div>
 
             <!-- SERVICE PROVIDER INFO -->
@@ -89,6 +110,11 @@
                 <label>Shop Address</label>
                 <asp:Label ID="SP_ShopAddress" runat="server" CssClass="profile-value" />
             </div>
+
+            <div class="section-title full-width">
+                Audit Information
+            </div>
+
             <!-- CREATED & MODIFIED INFO -->
             <div class="profile-item">
                 <label>Created At</label>
@@ -129,10 +155,10 @@
                 <asp:Button
                     ID="btnApprove"
                     runat="server"
-                    Visible="false"
                     OnClick="btnApprove_Click"
                     Text="✔ Approve Provider"
-                    CssClass="btn btn-approve" />
+                    CssClass="btn btn-approve"
+                    OnClientClick="confirmaAction()" />
 
                 <asp:Button
                     ID="btnReject"
@@ -140,12 +166,50 @@
                     OnClick="btnReject_Click"
                     Text="✖ Reject Provider"
                     CssClass="btn btn-reject"
-                    OnClientClick="return confirm('Are you sure you want to reject this provider?');" />
+                    OnClientClick="confirmaAction()" />
             </div>
 
         </div>
 
+        <script>
+            function confirmAction(button, titleText) {
+                if (button.dataset.confirmed === "true") {
+                    return true;
+                }
 
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#198754',
+                    cancelButtonColor: '#dc3545',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Your file has been deleted.',
+                            icon: 'success',
+                            confirmButtonColor: '#198754'
+                        }).then(() => {
+                            button.dataset.confirmed = "true";
+                            button.click();
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire({
+                            title: 'Cancelled',
+                            text: 'Your imaginary file is safe :)',
+                            icon: 'error',
+                            confirmButtonColor: '#198754'
+                        });
+                    }
+                });
+                return false;
+            }
+        </script>
     </div>
 
 </asp:Content>
