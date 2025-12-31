@@ -33,6 +33,7 @@
         </div>
     </div>
 
+    <h3>Booking List</h3>
     <!-- TABLE -->
     <div class="filter-tabs">
 
@@ -71,6 +72,10 @@
             OnClick="btnWorkerDecline_Click"
             CssClass="filter-btn" />
 
+    </div>
+    <div class="page-header" style="margin-top: 10px; float: right; margin-bottom: 10px">
+        <asp:Button Text="➕ Book Service" CssClass="btn btn-edit" ID="btnBooking" runat="server"
+            OnClick="btnBooking_Click" />
     </div>
 
     <!-- TABLE -->
