@@ -10,7 +10,7 @@
             {
                 new { Name = "Brooming & Mopping", Price = 199, Icon = "fa-broom", Desc = "Daily floor dusting & wet mop." },
                 new { Name = "Washroom Deep Clean", Price = 499, Icon = "fa-sink", Desc = "Tile scrubbing, acid wash & sanitizing." },
-                new { Name = "Full House Deep Clean", Price = 2499, Icon = "fa-house-chimney", Desc = "Complete home deep cleaning (Floor+Walls)." },
+                new { Name = "Full House Deep Clean", Price = 2599, Icon = "fa-house-chimney", Desc = "Complete home deep cleaning (Floor+Walls)." },
                 new { Name = "Water Tank Wash", Price = 899, Icon = "fa-faucet-drip", Desc = "Underground & overhead sludge removal." },
                 new { Name = "Summer Cool (AC/Fan)", Price = 799, Icon = "fa-snowflake", Desc = "AC servicing & fan cleaning special." },
                 new { Name = "Equipment Clean", Price = 599, Icon = "fa-blender-phone", Desc = "Fridge, Oven & Washing machine." }
