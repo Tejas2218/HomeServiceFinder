@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/service_provider_master.Master" AutoEventWireup="true" CodeBehind="service_provider_Booking_History.aspx.cs" Inherits="HomeServiceFinder.Pages.Service_Provider.service_provider_Booking_History" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/service_provider_master.Master" AutoEventWireup="true" CodeBehind="service_provider_Booking_History.aspx.cs" Inherits="HomeServiceFinder.Pages.Service_Provider.service_provider_Booking_History" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="bookings" class="section-box">
         <div class="section-header">
-            <h3>Booking History</h3>
+            <h3>Bookin History</h3>
         </div>
 
         <div class="tabs-container">

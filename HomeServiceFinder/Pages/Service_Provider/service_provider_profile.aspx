@@ -2,152 +2,243 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        .section-title {
+            grid-column: span 2;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e5e7eb;
+            margin-top: 10px;
+        }
+
+        .profile-card {
+            background: #fff;
+            padding: 25px;
+            width: 100%;
+        }
+
         .profile-grid {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 25px;
-        }
-        .profile-upload {
-            text-align: center;
-            padding: 20px;
-        }
-        .profile-img-container {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: #eee;
-            margin: 0 auto 15px;
-            border: 3px solid var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .profile-img-container img {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px 24px;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--secondary);
-            font-size: 14px;
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: inherit;
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .save-banner {
-            background: var(--dark);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 12px;
+
+        .profile-item {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
+            flex-direction: column;
         }
-        </style>
+
+            .profile-item.full-width {
+                grid-column: span 2;
+            }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-item.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="stats-grid">
-        <div class="stat-card" style="border-left-color: var(--success);">
-            <h3>Profile Status</h3>
-            <h2 style="color: var(--success);"><asp:Literal ID="litStatus" runat="server" Text="Verified" /></h2>
-        </div>
-        <div class="stat-card">
-            <h3>Member Since</h3>
-            <h2><asp:Literal ID="litMemberSince" runat="server" /></h2>
-        </div>
-        <div class="stat-card">
-            <h3>Completed Jobs</h3>
-            <h2><asp:Literal ID="litCompletedJobs" runat="server" /></h2>
-        </div>
-    </div>
+    <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
 
-    <div class="profile-grid">
-        <div class="section-box">
-            <div class="profile-upload">
-                <div class="profile-img-container">
-                    <asp:Image ID="imgProfile" runat="server" ImageUrl="~/Images/default-user.png" AlternateText="Profile" />
-                </div>
-                <asp:FileUpload ID="fuProfilePic" runat="server" CssClass="form-control" style="margin-bottom:10px;" />
-                <asp:Button ID="btnUpload" runat="server" Text="Change Photo" CssClass="btn btn-outline" style="width: 100%;" />
-                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;" />
-                <div class="info-group" style="text-align: left;">
-                    <label style="font-weight: bold; font-size: 13px; color: var(--secondary);">AVAILABILITY</label>
-                    <div style="margin-top: 5px;">
-                        <asp:CheckBox ID="chkActive" runat="server" Text=" &nbsp; Currently Active" CssClass="badge bg-active" AutoPostBack="true" />
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="profile-card">
 
-        <div class="section-box">
-            <div class="section-header">
-                <h3>Personal & Business Information</h3>
+        <div class="profile-grid">
+
+            <!-- PERSONAL INFO TITLE -->
+            <div class="section-title full-width">
+                Personal Information
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Service Category</label>
-                    <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control">
-                        <asp:ListItem>Electrician</asp:ListItem>
-                        <asp:ListItem>Plumber</asp:ListItem>
-                        <asp:ListItem>Carpenter</asp:ListItem>
-                        <asp:ListItem>Cleaning</asp:ListItem>
+            <!-- Name -->
+            <div class="profile-item">
+                <label>Name</label>
+                <asp:TextBox ID="UserName" runat="server" CssClass="profile-value" />
+                <asp:RequiredFieldValidator ControlToValidate="UserName"
+                    ErrorMessage="Name is required" Display="Dynamic"
+                    CssClass="error" runat="server" />
+            </div>
+
+            <!-- Email -->
+            <div class="profile-item">
+                <label>Email</label>
+                <asp:TextBox ID="UserEmail" runat="server" CssClass="profile-value" />
+                <asp:RequiredFieldValidator Display="Dynamic"
+                    ControlToValidate="UserEmail"
+                    ErrorMessage="Email is required"
+                    CssClass="error" runat="server" />
+                <asp:RegularExpressionValidator ControlToValidate="UserEmail"
+                    Display="Dynamic"
+                    ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                    ErrorMessage="Invalid email format"
+                    CssClass="error" runat="server" />
+            </div>
+
+            <!-- Contact -->
+            <div class="profile-item">
+                <label>Contact Number</label>
+                <asp:TextBox ID="UserContact" runat="server" CssClass="profile-value" />
+                <asp:RequiredFieldValidator ControlToValidate="UserContact"
+                    Display="Dynamic"
+                    ErrorMessage="Contact number is required"
+                    CssClass="error" runat="server" />
+            </div>
+
+            <div class="profile-item">
+                <label>State</label>
+                <div class="input-row">
+                    <asp:DropDownList ID="StateList" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="BindCityList" Style="padding-left: 15px;">
+                        <asp:ListItem Text="Select State" Value=""></asp:ListItem>
                     </asp:DropDownList>
                 </div>
+                <asp:RequiredFieldValidator ControlToValidate="StateList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a state" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Email ID</label>
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" />
+            <div class="profile-item">
+                <label>City</label>
+                <div class="input-row">
+                    <asp:DropDownList ID="CityList" runat="server" CssClass="textbox" Style="padding-left: 15px;">
+                        <asp:ListItem Text="Select City" Value=""></asp:ListItem>
+                    </asp:DropDownList>
                 </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" />
-                </div>
+                <asp:RequiredFieldValidator ControlToValidate="CityList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a city" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
 
-            <div class="form-group">
-                <label>Business Address</label>
-                <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" />
+            <div class="profile-item full-width">
+                <label>Address</label>
+                <asp:TextBox ID="UserAddress" runat="server" CssClass="profile-value" />
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Base Visit Charges (₹)</label>
-                    <asp:TextBox ID="txtCharges" runat="server" CssClass="form-control" TextMode="Number" />
-                </div>
-                <div class="form-group">
-                    <label>Experience (Years)</label>
-                    <asp:TextBox ID="txtExp" runat="server" CssClass="form-control" TextMode="Number" />
-                </div>
+            <!-- WORKING INFO TITLE -->
+            <div class="section-title full-width">
+                Working Information
             </div>
 
-            <div class="save-banner">
-                <span>Keep your profile updated to get more bookings!</span>
-                <asp:Button ID="btnUpdate" runat="server" Text="Update Profile" CssClass="btn btn-primary"  />
+            <div class="profile-item">
+                <label>Service</label>
+                <div class="input-row">
+                    <asp:DropDownList ID="ServiceList" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="BindEquipmentList" Style="padding-left: 15px;">
+                        <asp:ListItem Text="Select Service" Value=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="ServiceList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a Service" ValidationGroup="signup" Display="Dynamic" runat="server" />
             </div>
+
+            <div class="profile-item">
+                <label>Equipment</label>
+                <div class="input-row">
+                    <asp:DropDownList ID="EquipmentList" runat="server" CssClass="textbox" Style="padding-left: 15px;">
+                        <asp:ListItem Text="Select Equipment" Value=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="EquipmentList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a Equipment" ValidationGroup="signup" Display="Dynamic" runat="server" />
+            </div>
+
+            <div class="profile-item">
+                <label>Age</label>
+                <asp:TextBox ID="SPAge" runat="server" CssClass="profile-value" />
+                <asp:RequiredFieldValidator runat="server"
+                    ControlToValidate="SPAge"
+                    ErrorMessage="Age is required"
+                    ForeColor="Red" />
+                <asp:RangeValidator runat="server"
+                    ControlToValidate="SPAge"
+                    MinimumValue="18"
+                    MaximumValue="100"
+                    Type="Integer"
+                    ErrorMessage="Age must be between 18 and 100"
+                    ForeColor="Red" />
+            </div>
+
+            <div class="profile-item">
+                <label>Experience (Years)</label>
+                <asp:TextBox ID="SPExperience" runat="server" CssClass="profile-value" />
+                <asp:RequiredFieldValidator runat="server"
+                    ControlToValidate="SPExperience"
+                    ErrorMessage="Experience is required"
+                    ForeColor="Red" />
+                <asp:RangeValidator runat="server"
+                    ControlToValidate="SPExperience"
+                    MinimumValue="0"
+                    MaximumValue="50"
+                    Type="Integer"
+                    ErrorMessage="Experience must be between 0 and 50 years"
+                    ForeColor="Red" />
+            </div>
+
+            <div class="profile-item">
+                <label>Minimum Price</label>
+                <asp:TextBox ID="SPMinimumPrice" runat="server" CssClass="profile-value" />
+                <asp:RequiredFieldValidator runat="server"
+                    ControlToValidate="SPMinimumPrice"
+                    ErrorMessage="Minimum price is required"
+                    ForeColor="Red" />
+                <asp:CompareValidator runat="server"
+                    ControlToValidate="SPMinimumPrice"
+                    Operator="DataTypeCheck"
+                    Type="Double"
+                    ErrorMessage="Enter a valid price"
+                    ForeColor="Red" />
+            </div>
+
+            <div class="profile-item full-width">
+                <label>Shop Address</label>
+                <asp:TextBox ID="SPShopAddress" runat="server" CssClass="profile-value" />
+                <asp:RequiredFieldValidator runat="server"
+                    ControlToValidate="SPShopAddress"
+                    ErrorMessage="Shop address is required"
+                    ForeColor="Red" />
+            </div>
+
+            <!-- SECURITY INFO TITLE -->
+            <div class="section-title full-width">
+                Security Information
+            </div>
+
+            <div class="profile-item full-width">
+                <label>Password</label>
+                <asp:TextBox ID="Password" runat="server"
+                    CssClass="profile-value" TextMode="Password" />
+                <asp:RequiredFieldValidator runat="server"
+                    ControlToValidate="Password"
+                    ErrorMessage="Password is required"
+                    ForeColor="Red" />
+                <asp:RegularExpressionValidator runat="server"
+                    ControlToValidate="Password"
+                    ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                    ErrorMessage="Password must be at least 6 characters with letters and numbers"
+                    ForeColor="Red" />
+            </div>
+
         </div>
-    </div>
+
+
+        <div style="text-align: center; margin-top: 20px;">
+            <asp:Button ID="btnBack" runat="server" Text="← Back"
+                CssClass="btn btn-view"
+                OnClientClick="history.back(); return false;" />
+
+            <asp:Button ID="btnEdit" runat="server"
+                Text="Add Service Provider"
+                CssClass="btn btn-edit"
+                OnClick="btnEdit_Click" />
+            <asp:Button ID="btnUpdate" runat="server"
+                Text="Save Changes"
+                CssClass="btn btn-edit"
+                OnClick="btnUpdate_Click"
+                Visible="false" />
+        </div>
 </asp:Content>
