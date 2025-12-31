@@ -40,82 +40,91 @@
             ID="btnAll"
             runat="server"
             Text="All"
-            CssClass="filter-btn "
-             />
+            OnClick="btnAll_Click"
+            CssClass="filter-btn " />
 
         <asp:Button
             ID="btnPending"
             runat="server"
             Text="Pending Requests"
-            CssClass="filter-btn "
-             />
+            OnClick="btnPending_Click"
+            CssClass="filter-btn " />
 
         <asp:Button
-            ID="btnApproved"
+            ID="btnCompleted"
             runat="server"
             Text="Approved"
-            CssClass="filter-btn"
-             />
+            OnClick="btnCompleted_Click"
+            CssClass="filter-btn" />
 
         <asp:Button
-            ID="btnRejected"
+            ID="btnUserDecline"
             runat="server"
             Text="Declined"
-            CssClass="filter-btn"
-             />
+            OnClick="btnUserDecline_Click"
+            CssClass="filter-btn" />
+
+        <asp:Button
+            ID="btnWorkerDecline"
+            runat="server"
+            Text="Declined"
+            OnClick="btnWorkerDecline_Click"
+            CssClass="filter-btn" />
 
     </div>
 
     <!-- TABLE -->
     <div class="table-box">
         <asp:GridView
-            ID="UserGrid"
+            ID="BookingGrid"
             runat="server"
             CssClass="admin-table"
-            DataKeyNames="User_ID"
+            DataKeyNames="Booking_ID"
             EmptyDataText="No Data Found"
             AllowPaging="true"
             PageSize="10"
             AutoGenerateColumns="false"
-            >
+            OnRowCommand="UserGrid_RowCommand"
+            OnPageIndexChanging="UserGrid_PageIndexChanging">
 
             <Columns>
 
-                <asp:TemplateField HeaderText="Name">
+                <asp:TemplateField HeaderText="User ">
                     <ItemTemplate>
                         <%# Eval("User_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Email">
+                <asp:TemplateField HeaderText="Woker ">
                     <ItemTemplate>
-                        <%# Eval("User_EmailID") %>
+                        <%# Eval("Worker_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Address">
+                <asp:TemplateField HeaderText="Status">
                     <ItemTemplate>
-                        <%# Eval("User_Address") %>
+                        <%# Eval("Booking_Status") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="State">
+                <asp:TemplateField HeaderText="Booking Time">
                     <ItemTemplate>
-                        <%# Eval("State_Name") %>
+                        <%# Eval("Booking_DateTime") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="City">
+                <asp:TemplateField HeaderText="Rating">
                     <ItemTemplate>
-                        <%# Eval("City_Name") %>
+                        <%# Eval("Booking_Rating") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Contact No.">
+                <asp:TemplateField HeaderText="Service">
                     <ItemTemplate>
-                        <%# Eval("User_ContactNo") %>
+                        <%# Eval("Service_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
+
 
                 <asp:TemplateField HeaderText="Action">
                     <ItemTemplate>
@@ -126,7 +135,7 @@
                                 Text="View"
                                 CssClass="btn btn-view"
                                 CommandName="ViewUser"
-                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CommandArgument='<%# Eval("Booking_ID") %>'
                                 CausesValidation="false" />
 
 
@@ -136,7 +145,7 @@
                                 Text="Remove"
                                 CssClass="btn btn-delete"
                                 CommandName="DeleteUser"
-                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CommandArgument='<%# Eval("Booking_ID") %>'
                                 CausesValidation="false"
                                 OnClientClick="return confirm('Are you sure you want to remove this user?');" />
                         </div>
@@ -148,5 +157,6 @@
         </asp:GridView>
 
     </div>
+
 
 </asp:Content>
