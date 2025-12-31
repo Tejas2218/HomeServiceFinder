@@ -35,9 +35,9 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 using (SqlCommand cmd = new SqlCommand("View_Booking_Details", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@SP_ID", 7);
+                    //cmd.Parameters.AddWithValue("@SP_ID", 7);
                     cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
-                    //cmd.Parameters.AddWithValue("@Booking_Status", status);
+                    cmd.Parameters.AddWithValue("@Booking_Status", status);
                     SqlDataAdapter sda = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     sda.Fill(dt);

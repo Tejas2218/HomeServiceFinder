@@ -73,13 +73,13 @@ namespace HomeServiceFinder.login_signup
                             {
                                 Response.Redirect("Waiting_ServiceProvider.aspx");
                             }
-                            else if (dr["SP_Status"].ToString() == "Decline")
+                            else if (dr["SP_Status"].ToString() == "Rejected")
                             {
                                 Response.Write("<script>Swal.fire({\r\n  icon: 'error',\r\n  title: 'Request Declined',\r\n  text: 'Your request could not be approved at this time.',\r\n  confirmButtonColor: '#d33',\r\n  confirmButtonText: 'Understood'\r\n});</script>");
                             }
-                            else if (dr["SP_Status"].ToString() == "Accept")
+                            else if (dr["SP_Status"].ToString() == "Approved")
                             {
-                                Response.Redirect("~/Pages/Service_Provider/service_provider_dashboard.aspx");
+                                Response.Redirect("~/Pages/Service_Provider/service_provider_booking.aspx");
                             }
 
                         }

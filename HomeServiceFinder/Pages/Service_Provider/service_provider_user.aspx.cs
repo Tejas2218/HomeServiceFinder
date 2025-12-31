@@ -39,7 +39,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 using (SqlCommand cmd = new SqlCommand("Get_Unique_Customers_By_SP", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@SP_ID", 7);
+                    //cmd.Parameters.AddWithValue("@SP_ID", 7);
                     if(search!=null || search!="")
                     {
                         cmd.Parameters.AddWithValue("@search",search);
