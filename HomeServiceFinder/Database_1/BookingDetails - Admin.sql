@@ -66,15 +66,23 @@ go
 	create or alter proc Display_All_Booking
 	as
 	begin
-		select User_Name from BookingDetails BD
+		select BD.Booking_Status,
+			   BD.Booking_DateTime,
+			   BD.Booking_Rating,
+			   BD.Booking_Decline_Reason,
+			   BD.Booking_ID,
+			   UD.User_Name as User_Name, 
+			   SUD.User_Name as Worker_Name,
+			   SM.Service_Name
+		from BookingDetails BD
 		join UserDetails UD 
 		on BD.User_ID=UD.User_ID
-
-		select User_Name from BookingDetails BD
 		join ServiceProviderDetails SPD
 		on BD.SP_ID=SPD.SP_ID
-		join UserDetails UD
-		on SPD.User_ID=UD.User_ID
+		join ServiceMaster SM
+		on SPD.Service_ID=SM.Service_ID
+		join UserDetails SUD
+		on SPD.User_ID=SUD.User_ID
 	end
 	go
 

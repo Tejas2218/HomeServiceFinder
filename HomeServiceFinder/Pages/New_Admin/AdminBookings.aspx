@@ -79,7 +79,7 @@
             ID="BookingGrid"
             runat="server"
             CssClass="admin-table"
-            DataKeyNames="User_ID"
+            DataKeyNames="Booking_ID"
             EmptyDataText="No Data Found"
             AllowPaging="true"
             PageSize="10"
@@ -89,15 +89,15 @@
 
             <Columns>
 
-                <asp:TemplateField HeaderText="User ID">
+                <asp:TemplateField HeaderText="User ">
                     <ItemTemplate>
                         <%# Eval("User_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="SP_ID">
+                <asp:TemplateField HeaderText="Woker ">
                     <ItemTemplate>
-                        <%# Eval("SP_ID") %>
+                        <%# Eval("Worker_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
@@ -119,14 +119,11 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Contact No.">
+                <asp:TemplateField HeaderText="Service">
                     <ItemTemplate>
-                        <%# Eval("Booking_Decline_Reason") %>
+                        <%# Eval("Service_Name") %>
                     </ItemTemplate>
                 </asp:TemplateField>
-
-
-
 
 
                 <asp:TemplateField HeaderText="Action">
@@ -138,7 +135,7 @@
                                 Text="View"
                                 CssClass="btn btn-view"
                                 CommandName="ViewUser"
-                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CommandArgument='<%# Eval("Booking_ID") %>'
                                 CausesValidation="false" />
 
 
@@ -148,7 +145,7 @@
                                 Text="Remove"
                                 CssClass="btn btn-delete"
                                 CommandName="DeleteUser"
-                                CommandArgument='<%# Eval("SP_ID") %>'
+                                CommandArgument='<%# Eval("Booking_ID") %>'
                                 CausesValidation="false"
                                 OnClientClick="return confirm('Are you sure you want to remove this user?');" />
                         </div>
