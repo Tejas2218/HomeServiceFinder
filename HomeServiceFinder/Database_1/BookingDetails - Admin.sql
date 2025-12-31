@@ -26,28 +26,87 @@ end
 go
 
 --Insert Booking Detail--
+select * from BookingDetails
+go
+
 create or alter proc Insert_Booking_Details_Admin
 @Booking_Status varchar(50),
+@Booking_DateTime datetime Null,
 @User_ID int,
 @SP_ID int,
 @Booking_Rating int,
+@Booking_Decline_Reason varchar(100),
 @Equipment_ID int,
 @Time_Slot varchar(10),
 @Visiting_DateTime datetime
 as
 begin
-	insert into BookingDetails(Booking_Status,User_ID,SP_ID,Booking_Rating,Equipment_ID,Time_Slot,Visiting_DateTime)
-	values(@Booking_Status,@User_ID,@SP_ID,@Booking_Rating,@Equipment_ID,@Time_Slot,@Visiting_DateTime)
+	insert into BookingDetails(Booking_Status,Booking_DateTime,User_ID,SP_ID,Booking_Rating,Booking_Decline_Reason,Equipment_ID,Time_Slot,Visiting_DateTime)
+						values(@Booking_Status,@Booking_DateTime,@User_ID,@SP_ID,@Booking_Rating,@Booking_Decline_Reason,@Equipment_ID,@Time_Slot,@Visiting_DateTime)
 	
 	select SCOPE_IDENTITY() as Booking_ID
 end
 go
 
-exec Insert_Booking_Details_Admin 
-	'Pending',
-	1,
-	10,
-	0,
-	1,
-	'9-10',
-	GETDATE();
+Declare @CurrentDateTime DateTime;
+Set @CurrentDateTime = GetDate();
+EXEC Insert_Booking_Details_Admin
+@Booking_Status = 'Pending',
+@Booking_DateTime = @CurrentDateTime,
+@User_ID = 32,
+@SP_ID = 6,
+@Booking_Rating = 0,
+@Booking_Decline_Reason = null,
+@Equipment_ID = 1,
+@Time_Slot = '9To10',
+@Visiting_DateTime = @CurrentDateTime;
+go  
+
+--Display All Booking--
+	create or alter proc Display_All_Booking
+	as
+	begin
+		select User_Name from BookingDetails BD
+		join UserDetails UD 
+		on BD.User_ID=UD.User_ID
+
+		select User_Name from BookingDetails BD
+		join ServiceProviderDetails SPD
+		on BD.SP_ID=SPD.SP_ID
+		join UserDetails UD
+		on SPD.User_ID=UD.User_ID
+	end
+	go
+
+--Display Pending Booking--
+create or alter proc Display_Pending_Booking
+as
+begin
+	select * from BookingDetails where Booking_Status='Pending';
+end
+go 
+
+--Display Completed Booking--
+create or alter proc Display_Completed_Booking
+as
+begin
+	select * from BookingDetails where Booking_Status='Completed';
+end
+go
+
+--Display User Cancel Booking--
+create or alter proc Display_User_Decine_Booking
+as
+begin
+	select * from BookingDetails where Booking_Status='Cancel';
+end
+go
+
+--Display Worker Decline Booking--
+create or alter proc Display_User_Decine_Booking
+as
+begin
+	select * from BookingDetails where Booking_Status='Decline';
+end
+
+

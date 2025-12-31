@@ -60,30 +60,39 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.Button btnPending;
 
         /// <summary>
-        /// btnApproved control.
+        /// btnCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnApproved;
+        protected global::System.Web.UI.WebControls.Button btnCompleted;
 
         /// <summary>
-        /// btnRejected control.
+        /// btnUserDecline control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRejected;
+        protected global::System.Web.UI.WebControls.Button btnUserDecline;
 
         /// <summary>
-        /// UserGrid control.
+        /// btnWorkerDecline control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView UserGrid;
+        protected global::System.Web.UI.WebControls.Button btnWorkerDecline;
+
+        /// <summary>
+        /// BookingGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView BookingGrid;
     }
 }
