@@ -1,40 +1,42 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="service_provider.aspx.cs" Inherits="HomeServiceFinder.Pages.User.service_provider1" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <title>Select Provider - Apex</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 
     <style>
-        /* --- APEX THEME (Orange & Black) --- */
         :root {
-            --apex-orange: #FF4500;
+            --apex-orange: #f27b0c;
             --apex-dark: #1a1a1a;
             --apex-light: #f8f9fa;
         }
 
-        body {
-            background-color: var(--apex-light);
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        /* HEADER */
+        /* FIXED: Background Image Added */
         .page-header {
-            background: linear-gradient(135deg, var(--apex-dark) 0%, #333 100%);
-            padding: 60px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/carousel-1.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 80px 0;
             color: white;
             text-align: center;
             border-bottom: 5px solid var(--apex-orange);
             margin-bottom: 40px;
         }
 
-        /* CARD STYLE */
         .provider-card {
             background: white;
             border-radius: 12px;
@@ -44,7 +46,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             border-left: 5px solid transparent;
-            cursor: pointer;
+            margin-bottom: 20px;
         }
 
             .provider-card:hover {
@@ -58,25 +60,12 @@
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--apex-light);
             margin-right: 20px;
         }
 
-        .p-details h5 {
-            font-weight: 700;
-            margin: 0;
-            color: var(--apex-dark);
-        }
-
-        .p-details small {
-            color: #777;
-            font-weight: 500;
-        }
-
-        .p-rating {
+        .p-rating i {
             color: #ffc107;
             font-size: 0.9rem;
-            margin-top: 5px;
         }
 
         .btn-select {
@@ -85,30 +74,46 @@
             color: var(--apex-orange);
             background: transparent;
             border-radius: 50px;
-            padding: 5px 20px;
+            padding: 5px 25px;
             font-weight: 600;
             transition: 0.3s;
+            text-decoration: none;
         }
 
             .btn-select:hover {
                 background: var(--apex-orange);
                 color: white;
             }
+        /* =======================
+   APEX BOOKING MODAL
+======================= */
 
-        /* --- MODAL (POPUP) --- */
+        .modal-content {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            overflow: hidden;
+        }
+
+        /* Header */
         .modal-header {
-            background: var(--apex-dark);
+            background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
             color: white;
+            border-bottom: 3px solid #f27b0c;
         }
 
         .modal-title {
-            color: var(--apex-orange);
-            font-weight: bold;
+            font-weight: 700;
+            color: #f27b0c;
         }
 
-        /* Modal Left Side */
+        .btn-close-white {
+            filter: invert(1);
+        }
+
+        /* LEFT PROFILE PANEL */
         .modal-profile-box {
-            background-color: #f1f1f1;
+            background: linear-gradient(180deg, #f8f9fa, #eeeeee);
             padding: 30px 20px;
             text-align: center;
             height: 100%;
@@ -120,110 +125,168 @@
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--apex-orange);
+            border: 4px solid #f27b0c;
             margin-bottom: 15px;
+            background: white;
         }
 
-        /* Time Slots */
+        #mName {
+            color: #1a1a1a;
+        }
+
+        #mRole {
+            font-size: 0.9rem;
+        }
+
+        /* Rating badge */
+        .modal-profile-box .bg-white {
+            border-radius: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* RIGHT SIDE */
+        .modal-body h5 {
+            font-weight: 700;
+        }
+
+        /* TIME SLOTS */
         .time-slot-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-top: 10px;
         }
 
         .time-slot {
             border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-            border-radius: 5px;
+            padding: 10px;
+            border-radius: 8px;
             cursor: pointer;
+            text-align: center;
             font-size: 0.9rem;
-            transition: 0.2s;
+            transition: all 0.25s ease;
         }
 
             .time-slot:hover {
-                border-color: var(--apex-orange);
-                color: var(--apex-orange);
+                border-color: #f27b0c;
+                color: #f27b0c;
             }
 
             .time-slot.active {
-                background-color: var(--apex-orange);
+                background: #f27b0c;
                 color: white;
-                border-color: var(--apex-orange);
+                border-color: #f27b0c;
+                box-shadow: 0 5px 15px rgba(242,123,12,0.4);
             }
 
+        /* CONFIRM BUTTON */
         .btn-confirm {
-            background-color: var(--apex-dark);
+            background: #1a1a1a;
             color: white;
             width: 100%;
-            padding: 12px;
-            font-weight: bold;
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 10px;
             border: none;
-            border-radius: 8px;
-            margin-top: 20px;
+            margin-top: 25px;
+            transition: 0.3s;
         }
 
             .btn-confirm:hover {
-                background-color: var(--apex-orange);
+                background: #f27b0c;
             }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-
-        <div class="page-header">
-            <h1 class="display-5 fw-bold">Select Expert Provider</h1>
-            <p class="opacity-75">Choose the best professional for your service</p>
-        </div>
-
-        <div class="container pb-5">
-            <div class="row g-4">
-                <asp:Repeater ID="rptProviders" runat="server">
-                    <ItemTemplate>
-                        <div class="col-lg-6">
-                            <div class="provider-card"
-                                onclick="openModal(
-                '<%# ((System.Data.DataRowView)Container.DataItem)["User_Name"] %>',
-                '<%# ((System.Data.DataRowView)Container.DataItem)["Service_Name"] %>',
-                '<%# ((System.Data.DataRowView)Container.DataItem)["SP_AverageRating"] %>',
-                                '<%# ((System.Data.DataRowView)Container.DataItem)["SP_ID"] %>',
-                                '<%# ((System.Data.DataRowView)Container.DataItem)["Equipment_ID"] %>',
-                                '<%# ((System.Data.DataRowView)Container.DataItem)["SP_MinimumPrice"] %>',
-                                'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIQEBISEBIVExAQEA8QEhAQDxAVEBAQFRcXFxUVExUYHS0gGB0nHRcVITElJTUrLi8uGCAzRDMtOig5LisBCgoKDQ0ODg0NDisZHxkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOQA3QMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYBBAcDAv/EAEAQAAIBAQMIBggEBAcBAAAAAAABAgMEETEFBhIhQVFxkRMiUmGBoSMyQnKSscHRM0NiwlOCsvAUNHOTouHxJP/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A7iAAAAAAAAAAAAAA1LXlOjS/EqRi92lfL4VrIuvndZ4+qpz92Fy/5NAT4KnUz0Xs0X/NUu+SPF56T/gx+N/YC5Ap0c9JbaK8KjX7TYpZ5w9ulJe7KMvncBaQQ1nzns08ZuD3Ti15rUStCvCavhKMlvjJNeQHoAAAAAAAAAAAAAAAAAAAAAHzUqKKcpNRitbbaSS72RGWs4KdnviuvV7CeqPvPZwxKTlHKdW0SvqSvWyC1QjwX1xAtWUs7qcL1Rj0ku071BfV+XErVuy5aK3rVGo9mHVj5a343kcAAAAAAAAAB90qkoPSi3GS2xbT5o+ABPWDOqvTuU7qsf1ap+El9by0ZMy/Rr3JS0Zv2J6m3+l4M5yAOtgoOR85qtG6NS+pT3N9eK/TLbwfkXWw26nXhp05aS274vdJbGBsgAAAAAAAAAAAABUs4c5rr6VnfdKqtm9Q+/8A6eedOX776FF9XWqk1t3xi929+HGqgZb5vbvMAAAAAAAAAAAAAAAAAADYsNtqUJqdOVz27pLdJbUa4A6PkPLULTHV1akV1qd/nHeiUOUWevKnJTg3GUXemth0PIOWI2mGxVI+vD90e5+QEoAAAAAAAAVzOzLPRR6Gm/STXWaxhB/V/wB7CYypbo0KUqkti1LtSeCOZ2itKpOU5u+Um233geYAAAAAAAABK5JyFUtHW9Sn22tcvdW3jgBFC8vtjyBZ6fsab7VTreWHkSMKUVqUUluSSQHMbwdLrWSnP16cJe9CLIa35r053uk3Tlud7g+etf3qApoNi22KdGWjUjc9m6S3xe01wAAAAAAbFhtc6NSNSDulHk1tT7ma4A6jk23Rr041IYPFbYyWKZtHPs18q9BV0ZP0VVqMt0ZbJfR93A6CAAAAA1cp2tUaM6j9iLaW+WEVzuAp+eWUekrdFF9Slj31HjyWrmV4zKTbbbvbbbbxbeLMAAAAAAAA+6VNzlGMcZSUVxbuQExm3kfp5adReig7ru3LdwW0uqV2paktSSwSPKx2aNKnGnHCCS4va3xd7PYIAAAAANbKFhhXg4TXB7Yy3o5/brJKjUlTnjF47JLY0dJK/nhYtKkqqXWpu598JO7yd3NgU4ABQAAAAAOhZq5R6aglJ3zpXQlva9mXLzTOekzmpbeitMU/Vq+jfF+q+erxYHQgAAKvn1aroU6S9uTm+EcFzfkWg5/nhX07VJbKcYQ8tJ/1AQgAAAAAAABK5sUtK1U90dOXKLu87iKJjNSd1qj+qNReV/0AvIACAAAAAAeGUKWnSqR7VOa8bnce552mejCbeEYSb4JNgcyAQCgAAAAAZTa1rU1rT3MwAOp5PtPS0qdTtwjJ9zu1rnebBAZlV9KzaP8ADqSj4O6XzbJ8AcvytU069aW+rU5JtLyOoHJpyvbe9t8wPkAAAAAAAA2LBaOiqwqdiSb71tXK81wB1CMk0mtaaTT3p4GSuZp5VUoqhN9aK9G37UOzxXy4FjCAAAAAAROc9q6OzyXtVPRrg/W8r+ZKykkm27kk228Eli2ULL+U/wDEVb1+HC+MO/fLx+SQEYAAoAAAAAAAC15h1NdaO9U5ctJP5ouBRsxpf/RNb6MnylD7l5AHJEjrZym1w0ak49mc48m0B5AAAAAAAAAADMZNNNO5ppprFNbUW3I+c0ZJQtHVlgql3Vl73ZflwKiAOoQkmk0008GnenwZk5rZrXUpfhzlH3ZNJ8VgzfhnJaV+Ynxp0/ogL2eFsttOir6klFbE/WfBYso9XL9pljVaX6Ywj5pXkfObk75NtvFttt+LAl8t5dlX6kE4Ut3tT977EMAAAAAAAAAAAAFhzH/zMv8AQn/VAvRSsxIelqy3U0vilf8AtLqAObZx0dC1Vlvnp/ElL6nSSlZ82a6rTqbJw0X70X9pLkBWQAAAAAAADMVe7lrb1JLFvuJPJGRKlo1+pT7bWPurb8i4ZOyXSoL0cettnLXN+OzggKpYs269TXJKnH9frfCvrcTVmzVox9eUpvjox5LX5k8AjRpZHs8cKMP5o6T5yvNhWOmsKcP9uP2PYAa87BSeNKm+NOH2NStkCzS/LSe+DlHyTuJMAVm1ZpLGlUa/TUV6+JYcmQNuyVWo+vB6PbjrhzWHjcdEAHLgXXKubdOpfKldTnuX4cn3rZ4cio2yyToycKkXGXk1vT2oK8AAAAAAAAXPMOjdTqz7U4w+FX/uLQRWbFm6Oy008ZJ1H/M715XEqAIXO2x9LZpNetSaqLgtUvJvkTRiSvVz1p6mt6A5KDcytYnQrTp7E74vfB64v+9zNMAAABYs38gdJdVrLqYxh2++Xd8+GPlmzkfppdJUXoovUn+ZJfRf9by6AYSuVy1JaklgkZACAAAAAAAAAAAGtb7DCvDQqK9bGvWi98WbIA53lXJs7PPRlri9cJrCS+j7jSOk2+xwrU3Ca1PB7Yy2Nd5z632OVGpKnPFYPZKOxoK1wAANjJ9ldarCmvbkk+6PtPlea5bMx7BrnXksPRw44yfyXMC3RjcklgtSXcZAAAACu55ZM6SmqsV16S612Lp7eWPMox1po55nJkn/AA9Xqr0U73B9nfDw+QEQbOTbG69WNOPtPW+zFYs1i45n2LRpuq11qjuj3QX3d/JATtCjGnGMIq6MUkl3H2AEAAAAAAAAAAAAAAAACIzlyb01LSivSU05R3yjtj9V3rvJcAcuBKZxWHoa8kl1J9eO5X4rwd/hcRYV7WSzSqzjTgr5TaS+rfcsTp1hssaNONOPqwV3F7W+LvfiQWaGSOjh00116i6qeMYfd/K4sgAAAAAANbKNihXpypzWp4PbF7Gu82QBzC25MqUq3QyXWbSi9k03cmjoVCkoRjCOEIqK4JXHtabJCo4OUU5U5aUHtiz5lG4DAACAAAAAAAAAAAAAAAAAAAgc8LNpUVNY05L4Zan56JHZrZD6WSq1F6KL6qf5kl+1eZbqtljVi4zV8JK5rejZhBRSSSSSSSSuSSwSCvoAAAAAAAAAADEo3mQBrzhdwPk2jzlS3AeIMyjcYCAAAAAAAAAAAAH3Gm2B8HrCnv5H3GCR9BQAAAAAAAAAAAAAAAAAAD4dNH2APF0mfLi9xsADVBtGLgNYzcbFxkDXVNn2qW89QB8xgkfQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//2Q==')">
-
-                                <img src='data:image/jpeg;base64,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'
-                                    class="p-img" onerror="this.src='https://via.placeholder.com/80';" />
-
-                                <div class="p-details">
-                                    <h5><%# ((System.Data.DataRowView)Container.DataItem)["User_Name"] %></h5>
-                                    <small><%# ((System.Data.DataRowView)Container.DataItem)["Service_Name"] %></small>
-
-                                    <div class="p-rating">
-                                        <i class="fa fa-star"></i>
-                                        <%# ((System.Data.DataRowView)Container.DataItem)["SP_AverageRating"] %>
-                                        <span class="text-muted ms-1">(<%# ((System.Data.DataRowView)Container.DataItem)["SP_Experience"] %> Experience)
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <button type="button" class="btn btn-select">Select</button>
-                            </div>
-                        </div>
-                    </ItemTemplate>
-
-                </asp:Repeater>
-                <asp:Label ID="lblMessage" runat="server"></asp:Label>
+        <div class="container-fluid bg-light p-0">
+            <div class="row gx-0 d-none d-lg-flex">
+                <div class="col-lg-7 px-5 text-start">
+                    <div class="h-100 d-inline-flex align-items-center border-start border-end px-3">
+                        <small class="fa fa-phone-alt me-2"></small>
+                        <small>+012 345 6789</small>
+                    </div>
+                    <div class="h-100 d-inline-flex align-items-center border-end px-3">
+                        <small class="far fa-envelope-open me-2"></small>
+                        <small>info@example.com</small>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+            <a href="index.aspx" class="navbar-brand d-flex align-items-center">
+                <h1 class="m-0"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-3 py-lg-0">
+                    <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
+                    <a href="service.aspx" class="nav-item nav-link">Our Services</a>
+                    <a href="service_provider.aspx" class="nav-item nav-link active">providers</a>
+                    <a href="profile.aspx" class="nav-item nav-link">Profile</a>
+                    <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
+                    <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container text-center py-5">
+                <h1 class="display-4 text-white animated slideInDown mb-4">Choose a Provider</h1>
+                <p class="text-white">Select the best expert for your home needs</p>
+            </div>
+        </div>
+
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <asp:Repeater ID="rptProviders" runat="server">
+                        <ItemTemplate>
+                            <div class="provider-card wow fadeInUp" data-wow-delay="0.1s">
+                                <img src='data:image/jpeg;base64,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' class="p-img" alt="Provider"
+                                    onerror="this.src='img/testimonial-1.jpg';" />
+                                <div class="p-details">
+                                    <h5 class="mb-1"><%# Eval("User_Name") %></h5>
+                                    <small class="text-muted d-block mb-2">
+                                        <i class="fa fa-tools me-1"></i><%# Eval("SP_Experience") %> Years Experience
+                                    </small>
+                                    <div class="p-rating">
+                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
+                                        <span class="text-muted ms-2">(<%# Eval("SP_AverageRating") %>)</span>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="btn btn-select"
+                                    onclick="openModal(
+            '<%# Eval("User_Name") %>',
+            'Service Provider',
+            '<%# Eval("SP_AverageRating") %>',
+            'img/testimonial-1.jpg',
+            '<%# Eval("SP_ID") %>',
+                                    '<%# Eval("Equipment_ID") %>',
+        )">
+                                    Select
+                                </button>
+
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                    <asp:Label ID="lblMessage" runat="server" Text="No providers available for this service."
+                        Visible="false" CssClass="alert alert-info d-block text-center"></asp:Label>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content overflow-hidden">
 
                     <div class="modal-header">
                         <h5 class="modal-title">Book Appointment</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        <button type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        </button>
                     </div>
 
                     <div class="modal-body p-0">
@@ -252,20 +315,14 @@
 
                                 <label class="fw-bold small text-muted">AVAILABLE SLOTS</label>
                                 <div class="time-slot-grid">
-                                    <div class="time-slot" onclick="selectTime(this, '09:00 AM TO 11:00 AM')">09:00 AM TO 11:00</div>
-                                    <div class="time-slot" onclick="selectTime(this, '11:00 AM TO 01:00 PM')">10:00 AM TO 01:00 PM</div>
-                                    <div class="time-slot" onclick="selectTime(this, '01:00 PM TO 03:00 PM')">01:00 PM TO 03:00 PM</div>
+                                    <div class="time-slot" onclick="selectTime(this, '09:00 AM TO 11:00 AM')">09:00 AM TO 11:00 AM</div>
+                                    <div class="time-slot" onclick="selectTime(this, '11:00 AM TO 01:00 PM')">11:00 AM TO 01:00 PM</div>
+                                    <div class="time-slot" onclick="selectTime(this, '01:00 AM TO 03:00 PM')">01:00 PM TO 03:00 PM</div>
                                     <div class="time-slot" onclick="selectTime(this, '03:00 PM TO 05:00 PM')">03:00 PM TO 05:00 PM</div>
                                     <div class="time-slot" onclick="selectTime(this, '05:00 PM TO 07:00 PM')">05:00 PM TO 07:00 PM</div>
                                 </div>
                                 <small id="errTime" class="text-danger" style="display: none;">Please select a time slot.</small>
 
-                                <asp:HiddenField ID="hfProviderName" runat="server" />
-                                <asp:HiddenField ID="hfProviderID" runat="server" />
-                                <asp:HiddenField ID="hfEquipmentID" runat="server" />
-                                <asp:HiddenField ID="hfSelectedTime" runat="server" />
-                                <asp:HiddenField ID="hfMinimumPrice" runat="server" />
-                                <asp:HiddenField ID="hfdate" runat="server" />
 
                                 <asp:Button ID="btnBook" runat="server" Text="Confirm & Book" CssClass="btn btn-confirm" OnClientClick="return validate();" OnClick="btnBook_Click" />
                             </div>
@@ -277,47 +334,103 @@
             </div>
         </div>
 
-    </form>
+        <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h1 class="text-white mb-4"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
+                        <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Address</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Quick Links</h4>
+                        <a class="btn btn-link" href="about.aspx">About Us</a>
+                        <a class="btn btn-link" href="profile.aspx">Profile</a>
+                        <a class="btn btn-link" href="service.aspx">Our Services</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Newsletter</h4>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email" />
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <asp:HiddenField ID="hfProviderName" runat="server" />
+        <asp:HiddenField ID="hfProviderID" runat="server" />
+        <asp:HiddenField ID="hfEquipmentID" runat="server" />
+        <asp:HiddenField ID="hfSelectedTime" runat="server" />
+        <asp:HiddenField ID="hfMinimumPrice" runat="server" />
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Open Modal
-        function openModal(name, role, rating, spID, eqID, minPrice, img) {
-            document.getElementById('mName').innerText = name;
-            document.getElementById('mRole').innerText = role;
-            document.getElementById('mRating').innerText = rating;
-            document.getElementById('mImg').src = img;
 
-            // Set Hidden Field
-            document.getElementById('<%= hfProviderID.ClientID %>').value = spID;
-            document.getElementById('<%= hfdate.ClientID %>').value = txtDate.Text;
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            // Open Modal
+            function openModal(name, role, rating, img, sid, eid) {
+                document.getElementById('mName').innerText = name;
+                document.getElementById('mRole').innerText = role;
+                document.getElementById('mRating').innerText = rating;
+                document.getElementById('mImg').src = img;
 
-            // Reset Time
-            document.getElementById('<%= hfEquipmentID.ClientID %>').value = eqID;
-            document.getElementById('<%= hfMinimumPrice.ClientID %>').value = minPrice;
-            document.getElementById('<%= hfProviderName.ClientID %>').value = name;
+                // Set Hidden Field
+                document.getElementById('<%= hfProviderName.ClientID %>').value = name;
+                document.getElementById('<%= hfProviderID.ClientID %>').value = sid;
+                document.getElementById('<%= hfEquipmentID.ClientID %>').value = eid;
 
-            document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('active'));
+                // Reset Time
+                document.getElementById('<%= hfSelectedTime.ClientID %>').value = '';
+                document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('active'));
 
-            new bootstrap.Modal(document.getElementById('bookingModal')).show();
-        }
-
-        // Select Time
-        function selectTime(el, time) {
-            document.querySelectorAll('.time-slot').forEach(item => item.classList.remove('active'));
-            el.classList.add('active');
-            document.getElementById('<%= hfSelectedTime.ClientID %>').value = time;
-            document.getElementById('errTime').style.display = 'none';
-        }
-
-        // Validation
-        function validate() {
-            if (document.getElementById('<%= hfSelectedTime.ClientID %>').value === '') {
-                document.getElementById('errTime').style.display = 'block';
-                return false;
+                new bootstrap.Modal(document.getElementById('bookingModal')).show();
             }
-            return true;
-        }
-    </script>
+
+            // Select Time
+            function selectTime(el, time) {
+                document.querySelectorAll('.time-slot').forEach(item => item.classList.remove('active'));
+                el.classList.add('active');
+                document.getElementById('<%= hfSelectedTime.ClientID %>').value = time;
+                document.getElementById('errTime').style.display = 'none';
+            }
+
+            // Validation
+            function validate() {
+                if (document.getElementById('<%= hfSelectedTime.ClientID %>').value === '') {
+                    document.getElementById('errTime').style.display = 'block';
+                    return false;
+                }
+                return true;
+            }
+        </script>
+
+    </form>
 </body>
 </html>

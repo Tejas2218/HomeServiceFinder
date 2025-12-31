@@ -16,11 +16,11 @@ namespace HomeServiceFinder.login_signup
             {
                 if (Session["UserRole"].ToString() == "Admin")
                 {
-                    Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
+                    Response.Redirect("~/Pages/New_Admin/admin_dashboard.aspx");
                 }
                 else if (Session["UserRole"].ToString() == "User")
                 {
-                    Response.Redirect("~/Pages/User/homePage.aspx");
+                    Response.Redirect("~/Pages/User/user_dashboard.aspx");
                 }
                 else if (Session["User_Role"].ToString() == "Worker")
                 {
@@ -62,7 +62,7 @@ namespace HomeServiceFinder.login_signup
 
                         if (dr["User_Role"].ToString() == "Admin")
                         {
-                            Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
+                            Response.Redirect("~/Pages/New_Admin/AdminDashbord.aspx");
                         }
                         else if(dr["User_Role"].ToString() == "User")
                         {

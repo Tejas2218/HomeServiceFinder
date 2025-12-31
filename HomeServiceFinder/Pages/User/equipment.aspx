@@ -1,34 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="equipment.aspx.cs" Inherits="HomeServiceFinder.Pages.User.equipment" %>
 
-<script runat="server">
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        if (!IsPostBack)
-        {
-            // The specific sub-services for "Home Cleaning"
-            var subServices = new System.Collections.Generic.List<object>
-            {
-                new { Name = "Brooming & Mopping", Price = 199, Icon = "fa-broom", Desc = "Daily floor dusting & wet mop." },
-                new { Name = "Washroom Deep Clean", Price = 499, Icon = "fa-sink", Desc = "Tile scrubbing, acid wash & sanitizing." },
-                new { Name = "Full House Deep Clean", Price = 2499, Icon = "fa-house-chimney", Desc = "Complete home deep cleaning (Floor+Walls)." },
-                new { Name = "Water Tank Wash", Price = 899, Icon = "fa-faucet-drip", Desc = "Underground & overhead sludge removal." },
-                new { Name = "Summer Cool (AC/Fan)", Price = 799, Icon = "fa-snowflake", Desc = "AC servicing & fan cleaning special." },
-                new { Name = "Equipment Clean", Price = 599, Icon = "fa-blender-phone", Desc = "Fridge, Oven & Washing machine." }
-            };
-            rptServices.DataSource = subServices;
-            rptServices.DataBind();
-        }
-    }
-
-    protected void btnConfirm_Click(object sender, EventArgs e)
-    {
-        // Simulate Booking
-        string service = hfServiceName.Value;
-        string date = txtDate.Text;
-        ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('APEX BOOKING SUCCESS!\\nConfirmed: {service}\\nDate: {date}');", true);
-    }
-</script>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -180,27 +151,32 @@
         <div class="container py-4">
             <p class="text-muted small mb-3 text-uppercase fw-bold ls-1">Select a Service Type</p>
 
-            <asp:Repeater ID="rptServices" runat="server">
+            <asp:Repeater ID="rptEquipment" runat="server">
                 <ItemTemplate>
-                    <div class="sub-service-card" onclick="openModal('<%# Eval("Name") %>', '<%# Eval("Price") %>')">
+                    <a href='service_provider.aspx?eqid=<%# Eval("Equipment_ID") %>&sid=<%# Request.QueryString["sid"] %>'
+                        class="text-decoration-none text-dark">
 
-                        <div class="icon-box">
-                            <i class="fa-solid <%# Eval("Icon") %>"></i>
+                        <div class="sub-service-card">
+
+                            <div class="icon-box">
+                                <i class="fa-solid <%# Eval("Equipment_Icon") %>"></i>
+                            </div>
+
+                            <div class="content-box">
+                                <div class="service-name"><%# Eval("Equipment_Name") %></div>
+                                <p class="service-desc"><%# Eval("Equipment_Description") %></p>
+                            </div>
+
+                            <div class="price-box">
+                                <span class="price-text">₹<%# Eval("Equipment_Price") %></span>
+                                <span class="add-btn">Select</span>
+                            </div>
+
                         </div>
-
-                        <div class="content-box">
-                            <div class="service-name"><%# Eval("Name") %></div>
-                            <p class="service-desc"><%# Eval("Desc") %></p>
-                        </div>
-
-                        <div class="price-box">
-                            <span class="price-text">₹<%# Eval("Price") %></span>
-                            <span class="add-btn">Book</span>
-                        </div>
-
-                    </div>
+                    </a>
                 </ItemTemplate>
             </asp:Repeater>
+
         </div>
 
         <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">

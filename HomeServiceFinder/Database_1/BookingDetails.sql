@@ -62,6 +62,62 @@ begin
 	where Booking_ID=@Booking_ID
 end
 
+-----------view booking for user side
+CREATE or alter PROCEDURE View_User_Booking_Details
+    @User_ID INT
+AS
+BEGIN
+    SELECT *
+    FROM BookingDetails
+    WHERE User_ID = @User_ID
+END
+
+exec View_User_Booking_Details 10
+
+------------delete booking
+create or alter proc Delete_Booking_Details
+@Booking_ID int
+as
+begin
+    delete from BookingDetails where Booking_ID = @Booking_ID
+end
+
+---------delete booking details
+CREATE OR ALTER PROCEDURE Get_Booking_Cancel_Details
+    @Booking_ID INT
+AS
+BEGIN
+    SELECT 
+        b.Booking_ID,
+        b.Visiting_DateTime,
+        b.Time_Slot,
+
+        -- CUSTOMER EMAIL
+        u.User_EmailID AS UserEmail,
+
+        -- SERVICE PROVIDER DETAILS
+        spu.User_EmailID AS ProviderEmail,
+        spu.User_Name    AS ProviderName
+
+    FROM BookingDetails b
+
+    -- CUSTOMER
+    INNER JOIN UserDetails u 
+        ON b.User_ID = u.User_ID
+
+    -- SERVICE PROVIDER
+    INNER JOIN ServiceProviderDetails sp 
+        ON b.SP_ID = sp.SP_ID
+
+    INNER JOIN UserDetails spu
+        ON sp.User_ID = spu.User_ID
+
+    WHERE b.Booking_ID = @Booking_ID
+END
+
+
+
+
 ---------------view booking for service provider side 
 create or alter proc View_Booking_Details
 @SP_ID int,

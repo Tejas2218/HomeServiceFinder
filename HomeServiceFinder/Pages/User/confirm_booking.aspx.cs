@@ -19,7 +19,7 @@ namespace HomeServiceFinder.Pages.User
                 lblBookingID.Text = Request.QueryString["id"] ?? "APX-" + new Random().Next(1000, 9999);
                 lblProvider.Text = Request.QueryString["provider"] ?? "xxxxx";
                 lblDate.Text = Request.QueryString["date"]; // Dummy date 
-                lblTime.Text = Request.QueryString["date"];
+                lblTime.Text = Request.QueryString["time"];
                 lblAmount.Text = Request.QueryString["amount"];
             }
         }

@@ -77,6 +77,9 @@ create table BookingDetails(
 	Booking_Decline_Reason varchar(100) null
 )
 
+DELETE FROM BookingDetails
+WHERE Booking_Status = 'Panding';
+
 select * from BookingDetails
 
 alter table BookingDetails add Equipment_ID int
@@ -85,6 +88,10 @@ alter table BookingDetails add constraint FK_BookingDetails_Equipment Foreign ke
 alter table BookingDetails add Time_Slot varchar(10) not null----addd column
 
 alter table BookingDetails add Visiting_DateTime datetime not null----addd column
+
+------update datatype size
+ALTER TABLE BookingDetails
+ALTER COLUMN Time_Slot VARCHAR(20) NOT NULL;
 
 
 
@@ -95,6 +102,9 @@ as
 Begin
 Select * from ServiceMaster
 end
+
+exec View_ServiceMaster
+select * from ServiceMaster
 
 create or alter proc View_Equipment_ByID
 @Service_ID int

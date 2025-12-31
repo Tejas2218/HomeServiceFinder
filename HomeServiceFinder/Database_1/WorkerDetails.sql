@@ -19,6 +19,8 @@ begin
 	inner join EquipmentMaster EM
 	on EM.Service_ID=SM.Service_ID
 end
+
+exec Display_Worker_Details
 --26-12-25--
 ---Display Worker Details Pending--
 create or alter proc Display_Worker_Details_Pending
@@ -89,7 +91,7 @@ WHERE SP_ID IN (1, 2);
 
 --Display Worker Detail by Service--
 create or alter proc Display_Worker_Details_ByService
-@SP_Service int
+@SP_ID int
 as
 begin
 	select * from ServiceProviderDetails SPD 
@@ -104,8 +106,33 @@ begin
 	on SM.Service_ID=SPD.Service_ID
 	inner join EquipmentMaster EM
 	on EM.Service_ID=SM.Service_ID
-	where SPD.SP_Service=@SP_Service
+	where SPD.Service_ID=@SP_ID
 end
+
+--Display Worker Detail by Equipment--
+create or alter proc Display_Worker_Details_ByEquipment
+@EQ_ID int
+as
+begin
+	select * from ServiceProviderDetails SPD 
+	inner join UserDetails UD 
+	on SPD.User_ID=UD.User_ID  
+	----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	inner join StateDetails SD
+	on UD.State_ID=SD.State_ID
+	inner join ServiceMaster SM
+	on SM.Service_ID=SPD.Service_ID
+	inner join EquipmentMaster EM
+	on EM.Service_ID=SM.Service_ID
+	where SPD.Equipment_ID=@EQ_ID
+end
+exec Display_Worker_Details_ByEquipment 1
+
+exec Display_Worker_Details_ByService 9
+select * from ServiceProviderDetails
+
 exec Display_Worker_Details_ByID 4
 --Display Specific Worker Details--
 create or alter proc Display_Worker_Details_ByID
@@ -234,7 +261,19 @@ begin
 	select SCOPE_IDENTITY() as User_ID
 end
 
+-----------get provider email
+CREATE OR ALTER PROCEDURE Get_Provider_Email
+    @SP_ID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
 
+    SELECT ud.User_EmailID
+    FROM ServiceProviderDetails spd
+    INNER JOIN UserDetails ud
+        ON spd.User_ID = ud.User_ID
+    WHERE spd.SP_ID = @SP_ID;
+END
 
 ---------------------------------------------------- not executed --------------------------------------------
 

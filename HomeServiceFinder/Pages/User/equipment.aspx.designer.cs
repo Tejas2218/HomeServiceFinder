@@ -24,13 +24,13 @@ namespace HomeServiceFinder.Pages.User
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// rptServices control.
+        /// rptEquipment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptServices;
+        protected global::System.Web.UI.WebControls.Repeater rptEquipment;
 
         /// <summary>
         /// txtDate control.

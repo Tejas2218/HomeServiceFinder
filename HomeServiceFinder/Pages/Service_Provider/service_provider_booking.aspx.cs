@@ -34,7 +34,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
             }
         }
 
-        protected void 
+        //protected void 
 
         protected void loadData(string status)
         {

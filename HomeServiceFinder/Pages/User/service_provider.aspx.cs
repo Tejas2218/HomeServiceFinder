@@ -18,9 +18,15 @@ namespace HomeServiceFinder.Pages.User
         {
             if (!IsPostBack)
             {
-                LoadProviders();
-                //rptProviders.DataSource = providerList;
-                //rptProviders.DataBind();
+                if (Request.QueryString["sid"] != null &&
+            int.TryParse(Request.QueryString["sid"], out int sid))
+                {
+                    LoadProvidersByID(sid);
+                }
+                //else
+                //{
+                //    LoadProviders();
+                //}
             }
         }
 
@@ -29,14 +35,46 @@ namespace HomeServiceFinder.Pages.User
         public SqlCommand cmd;
         public DataSet sd;
 
-        private void LoadProviders()
+        //private void LoadProviders()
+        //{
+        //    try
+        //    {
+        //        using (SqlConnection con = new SqlConnection(constr))
+        //        using (SqlCommand cmd = new SqlCommand("Display_Worker_Details", con))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
+
+        //            SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //            DataTable dt = new DataTable();
+        //            da.Fill(dt);
+
+        //            if (dt.Rows.Count > 0)
+        //            {
+        //                rptProviders.DataSource = dt;
+        //                rptProviders.DataBind();
+        //            }
+        //            else
+        //            {
+        //                lblMessage.Text = "No service providers found.";
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lblMessage.Text = "No user data found." + ex;
+        //    }
+        //}
+
+        private void LoadProvidersByID(int eid)
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(constr))
-                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details", con))
+                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details_ByEquipment", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EQ_ID", eid);
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -58,6 +96,28 @@ namespace HomeServiceFinder.Pages.User
                 lblMessage.Text = "No user data found." + ex;
             }
         }
+
+        private string GetProviderEmail(string spId)
+        {
+            string email = "";
+
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                SqlCommand cmd = new SqlCommand("Get_Provider_Email", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@SP_ID", spId);
+
+                con.Open();
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    email = result.ToString();
+                }
+            }
+            return email;
+        }
+
 
         protected void btnBook_Click(object sender, EventArgs e)
         {
@@ -134,13 +194,6 @@ namespace HomeServiceFinder.Pages.User
         <span style='float:right; color:#ff4d00; font-weight:bold;'>₹{hfMinimumPrice.Value}</span>
     </p>
 
-    <div style='text-align:center; margin-top:30px;'>
-        <a href='http://localhost:50095/Pages/login_signup/loginPage.aspx'
-           style='background:#ff4d00; color:#fff; padding:14px 30px;
-                  text-decoration:none; border-radius:25px; display:inline-block;'>
-            Go to Dashboard
-        </a>
-    </div>
 
 </div>
 
@@ -148,11 +201,69 @@ namespace HomeServiceFinder.Pages.User
 </html>";
 
 
-                    SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-                    smtp.Credentials = new System.Net.NetworkCredential("homeservicefinder999@gmail.com", "cvquixtqamspxxjp");
-                    smtp.EnableSsl = true;
-                    
-                    smtp.Send(mail);
+
+
+                    // ===== SEND EMAIL TO SERVICE PROVIDER =====
+                    string providerEmail = GetProviderEmail(hfProviderID.Value);
+
+                    if (!string.IsNullOrEmpty(providerEmail))
+                    {
+                        MailMessage spMail = new MailMessage();
+                        spMail.To.Add(providerEmail);
+                        spMail.From = new MailAddress("homeservicefinder999@gmail.com");
+                        spMail.Subject = "New Booking Assigned - HomeServiceFinder";
+                        spMail.IsBodyHtml = true;
+
+                        spMail.Body = $@"
+<!DOCTYPE html>
+<html>
+<body style='font-family: Arial; background:#f5f5f5; padding:20px;'>
+
+<div style='max-width:600px; background:#fff; padding:30px; border-radius:10px; margin:auto;'>
+
+    <h2 style='color:#ff4d00;'>New Booking Received</h2>
+
+    <p>You have received a new service request.</p>
+
+    <table style='width:100%; margin-top:20px;'>
+        <tr>
+            <td><b>Customer</b></td>
+            <td style='text-align:right;'>{Session["UserEmail"]}</td>
+        </tr>
+        <tr>
+            <td><b>Date</b></td>
+            <td style='text-align:right;'>{txtDate.Text}</td>
+        </tr>
+        <tr>
+            <td><b>Time Slot</b></td>
+            <td style='text-align:right;'>{hfSelectedTime.Value}</td>
+        </tr>
+        <tr>
+            <td><b>Service ID</b></td>
+            <td style='text-align:right;'>{hfEquipmentID.Value}</td>
+        </tr>
+    </table>
+
+    <p style='margin-top:20px;'>
+        Please login to your dashboard to accept or manage this booking.
+    </p>
+
+</div>
+
+</body>
+</html>";
+
+                        //SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+
+                        SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                        smtp.Credentials = new System.Net.NetworkCredential("homeservicefinder999@gmail.com", "cvquixtqamspxxjp");
+                        smtp.EnableSsl = true;
+
+                        smtp.Send(mail);
+
+                        smtp.Send(spMail);
+                    }
+
 
                     Response.Redirect($"confirm_booking.aspx?provider={hfProviderName.Value}&date={txtDate.Text}&time={hfSelectedTime.Value}&amount={hfMinimumPrice.Value}");
                 }
@@ -165,50 +276,3 @@ namespace HomeServiceFinder.Pages.User
     }
 }
 
-
-
-//namespace WebAppDemo.Pages
-//{
-//    public partial class ForgotPassword : System.Web.UI.Page
-//    {
-//        SqlConnection con = new SqlConnection(@"Data Source=SMIT\SQLEXPRESS02;Initial Catalog=TAWebAppDemo;Integrated Security=True");
-
-//        protected void btnSendOTP_Click(object sender, EventArgs e)
-//        {
-//            SqlCommand cmd = new SqlCommand("SELECT StudentID FROM Student WHERE Email=@Email", con);
-//            cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-
-//            SqlDataAdapter da = new SqlDataAdapter(cmd);
-//            DataTable dt = new DataTable();
-//            da.Fill(dt);
-
-//            if (dt.Rows.Count == 0)
-//            {
-//                lblMsg.Text = "Email not found!";
-//                return;
-//            }
-
-//            // Generate OTP
-//            Random rnd = new Random();
-//            int otp = rnd.Next(100000, 999999);
-
-//            Session["OTP"] = otp;
-//            Session["Email"] = txtEmail.Text.Trim();
-//            Session["StudentID"] = dt.Rows[0]["StudentID"].ToString();
-
-//            // Send Email
-//            MailMessage mail = new MailMessage();
-//            mail.To.Add(txtEmail.Text);
-//            mail.From = new MailAddress("`your-email-address");
-//            mail.Subject = "Your OTP Code";
-//            mail.Body = "Your OTP is: " + otp;
-
-//            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-//            smtp.Credentials = new System.Net.NetworkCredential("your-email-address", "google app password");
-//            smtp.EnableSsl = true;
-//            smtp.Send(mail);
-
-//            Response.Redirect("VerifyOTP.aspx");
-//        }
-//    }
-//}

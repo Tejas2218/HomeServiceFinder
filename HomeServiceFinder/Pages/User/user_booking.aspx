@@ -133,7 +133,6 @@
                                             <th scope="col">Booking ID</th>
                                             <th scope="col">Service Name</th>
                                             <th scope="col">Date & Time</th>
-                                            <th scope="col">Price</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -160,14 +159,12 @@
                     <%# Eval("Time_Slot") %>
                                                     </td>
 
-                                                    <td>₹ --</td>
 
                                                     <td>
                                                         <span class='status-badge <%# Eval("StatusClass") %>'>
                                                             <%# Eval("Booking_Status") %>
                                                         </span>
                                                     </td>
-
                                                     <td>
                                                         <asp:Button
                                                             ID="btnAction"
@@ -175,12 +172,16 @@
                                                             Text='<%# Eval("ActionText") %>'
                                                             CssClass='<%# Eval("ActionClass") %>'
                                                             CommandArgument='<%# Eval("Booking_ID") %>'
-                                                            OnCommand="BookingAction_Command" />
+                                                            OnCommand="btnAction_Command"
+                                                            OnClientClick="return confirm('Are you sure you want to cancel this booking?');" />
+
                                                     </td>
+
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                                        <asp:Label ID="lblMessage2" runat="server"></asp:Label>
                                     </tbody>
 
                                 </table>
@@ -188,17 +189,30 @@
 
                             <nav aria-label="Page navigation" class="mt-4">
                                 <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+
                                     <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
+                                        <asp:LinkButton
+                                            ID="btnPrev"
+                                            runat="server"
+                                            CssClass="page-link"
+                                            OnClick="PrevPage">
+                Previous
+                                        </asp:LinkButton>
                                     </li>
+
+                                    <li class="page-item">
+                                        <asp:LinkButton
+                                            ID="btnNext"
+                                            runat="server"
+                                            CssClass="page-link"
+                                            OnClick="NextPage">
+                Next
+                                        </asp:LinkButton>
+                                    </li>
+
                                 </ul>
                             </nav>
+
                         </div>
                     </div>
                 </div>

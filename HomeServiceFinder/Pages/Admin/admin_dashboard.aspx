@@ -593,14 +593,14 @@
 
                             <asp:TemplateField HeaderText="State">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblState" runat="server" Text='<%#Eval("State_Name")%>'></asp:Label>
+                                    <asp:Label ID="lblState" runat="server" Text='<%#Eval("State_ID")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
 
                             <asp:TemplateField HeaderText="City">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblCity" runat="server" Text='<%#Eval("City_Name")%>'></asp:Label>
+                                    <asp:Label ID="lblCity" runat="server" Text='<%#Eval("City_ID")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
