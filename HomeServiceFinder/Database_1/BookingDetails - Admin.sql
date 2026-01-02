@@ -47,20 +47,7 @@ begin
 	select SCOPE_IDENTITY() as Booking_ID
 end
 go
-
-Declare @CurrentDateTime DateTime;
-Set @CurrentDateTime = GetDate();
-EXEC Insert_Booking_Details_Admin
-@Booking_Status = 'Pending',
-@Booking_DateTime = @CurrentDateTime,
-@User_ID = 32,
-@SP_ID = 6,
-@Booking_Rating = 0,
-@Booking_Decline_Reason = null,
-@Equipment_ID = 1,
-@Time_Slot = '9To10',
-@Visiting_DateTime = @CurrentDateTime;
-go  
+ 
 
 --Display All Booking--
 	create or alter proc Display_All_Booking

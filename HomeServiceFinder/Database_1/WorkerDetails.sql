@@ -1,331 +1,301 @@
---WorkerDetails--
----------------------------------------------------- not executed --------------------------------------------
+USE Home_Service_Finder
+GO
+
 --Display Worker Details--
-create or alter proc Display_Worker_Details
-as
-begin
-	select * from ServiceProviderDetails SPD 
-	inner join UserDetails UD  
-	on SPD.User_ID=UD.User_ID 
-		----25-12-25 Updated-----
-	inner join CityDetails CD
-	on UD.City_ID=CD.City_ID
-	inner join StateDetails SD
-	on UD.State_ID=SD.State_ID
-	inner join ServiceMaster SM
-	on SPD.Service_ID=SM.Service_ID
-	inner join EquipmentMaster EM
-	on EM.Service_ID=SM.Service_ID
-end
---26-12-25--
----Display Worker Details Pending--
-create or alter proc Display_Worker_Details_Pending
-as
-begin
-	select * from ServiceProviderDetails SPD 
-	inner join UserDetails UD  
-	on SPD.User_ID=UD.User_ID 
-		----25-12-25 Updated-----
-	inner join CityDetails CD
-	on UD.City_ID=CD.City_ID
-	inner join StateDetails SD
-	on UD.State_ID=SD.State_ID
-	inner join ServiceMaster SM
-	on SPD.Service_ID=SM.Service_ID
-	inner join EquipmentMaster EM
-	on EM.Service_ID=SM.Service_ID
-	where SPD.SP_Status='Pending'
-end
+CREATE OR ALTER PROCEDURE Display_Worker_Details
+AS
+BEGIN
+    SELECT * FROM ServiceProviderDetails SPD 
+    INNER JOIN UserDetails UD  
+        ON SPD.User_ID = UD.User_ID 
+    INNER JOIN CityDetails CD
+        ON UD.City_ID = CD.City_ID
+    INNER JOIN StateDetails SD
+        ON UD.State_ID = SD.State_ID
+    INNER JOIN ServiceMaster SM
+        ON SPD.Service_ID = SM.Service_ID
+    INNER JOIN EquipmentMaster EM
+        ON EM.Service_ID = SM.Service_ID
+END
+GO
 
---26-12-25--
----Display Worker Details Approved--
-create or alter proc Display_Worker_Details_Approved
-as
-begin
-	select * from ServiceProviderDetails SPD 
-	inner join UserDetails UD  
-	on SPD.User_ID=UD.User_ID 
-		----25-12-25 Updated-----
-	inner join CityDetails CD
-	on UD.City_ID=CD.City_ID
-	inner join StateDetails SD
-	on UD.State_ID=SD.State_ID
-	inner join ServiceMaster SM
-	on SPD.Service_ID=SM.Service_ID
-	inner join EquipmentMaster EM
-	on EM.Service_ID=SM.Service_ID
-	where SPD.SP_Status='Approved'
-end
+--Display Worker Details Pending--
+CREATE OR ALTER PROCEDURE Display_Worker_Details_Pending
+AS
+BEGIN
+    SELECT * FROM ServiceProviderDetails SPD 
+    INNER JOIN UserDetails UD  
+        ON SPD.User_ID = UD.User_ID 
+    INNER JOIN CityDetails CD
+        ON UD.City_ID = CD.City_ID
+    INNER JOIN StateDetails SD
+        ON UD.State_ID = SD.State_ID
+    INNER JOIN ServiceMaster SM
+        ON SPD.Service_ID = SM.Service_ID
+    INNER JOIN EquipmentMaster EM
+        ON EM.Service_ID = SM.Service_ID
+    WHERE SPD.SP_Status = 'Pending'
+END
+GO
 
+--Display Worker Details Approved--
+CREATE OR ALTER PROCEDURE Display_Worker_Details_Approved
+AS
+BEGIN
+    SELECT * FROM ServiceProviderDetails SPD 
+    INNER JOIN UserDetails UD  
+        ON SPD.User_ID = UD.User_ID 
+    INNER JOIN CityDetails CD
+        ON UD.City_ID = CD.City_ID
+    INNER JOIN StateDetails SD
+        ON UD.State_ID = SD.State_ID
+    INNER JOIN ServiceMaster SM
+        ON SPD.Service_ID = SM.Service_ID
+    INNER JOIN EquipmentMaster EM
+        ON EM.Service_ID = SM.Service_ID
+    WHERE SPD.SP_Status = 'Approved'
+END
+GO
 
---26-12-25--
----Display Worker Details Decline--
-create or alter proc Display_Worker_Details_Decline
-as
-begin
-	select * from ServiceProviderDetails SPD 
-	inner join UserDetails UD  
-	on SPD.User_ID=UD.User_ID 
-		----25-12-25 Updated-----
-	inner join CityDetails CD
-	on UD.City_ID=CD.City_ID
-	inner join StateDetails SD
-	on UD.State_ID=SD.State_ID
-	inner join ServiceMaster SM
-	on SPD.Service_ID=SM.Service_ID
-	inner join EquipmentMaster EM
-	on EM.Service_ID=SM.Service_ID
-	where SPD.SP_Status='Rejected'
-end
-
-
+--Display Worker Details Decline--
+CREATE OR ALTER PROCEDURE Display_Worker_Details_Decline
+AS
+BEGIN
+    SELECT * FROM ServiceProviderDetails SPD 
+    INNER JOIN UserDetails UD  
+        ON SPD.User_ID = UD.User_ID 
+    INNER JOIN CityDetails CD
+        ON UD.City_ID = CD.City_ID
+    INNER JOIN StateDetails SD
+        ON UD.State_ID = SD.State_ID
+    INNER JOIN ServiceMaster SM
+        ON SPD.Service_ID = SM.Service_ID
+    INNER JOIN EquipmentMaster EM
+        ON EM.Service_ID = SM.Service_ID
+    WHERE SPD.SP_Status = 'Rejected'
+END
+GO
 
 --Display Worker Detail by Service--
-create or alter proc Display_Worker_Details_ByService
-@SP_ID int
-as
-begin
-	select * from ServiceProviderDetails SPD 
-	inner join UserDetails UD 
-	on SPD.User_ID=UD.User_ID  
-	----25-12-25 Updated-----
-	inner join CityDetails CD
-	on UD.City_ID=CD.City_ID
-	inner join StateDetails SD
-	on UD.State_ID=SD.State_ID
-	inner join ServiceMaster SM
-	on SM.Service_ID=SPD.Service_ID
-	inner join EquipmentMaster EM
-	on EM.Service_ID=SM.Service_ID
-	where SPD.Service_ID=@SP_ID
-end
+CREATE OR ALTER PROCEDURE Display_Worker_Details_ByService
+    @Service_ID int
+AS
+BEGIN
+    SELECT * FROM ServiceProviderDetails SPD 
+    INNER JOIN UserDetails UD 
+        ON SPD.User_ID = UD.User_ID  
+    INNER JOIN CityDetails CD
+        ON UD.City_ID = CD.City_ID
+    INNER JOIN StateDetails SD
+        ON UD.State_ID = SD.State_ID
+    INNER JOIN ServiceMaster SM
+        ON SM.Service_ID = SPD.Service_ID
+    INNER JOIN EquipmentMaster EM
+        ON EM.Service_ID = SM.Service_ID
+    WHERE SPD.Service_ID = @Service_ID
+END
+GO
 
 --Display Worker Detail by Equipment--
-create or alter proc Display_Worker_Details_ByEquipment
-@EQ_ID int
-as
-begin
-	select * from ServiceProviderDetails SPD 
-	inner join UserDetails UD 
-	on SPD.User_ID=UD.User_ID  
-	----25-12-25 Updated-----
-	inner join CityDetails CD
-	on UD.City_ID=CD.City_ID
-	inner join StateDetails SD
-	on UD.State_ID=SD.State_ID
-	inner join ServiceMaster SM
-	on SM.Service_ID=SPD.Service_ID
-	inner join EquipmentMaster EM
-	on EM.Service_ID=SM.Service_ID
-	where SPD.Equipment_ID=@EQ_ID
-end
-exec Display_Worker_Details_ByEquipment 1
+CREATE OR ALTER PROCEDURE Display_Worker_Details_ByEquipment
+    @Equipment_ID int
+AS
+BEGIN
+    SELECT * FROM ServiceProviderDetails SPD 
+    INNER JOIN UserDetails UD 
+        ON SPD.User_ID = UD.User_ID  
+    INNER JOIN CityDetails CD
+        ON UD.City_ID = CD.City_ID
+    INNER JOIN StateDetails SD
+        ON UD.State_ID = SD.State_ID
+    INNER JOIN ServiceMaster SM
+        ON SM.Service_ID = SPD.Service_ID
+    INNER JOIN EquipmentMaster EM
+        ON EM.Service_ID = SM.Service_ID
+    WHERE SPD.Equipment_ID = @Equipment_ID
+END
+GO
 
-exec Display_Worker_Details_ByService 9
-select * from ServiceProviderDetails
-
-exec Display_Worker_Details_ByID 4
+-- exec Display_Worker_Details_ByEquipment 12
+-- exec Display_Worker_Details_ByService 9
+-- exec Display_Worker_Details_ByID 12
+GO
 
 --Display Specific Worker Details--
-create or alter proc Display_Worker_Details_ByID
-@SP_ID int
-as
-begin
-	select * from ServiceProviderDetails SPD 
-	inner join UserDetails UD 
-	on SPD.User_ID=UD.User_ID 
-	----25-12-25 Updated-----
-	inner join CityDetails CD
-	on UD.City_ID=CD.City_ID
-	inner join StateDetails SD
-	on UD.State_ID=SD.State_ID
-	inner join ServiceMaster SM
-	on SM.Service_ID=SPD.Service_ID
-	inner join EquipmentMaster EM
-	on EM.Service_ID=SM.Service_ID
-	where SPD.SP_ID=@SP_ID
-end
+CREATE OR ALTER PROCEDURE Display_Worker_Details_ByID
+    @SP_ID int
+AS
+BEGIN
+    SELECT * FROM ServiceProviderDetails SPD 
+    INNER JOIN UserDetails UD 
+        ON SPD.User_ID = UD.User_ID 
+    INNER JOIN CityDetails CD
+        ON UD.City_ID = CD.City_ID
+    INNER JOIN StateDetails SD
+        ON UD.State_ID = SD.State_ID
+    INNER JOIN ServiceMaster SM
+        ON SM.Service_ID = SPD.Service_ID
+    INNER JOIN EquipmentMaster EM
+        ON EM.Service_ID = SM.Service_ID
+    WHERE SPD.SP_ID = @SP_ID
+END
+GO
 
----------------------------------------------------- not executed --------------------------------------------^
-
-alter table ServiceProviderDetails drop column SP_Service 
 --Insert Worker Detail--
-Create OR alter proc Insert_Worker_Details
-@User_Name varchar(50),
-@User_EmailID varchar(100),
-@User_Address varchar(200),
-@User_ContactNo bigint,
-@User_Password varchar(50),
-@User_Role varchar(50),
-@City_ID int,
-@State_ID int,
-@Service_ID int,
-@Equipment_ID int,
-@SP_Age int ,
-@SP_ShopAddress varchar(200),
-@SP_Experience int,
-@SP_MinimumPrice int,
-@SP_AverageRating int,
-@SP_Status varchar(20)
-as
-begin
+CREATE OR ALTER PROCEDURE Insert_Worker_Details
+    @User_Name varchar(50),
+    @User_EmailID varchar(100),
+    @User_Address varchar(200),
+    @User_ContactNo varchar(10),
+    @User_Password varchar(50),
+    @User_Role varchar(50),
+    @City_ID int,
+    @State_ID int,
+    @Service_ID int,
+    @Equipment_ID int,
+    @SP_Age int,
+    @SP_ShopAddress varchar(200),
+    @SP_Experience int,
+    @SP_MinimumPrice int,
+    @SP_AverageRating int,
+    @SP_Status varchar(20)
+AS
+BEGIN
     DECLARE @User_ID INT;
 
-	insert into UserDetails(
-		User_Name,
-		User_EmailID,
-		User_Address,
-		User_ContactNo,
-		User_Password,
-		User_Role,
-		City_ID ,
-		State_ID
-	)
-	values(
-		@User_Name,
-		@User_EmailID,
-		@User_Address,
-		@User_ContactNo,
-		@User_Password,
-		@User_Role,
-		@City_ID,
-		@State_ID
-	)
+    INSERT INTO UserDetails(
+        User_Name,
+        User_EmailID,
+        User_Address,
+        User_ContactNo,
+        User_Password,
+        User_Role,
+        City_ID,
+        State_ID
+    )
+    VALUES(
+        @User_Name,
+        @User_EmailID,
+        @User_Address,
+        @User_ContactNo,
+        @User_Password,
+        @User_Role,
+        @City_ID,
+        @State_ID
+    )
 
+    SET @User_ID = SCOPE_IDENTITY();
 
-	SET @User_ID = SCOPE_IDENTITY();
-
-
-	insert into ServiceProviderDetails(
-		User_ID,
-		SP_Age ,
-		SP_ShopAddress,
-		SP_Experience,
-		SP_MinimumPrice,
-		SP_AverageRating,
-		Service_ID,
-		Equipment_ID,
-		SP_Status
-	)
-	values(
-		@User_ID,
-		@SP_Age,
-		@SP_ShopAddress,
-		@SP_Experience,
-		@SP_MinimumPrice,
-		@SP_AverageRating,
-		@Service_ID,
-		@Equipment_ID,
-		@SP_Status
-	)
-
-end
-
----------------------------------------------------- not executed --------------------------------------------
+    INSERT INTO ServiceProviderDetails(
+        User_ID,
+        SP_Age,
+        SP_ShopAddress,
+        SP_Experience,
+        SP_MinimumPrice,
+        SP_AverageRating,
+        Service_ID,
+        Equipment_ID,
+        SP_Status
+    )
+    VALUES(
+        @User_ID,
+        @SP_Age,
+        @SP_ShopAddress,
+        @SP_Experience,
+        @SP_MinimumPrice,
+        @SP_AverageRating,
+        @Service_ID,
+        @Equipment_ID,
+        @SP_Status
+    )
+END
+GO
 
 --Update Worker Detail--
-create or alter proc Update_Worker_Details
-@SP_ID int,
-@User_Name varchar(50),
-@User_EmailID varchar(100),
-@User_Address varchar(200),
-@User_ContactNo bigint,
-@User_Password varchar(50),
-@User_Role varchar(50),
-@City_ID int
-as
-begin
-	insert into UserDetails(
-		User_Name,
-		User_EmailID,
-		User_Address,
-		User_ContactNo,
-		User_Password,
-		User_Role,
-		City_ID 
-	)
-	values(
-		@User_Name,
-		@User_EmailID,
-		@User_Address,
-		@User_ContactNo,
-		@User_Password,
-		@User_Role,
-		@City_ID
-	)
-	select SCOPE_IDENTITY() as User_ID
-end
+-- I have added the missing parameters (Service_ID, Equipment_ID, User details) to make this valid --
+CREATE OR ALTER PROCEDURE Update_Worker_Details
+    @SP_ID int,
+    @SP_Age int,
+    @SP_ShopAddress varchar(200),
+    @SP_Experience int,
+    @SP_MinimumPrice int,
+    @Service_ID int,          -- Added
+    @Equipment_ID int,        -- Added
+    @User_Name varchar(50),   -- Added
+    @User_EmailID varchar(100), -- Added
+    @User_Address varchar(200), -- Added
+    @User_ContactNo varchar(10), -- Added
+    @User_Password varchar(50), -- Added
+    @City_ID int,             -- Added
+    @State_ID int             -- Added
+AS
+BEGIN
+    -- Update Service Provider specific details
+    UPDATE ServiceProviderDetails
+    SET Service_ID = @Service_ID,
+        Equipment_ID = @Equipment_ID,
+        SP_Age = @SP_Age,
+        SP_Experience = @SP_Experience,
+        SP_MinimumPrice = @SP_MinimumPrice,
+        SP_ShopAddress = @SP_ShopAddress
+    WHERE SP_ID = @SP_ID
 
+    -- Get the User_ID associated with this SP_ID
+    DECLARE @User_ID int;
+    SELECT @User_ID = User_ID FROM ServiceProviderDetails
+    WHERE SP_ID = @SP_ID
 
-
----------------------------------------------------- not executed --------------------------------------------
-
---Update Worker Detail--
-alter proc Update_Worker_Details
-@SP_ID int,
-@SP_Age int ,
-@SP_ShopAddress varchar(200),
-@SP_Experience int,
-@SP_MinimumPrice int
-as
-begin
-	update ServiceProviderDetails
-	set Service_ID=@Service_ID,
-		Equipment_ID=@Equipment_ID,
-		SP_Age=@SP_Age,
-		SP_Experience=@SP_Experience,
-		SP_MinimumPrice=@SP_MinimumPrice,
-		SP_ShopAddress=@SP_ShopAddress
-	where SP_ID=@SP_ID
-
-	declare @User_ID int;
-	select @User_ID=User_ID from ServiceProviderDetails
-	where SP_ID=@SP_ID
-
-	update UserDetails
-	set User_Name=@User_Name,
-		User_EmailID=@User_EmailID,
-		User_ContactNo=@User_ContactNo,
-		State_ID=@State_ID,
-		City_ID=@City_ID,
-		User_Address=@User_Address,
-		User_Password=@User_Password
-	where User_ID=@User_ID
-end
+    -- Update the User table details
+    UPDATE UserDetails
+    SET User_Name = @User_Name,
+        User_EmailID = @User_EmailID,
+        User_ContactNo = @User_ContactNo,
+        State_ID = @State_ID,
+        City_ID = @City_ID,
+        User_Address = @User_Address,
+        User_Password = @User_Password,
+        Modified_DateTime = GETDATE()
+    WHERE User_ID = @User_ID
+END
+GO
 
 --Delete Worker Detail--
-create proc Delete_Worker_Details
-@SP_ID int
-as
-begin
-	delete from ServiceProviderDetails
-	where SP_ID=@SP_ID;
-end
----------------------------------------------------- not executed --------------------------------------------^
---Count total user--
-create proc Count_ServiceProvider
-as
-begin
-	select count(*) from ServiceProviderDetails
-end
+CREATE OR ALTER PROCEDURE Delete_Worker_Details
+    @SP_ID int
+AS
+BEGIN
+    -- Optional: Delete from UserDetails as well if you want strict cleanup
+    -- For now, deleting from ServiceProviderDetails as requested
+    DELETE FROM ServiceProviderDetails
+    WHERE SP_ID = @SP_ID;
+END
+GO
 
---Update Worker Status--  25-12-25
-create or alter proc Update_Worker_Status
-@SP_ID int,
-@SP_Status varchar(50)
-as
-begin
-	declare @User_ID int;
+--Count total service providers--
+CREATE OR ALTER PROCEDURE Count_ServiceProvider
+AS
+BEGIN
+    SELECT count(*) FROM ServiceProviderDetails
+END
+GO
 
-	select @User_ID=User_ID from ServiceProviderDetails 
-	where SP_ID=@SP_ID
+--Update Worker Status--
+CREATE OR ALTER PROCEDURE Update_Worker_Status
+    @SP_ID int,
+    @SP_Status varchar(50)
+AS
+BEGIN
+    DECLARE @User_ID int;
 
-	update ServiceProviderDetails
-	set SP_Status=@SP_Status
-	where SP_ID=@SP_ID
+    SELECT @User_ID = User_ID FROM ServiceProviderDetails 
+    WHERE SP_ID = @SP_ID
 
-	update UserDetails
-	set Modified_DateTime=GETDATE()
-	where User_ID=@User_ID
-end
+    UPDATE ServiceProviderDetails
+    SET SP_Status = @SP_Status
+    WHERE SP_ID = @SP_ID
 
+    UPDATE UserDetails
+    SET Modified_DateTime = GETDATE()
+    WHERE User_ID = @User_ID
+END
+GO
