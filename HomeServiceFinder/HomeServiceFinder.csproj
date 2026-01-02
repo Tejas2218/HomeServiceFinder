@@ -82,7 +82,6 @@
     <Content Include="Database_1\Tables.sql" />
     <Content Include="Database_1\UserDetails.sql" />
     <Content Include="Database_1\WorkerDetails.sql" />
-    <Content Include="Pages\Admin\admin_dashboard.aspx" />
     <Content Include="Pages\login_signup\css\style.css" />
     <Content Include="Pages\login_signup\loginPage.aspx" />
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
@@ -130,13 +129,6 @@
     </Compile>
     <Compile Include="MasterPage\AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\admin_dashboard.aspx.cs">
-      <DependentUpon>admin_dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Admin\admin_dashboard.aspx.designer.cs">
-      <DependentUpon>admin_dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\login_signup\loginPage.aspx.cs">
       <DependentUpon>loginPage.aspx</DependentUpon>
