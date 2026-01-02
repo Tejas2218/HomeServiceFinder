@@ -4,9 +4,9 @@
     MasterPageFile="~/MasterPage/AdminMaster.Master"
     Inherits="HomeServiceFinder.Pages.New_Admin.ViewServiceProviderDetails" %>
 
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         .section-title {
@@ -17,16 +17,15 @@
             padding-bottom: 6px;
             border-bottom: 2px solid #e5e7eb;
             margin-top: 10px;
+        }
     </style>
 
     <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
-
 
     <div class="profile-card" style="width: 100%">
 
         <div class="profile-grid" style="width: 100%">
 
-            <!-- USER INFO -->
             <div class="section-title full-width">
                 Personal Information
             </div>
@@ -70,7 +69,6 @@
                 Working Information
             </div>
 
-            <!-- SERVICE PROVIDER INFO -->
             <div class="profile-item">
                 <label>Service</label>
                 <asp:Label ID="Service_Name" runat="server" CssClass="profile-value" />
@@ -115,7 +113,6 @@
                 Audit Information
             </div>
 
-            <!-- CREATED & MODIFIED INFO -->
             <div class="profile-item">
                 <label>Created At</label>
                 <asp:Label ID="Created_At" runat="server" CssClass="profile-value" />
@@ -127,7 +124,6 @@
             </div>
         </div>
 
-        <!-- ACTION BUTTONS -->
         <div style="text-align: center; margin-top: 20px;">
 
             <asp:Button
@@ -145,7 +141,6 @@
                 OnClick="btnEdit_Click" />
 
         </div>
-        <!-- APPROVAL ACTION BOX -->
         <div class="approval-box">
 
             <h4>Admin Action</h4>
@@ -158,7 +153,7 @@
                     OnClick="btnApprove_Click"
                     Text="✔ Approve Provider"
                     CssClass="btn btn-approve"
-                    OnClientClick="confirmaAction()" />
+                    OnClientClick="return confirmAction(this, 'Approve');" />
 
                 <asp:Button
                     ID="btnReject"
@@ -166,45 +161,49 @@
                     OnClick="btnReject_Click"
                     Text="✖ Reject Provider"
                     CssClass="btn btn-reject"
-                    OnClientClick="confirmaAction()" />
+                    OnClientClick="return confirmAction(this, 'Reject');" />
             </div>
 
         </div>
 
         <script>
-            function confirmAction(button, titleText) {
+            function confirmAction(button, actionType) {
                 if (button.dataset.confirmed === "true") {
                     return true;
                 }
 
+                let titleText = actionType === 'Approve' ? 'Approve Provider?' : 'Reject Provider?';
+                let confirmColor = actionType === 'Approve' ? '#198754' : '#dc3545';
+                let btnText = actionType === 'Approve' ? 'Yes, Approve!' : 'Yes, Reject!';
+
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
+                    title: titleText,
+                    text: "Are you sure you want to " + actionType.toLowerCase() + " this service provider?",
+                    icon: 'question',
                     showCancelButton: true,
-                    confirmButtonColor: '#198754',
-                    cancelButtonColor: '#dc3545',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
-                    reverseButtons: true
+                    confirmButtonColor: confirmColor,
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: btnText,
+                    cancelButtonText: 'No, cancel',
+                    reverseButtons: true,
+                    allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        // Display the loader
                         Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Your file has been deleted.',
-                            icon: 'success',
-                            confirmButtonColor: '#198754'
-                        }).then(() => {
-                            button.dataset.confirmed = "true";
-                            button.click();
+                            title: 'Processing...',
+                            text: 'Please wait while we update the status.',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            showConfirmButton: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
                         });
-                    } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        Swal.fire({
-                            title: 'Cancelled',
-                            text: 'Your imaginary file is safe :)',
-                            icon: 'error',
-                            confirmButtonColor: '#198754'
-                        });
+
+                        // Trigger the postback
+                        button.dataset.confirmed = "true";
+                        button.click();
                     }
                 });
                 return false;

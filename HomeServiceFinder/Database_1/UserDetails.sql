@@ -10,6 +10,15 @@ begin
 	on UD.State_ID=SD.State_ID
 	where User_Role='User'
 end
+go
+
+--Display User Name Only--
+create or alter proc Display_User_Name
+as
+begin
+	select User_ID,User_Name from UserDetails
+end
+go
 
 --Display Specific User Details--
 create or alter proc Display_User_Details_ByID

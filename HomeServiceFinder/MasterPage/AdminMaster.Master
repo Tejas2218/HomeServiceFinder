@@ -581,6 +581,54 @@
                 color: #666;
                 pointer-events: none;
             }
+
+        .section-title {
+            grid-column: span 2;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e5e7eb;
+            margin-top: 10px;
+        }
+
+        .profile-card {
+            background: #fff;
+            padding: 25px;
+            width: 100%;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px 24px;
+            width: 100%;
+        }
+
+        .profile-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+            .profile-item.full-width {
+                grid-column: span 2;
+            }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-item.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
     </style>
 </head>
 
