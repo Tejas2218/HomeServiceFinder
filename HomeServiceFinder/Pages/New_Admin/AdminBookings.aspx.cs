@@ -164,7 +164,7 @@ namespace HomeServiceFinder.Pages.New_Admin
 
         protected void btnBooking_Click(object sender, EventArgs e)
         {
-            Response.Redirect("");
+            Response.Redirect("AddBooking.aspx");
         }
     }
 }

@@ -87,6 +87,7 @@
     <Content Include="Pages\login_signup\User_SignUp.aspx" />
     <Content Include="Pages\login_signup\Waiting_ServiceProvider.aspx" />
     <Content Include="Pages\login_signup\Worker_SignUp.aspx" />
+    <Content Include="Pages\New_Admin\AddBooking.aspx" />
     <Content Include="Pages\New_Admin\AddServiceProvider.aspx" />
     <Content Include="Pages\New_Admin\AdminBookings.aspx" />
     <Content Include="Pages\New_Admin\AdminDashbord.aspx" />
@@ -157,6 +158,13 @@
     </Compile>
     <Compile Include="Pages\login_signup\Worker_SignUp.aspx.designer.cs">
       <DependentUpon>Worker_SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AddBooking.aspx.cs">
+      <DependentUpon>AddBooking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\AddBooking.aspx.designer.cs">
+      <DependentUpon>AddBooking.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\New_Admin\AddServiceProvider.aspx.cs">
       <DependentUpon>AddServiceProvider.aspx</DependentUpon>

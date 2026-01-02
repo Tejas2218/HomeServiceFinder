@@ -6,56 +6,45 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <!-- PAGE LEVEL CSS (UNCHANGED) -->
     <style>
-        .section-title {
-            grid-column: span 2;
-            font-size: 16px;
-            font-weight: 700;
-            color: #333;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #e5e7eb;
-            margin-top: 10px;
-        }
-
-        .profile-card {
-            background: #fff;
-            padding: 25px;
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-        }
-
-        .profile-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px 24px;
-            width: 100%;
-        }
-
-        .profile-item {
-            display: flex;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            display: none;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-            .profile-item.full-width {
-                grid-column: span 2;
-            }
-
-        @media (max-width: 768px) {
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .profile-item.full-width {
-                grid-column: span 1;
-            }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .error {
-            color: red;
-            font-size: 12px;
-            margin-top: 4px;
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
+
+    <div id="overlay">
+        <div class="spinner"></div>
+        <p style="margin-top: 10px; font-weight: bold; color: #333;">Processing, please wait...</p>
+    </div>
 
     <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
 
@@ -63,12 +52,10 @@
 
         <div class="profile-grid">
 
-            <!-- PERSONAL INFO TITLE -->
             <div class="section-title full-width">
                 Personal Information
             </div>
 
-            <!-- Name -->
             <div class="profile-item">
                 <label>Name</label>
                 <asp:TextBox ID="UserName" runat="server" CssClass="profile-value" />
@@ -77,7 +64,6 @@
                     CssClass="error" runat="server" />
             </div>
 
-            <!-- Email -->
             <div class="profile-item">
                 <label>Email</label>
                 <asp:TextBox ID="UserEmail" runat="server" CssClass="profile-value" />
@@ -92,7 +78,6 @@
                     CssClass="error" runat="server" />
             </div>
 
-            <!-- Contact -->
             <div class="profile-item">
                 <label>Contact Number</label>
                 <asp:TextBox ID="UserContact" runat="server" CssClass="profile-value" />
@@ -127,7 +112,6 @@
                 <asp:TextBox ID="UserAddress" runat="server" CssClass="profile-value" />
             </div>
 
-            <!-- WORKING INFO TITLE -->
             <div class="section-title full-width">
                 Working Information
             </div>
@@ -208,7 +192,6 @@
                     ForeColor="Red" />
             </div>
 
-            <!-- SECURITY INFO TITLE -->
             <div class="section-title full-width">
                 Security Information
             </div>
@@ -239,11 +222,31 @@
             <asp:Button ID="btnEdit" runat="server"
                 Text="Add Service Provider"
                 CssClass="btn btn-edit"
-                OnClick="btnEdit_Click" />
+                OnClick="btnEdit_Click"
+                OnClientClick="return showLoader();" />
+
             <asp:Button ID="btnUpdate" runat="server"
                 Text="Save Changes"
                 CssClass="btn btn-edit"
                 OnClick="btnUpdate_Click"
-                Visible="false" />
+                Visible="false"
+                OnClientClick="return showLoader();" />
         </div>
+    </div>
+
+    <script type="text/javascript">
+        function showLoader() {
+            // Check if client-side validation passes before showing the loader
+            if (typeof (Page_ClientValidate) == 'function') {
+                var isValid = Page_ClientValidate();
+                if (isValid) {
+                    document.getElementById('overlay').style.display = 'flex';
+                }
+                return isValid;
+            }
+            // Fallback if no validators are present
+            document.getElementById('overlay').style.display = 'flex';
+            return true;
+        }
+    </script>
 </asp:Content>
