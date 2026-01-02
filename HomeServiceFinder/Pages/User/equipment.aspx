@@ -158,17 +158,12 @@
 
                         <div class="sub-service-card">
 
-                            <div class="icon-box">
-                                <i class="fa-solid <%# Eval("Equipment_Icon") %>"></i>
-                            </div>
 
                             <div class="content-box">
                                 <div class="service-name"><%# Eval("Equipment_Name") %></div>
-                                <p class="service-desc"><%# Eval("Equipment_Description") %></p>
                             </div>
 
                             <div class="price-box">
-                                <span class="price-text">₹<%# Eval("Equipment_Price") %></span>
                                 <span class="add-btn">Select</span>
                             </div>
 
@@ -176,57 +171,15 @@
                     </a>
                 </ItemTemplate>
             </asp:Repeater>
+            <asp:Label ID="lblMessage" runat="server" CssClass="text-danger"></asp:Label>
 
         </div>
 
-        <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content border-0 shadow-lg">
-
-                    <div class="modal-header border-0 pb-0">
-                        <h5 class="modal-title fw-bold">Confirm Service</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded">
-                            <div>
-                                <small class="text-muted d-block">Service</small>
-                                <strong class="text-dark" id="lblServiceName">...</strong>
-                            </div>
-                            <div class="text-end">
-                                <small class="text-muted d-block">Total</small>
-                                <strong style="color: var(--apex-orange); font-size: 1.2rem;" id="lblServicePrice">...</strong>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="fw-bold small text-muted">DATE</label>
-                            <asp:TextBox ID="txtDate" runat="server" TextMode="Date" CssClass="form-control" required="true"></asp:TextBox>
-                        </div>
-                        <div class="mb-4">
-                            <label class="fw-bold small text-muted">ADDRESS</label>
-                            <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-control" placeholder="House/Flat No..." required="true"></asp:TextBox>
-                        </div>
-
-                        <asp:HiddenField ID="hfServiceName" runat="server" />
-
-                        <asp:Button ID="btnConfirm" runat="server" Text="Yes, Confirm Booking" CssClass="btn btn-orange-fill rounded-pill" OnClick="btnConfirm_Click" />
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function openModal(name, price) {
-            document.getElementById('lblServiceName').innerText = name;
-            document.getElementById('lblServicePrice').innerText = '₹' + price;
-            document.getElementById('<%= hfServiceName.ClientID %>').value = name;
-            new bootstrap.Modal(document.getElementById('bookingModal')).show();
-        }
-    </script>
+   
 </body>
 </html>

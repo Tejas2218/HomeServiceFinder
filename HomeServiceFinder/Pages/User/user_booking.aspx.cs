@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Net.Mail;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,25 +11,18 @@ namespace HomeServiceFinder.Pages.User
 {
     public partial class user_booking : System.Web.UI.Page
     {
+        private string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+        private int PageSize = 5;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //lblMessage2.Text = "Session UserID = " + (Session["UserID"] == null ? "NULL" : Session["UserID"].ToString());
-
             if (!IsPostBack)
             {
                 LoadBookings(0);
             }
         }
 
-        public string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
-        public SqlDataAdapter sda;
-        public SqlCommand cmd;
-        public DataSet sd;
-
-        private int PageSize = 5;
-
-
-        private void LoadBookings(int pageIndex = 0)
+        private void LoadBookings(int pageIndex)
         {
             using (SqlConnection con = new SqlConnection(constr))
             using (SqlCommand cmd = new SqlCommand("View_User_Booking_Details", con))
@@ -39,9 +30,8 @@ namespace HomeServiceFinder.Pages.User
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@User_ID", Session["UserID"]);
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
-                da.Fill(dt);
+                new SqlDataAdapter(cmd).Fill(dt);
 
                 dt.Columns.Add("StatusClass");
                 dt.Columns.Add("ActionText");
@@ -71,37 +61,21 @@ namespace HomeServiceFinder.Pages.User
                     }
                 }
 
-                PagedDataSource pds = new PagedDataSource();
-                pds.DataSource = dt.DefaultView;
-                pds.AllowPaging = true;
-                pds.PageSize = PageSize;
-                pds.CurrentPageIndex = pageIndex;
+                PagedDataSource pds = new PagedDataSource
+                {
+                    DataSource = dt.DefaultView,
+                    AllowPaging = true,
+                    PageSize = PageSize,
+                    CurrentPageIndex = pageIndex
+                };
 
                 rptBookings.DataSource = pds;
                 rptBookings.DataBind();
 
-                ViewState["TotalPages"] = pds.PageCount;
                 ViewState["CurrentPage"] = pageIndex;
+                ViewState["TotalPages"] = pds.PageCount;
             }
         }
-
-        protected void NextPage(object sender, EventArgs e)
-        {
-            int page = (int)ViewState["CurrentPage"];
-            int total = (int)ViewState["TotalPages"];
-
-            if (page < total - 1)
-                LoadBookings(page + 1);
-        }
-
-        protected void PrevPage(object sender, EventArgs e)
-        {
-            int page = (int)ViewState["CurrentPage"];
-            if (page > 0)
-                LoadBookings(page - 1);
-        }
-
-
 
         protected void btnAction_Command(object sender, CommandEventArgs e)
         {
@@ -113,18 +87,19 @@ namespace HomeServiceFinder.Pages.User
 
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    // 1️⃣ GET DETAILS
+                    con.Open();
+
+                    // 🔹 GET DETAILS
                     SqlCommand getCmd = new SqlCommand("Get_Booking_Cancel_Details", con);
                     getCmd.CommandType = CommandType.StoredProcedure;
                     getCmd.Parameters.AddWithValue("@Booking_ID", bookingId);
 
-                    SqlDataAdapter da = new SqlDataAdapter(getCmd);
                     DataTable dt = new DataTable();
-                    da.Fill(dt);
+                    new SqlDataAdapter(getCmd).Fill(dt);
 
                     if (dt.Rows.Count == 0)
                     {
-                        lblMessage2.Text = "Booking data not found.";
+                        lblMessage2.Text = "Booking not found.";
                         return;
                     }
 
@@ -134,22 +109,21 @@ namespace HomeServiceFinder.Pages.User
                     timeSlot = dt.Rows[0]["Time_Slot"].ToString();
                     visitDate = Convert.ToDateTime(dt.Rows[0]["Visiting_DateTime"]).ToString("dd MMM yyyy");
 
-                    // 2️⃣ DELETE BOOKING
+                    // 🔹 DELETE BOOKING
                     SqlCommand delCmd = new SqlCommand("Delete_Booking_Details", con);
                     delCmd.CommandType = CommandType.StoredProcedure;
                     delCmd.Parameters.AddWithValue("@Booking_ID", bookingId);
-
-                    con.Open();
                     delCmd.ExecuteNonQuery();
-                    con.Close();
                 }
 
-                // 3️⃣ SEND EMAILS
-                SendCancelEmailToUser(userEmail, visitDate, timeSlot, spName);
-                SendCancelEmailToProvider(spEmail, visitDate, timeSlot, userEmail);
+                Task.Run(() =>
+                {
+                    SendCancelEmailToUser(userEmail, visitDate, timeSlot, spName);
+                    SendCancelEmailToProvider(spEmail, visitDate, timeSlot, userEmail);
+                });
 
-                lblMessage.Text = "<div class='alert alert-success'>Booking cancelled & emails sent.</div>";
-                LoadBookings();
+                lblMessage.Text = "<div class='alert alert-success'>Booking cancelled successfully.</div>";
+                LoadBookings((int)ViewState["CurrentPage"]);
             }
             catch (Exception ex)
             {
@@ -157,52 +131,38 @@ namespace HomeServiceFinder.Pages.User
             }
         }
 
-
         private void SendCancelEmailToUser(string email, string date, string time, string provider)
         {
-            MailMessage mail = new MailMessage();
+            MailMessage mail = new MailMessage
+            {
+                From = new MailAddress("homeservicefinder999@gmail.com"),
+                Subject = "Booking Cancelled - HomeServiceFinder",
+                IsBodyHtml = true,
+                Body = $@"
+                    <h3>Booking Cancelled</h3>
+                    <p>Your booking with <b>{provider}</b> has been cancelled.</p>
+                    <p><b>Date:</b> {date}</p>
+                    <p><b>Time:</b> {time}</p>"
+            };
             mail.To.Add(email);
-            mail.From = new MailAddress("homeservicefinder999@gmail.com");
-            mail.Subject = "Booking Cancelled - HomeServiceFinder";
-            mail.IsBodyHtml = true;
-
-            mail.Body = $@"
-    <h2>Booking Cancelled</h2>
-    <p>Your booking with <b>{provider}</b> has been cancelled.</p>
-    <p><b>Date:</b> {date}</p>
-    <p><b>Time:</b> {time}</p>
-    <p>If this was a mistake, you can rebook anytime.</p>";
-
-            SendSMTP(mail);
+            new SmtpClient().Send(mail);
         }
 
         private void SendCancelEmailToProvider(string email, string date, string time, string userEmail)
         {
-            MailMessage mail = new MailMessage();
+            MailMessage mail = new MailMessage
+            {
+                From = new MailAddress("homeservicefinder999@gmail.com"),
+                Subject = "Booking Cancelled by User",
+                IsBodyHtml = true,
+                Body = $@"
+                    <h3>Booking Cancelled</h3>
+                    <p>User <b>{userEmail}</b> cancelled the booking.</p>
+                    <p><b>Date:</b> {date}</p>
+                    <p><b>Time:</b> {time}</p>"
+            };
             mail.To.Add(email);
-            mail.From = new MailAddress("homeservicefinder999@gmail.com");
-            mail.Subject = "Booking Cancelled by User";
-            mail.IsBodyHtml = true;
-
-            mail.Body = $@"
-    <h2>Booking Cancelled</h2>
-    <p>The customer <b>{userEmail}</b> has cancelled the booking.</p>
-    <p><b>Date:</b> {date}</p>
-    <p><b>Time:</b> {time}</p>";
-
-            SendSMTP(mail);
+            new SmtpClient().Send(mail);
         }
-
-        private void SendSMTP(MailMessage mail)
-        {
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.Credentials = new System.Net.NetworkCredential(
-                "homeservicefinder999@gmail.com",
-                "cvquixtqamspxxjp"
-            );
-            smtp.EnableSsl = true;
-            smtp.Send(mail);
-        }
-
     }
 }
