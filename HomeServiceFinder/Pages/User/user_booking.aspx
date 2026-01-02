@@ -94,7 +94,7 @@
             </div>
         </div>
         <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
-            <a href="user_dashboard.aspx" class="navbar-brand d-flex align-items-center">
+            <a href="index.aspx" class="navbar-brand d-flex align-items-center">
                 <h1 class="m-0"><i class="fa fa-building text-primary me-3"></i>APEX</h1>
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -133,101 +133,86 @@
                                             <th scope="col">Booking ID</th>
                                             <th scope="col">Service Name</th>
                                             <th scope="col">Date & Time</th>
-                                            <th scope="col">Price</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><strong>#BK-2023001</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="btn-square bg-light rounded-circle me-2">
-                                                        <i class="fa fa-paint-roller text-primary"></i>
-                                                    </div>
-                                                    <span>Wall Painting</span>
-                                                </div>
-                                            </td>
-                                            <td>24 Oct 2023, 10:00 AM</td>
-                                            <td>$150.00</td>
-                                            <td><span class="status-badge status-pending">Pending</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-outline-danger">Cancel</button>
-                                            </td>
-                                        </tr>
+                                        <asp:Repeater ID="rptBookings" runat="server">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td>
+                                                        <strong>#BK-<%# Eval("Booking_ID") %></strong>
+                                                    </td>
 
-                                        <tr>
-                                            <td><strong>#BK-2023002</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="btn-square bg-light rounded-circle me-2">
-                                                        <i class="fa fa-wrench text-primary"></i>
-                                                    </div>
-                                                    <span>Plumbing Service</span>
-                                                </div>
-                                            </td>
-                                            <td>15 Sep 2023, 02:30 PM</td>
-                                            <td>$80.00</td>
-                                            <td><span class="status-badge status-completed">Completed</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-outline-primary">Invoice</button>
-                                            </td>
-                                        </tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="btn-square bg-light rounded-circle me-2">
+                                                                <i class="fa fa-tools text-primary"></i>
+                                                            </div>
+                                                            <span>Service ID: <%# Eval("Equipment_ID") %></span>
+                                                        </div>
+                                                    </td>
 
-                                        <tr>
-                                            <td><strong>#BK-2023003</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="btn-square bg-light rounded-circle me-2">
-                                                        <i class="fa fa-bolt text-primary"></i>
-                                                    </div>
-                                                    <span>Electrical Repair</span>
-                                                </div>
-                                            </td>
-                                            <td>10 Aug 2023, 11:00 AM</td>
-                                            <td>$120.00</td>
-                                            <td><span class="status-badge status-cancelled">Cancelled</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-primary">Rebook</button>
-                                            </td>
-                                        </tr>
+                                                    <td>
+                                                        <%# Convert.ToDateTime(Eval("Visiting_DateTime")).ToString("dd MMM yyyy") %>,
+                    <%# Eval("Time_Slot") %>
+                                                    </td>
 
-                                        <tr>
-                                            <td><strong>#BK-2023004</strong></td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="btn-square bg-light rounded-circle me-2">
-                                                        <i class="fa fa-tools text-primary"></i>
-                                                    </div>
-                                                    <span>Furniture Assembly</span>
-                                                </div>
-                                            </td>
-                                            <td>01 Aug 2023, 09:00 AM</td>
-                                            <td>$200.00</td>
-                                            <td><span class="status-badge status-completed">Completed</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-outline-primary">Invoice</button>
-                                            </td>
-                                        </tr>
+
+                                                    <td>
+                                                        <span class='status-badge <%# Eval("StatusClass") %>'>
+                                                            <%# Eval("Booking_Status") %>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <asp:Button
+                                                            ID="btnAction"
+                                                            runat="server"
+                                                            Text='<%# Eval("ActionText") %>'
+                                                            CssClass='<%# Eval("ActionClass") %>'
+                                                            CommandArgument='<%# Eval("Booking_ID") %>'
+                                                            OnCommand="btnAction_Command"
+                                                            OnClientClick="return confirm('Are you sure you want to cancel this booking?');" />
+
+                                                    </td>
+
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                                        <asp:Label ID="lblMessage2" runat="server"></asp:Label>
                                     </tbody>
+
                                 </table>
                             </div>
 
                             <nav aria-label="Page navigation" class="mt-4">
                                 <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
 
+                                    <li class="page-item">
+                                        <asp:LinkButton
+                                            ID="btnPrev"
+                                            runat="server"
+                                            CssClass="page-link"
+                                            OnClick="PrevPage">
+                Previous
+                                        </asp:LinkButton>
                                     </li>
+
+                                    <li class="page-item">
+                                        <asp:LinkButton
+                                            ID="btnNext"
+                                            runat="server"
+                                            CssClass="page-link"
+                                            OnClick="NextPage">
+                Next
+                                        </asp:LinkButton>
+                                    </li>
+
                                 </ul>
                             </nav>
+
                         </div>
                     </div>
                 </div>

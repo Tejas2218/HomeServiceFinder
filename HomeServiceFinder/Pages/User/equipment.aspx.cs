@@ -9,6 +9,7 @@ namespace HomeServiceFinder.Pages.User
 {
     public partial class equipment : System.Web.UI.Page
     {
+        //rptEquipment
         protected void Page_Load(object sender, EventArgs e)
         {
 

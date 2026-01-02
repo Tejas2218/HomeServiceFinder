@@ -30,7 +30,7 @@ namespace HomeServiceFinder.Pages.User
             try
             {
                 using (SqlConnection con = new SqlConnection(constr))
-                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details", con))
+                using (SqlCommand cmd = new SqlCommand("View_ServiceMaster", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -45,13 +45,13 @@ namespace HomeServiceFinder.Pages.User
                     }
                     else
                     {
-                        lblMessage.Text = "No service providers found.";
+                        lblMessage.Text = "No services found.";
                     }
                 }
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "No user data found." + ex;
+                lblMessage.Text = "Error: " + ex.Message;
             }
         }
     }

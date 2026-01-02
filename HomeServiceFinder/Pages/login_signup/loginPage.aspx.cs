@@ -16,11 +16,11 @@ namespace HomeServiceFinder.login_signup
             {
                 if (Session["UserRole"].ToString() == "Admin")
                 {
-                    Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
+                    Response.Redirect("~/Pages/New_Admin/admin_dashboard.aspx");
                 }
                 else if (Session["UserRole"].ToString() == "User")
                 {
-                    Response.Redirect("~/Pages/User/homePage.aspx");
+                    Response.Redirect("~/Pages/User/user_dashboard.aspx");
                 }
                 else if (Session["User_Role"].ToString() == "Worker")
                 {
@@ -54,6 +54,7 @@ namespace HomeServiceFinder.login_signup
                     {
                         Session["UserID"] = dr["User_ID"].ToString();
                         Session["UserRole"] = dr["User_Role"].ToString();
+                        Session["UserEmail"] = username.ToString();
                         
 
                         lblMessage.CssClass = "success-msg";
@@ -61,7 +62,7 @@ namespace HomeServiceFinder.login_signup
 
                         if (dr["User_Role"].ToString() == "Admin")
                         {
-                            Response.Redirect("~/Pages/Admin/admin_dashboard.aspx");
+                            Response.Redirect("~/Pages/New_Admin/AdminDashbord.aspx");
                         }
                         else if(dr["User_Role"].ToString() == "User")
                         {
@@ -73,13 +74,13 @@ namespace HomeServiceFinder.login_signup
                             {
                                 Response.Redirect("Waiting_ServiceProvider.aspx");
                             }
-                            else if (dr["SP_Status"].ToString() == "Decline")
+                            else if (dr["SP_Status"].ToString() == "Rejected")
                             {
                                 Response.Write("<script>Swal.fire({\r\n  icon: 'error',\r\n  title: 'Request Declined',\r\n  text: 'Your request could not be approved at this time.',\r\n  confirmButtonColor: '#d33',\r\n  confirmButtonText: 'Understood'\r\n});</script>");
                             }
-                            else if (dr["SP_Status"].ToString() == "Accept")
+                            else if (dr["SP_Status"].ToString() == "Approved")
                             {
-                                Response.Redirect("~/Pages/Service_Provider/service_provider_dashboard.aspx");
+                                Response.Redirect("~/Pages/Service_Provider/service_provider_booking.aspx");
                             }
 
                         }

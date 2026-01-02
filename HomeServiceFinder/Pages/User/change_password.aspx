@@ -100,6 +100,7 @@
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
                     <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
+                    <a href="service_provider.aspx" class="nav-item nav-link">Providers</a>
                     <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
                     <a href="profile.aspx" class="nav-item nav-link active">Profile</a>
                     <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
@@ -208,7 +209,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 mt-4">
-                                    <asp:Button ID="btnResetSubmit" runat="server" Text="Reset Password" CssClass="btn btn-primary w-100 py-2" OnClientClick="return confirmAction(this, 'Reset Password?');" />
+                                    <asp:Button ID="btnResetSubmit" runat="server" Text="Reset Password" CssClass="btn btn-primary w-100 py-2" />
                                 </div>
                             </div>
 
@@ -227,45 +228,6 @@
         $(window).on('load', function () {
             if ($('#spinner').length > 0) $('#spinner').removeClass('show');
         });
-
-        // SweetAlert2 Confirmation Logic
-        function confirmAction(button, titleText) {
-            if (button.dataset.confirmed === "true") {
-                return true;
-            }
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#198754',
-                cancelButtonColor: '#dc3545',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Deleted!',
-                        text: 'Your file has been deleted.',
-                        icon: 'success',
-                        confirmButtonColor: '#198754'
-                    }).then(() => {
-                        button.dataset.confirmed = "true";
-                        button.click();
-                    });
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire({
-                        title: 'Cancelled',
-                        text: 'Your imaginary file is safe :)',
-                        icon: 'error',
-                        confirmButtonColor: '#198754'
-                    });
-                }
-            });
-            return false;
-        }
 
         let timerInterval;
 
@@ -308,11 +270,18 @@
         }
 
         function verifyAndStopTimer() {
+            // 1. Stop the Timer
             clearInterval(timerInterval);
+
+            // 2. Visual feedback
             document.getElementById('timerContainer').innerHTML = '<span class="text-primary fw-bold"><i class="fa fa-check-circle"></i> OTP Verified</span>';
+
+            // 3. Disable OTP inputs so they can't be changed
             for (let i = 1; i <= 6; i++) {
                 document.getElementById('otp' + i).disabled = true;
             }
+
+            // 4. Hide Verify button and Resend link, Show Password fields
             $('#btnVerifyOtp').fadeOut(200, function () {
                 $('#passwordResetFields').fadeIn();
                 $('#resendBtn').hide();
@@ -330,6 +299,7 @@
                 if (--timer < 0) {
                     clearInterval(timerInterval);
                     display.textContent = "Expired";
+                    // Disable inputs if expired
                     for (let i = 1; i <= 6; i++) document.getElementById('otp' + i).disabled = true;
                 }
             }, 1000);

@@ -17,7 +17,6 @@ begin
 	inner join EquipmentMaster EM
 	on EM.Service_ID=SM.Service_ID
 end
-
 --26-12-25--
 ---Display Worker Details Pending--
 create or alter proc Display_Worker_Details_Pending
@@ -80,9 +79,10 @@ begin
 end
 
 
+
 --Display Worker Detail by Service--
 create or alter proc Display_Worker_Details_ByService
-@SP_Service int
+@SP_ID int
 as
 begin
 	select * from ServiceProviderDetails SPD 
@@ -97,8 +97,33 @@ begin
 	on SM.Service_ID=SPD.Service_ID
 	inner join EquipmentMaster EM
 	on EM.Service_ID=SM.Service_ID
-	where SPD.SP_Service=@SP_Service
+	where SPD.Service_ID=@SP_ID
 end
+
+--Display Worker Detail by Equipment--
+create or alter proc Display_Worker_Details_ByEquipment
+@EQ_ID int
+as
+begin
+	select * from ServiceProviderDetails SPD 
+	inner join UserDetails UD 
+	on SPD.User_ID=UD.User_ID  
+	----25-12-25 Updated-----
+	inner join CityDetails CD
+	on UD.City_ID=CD.City_ID
+	inner join StateDetails SD
+	on UD.State_ID=SD.State_ID
+	inner join ServiceMaster SM
+	on SM.Service_ID=SPD.Service_ID
+	inner join EquipmentMaster EM
+	on EM.Service_ID=SM.Service_ID
+	where SPD.Equipment_ID=@EQ_ID
+end
+exec Display_Worker_Details_ByEquipment 1
+
+exec Display_Worker_Details_ByService 9
+select * from ServiceProviderDetails
+
 exec Display_Worker_Details_ByID 4
 
 --Display Specific Worker Details--
@@ -206,10 +231,38 @@ create or alter proc Update_Worker_Details
 @User_Address varchar(200),
 @User_ContactNo bigint,
 @User_Password varchar(50),
-@City_ID int,
-@State_ID int,
-@Service_ID int,
-@Equipment_ID int,
+@User_Role varchar(50),
+@City_ID int
+as
+begin
+	insert into UserDetails(
+		User_Name,
+		User_EmailID,
+		User_Address,
+		User_ContactNo,
+		User_Password,
+		User_Role,
+		City_ID 
+	)
+	values(
+		@User_Name,
+		@User_EmailID,
+		@User_Address,
+		@User_ContactNo,
+		@User_Password,
+		@User_Role,
+		@City_ID
+	)
+	select SCOPE_IDENTITY() as User_ID
+end
+
+
+
+---------------------------------------------------- not executed --------------------------------------------
+
+--Update Worker Detail--
+alter proc Update_Worker_Details
+@SP_ID int,
 @SP_Age int ,
 @SP_ShopAddress varchar(200),
 @SP_Experience int,

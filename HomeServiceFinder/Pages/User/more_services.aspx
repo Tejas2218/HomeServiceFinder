@@ -125,153 +125,25 @@
                 </div>
 
                 <div id="service-page-1" class="row g-4 justify-content-center">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-1.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Building Construction</h5>
-                                    <p>Full-scale construction services for residential and commercial properties.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
+                    <asp:Repeater ID="rptWorkers" runat="server">
+                        <ItemTemplate>
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="<%# (Container.ItemIndex % 3) * 0.2 %>s">
+                                <a href="equipment.aspx?sid=<%# Eval("Service_ID") %>" class="service-link">
+                                    <div class="service-item bg-light overflow-hidden h-100">
+                                        <img class="img-fluid" src="img/service-1.jpg" alt="" />
+                                        <div class="service-text position-relative text-center h-100 p-4">
+                                            <h4 class="mb-3">
+                                                <%# Eval("Service_Name") %>
+                                            </h4>
+                                            <div class="btn btn-primary py-2 px-4">View Equipments</div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-2.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Home Maintenance</h5>
-                                    <p>Routine checkups and repairs to keep your home in perfect condition.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-3.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Renovation & Painting</h5>
-                                    <p>Give your home a fresh look with our expert renovation services.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-4.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Wiring & Installation</h5>
-                                    <p>Safe and certified electrical wiring and appliance installation.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-5.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Tiling & Flooring</h5>
-                                    <p>High-quality floor tiling, wooden flooring, and repair works.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-6.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Interior Design</h5>
-                                    <p>Modern interior design solutions to transform your living space.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
 
-                <div id="service-page-2" class="row g-4 justify-content-center">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-1.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Plumbing Services</h5>
-                                    <p>Leak repairs, pipe installation, and bathroom fitting services.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-2.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Roofing Repair</h5>
-                                    <p>Waterproofing, roof tiles replacement, and leak fixing.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-3.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">HVAC & AC Repair</h5>
-                                    <p>Installation and repair of air conditioners and heating systems.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-4.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Carpentry</h5>
-                                    <p>Custom furniture, door repairs, and general woodwork.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-5.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Gardening</h5>
-                                    <p>Lawn mowing, tree trimming, and landscape maintenance.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                        <a href="equipment.aspx" class="service-link">
-                            <div class="service-item bg-light overflow-hidden h-100">
-                                <img class="img-fluid" src="img/service-6.jpg" alt="">
-                                <div class="service-text position-relative text-center h-100 p-4">
-                                    <h5 class="mb-3">Smart Home Setup</h5>
-                                    <p>Installation of smart locks, cameras, and automation systems.</p>
-                                    <span class="small fw-bold text-primary">BOOK NOW <i class="fa fa-arrow-right ms-2"></i></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    <asp:Label ID="lblMessage" Text="" runat="server"></asp:Label>
                 </div>
 
                 <div class="row wow fadeInUp" data-wow-delay="0.8s">
@@ -322,29 +194,29 @@
                         <a class="btn btn-link" href="profile.aspx">Profile</a>
                         <a class="btn btn-link" href="service.aspx">Our Services</a>
                     </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-light mb-4">Newsletter</h4>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email" />
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Newsletter</h4>
+                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email" />
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
                     </div>
                 </div>
             </div>
-            <div class="container-fluid copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a href="#">Your Site Name</a>, All Right Reserved.
-                        </div>
-                        <div class="col-md-6 text-center text-md-end">
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        Designed By <a href="https://htmlcodex.com">HTML Codex</a>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </form>

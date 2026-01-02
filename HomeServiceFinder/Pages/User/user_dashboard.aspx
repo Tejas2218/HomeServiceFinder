@@ -25,6 +25,23 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
     <link href="css/style.css" rel="stylesheet" />
+
+    <style>
+        /* Keeps the text style consistent now that the whole card is a link */
+        .card-link {
+            text-decoration: none !important;
+            color: inherit !important;
+            display: block;
+        }
+
+        .service-item {
+            cursor: pointer;
+        }
+
+        .servicesClass {
+            display: flex
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -273,44 +290,35 @@
                 </div>
             </div>
         </div>
+
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5 align-items-end mb-5">
+                    <div class="servicesClass">
+                        <h1>Services</h1>
+                        <div class="col-lg-6 text-lg-end wow fadeInUp" data-wow-delay="0.3s">
+                            <a class="btn btn-primary py-3 px-5" href="more_services.aspx">More Services</a>
+                        </div>
+                    </div>
                     <asp:Repeater ID="rptWorkers" runat="server">
                         <ItemTemplate>
-
-                            <div class="col-lg-4 col-md-6 wow fadeInUp"
-                                data-wow-delay="<%# (Container.ItemIndex % 3) * 0.2 %>s">
-
-                                <div class="service-item bg-light overflow-hidden h-100">
-
-                                    <!-- KEEP image exactly same -->
-                                    <img class="img-fluid" src="img/service-1.jpg" alt="" />
-
-                                    <!-- KEEP ALL original classes -->
-                                    <div class="service-text position-relative text-center h-100 p-4">
-                                        
-
-                                        <p>
-                                            <%# Eval("User_Name") %> •
-                        <%# Eval("SP_Experience") %> yrs
-                                        </p>
-
-                                        <p>
-                                            Starting at ₹<%# Eval("SP_MinimumPrice") %>
-                                        </p>
-
-                                        <a class="small"
-                                            href='equipment.aspx?id=<%# Eval("SP_ID") %>'>READ MORE <i class="fa fa-arrow-right ms-3"></i>
-                                        </a>
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="<%# (Container.ItemIndex % 3) * 0.2 %>s">
+                                <a href="equipment.aspx?sid=<%# Eval("Service_ID") %>" class="service-link">
+                                    <div class="service-item bg-light overflow-hidden h-100">
+                                        <img class="img-fluid" src="img/service-1.jpg" alt="" />
+                                        <div class="service-text position-relative text-center h-100 p-4">
+                                            <h4 class="mb-3">
+                                                <%# Eval("Service_Name") %>
+                                            </h4>
+                                            <div class="btn btn-primary py-2 px-4">View Equipments</div>
+                                        </div>
                                     </div>
-
-                                </div>
+                                </a>
                             </div>
-
                         </ItemTemplate>
                     </asp:Repeater>
 
+                    <asp:Label ID="Label1" Text="" runat="server"></asp:Label>
                 </div>
             </div>
         </div>

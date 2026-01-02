@@ -1,5 +1,5 @@
 use Home_Service_Finder
-
+create database Home_Service_Finder
 --All Tables--
 create table StateDetails(
 	State_ID int primary key identity(1,1),
@@ -77,6 +77,9 @@ create table BookingDetails(
 	Booking_Decline_Reason varchar(100) null
 )
 
+DELETE FROM BookingDetails
+WHERE Booking_Status = 'Panding';
+
 select * from BookingDetails
 
 alter table BookingDetails add Equipment_ID int
@@ -85,6 +88,10 @@ alter table BookingDetails add constraint FK_BookingDetails_Equipment Foreign ke
 alter table BookingDetails add Time_Slot varchar(10) not null----addd column
 
 alter table BookingDetails add Visiting_DateTime datetime not null----addd column
+
+------update datatype size
+ALTER TABLE BookingDetails
+ALTER COLUMN Time_Slot VARCHAR(20) NOT NULL;
 
 
 
@@ -95,6 +102,9 @@ as
 Begin
 Select * from ServiceMaster
 end
+
+exec View_ServiceMaster
+select * from ServiceMaster
 
 create or alter proc View_Equipment_ByID
 @Service_ID int
@@ -112,7 +122,90 @@ Insert into EquipmentMaster(Equipment_Name,Service_ID)
 values('Tap Repairing',1)
 
 
+-- =============================================
+-- 1. INSERT SERVICE: PLUMBING
+-- =============================================
+INSERT INTO ServiceMaster (Service_Name) VALUES ('Plumbing');
 
+-- Capture the newly created Service_ID
+DECLARE @PlumbingID INT = SCOPE_IDENTITY(); 
+
+INSERT INTO EquipmentMaster (Equipment_Name, Service_ID) VALUES 
+('Pipe Wrench', @PlumbingID),
+('Plunger', @PlumbingID),
+('Teflon Tape', @PlumbingID),
+('Drain Snake', @PlumbingID),
+('PVC Pipe Cutter', @PlumbingID);
+
+-- =============================================
+-- 2. INSERT SERVICE: ELECTRICAL
+-- =============================================
+INSERT INTO ServiceMaster (Service_Name) VALUES ('Electrical');
+
+DECLARE @ElectricalID INT = SCOPE_IDENTITY();
+
+INSERT INTO EquipmentMaster (Equipment_Name, Service_ID) VALUES 
+('Digital Multimeter', @ElectricalID),
+('Wire Strippers', @ElectricalID),
+('Voltage Tester', @ElectricalID),
+('Insulated Screwdriver', @ElectricalID),
+('Cable Ties', @ElectricalID);
+
+-- =============================================
+-- 3. INSERT SERVICE: AC REPAIR
+-- =============================================
+INSERT INTO ServiceMaster (Service_Name) VALUES ('AC Repair');
+
+DECLARE @AcID INT = SCOPE_IDENTITY();
+
+INSERT INTO EquipmentMaster (Equipment_Name, Service_ID) VALUES 
+('Vacuum Pump', @AcID),
+('Manifold Gauge', @AcID),
+('Fin Comb', @AcID),
+('Gas Leak Detector', @AcID),
+('AC Cleaning Jet', @AcID);
+
+-- =============================================
+-- 4. INSERT SERVICE: CARPENTRY
+-- =============================================
+INSERT INTO ServiceMaster (Service_Name) VALUES ('Carpentry');
+
+DECLARE @CarpentryID INT = SCOPE_IDENTITY();
+
+INSERT INTO EquipmentMaster (Equipment_Name, Service_ID) VALUES 
+('Claw Hammer', @CarpentryID),
+('Power Drill', @CarpentryID),
+('Wood Chisel', @CarpentryID),
+('Hand Saw', @CarpentryID),
+('Measuring Tape', @CarpentryID);
+
+-- =============================================
+-- 5. INSERT SERVICE: HOUSE CLEANING
+-- =============================================
+INSERT INTO ServiceMaster (Service_Name) VALUES ('House Cleaning');
+
+DECLARE @CleaningID INT = SCOPE_IDENTITY();
+
+INSERT INTO EquipmentMaster (Equipment_Name, Service_ID) VALUES 
+('Industrial Vacuum', @CleaningID),
+('Microfiber Mop', @CleaningID),
+('Glass Squeegee', @CleaningID),
+('Floor Scrubber', @CleaningID),
+('Cleaning Bucket', @CleaningID);
+
+-- =============================================
+-- 6. INSERT SERVICE: PAINTING
+-- =============================================
+INSERT INTO ServiceMaster (Service_Name) VALUES ('Painting');
+
+DECLARE @PaintingID INT = SCOPE_IDENTITY();
+
+INSERT INTO EquipmentMaster (Equipment_Name, Service_ID) VALUES 
+('Paint Roller', @PaintingID),
+('Extension Pole', @PaintingID),
+('Paint Tray', @PaintingID),
+('Drop Cloth', @PaintingID),
+('Masking Tape', @PaintingID);
 
 
 
