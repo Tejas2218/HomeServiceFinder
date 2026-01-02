@@ -1,8 +1,9 @@
 --Booking Detail--
 use Home_Service_Finder
+go
 
 --Insert Booking Detail--
-alter proc Insert_Booking_Details
+create or alter proc Insert_Booking_Details
 @Booking_Status varchar(50),
 @User_ID int,
 @SP_ID int,

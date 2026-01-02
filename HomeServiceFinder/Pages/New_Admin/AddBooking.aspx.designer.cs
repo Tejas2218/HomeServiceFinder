@@ -33,6 +33,15 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlService;
 
         /// <summary>
+        /// ddlEquipment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEquipment;
+
+        /// <summary>
         /// ddlServiceProvider control.
         /// </summary>
         /// <remarks>
@@ -51,31 +60,13 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.TextBox txtServiceDate;
 
         /// <summary>
-        /// txtServiceTime control.
+        /// ddlServiceTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtServiceTime;
-
-        /// <summary>
-        /// txtServiceAddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtServiceAddress;
-
-        /// <summary>
-        /// ddlStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
+        protected global::System.Web.UI.WebControls.DropDownList ddlServiceTime;
 
         /// <summary>
         /// btnBack control.

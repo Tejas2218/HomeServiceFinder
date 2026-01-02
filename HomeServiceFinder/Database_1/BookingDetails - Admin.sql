@@ -128,15 +128,14 @@ go
 
 --Display All Service Provider--
 create or alter proc Bind_Name_ServiceProvider
-@Service_Name varchar(50)
+@Service_ID int
 as
 begin
-	select User_Name from ServiceProviderDetails SPD
+	select * from ServiceProviderDetails SPD
 	join UserDetails UD
 	on SPD.User_ID=UD.User_ID
-	join ServiceMaster SM
-	on SPD.Service_ID=SM.Service_ID
-	where @Service_Name=SM.Service_Name
+	where @Service_ID=SPD.Equipment_ID
 end
+go
 
-exec Bind_Name_ServiceProvider 'Plumber'
+select * from BookingDetails
