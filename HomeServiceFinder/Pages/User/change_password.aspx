@@ -100,7 +100,6 @@
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
                     <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
-                    <a href="service_provider.aspx" class="nav-item nav-link">Providers</a>
                     <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
                     <a href="profile.aspx" class="nav-item nav-link active">Profile</a>
                     <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
