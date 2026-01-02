@@ -26,6 +26,8 @@
 
     <link href="css/style.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <style>
         .history-card {
             border: 1px solid #eee;
@@ -59,7 +61,22 @@
             background-color: #fff3cd;
             color: #856404;
         }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.7);
+            justify-content: center;
+            align-items: center;
+        }
     </style>
+
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -156,7 +173,7 @@
 
                                                     <td>
                                                         <%# Convert.ToDateTime(Eval("Visiting_DateTime")).ToString("dd MMM yyyy") %>,
-                    <%# Eval("Time_Slot") %>
+                                    <%# Eval("Time_Slot") %>
                                                     </td>
 
 
@@ -166,6 +183,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
+
                                                         <asp:Button
                                                             ID="btnAction"
                                                             runat="server"
@@ -173,7 +191,8 @@
                                                             CssClass='<%# Eval("ActionClass") %>'
                                                             CommandArgument='<%# Eval("Booking_ID") %>'
                                                             OnCommand="btnAction_Command"
-                                                            OnClientClick="return confirm('Are you sure you want to cancel this booking?');" />
+                                                            OnClientClick="return confirmCancel();" />
+
 
                                                     </td>
 
@@ -186,32 +205,6 @@
 
                                 </table>
                             </div>
-
-                            <nav aria-label="Page navigation" class="mt-4">
-                                <ul class="pagination justify-content-center">
-
-                                    <li class="page-item">
-                                        <asp:LinkButton
-                                            ID="btnPrev"
-                                            runat="server"
-                                            CssClass="page-link"
-                                            OnClick="PrevPage">
-                Previous
-                                        </asp:LinkButton>
-                                    </li>
-
-                                    <li class="page-item">
-                                        <asp:LinkButton
-                                            ID="btnNext"
-                                            runat="server"
-                                            CssClass="page-link"
-                                            OnClick="NextPage">
-                Next
-                                        </asp:LinkButton>
-                                    </li>
-
-                                </ul>
-                            </nav>
 
                         </div>
                     </div>
@@ -266,7 +259,11 @@
                 </div>
             </div>
         </div>
-
+        <div id="loaderOverlay" class="loader-overlay">
+            <div class="spinner-border text-danger" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     </form>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -276,6 +273,48 @@
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="js/main.js"></script>
+
+    <script>
+        function confirmCancel() {
+            if (!confirm("Are you sure you want to cancel this booking?")) {
+                return false;
+            }
+
+            document.getElementById("loaderOverlay").style.display = "flex";
+            return true; // allow postback
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        function confirmCancel(button) {
+            // Check if the button is actually a 'Cancel' button based on its text
+            if (button.value === "Cancel") {
+                if (button.dataset.confirmed) {
+                    return true;
+                }
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to cancel this booking!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, cancel it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        button.dataset.confirmed = "true";
+                        button.click(); // Trigger the postback
+                    }
+                });
+                return false;
+            }
+            return true; // For other actions like 'Pay' or 'View' if any
+        }
+    </script>
 </body>
 </html>

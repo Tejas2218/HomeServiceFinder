@@ -33,6 +33,9 @@ begin
     select SCOPE_IDENTITY() as Booking_ID
 end
 
+
+exec Insert_Booking_Details 'Pending',14,7,4,1,'4-5',
+
 select * from BookingDetails
 
 select * from UserDetails
@@ -45,7 +48,7 @@ values('Pending',14,7,4,null,1,'4-5',GETDATE())
 Insert_Booking_Details 'Pending',14,7,4;
 
 --Update Booking Detail--
-create proc Update_Booking_Details
+create or alter proc Update_Booking_Details
 @Booking_ID int,
 @Booking_Status varchar(50),
 @User_ID int,
@@ -239,4 +242,5 @@ BEGIN
 			U.User_ContactNo
 	End
 END
+
 
