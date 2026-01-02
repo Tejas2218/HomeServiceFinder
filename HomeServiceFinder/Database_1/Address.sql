@@ -8,11 +8,9 @@ end
 
 --Display City--
 create or alter proc Display_City
-@State_Name varchar(50)
+@State_ID varchar(50)
 as
 begin
-	declare @State_ID int;
-	select @State_ID=State_ID from StateDetails where State_Name=@State_Name
 	select * from CityDetails where State_ID=@State_ID
 end
 SELECT * FROM CityDetails;

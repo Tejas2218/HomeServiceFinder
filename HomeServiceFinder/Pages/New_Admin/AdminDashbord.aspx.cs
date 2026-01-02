@@ -47,7 +47,7 @@ namespace HomeServiceFinder.Pages.New_Admin
         {
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("Count_Worker", con);
+                SqlCommand cmd = new SqlCommand("Count_ServiceProvider", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 con.Open();
@@ -59,7 +59,7 @@ namespace HomeServiceFinder.Pages.New_Admin
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("Count_Today_Booking", con);
+                SqlCommand cmd = new SqlCommand("Today_Booking", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 con.Open();
@@ -71,7 +71,7 @@ namespace HomeServiceFinder.Pages.New_Admin
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("Count_Booking", con);
+                SqlCommand cmd = new SqlCommand("TotalAll_Booking", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 con.Open();

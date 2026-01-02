@@ -24,7 +24,7 @@ namespace HomeServiceFinder.login_signup
                 }
                 else if (Session["User_Role"].ToString() == "Worker")
                 {
-                    Response.Redirect("~/Pages/Service_Provider/service_provider_dashboard.aspx");
+                    Response.Redirect("~/Pages/Service_Provider/service_provider_booking.aspx");
                 }
             }
         }

@@ -6,25 +6,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
-        /* 1. Background Setup - Necessary for Glass effect to be visible */
         body {
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            /* Changed background to a solid/cleaner look */
+            background-color: #f4f7f6;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
         }
 
-        /* 2. The Glass Container */
+        /* 2. Standard Container (Glass effect removed) */
         .glass-container {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            background: #ffffff; /* Solid White */
+            border: 1px solid #ddd;
+            border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             max-width: 650px;
             width: 100%;
             margin: 20px;
@@ -47,9 +46,9 @@
         }
 
         .field-label {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.9);
+            color: #444; /* Darker text for readability on white */
             margin-bottom: 6px;
             display: block;
             margin-left: 5px;
@@ -59,14 +58,14 @@
             position: relative;
         }
 
-        /* 3. Glass Input Styling */
+        /* 3. Standard Input Styling */
         .textbox {
             width: 100%;
             padding: 10px 12px 10px 40px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #333;
             box-sizing: border-box;
             font-size: 14px;
             height: 42px;
@@ -74,29 +73,29 @@
         }
 
         .textbox::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            color: #999;
         }
 
         .textbox:focus {
-            background: rgba(255, 255, 255, 0.2);
+            background: #fff;
             border-color: #FF8C00 !important;
             outline: none;
-            box-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+            box-shadow: 0 0 5px rgba(255, 140, 0, 0.2);
         }
 
         /* Dropdown specific styling */
         select.textbox {
             padding-left: 10px !important;
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 1em;
         }
 
         select.textbox option {
-            background: #4b3d8a; /* Dark background for dropdown options */
-            color: #fff;
+            background: #fff;
+            color: #333;
         }
 
         .input-icon {
@@ -105,20 +104,20 @@
             top: 50%;
             transform: translateY(-50%);
             width: 16px;
-            filter: brightness(0) invert(1); /* Makes icons white */
-            opacity: 0.8;
+            filter: none; /* Removed inversion - icons will show original color */
+            opacity: 0.6;
             z-index: 2;
         }
 
         .validation-error {
-            color: #ff6b6b;
+            color: #d9534f;
             font-size: 11px;
             margin-top: 4px;
             display: block;
             font-weight: 600;
         }
 
-        /* 4. Glass Button Styling */
+        /* 4. Button Styling (Kept identical but removed glass shadow) */
         .signup-btn {
             width: 100%;
             background: #FF8C00;
@@ -126,20 +125,18 @@
             font-weight: bold;
             padding: 12px;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             cursor: pointer;
             margin-top: 20px;
             font-size: 16px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
             transition: all 0.3s ease;
         }
 
         .signup-btn:hover {
             background: #E67E00;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
+            transform: translateY(-1px);
         }
 
         #togglePwd, #toggleCPwd {
@@ -149,14 +146,14 @@
             transform: translateY(-50%);
             cursor: pointer;
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
+            color: #777;
         }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="glass-container">
-        <h2 style="color: white; text-align: center; margin-bottom: 25px; font-weight: 300; letter-spacing: 2px;">USER SIGN UP</h2>
+        <h2 style="color: #333; text-align: center; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px;">USER SIGN UP</h2>
         
         <div class="form-grid">
             <div class="grid-item full-row">
