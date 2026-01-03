@@ -1,6 +1,12 @@
 use Home_Service_Finder
-GO
+go
 
+select * from BookingDetails
+go
+-- 3-1-26 --Dev--
+ALTER TABLE BookingDetails
+ALTER COLUMN Time_Slot VARCHAR(50) NOT NULL;
+go
 --Insert Booking Detail--
 CREATE OR ALTER PROCEDURE Insert_Booking_Details
     @Booking_Status varchar(50),
@@ -9,8 +15,7 @@ CREATE OR ALTER PROCEDURE Insert_Booking_Details
     @Booking_Rating int,
     @Equipment_ID int,          -- Added missing parameter
     @Time_Slot varchar(50),     -- Added missing parameter
-    @Visiting_DateTime datetime, -- Added missing parameter
-    @Booking_Code varchar(6)
+    @Visiting_DateTime datetime -- Added missing parameter
 AS
 BEGIN
     INSERT INTO BookingDetails
@@ -18,7 +23,6 @@ BEGIN
         Booking_Status,
         User_ID,
         SP_ID,
-        Booking_Rating,
         Equipment_ID,
         Time_Slot,
         Visiting_DateTime,
@@ -29,11 +33,9 @@ BEGIN
         @Booking_Status,
         @User_ID,
         @SP_ID,
-        @Booking_Rating,
         @Equipment_ID,
         @Time_Slot,
-        @Visiting_DateTime,
-        @Booking_Code
+        @Visiting_DateTime
     )
 
     SELECT SCOPE_IDENTITY() as Booking_ID
