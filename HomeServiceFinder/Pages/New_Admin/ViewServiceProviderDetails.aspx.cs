@@ -112,7 +112,7 @@ namespace HomeServiceFinder.Pages.New_Admin
 
                 if (dr.Read())
                 {
-                    SendEmail(id, "Approved", dr["User_Name"].ToString().ToString(), dr["User_EmailID"].ToString());
+                    SendEmail(id, "Approved", dr["User_Name"].ToString(), dr["User_EmailID"].ToString());
                 }
             }
             btnApprove.Visible = false;

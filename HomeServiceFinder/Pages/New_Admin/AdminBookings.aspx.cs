@@ -83,8 +83,8 @@ namespace HomeServiceFinder.Pages.New_Admin
         {
             if(e.CommandName== "ViewUser")
             {
-                int userId = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("~/Pages/New_Admin/ViewServiceProviderDetails.aspx?id=" + userId);
+                int bookingID = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("~/Pages/New_Admin/ViewBooking.aspx?id=" + bookingID);
             }
           
             if (e.CommandName == "DeleteUser")

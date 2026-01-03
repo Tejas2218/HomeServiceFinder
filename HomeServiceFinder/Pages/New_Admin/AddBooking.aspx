@@ -94,20 +94,6 @@
                     runat="server" />
             </div>
 
-            <!-- DATE -->
-            <div class="profile-item">
-                <label>Service Date</label>
-                <asp:TextBox ID="txtServiceDate"
-                    runat="server"
-                    TextMode="Date"
-                    CssClass="profile-value" />
-                <asp:RequiredFieldValidator ControlToValidate="txtServiceDate"
-                    ErrorMessage="Select service date"
-                    CssClass="error"
-                    Display="Dynamic"
-                    runat="server" />
-            </div>
-
             <!-- TIME -->
             <div class="profile-item">
                 <label>Service Time</label>

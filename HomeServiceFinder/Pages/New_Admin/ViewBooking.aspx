@@ -1,50 +1,45 @@
 ﻿<%@ Page Language="C#"
     AutoEventWireup="true"
-    CodeBehind="ViewServiceProviderDetails.aspx.cs"
+    CodeBehind="ViewBooking.aspx.cs"
     MasterPageFile="~/MasterPage/AdminMaster.Master"
-    Inherits="HomeServiceFinder.Pages.New_Admin.ViewServiceProviderDetails" %>
+    Inherits="HomeServiceFinder.Pages.New_Admin.ViewBooking" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
-    <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
+    <h2 style="margin-bottom: 20px;">Booking Details</h2>
 
     <div class="profile-card" style="width: 100%">
 
         <div class="profile-grid" style="width: 100%">
 
+            <!-- ================= USER INFORMATION ================= -->
             <div class="section-title full-width">
-                Personal Information
+                User Information
             </div>
 
-            <div class="profile-item">
+            <div class="profile-item full-width" style="width: 48%">
                 <label>Name</label>
                 <asp:Label ID="User_Name" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
                 <label>Email</label>
-                <asp:Label ID="User_Email" runat="server" CssClass="profile-value" />
+                <asp:Label ID="User_EmailID" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
                 <label>Contact Number</label>
-                <asp:Label ID="User_Contact" runat="server" CssClass="profile-value" />
-            </div>
-
-            <div class="profile-item">
-                <label>Role</label>
-                <asp:Label ID="User_Role" runat="server" CssClass="profile-value" />
+                <asp:Label ID="User_ContactNo" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
                 <label>State</label>
-                <asp:Label ID="State_Name" runat="server" CssClass="profile-value" />
+                <asp:Label ID="User_State_Name" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
                 <label>City</label>
-                <asp:Label ID="City_Name" runat="server" CssClass="profile-value" />
+                <asp:Label ID="User_City_Name" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item full-width">
@@ -52,8 +47,9 @@
                 <asp:Label ID="User_Address" runat="server" CssClass="profile-value" />
             </div>
 
+            <!-- ================= WORKER INFORMATION ================= -->
             <div class="section-title full-width">
-                Working Information
+                Worker Information
             </div>
 
             <div class="profile-item">
@@ -62,8 +58,28 @@
             </div>
 
             <div class="profile-item">
-                <label>Equipment</label>
-                <asp:Label ID="Equipment_Name" runat="server" CssClass="profile-value" />
+                <label>Worker Name</label>
+                <asp:Label ID="Worker_Name" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Worker Email</label>
+                <asp:Label ID="Worker_EmailID" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>Worker Contact</label>
+                <asp:Label ID="Worker_ContactNo" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>State</label>
+                <asp:Label ID="Worker_State_Name" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item">
+                <label>City</label>
+                <asp:Label ID="Worker_City_Name" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
@@ -96,23 +112,37 @@
                 <asp:Label ID="SP_ShopAddress" runat="server" CssClass="profile-value" />
             </div>
 
+            <!-- ================= BOOKING INFORMATION ================= -->
             <div class="section-title full-width">
-                Audit Information
+                Booking Information
             </div>
 
             <div class="profile-item">
-                <label>Created At</label>
-                <asp:Label ID="Created_At" runat="server" CssClass="profile-value" />
+                <label>Booking Status</label>
+                <asp:Label ID="Booking_Status" runat="server" CssClass="profile-value" />
             </div>
 
             <div class="profile-item">
-                <label>Modified At</label>
-                <asp:Label ID="Modified_At" runat="server" CssClass="profile-value" />
+                <label>Booking Date & Time</label>
+                <asp:Label ID="Booking_DateTime" runat="server" CssClass="profile-value" />
             </div>
+
+            <div class="profile-item">
+                <label>Rating</label>
+                <asp:Label ID="Booking_Rating" runat="server" CssClass="profile-value" />
+            </div>
+
+            <div class="profile-item full-width">
+                <label>Decline Reason</label>
+                <asp:Label ID="Booking_Decline_Reason" runat="server" CssClass="profile-value" />
+            </div>
+
+
+
         </div>
 
+        <!-- ================= BUTTONS ================= -->
         <div style="text-align: center; margin-top: 20px;">
-
             <asp:Button
                 ID="btnBack"
                 runat="server"
@@ -124,35 +154,11 @@
                 ID="btnEdit"
                 runat="server"
                 Text="Edit Profile"
-                CssClass="btn btn-edit"
-                OnClick="btnEdit_Click" />
-
-        </div>
-        <div class="approval-box">
-
-            <h4>Admin Action</h4>
-            <p>Please review the service provider details before taking action.</p>
-
-            <div class="approval-actions">
-                <asp:Button
-                    ID="btnApprove"
-                    runat="server"
-                    OnClick="btnApprove_Click"
-                    Text="✔ Approve Provider"
-                    CssClass="btn btn-approve"
-                    OnClientClick="return confirmAction(this, 'Approve');" />
-
-                <asp:Button
-                    ID="btnReject"
-                    runat="server"
-                    OnClick="btnReject_Click"
-                    Text="✖ Reject Provider"
-                    CssClass="btn btn-reject"
-                    OnClientClick="return confirmAction(this, 'Reject');" />
-            </div>
-
+                CssClass="btn btn-edit" />
         </div>
 
+      
+        <!-- ================= SCRIPT ================= -->
         <script>
             function confirmAction(button, actionType) {
                 if (button.dataset.confirmed === "true") {
@@ -172,23 +178,9 @@
                     cancelButtonColor: '#6c757d',
                     confirmButtonText: btnText,
                     cancelButtonText: 'No, cancel',
-                    reverseButtons: true,
-                    allowOutsideClick: () => !Swal.isLoading()
+                    reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Display the loader
-                        Swal.fire({
-                            title: 'Processing...',
-                            text: 'Please wait while we update the status.',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                            showConfirmButton: false,
-                            didOpen: () => {
-                                Swal.showLoading();
-                            }
-                        });
-
-                        // Trigger the postback
                         button.dataset.confirmed = "true";
                         button.click();
                     }
@@ -196,6 +188,6 @@
                 return false;
             }
         </script>
-    </div>
 
+    </div>
 </asp:Content>

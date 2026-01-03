@@ -99,6 +99,7 @@
     <Content Include="Pages\New_Admin\Settings.aspx" />
     <Content Include="Pages\New_Admin\User.aspx" />
     <Content Include="Pages\New_Admin\UserProfile.aspx" />
+    <Content Include="Pages\New_Admin\ViewBooking.aspx" />
     <Content Include="Pages\New_Admin\ViewServiceProviderDetails.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_booking.aspx" />
     <Content Include="Pages\Service_Provider\service_provider_Booking_History.aspx" />
@@ -237,6 +238,13 @@
     </Compile>
     <Compile Include="Pages\New_Admin\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ViewBooking.aspx.cs">
+      <DependentUpon>ViewBooking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\New_Admin\ViewBooking.aspx.designer.cs">
+      <DependentUpon>ViewBooking.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\New_Admin\ViewServiceProviderDetails.aspx.cs">
       <DependentUpon>ViewServiceProviderDetails.aspx</DependentUpon>

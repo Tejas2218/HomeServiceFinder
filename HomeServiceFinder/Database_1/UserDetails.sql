@@ -22,7 +22,7 @@ GO
 CREATE OR ALTER PROCEDURE Display_User_Name
 AS
 BEGIN
-    SELECT User_ID, User_Name FROM UserDetails
+    SELECT User_ID, User_Name FROM UserDetails WHERE User_Role = 'User'
 END
 GO
 

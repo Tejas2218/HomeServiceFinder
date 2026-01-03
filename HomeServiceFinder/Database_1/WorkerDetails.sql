@@ -272,7 +272,7 @@ END
 GO
 
 --Count total service providers--
-CREATE OR ALTER PROCEDURE Count_ServiceProvider
+CREATE OR ALTER PROCEDURE Count_ALL_ServiceProvider
 AS
 BEGIN
     SELECT count(*) FROM ServiceProviderDetails

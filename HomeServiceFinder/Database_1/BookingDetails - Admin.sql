@@ -25,53 +25,86 @@ begin
 end
 go
 
---Insert Booking Detail--
-select * from BookingDetails
-go
-
-create or alter proc Insert_Booking_Details_Admin
-@Booking_Status varchar(50),
-@Booking_DateTime datetime Null,
-@User_ID int,
-@SP_ID int,
-@Booking_Rating int,
-@Booking_Decline_Reason varchar(100),
-@Equipment_ID int,
-@Time_Slot varchar(10),
-@Visiting_DateTime datetime
+--Display All Booking--
+create or alter proc Display_All_Booking
 as
 begin
-	insert into BookingDetails(Booking_Status,Booking_DateTime,User_ID,SP_ID,Booking_Rating,Booking_Decline_Reason,Equipment_ID,Time_Slot,Visiting_DateTime)
-						values(@Booking_Status,@Booking_DateTime,@User_ID,@SP_ID,@Booking_Rating,@Booking_Decline_Reason,@Equipment_ID,@Time_Slot,@Visiting_DateTime)
-	
-	select SCOPE_IDENTITY() as Booking_ID
+	select BD.Booking_Status,
+			BD.Booking_DateTime,
+			BD.Booking_Rating,
+			BD.Booking_Decline_Reason,
+			BD.Booking_ID,
+			UD.User_Name as User_Name, 
+			SUD.User_Name as Worker_Name,
+			SM.Service_Name
+	from BookingDetails BD
+	join UserDetails UD 
+	on BD.User_ID=UD.User_ID
+	join ServiceProviderDetails SPD
+	on BD.SP_ID=SPD.SP_ID
+	join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	join UserDetails SUD
+	on SPD.User_ID=SUD.User_ID
 end
 go
- 
 
---Display All Booking--
-	create or alter proc Display_All_Booking
-	as
-	begin
-		select BD.Booking_Status,
-			   BD.Booking_DateTime,
-			   BD.Booking_Rating,
-			   BD.Booking_Decline_Reason,
-			   BD.Booking_ID,
-			   UD.User_Name as User_Name, 
-			   SUD.User_Name as Worker_Name,
-			   SM.Service_Name
-		from BookingDetails BD
-		join UserDetails UD 
-		on BD.User_ID=UD.User_ID
-		join ServiceProviderDetails SPD
-		on BD.SP_ID=SPD.SP_ID
-		join ServiceMaster SM
-		on SPD.Service_ID=SM.Service_ID
-		join UserDetails SUD
-		on SPD.User_ID=SUD.User_ID
-	end
-	go
+--Display All Booking Details ByID
+create or alter proc Display_All_Booking_ByID
+@Booking_ID int
+as
+begin
+	select BD.Booking_Status as Booking_Status,
+			BD.Booking_DateTime as Booking_DateTime,
+			BD.Booking_Rating as Booking_Rating,
+			BD.Booking_Decline_Reason as Booking_decline_Reason,
+			BD.Booking_ID as Booking_ID,
+
+			UD.User_Name as User_Name,
+			UD.User_EmailID as User_EmailID,
+			UD.User_Address as User_Address,
+			UD.User_ContactNo as User_ContactNo,
+			SD.State_Name as User_State_Name,
+			CD.City_Name as User_City_Name,
+
+			SUD.User_Name as Worker_Name,
+			SUD.User_EmailID as Worker_EmailID,
+			SUD.User_Address as Worker_Address,
+			SUD.User_ContactNo as Worker_ContactNo,
+			SWD.State_Name as Worker_State_Name,
+			CWD.City_Name as Worker_City_Name,
+
+			SPD.SP_Age,
+			SPD.SP_ShopAddress,
+			SPD.SP_Experience,
+			SPD.SP_AverageRating,
+			SPD.SP_MinimumPrice,
+			SPD.SP_Status,
+			SM.Service_Name
+	from BookingDetails BD
+	
+	join UserDetails UD 
+	on BD.User_ID=UD.User_ID
+	join StateDetails SD
+	on SD.State_ID=UD.State_ID
+	join CityDetails CD
+	on CD.City_ID=UD.City_ID
+	
+	join ServiceProviderDetails SPD
+	on BD.SP_ID=SPD.SP_ID
+	join UserDetails SUD
+	on SPD.User_ID=SUD.User_ID
+	join StateDetails SWD
+	on SUD.State_ID=SWD.State_ID
+	join CityDetails CWD
+	on SUD.City_ID=CWD.City_ID
+	join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+
+	where Booking_ID=@Booking_ID
+end
+go
+
 
 --Display Pending Booking--
 create or alter proc Display_Pending_Booking

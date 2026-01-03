@@ -91,7 +91,7 @@ alter table BookingDetails add Visiting_DateTime datetime not null----addd colum
 
 ------update datatype size
 ALTER TABLE BookingDetails
-ALTER COLUMN Time_Slot VARCHAR(20) NOT NULL;
+ALTER COLUMN Time_Slot VARCHAR(50) NOT NULL;
 
 
 

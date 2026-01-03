@@ -1,11 +1,19 @@
 use Home_Service_Finder
+go
 
+select * from BookingDetails
+go
+-- 3-1-26 --Dev--
+ALTER TABLE BookingDetails
+ALTER COLUMN Time_Slot VARCHAR(50) NOT NULL;
+go
 --Insert Booking Detail--
-alter proc Insert_Booking_Details
+create or alter proc Insert_Booking_Details
 @Booking_Status varchar(50),
 @User_ID int,
 @SP_ID int,
-@Booking_Rating int
+@Equipment_ID int,
+@Time_Slot varchar(20)
 as
 begin
     insert into BookingDetails
@@ -13,7 +21,6 @@ begin
         Booking_Status,
         User_ID,
         SP_ID,
-        Booking_Rating,
         Equipment_ID,
         Time_Slot,
         Visiting_DateTime
@@ -23,10 +30,9 @@ begin
         @Booking_Status,
         @User_ID,
         @SP_ID,
-        @Booking_Rating,
         @Equipment_ID,
         @Time_Slot,
-        @Visiting_DateTime
+        GETDATE()
     )
 
     SELECT SCOPE_IDENTITY() as Booking_ID
