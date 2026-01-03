@@ -9,7 +9,8 @@ CREATE OR ALTER PROCEDURE Insert_Booking_Details
     @Booking_Rating int,
     @Equipment_ID int,          -- Added missing parameter
     @Time_Slot varchar(50),     -- Added missing parameter
-    @Visiting_DateTime datetime -- Added missing parameter
+    @Visiting_DateTime datetime, -- Added missing parameter
+    @Booking_Code varchar(6)
 AS
 BEGIN
     INSERT INTO BookingDetails
@@ -20,7 +21,8 @@ BEGIN
         Booking_Rating,
         Equipment_ID,
         Time_Slot,
-        Visiting_DateTime
+        Visiting_DateTime,
+        Booking_Code
     )
     VALUES
     (
@@ -30,7 +32,8 @@ BEGIN
         @Booking_Rating,
         @Equipment_ID,
         @Time_Slot,
-        @Visiting_DateTime
+        @Visiting_DateTime,
+        @Booking_Code
     )
 
     SELECT SCOPE_IDENTITY() as Booking_ID
@@ -38,7 +41,14 @@ END
 GO
 
 -- Testing Insert Procedure (Example)
--- exec Insert_Booking_Details 'Pending',14,7,4,1,'4-5', GETDATE()
+exec Insert_Booking_Details 'Pending',6,5,4,16,'4-5','2026-01-03 23:30:00','123043'
+
+delete from BookingDetails
+
+select * from BookingDetails
+select * from ServiceProviderDetails
+select * from UserDetails
+select * from EquipmentMaster
 GO
 
 select * from BookingDetails
@@ -131,10 +141,12 @@ GO
 
 ---------------view booking for service provider side 
 CREATE OR ALTER PROCEDURE View_Booking_Details
-    @SP_ID int,
+    @User_ID int,
     @Booking_Status varchar(10)
 AS 
 BEGIN 
+    Declare @SP_ID int
+    Select @SP_ID=SP_ID from ServiceProviderDetails where User_ID = @User_ID
     IF(@Booking_Status = 'none')
     BEGIN
         SELECT * FROM BookingDetails AS BD 
@@ -156,15 +168,39 @@ BEGIN
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
         WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Decline'
     END
+    ELSE IF (@Booking_Status = 'Completed')
+    BEGIN
+        SELECT * FROM BookingDetails AS BD 
+        INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
+        INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Completed'
+    END
+    ELSE IF (@Booking_Status = 'Cancelled')
+    BEGIN
+        SELECT * FROM BookingDetails AS BD 
+        INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
+        INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Cancelled'
+    END
+    ELSE IF(@Booking_Status = 'Upcomming')
+    BEGIN
+        SELECT * FROM BookingDetails AS BD 
+        INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
+        INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status=@Booking_Status AND BD.Visiting_DateTime > cast(GETDATE() as Date)
+    END
     ELSE
     BEGIN
         SELECT * FROM BookingDetails AS BD 
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
-        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status=@Booking_Status AND BD.Visiting_DateTime > GETDATE()
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status=@Booking_Status AND BD.Visiting_DateTime = cast(GETDATE() as Date)
     END
 END
+
+exec View_Booking_Details 7,'none'
 GO
+
 
 -----------------update booking status for service provider side
 CREATE OR ALTER PROCEDURE Update_Booking_Status
@@ -181,18 +217,22 @@ GO
 
 --------------------booking pending notification
 CREATE OR ALTER PROCEDURE Notification_Pending_Booking
-    @SP_ID int
+    @User_ID int
 AS 
 BEGIN
+    Declare @SP_ID int
+    Select @SP_ID=SP_ID from ServiceProviderDetails where User_ID = @User_ID
     SELECT Count(*) as noti FROM BookingDetails WHERE SP_ID = @SP_ID  AND Booking_Status = 'Pending'; 
 END
 GO
 
 -----------------Total booking Accept
 CREATE OR ALTER PROCEDURE Total_Booking
-    @SP_ID int 
+    @User_ID int 
 AS 
 BEGIN
+    Declare @SP_ID int
+    Select @SP_ID=SP_ID from ServiceProviderDetails where User_ID = @User_ID
     SELECT Count(*) as Total FROM BookingDetails WHERE SP_ID = @SP_ID AND Booking_Status = 'Accept';
 END
 GO
@@ -202,8 +242,16 @@ CREATE OR ALTER PROCEDURE Avg_Rating
     @SP_ID int 
 AS 
 BEGIN
-    SELECT SP_AverageRating FROM ServiceProviderDetails WHERE SP_ID = @SP_ID
+    SET NOCOUNT ON;
+    -- ISNULL ensures that even if the record is empty, you get a '0'
+    SELECT ISNULL(SP_AverageRating, 0) AS SP_AverageRating 
+    FROM ServiceProviderDetails 
+    WHERE User_ID= @SP_ID
 END
+
+exec Avg_Rating 5
+
+update ServiceProviderDetails set SP_AverageRating = 5 where SP_ID = 5
 GO
 
 ------------User Booking Records
@@ -219,10 +267,12 @@ GO
 
 ----------service provider's customers fetch
 CREATE OR ALTER PROCEDURE Get_Unique_Customers_By_SP
-    @SP_ID INT,
+    @User_ID INT,
     @search varchar(20) = 'none'
 AS
 BEGIN
+    Declare @SP_ID int
+    Select @SP_ID=SP_ID from ServiceProviderDetails where User_ID = @User_ID
     IF(@search = 'none')
     BEGIN
         SELECT
@@ -261,4 +311,5 @@ BEGIN
             U.User_ContactNo
     END
 END
+update BookingDetails set Booking_Status = 'Accept' where Booking_ID = 5
 GO
