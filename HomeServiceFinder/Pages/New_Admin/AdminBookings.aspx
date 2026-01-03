@@ -144,15 +144,7 @@
                                 CausesValidation="false" />
 
 
-                            <asp:Button
-                                ID="btnRemove"
-                                runat="server"
-                                Text="Remove"
-                                CssClass="btn btn-delete"
-                                CommandName="DeleteUser"
-                                CommandArgument='<%# Eval("Booking_ID") %>'
-                                CausesValidation="false"
-                                OnClientClick="return confirm('Are you sure you want to remove this user?');" />
+                          
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
