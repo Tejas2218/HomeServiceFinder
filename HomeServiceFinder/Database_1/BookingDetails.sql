@@ -1,18 +1,14 @@
 use Home_Service_Finder
-GO
 
 --Insert Booking Detail--
-CREATE OR ALTER PROCEDURE Insert_Booking_Details
-    @Booking_Status varchar(50),
-    @User_ID int,
-    @SP_ID int,
-    @Booking_Rating int,
-    @Equipment_ID int,          -- Added missing parameter
-    @Time_Slot varchar(50),     -- Added missing parameter
-    @Visiting_DateTime datetime -- Added missing parameter
-AS
-BEGIN
-    INSERT INTO BookingDetails
+alter proc Insert_Booking_Details
+@Booking_Status varchar(50),
+@User_ID int,
+@SP_ID int,
+@Booking_Rating int
+as
+begin
+    insert into BookingDetails
     (
         Booking_Status,
         User_ID,
