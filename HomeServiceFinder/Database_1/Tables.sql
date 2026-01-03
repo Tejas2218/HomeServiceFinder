@@ -67,6 +67,8 @@ create table ServiceProviderDetails(
 select * from ServiceProviderDetails
 alter table ServiceProviderDetails add SP_Status varchar(20)---add
 
+alter table ServiceProviderDetails alter column SP_AverageRating float----alter it----------------
+
 create table BookingDetails(
 	Booking_ID int primary key identity(1,1),
 	Booking_Status varchar(50) not null,
@@ -87,7 +89,19 @@ alter table BookingDetails add constraint FK_BookingDetails_Equipment Foreign ke
 
 alter table BookingDetails add Time_Slot varchar(10) not null----addd column
 
+alter table BookingDetails alter Column Visiting_DateTime date not null----alter it
+
+
+ALTER TABLE BookingDetails 
+DROP CONSTRAINT DF__BookingDe__Booki__778AC167;---drop it then alter down query
+
+ALTER TABLE BookingDetails 
+ADD CONSTRAINT DF_Booking_Date_New 
+DEFAULT CAST(GETDATE() AS DATE) FOR Booking_DateTime;---alter it
+
 alter table BookingDetails add Visiting_DateTime datetime not null----addd column
+
+alter table BookingDetails add Booking_Code varchar(6) not null -----add column
 
 ------update datatype size
 ALTER TABLE BookingDetails
