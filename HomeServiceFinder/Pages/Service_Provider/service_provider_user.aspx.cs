@@ -40,11 +40,15 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     //cmd.Parameters.AddWithValue("@SP_ID", 7);
-                    if(search!=null || search!="")
+                    if (string.IsNullOrEmpty(search))
                     {
-                        cmd.Parameters.AddWithValue("@search",search);
+                        cmd.Parameters.AddWithValue("@search", "none");
                     }
-                    cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@search", search);
+                    }
+                    cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(Session["UserID"]));
                     SqlDataAdapter sda = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     sda.Fill(dt);
@@ -65,7 +69,8 @@ namespace HomeServiceFinder.Pages.Service_Provider
 
         protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            BindCustomerGrid(txtSearch.Text.Trim());
+            string search = txtSearch.Text.Trim();
+            BindCustomerGrid(search);
         }
     }
 }

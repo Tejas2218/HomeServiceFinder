@@ -78,7 +78,7 @@ GO
 
 --Display Worker Detail by Service--
 CREATE OR ALTER PROCEDURE Display_Worker_Details_ByService
-    @Service_ID int
+@Service_ID int
 AS
 BEGIN
     SELECT * FROM ServiceProviderDetails SPD 
@@ -98,7 +98,7 @@ GO
 
 --Display Worker Detail by Equipment--
 CREATE OR ALTER PROCEDURE Display_Worker_Details_ByEquipment
-    @Equipment_ID int
+@Equipment_ID int
 AS
 BEGIN
     SELECT * FROM ServiceProviderDetails SPD 
@@ -111,19 +111,19 @@ BEGIN
     INNER JOIN ServiceMaster SM
         ON SM.Service_ID = SPD.Service_ID
     INNER JOIN EquipmentMaster EM
-        ON EM.Service_ID = SM.Service_ID
-    WHERE SPD.Equipment_ID = @Equipment_ID
+        ON EM.Equipment_ID = SPD.Equipment_ID
+    WHERE SPD.Equipment_ID=@Equipment_ID
 END
 GO
 
--- exec Display_Worker_Details_ByEquipment 12
+---exec Display_Worker_Details_ByEquipment 16
 -- exec Display_Worker_Details_ByService 9
 -- exec Display_Worker_Details_ByID 12
 GO
 
 --Display Specific Worker Details--
 CREATE OR ALTER PROCEDURE Display_Worker_Details_ByID
-    @SP_ID int
+@SP_ID int
 AS
 BEGIN
     SELECT * FROM ServiceProviderDetails SPD 
@@ -136,9 +136,11 @@ BEGIN
     INNER JOIN ServiceMaster SM
         ON SM.Service_ID = SPD.Service_ID
     INNER JOIN EquipmentMaster EM
-        ON EM.Service_ID = SM.Service_ID
-    WHERE SPD.SP_ID = @SP_ID
+        ON EM.Equipment_ID = SPD.Equipment_ID
+    WHERE SPD.User_ID = @SP_ID
 END
+exec Display_Worker_Details_ByID 5
+select * from ServiceProviderDetails
 GO
 
 --Insert Worker Detail--

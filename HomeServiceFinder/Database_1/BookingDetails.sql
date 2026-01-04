@@ -45,7 +45,7 @@ END
 GO
 
 -- Testing Insert Procedure (Example)
-exec Insert_Booking_Details 'Pending',6,5,4,16,'4-5','2026-01-03 23:30:00','123043'
+exec Insert_Booking_Details 'Pending',6,5,4,16,'4-5','2026-01-05','123041'
 
 delete from BookingDetails
 
@@ -157,6 +157,7 @@ BEGIN
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
         WHERE BD.SP_ID=@SP_ID
+        ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE IF(@Booking_Status = 'Accepted')
     BEGIN
@@ -164,6 +165,7 @@ BEGIN
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
         WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Accept'
+        ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE IF (@Booking_Status = 'Declined')
     BEGIN
@@ -171,6 +173,7 @@ BEGIN
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
         WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Decline'
+        ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE IF (@Booking_Status = 'Completed')
     BEGIN
@@ -178,20 +181,31 @@ BEGIN
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
         WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Completed'
+        ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE IF (@Booking_Status = 'Cancelled')
     BEGIN
         SELECT * FROM BookingDetails AS BD 
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
-        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Cancelled'
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Cancelled' 
+        ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE IF(@Booking_Status = 'Upcomming')
     BEGIN
         SELECT * FROM BookingDetails AS BD 
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
-        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status=@Booking_Status AND BD.Visiting_DateTime > cast(GETDATE() as Date)
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Accept' AND BD.Visiting_DateTime > cast(GETDATE() as Date)
+        ORDER BY BD.Visiting_DateTime DESC
+    END
+    ELSE IF(@Booking_Status = 'Pending')
+    BEGIN
+        SELECT * FROM BookingDetails AS BD 
+        INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
+        INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status=@Booking_Status
+        ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE
     BEGIN
@@ -199,6 +213,7 @@ BEGIN
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
         WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status=@Booking_Status AND BD.Visiting_DateTime = cast(GETDATE() as Date)
+        ORDER BY BD.Visiting_DateTime DESC
     END
 END
 
@@ -272,48 +287,35 @@ GO
 ----------service provider's customers fetch
 CREATE OR ALTER PROCEDURE Get_Unique_Customers_By_SP
     @User_ID INT,
-    @search varchar(20) = 'none'
+    @search varchar(50) = 'none' -- Increased size for better searching
 AS
 BEGIN
     Declare @SP_ID int
-    Select @SP_ID=SP_ID from ServiceProviderDetails where User_ID = @User_ID
-    IF(@search = 'none')
+    Select @SP_ID = SP_ID from ServiceProviderDetails where User_ID = @User_ID
+
+    -- If search is empty or 'none', show all
+    IF(@search = 'none' OR @search = '')
     BEGIN
-        SELECT
-            U.User_ID, 
-            U.User_Name,
-            U.User_EmailID,
-            U.User_ContactNo 
+        SELECT U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo 
         FROM BookingDetails B
         INNER JOIN UserDetails U ON B.User_ID = U.User_ID
-        INNER JOIN EquipmentMaster E ON B.Equipment_ID = E.Equipment_ID
-        WHERE B.SP_ID = @SP_ID 
-          AND B.Booking_Status = 'Accept' 
-        GROUP BY 
-            U.User_ID, 
-            U.User_Name, 
-            U.User_EmailID, 
-            U.User_ContactNo
+        WHERE B.SP_ID = @SP_ID AND B.Booking_Status = 'Accept' 
+        GROUP BY U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo
     END
     ELSE
     BEGIN
-        SELECT
-            U.User_ID, 
-            U.User_Name,
-            U.User_EmailID,
-            U.User_ContactNo 
+        SELECT U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo 
         FROM BookingDetails B
         INNER JOIN UserDetails U ON B.User_ID = U.User_ID
-        INNER JOIN EquipmentMaster E ON B.Equipment_ID = E.Equipment_ID
         WHERE B.SP_ID = @SP_ID 
           AND B.Booking_Status = 'Accept' 
-          AND (u.User_Name=@search OR u.User_EmailID=@search)
-        GROUP BY 
-            U.User_ID, 
-            U.User_Name, 
-            U.User_EmailID, 
-            U.User_ContactNo
+          -- Use LIKE for partial matching
+          AND (U.User_Name LIKE '%' + @search + '%' OR U.User_EmailID LIKE '%' + @search + '%')
+        GROUP BY U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo
     END
 END
+exec Get_Unique_Customers_By_SP 5,'Tanmay'
+select * from BookingDetails
+
 update BookingDetails set Booking_Status = 'Accept' where Booking_ID = 5
 GO

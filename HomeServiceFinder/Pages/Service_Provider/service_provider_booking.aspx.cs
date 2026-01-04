@@ -24,7 +24,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 //pending_notification();
                 if (Session["UserID"] != null)
                 {
-                    loadData("Accept");
+                    loadData("Accepted");
                 }
                 else
                 {
@@ -37,60 +37,70 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
             try
             {
+                int s_id = Convert.ToInt32(Session["UserID"]);
                 using (SqlConnection con = new SqlConnection(constr))
                 {
+                    con.Open(); // Open once for all commands
+
+                    // 1. View Booking Details
                     using (SqlCommand cmd = new SqlCommand("View_Booking_Details", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
+                        cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(Session["UserID"]));
                         cmd.Parameters.AddWithValue("@Booking_Status", status);
                         SqlDataAdapter sda = new SqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         sda.Fill(dt);
-
-                        // Always bind, even if empty, to show the EmptyDataText
                         gvBookings.DataSource = dt;
                         gvBookings.DataBind();
-                        pending_notification();
                     }
+                    //using (SqlCommand cmd = new SqlCommand("View_Booking_Details", con))
+                    //{
+                    //    cmd.CommandType = CommandType.StoredProcedure;
+                    //    cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(Session["UserID"]));
+                    //    cmd.Parameters.AddWithValue("@Booking_Status", "Upcomming");
+                    //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    //    DataTable dt = new DataTable();
+                    //    sda.Fill(dt);
+                    //    gvUp_CommingBookings.DataSource = dt;
+                    //    gvUp_CommingBookings.DataBind();
+                    //}
+
+                    // Move this AFTER the first block is totally done
+                    pending_notification();
+
+                    // 2. Total Booking
                     using (SqlCommand cmd = new SqlCommand("Total_Booking", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
-                        con.Open();
-                        SqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read())
+                        cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(Session["UserID"]));
+                        using (SqlDataReader dr = cmd.ExecuteReader())
                         {
-                            lblTotalBooking.Text = dr["Total"].ToString();
-                        }
-                        else
-                        {
-                            lblTotalBooking.Text = "Data not found";
-                        }
-                        con.Close();
+                            if (dr.Read())
+                                lblTotalBooking.Text = dr["Total"].ToString();
+                            else
+                                lblTotalBooking.Text = "0";
+                        } // Reader closes here automatically
                     }
+
+                    // 3. Avg Rating
                     using (SqlCommand cmd = new SqlCommand("Avg_Rating", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
-                        con.Open();
-                        SqlDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read())
+                        using (SqlDataReader dr = cmd.ExecuteReader())
                         {
-                            lblAvgRating.Text = dr["SP_AverageRating"].ToString();
+                            if (dr.Read())
+                                lblAvgRating.Text = dr["SP_AverageRating"].ToString();
+                            else
+                                lblAvgRating.Text = "No Rating";
                         }
-                        else
-                        {
-                            lblAvgRating.Text = "Data not found";
-                        }
-                        con.Close();
                     }
                 }
             }
             catch (Exception ex)
             {
-                // For debugging: This will show you if the SQL fails
-                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "") + "');</script>");
             }
         }
 
@@ -157,8 +167,18 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
             btnFetchPending.CssClass = "tab-btn active-tab";
             btnFetchAccepted.CssClass = "tab-btn";
+            btnFetchAcceptedUpcomming.CssClass = "tab-btn";
             //String status = btnFetchPending.CommandName.ToString();
             loadData("Pending");
+            //btnFetchPending.Text = "Pending";
+        }
+        protected void btnFetchAcceptedUpcomming_Click(object sender, EventArgs e)
+        {
+            btnFetchPending.CssClass = "tab-btn";
+            btnFetchAccepted.CssClass = "tab-btn ";
+            btnFetchAcceptedUpcomming.CssClass = "tab-btn active-tab";
+            //String status = btnFetchPending.CommandName.ToString();
+            loadData("Upcomming");
             //btnFetchPending.Text = "Pending";
         }
 
@@ -167,6 +187,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
             //LinkButton btn = (LinkButton)sender;
             btnFetchAccepted.CssClass = "tab-btn active-tab";
             btnFetchPending.CssClass = "tab-btn";
+            btnFetchAcceptedUpcomming.CssClass = "tab-btn";
             //String status = btnFetchAccepted.CommandName.ToString();
             loadData("Accept");
         }
@@ -180,7 +201,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                     {
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
+                        cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(Session["UserID"]));
                         SqlDataReader dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
@@ -201,5 +222,50 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
+
+        protected void btnComplete_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int Booking_ID = Convert.ToInt32(btn.CommandArgument);
+            try
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Completed");
+                        int result = cmd.ExecuteNonQuery();
+                        loadData("Pending");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // For debugging: This will show you if the SQL fails
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
+
+        }
+
+        //protected void btnFetchAcceptedUpcomming_Click(object sender, EventArgs e)
+        //{
+        //    //LinkButton btn = (LinkButton)sender;
+        //    btnFetchAcceptedUpcomming.CssClass = "tab-btn active-tab";
+        //    btnFetchPendingUpcomming.CssClass = "tab-btn";
+        //    //String status = btnFetchAccepted.CommandName.ToString();
+        //    loadData("Accept");
+        //}
+
+        //protected void btnFetchPendingUpcomming_Click(object sender, EventArgs e)
+        //{
+        //    btnFetchPendingUpcomming.CssClass = "tab-btn active-tab";
+        //    btnFetchAcceptedUpcomming.CssClass = "tab-btn";
+        //    //String status = btnFetchPending.CommandName.ToString();
+        //    loadData("Pending");
+        //    //btnFetchPending.Text = "Pending";
+        //}
     }
 }

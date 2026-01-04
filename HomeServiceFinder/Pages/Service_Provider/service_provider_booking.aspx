@@ -1,6 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/service_provider_master.Master" AutoEventWireup="true" CodeBehind="service_provider_booking.aspx.cs" Inherits="HomeServiceFinder.Pages.Service_Provider.service_provider_booking" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .otp-input {
+            width: 50px;
+            height: 60px;
+            margin: 0 5px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+        }
+
+            .otp-input:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0,123,255,.25);
+            }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -22,25 +40,30 @@
     <div id="bookings" class="section-box">
 
         <div class="section-header">
-            <h3>Bookings</h3>
+            <h3>Booking Details</h3>
         </div>
 
         <div class="tabs-container">
             <asp:LinkButton ID="btnFetchAccepted" runat="server"
                 CssClass="tab-btn  active-tab" OnClick="btnFetchAccepted_Click">
-                Accepted
+                Current Booking
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnFetchAcceptedUpcomming" runat="server"
+                CssClass="tab-btn" OnClick="btnFetchAcceptedUpcomming_Click">
+                Up-Comming Booking
             </asp:LinkButton>
             <asp:LinkButton ID="btnFetchPending" runat="server"
                 CssClass="tab-btn" OnClick="btnFetchPending_Click">
         
             </asp:LinkButton>
+
         </div>
         <br />
 
         <table>
             <!--OnRowCommand="gvBookings_RowCommand"-->
             <asp:GridView ID="gvBookings" runat="server" AutoGenerateColumns="false"
-                CssClass="table" GridLines="None" EmptyDataText="Data Not Available">
+                CssClass="table" GridLines="None" EmptyDataText="Data Not Available" ShowHeaderWhenEmpty="true">
                 <Columns>
                     <asp:BoundField DataField="Booking_ID" HeaderText="ID" />
                     <asp:TemplateField HeaderText="Customer">
@@ -58,6 +81,10 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="Equipment_Name" HeaderText="Service" />
+                    <asp:BoundField DataField="Visiting_DateTime"
+                        HeaderText="Visiting Date"
+                        DataFormatString="{0:dd-MM-yyyy}"
+                        HtmlEncode="false" />
                     <asp:BoundField DataField="Time_Slot" HeaderText="Schedule" />
 
                     <asp:TemplateField HeaderText="Status">
@@ -76,12 +103,15 @@
                             <asp:Button ID="btnDecline" runat="server" Text="Decline"
                                 CommandName="Decline" CommandArgument='<%# Eval("Booking_ID") %>'
                                 CssClass="btn btn-danger" OnClick="btnDecline_Click" />
+                            <asp:Button ID="btnComplete" runat="server" Text="Completed"
+                                CssClass="btn btn-success" OnClick="btnComplete_Click"
+                                CommandName="Completed" CommandArgument='<%# Eval("Booking_ID") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </table>
     </div>
-
-
 </asp:Content>
+
+

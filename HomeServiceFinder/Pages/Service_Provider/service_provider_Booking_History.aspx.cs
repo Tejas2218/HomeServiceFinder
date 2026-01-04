@@ -36,7 +36,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     //cmd.Parameters.AddWithValue("@SP_ID", 7);
-                    cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(Session["UserID"]));
+                    cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(Session["UserID"]));
                     cmd.Parameters.AddWithValue("@Booking_Status", status);
                     SqlDataAdapter sda = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -59,21 +59,38 @@ namespace HomeServiceFinder.Pages.Service_Provider
             {
                 btnFetchDeclined.CssClass = "tab-btn";
                 btnFetchAccepted.CssClass = "tab-btn";
-                loadData(status);
+                btnFetchCancelled.CssClass = "tab-btn";
+                btnFetchCompleted.CssClass = "tab-btn";
             }
             else if(status == "Accepted")
             {
                 btnFetchAll.CssClass = "tab-btn";
                 btnFetchDeclined.CssClass = "tab-btn";
-                loadData(status);
+                btnFetchCancelled.CssClass = "tab-btn";
+                btnFetchCompleted.CssClass = "tab-btn";
+            }
+            else if(status == "Declined")
+            {
+                btnFetchAll.CssClass = "tab-btn";
+                btnFetchAccepted.CssClass = "tab-btn";
+                btnFetchCancelled.CssClass = "tab-btn";
+                btnFetchCompleted.CssClass = "tab-btn";
+            }
+            else if(status == "Completed")
+            {
+                btnFetchAll.CssClass = "tab-btn";
+                btnFetchAccepted.CssClass = "tab-btn";
+                btnFetchCancelled.CssClass = "tab-btn";
+                btnFetchDeclined.CssClass = "tab-btn";
             }
             else
             {
                 btnFetchAll.CssClass = "tab-btn";
                 btnFetchAccepted.CssClass = "tab-btn";
-                loadData(status);
+                btnFetchCompleted.CssClass = "tab-btn";
+                btnFetchDeclined.CssClass = "tab-btn";
             }
-            
+            loadData(status);
         }
 
         protected void btnMoreInfo_Click(object sender, EventArgs e)
@@ -81,6 +98,67 @@ namespace HomeServiceFinder.Pages.Service_Provider
             LinkButton btn = (LinkButton)sender;
             string UserID = btn.CommandArgument;
             Response.Redirect("service_provider_user_profile_new.aspx?id=" + UserID);
+        }
+        protected void btnAccept_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int Booking_ID = Convert.ToInt32(btn.CommandArgument);
+            try
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Accept");
+                        int result = cmd.ExecuteNonQuery();
+                        btnFetchAll.CssClass = "tab-btn active-tab";
+                        btnFetchDeclined.CssClass = "tab-btn";
+                        btnFetchAccepted.CssClass = "tab-btn";
+                        btnFetchCancelled.CssClass = "tab-btn";
+                        btnFetchCompleted.CssClass = "tab-btn";
+                        loadData("none");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // For debugging: This will show you if the SQL fails
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
+        }
+
+        protected void btnDecline_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int Booking_ID = Convert.ToInt32(btn.CommandArgument);
+            try
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Decline");
+                        int result = cmd.ExecuteNonQuery();
+                        btnFetchAll.CssClass = "tab-btn active-tab";
+                        btnFetchDeclined.CssClass = "tab-btn";
+                        btnFetchAccepted.CssClass = "tab-btn";
+                        btnFetchCancelled.CssClass = "tab-btn";
+                        btnFetchCompleted.CssClass = "tab-btn";
+                        loadData("none");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // For debugging: This will show you if the SQL fails
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
         }
     }
 }
