@@ -24,13 +24,6 @@
                 <asp:Label ID="lblTodayBookings" runat="server" Text="0"></asp:Label>
             </h2>
         </div>
-
-        <div class="stat-card">
-            <h3>Pending</h3>
-            <h2>
-                <asp:Label ID="lblPendingBookings" runat="server" Text="0"></asp:Label>
-            </h2>
-        </div>
     </div>
 
     <h3>Booking List</h3>
@@ -42,26 +35,33 @@
             runat="server"
             Text="All"
             OnClick="btnAll_Click"
-            CssClass="filter-btn " />
+            CssClass="filter-btn" />
 
         <asp:Button
             ID="btnPending"
             runat="server"
-            Text="Pending Requests"
+            Text="Pending"
             OnClick="btnPending_Click"
-            CssClass="filter-btn " />
+            CssClass="filter-btn" />
+
+        <asp:Button
+            ID="btnAccepted"
+            runat="server"
+            Text="Accepted"
+            OnClick="btnAccepted_Click"
+            CssClass="filter-btn" />
 
         <asp:Button
             ID="btnCompleted"
             runat="server"
-            Text="Approved"
+            Text="Completed"
             OnClick="btnCompleted_Click"
             CssClass="filter-btn" />
 
         <asp:Button
             ID="btnUserDecline"
             runat="server"
-            Text="Declined"
+            Text="Cancelled"
             OnClick="btnUserDecline_Click"
             CssClass="filter-btn" />
 
@@ -114,7 +114,7 @@
 
                 <asp:TemplateField HeaderText="Rating">
                     <ItemTemplate>
-                        <%# Eval("Booking_Rating") %>
+                        <%# Eval("Booking_Rating") == DBNull.Value || Eval("Booking_Rating") == null ? "-" : Eval("Booking_Rating")%>
                     </ItemTemplate>
                 </asp:TemplateField>
 

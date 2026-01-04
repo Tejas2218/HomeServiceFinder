@@ -33,15 +33,6 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.Label lblTodayBookings;
 
         /// <summary>
-        /// lblPendingBookings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPendingBookings;
-
-        /// <summary>
         /// btnAll control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace HomeServiceFinder.Pages.New_Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPending;
+
+        /// <summary>
+        /// btnAccepted control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAccepted;
 
         /// <summary>
         /// btnCompleted control.
