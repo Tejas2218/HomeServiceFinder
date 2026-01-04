@@ -92,6 +92,8 @@ namespace HomeServiceFinder.Pages.New_Admin
                 cmd.Parameters.AddWithValue("@SP_ID", ddlServiceProvider.SelectedValue);
                 cmd.Parameters.AddWithValue("@Equipment_ID", ddlEquipment.SelectedValue);
                 cmd.Parameters.AddWithValue("@Time_Slot", ddlServiceTime.SelectedValue);
+                cmd.Parameters.AddWithValue("@Visiting_DateTime", txtVisitingDate.Text);
+                cmd.Parameters.AddWithValue("@Booking_Code", GenerateRandomCode(6));
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -99,6 +101,18 @@ namespace HomeServiceFinder.Pages.New_Admin
             SendEmailBridge(Convert.ToInt32(ddlServiceProvider.SelectedValue), Convert.ToInt32(ddlUser.SelectedValue));
             Response.Redirect("AdminBookings.aspx");
         }
+
+        public string GenerateRandomCode(int length = 6)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            Random random = new Random();
+
+            return new string(Enumerable
+                .Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)])
+                .ToArray());
+        }
+
 
         void SendEmailBridge(int sp_ID, int user_ID)
         {
@@ -133,7 +147,7 @@ namespace HomeServiceFinder.Pages.New_Admin
         }
         void SendEmail(string name, string email,string role)
         {
-            string subject = "Service Provider Account Status";
+            string subject = role=="User" ? "User Account Status" : "Service Provider Account Status";
             string body;
 
             if (role == "User")

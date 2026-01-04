@@ -12,10 +12,11 @@ CREATE OR ALTER PROCEDURE Insert_Booking_Details
     @Booking_Status varchar(50),
     @User_ID int,
     @SP_ID int,
-    @Booking_Rating int,
+    --  @Booking_Rating int,---- This will come after service completed    
     @Equipment_ID int,          -- Added missing parameter
     @Time_Slot varchar(50),     -- Added missing parameter
-    @Visiting_DateTime datetime -- Added missing parameter
+    @Visiting_DateTime datetime, -- Added missing parameter
+    @Booking_Code varchar(6)
 AS
 BEGIN
     INSERT INTO BookingDetails
@@ -35,7 +36,8 @@ BEGIN
         @SP_ID,
         @Equipment_ID,
         @Time_Slot,
-        @Visiting_DateTime
+        @Visiting_DateTime,
+        @Booking_Code
     )
 
     SELECT SCOPE_IDENTITY() as Booking_ID

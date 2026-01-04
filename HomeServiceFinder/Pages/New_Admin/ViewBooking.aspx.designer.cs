@@ -69,6 +69,24 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.Label User_Address;
 
         /// <summary>
+        /// btnCancelBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelBooking;
+
+        /// <summary>
+        /// btnReBook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReBook;
+
+        /// <summary>
         /// Service_Name control.
         /// </summary>
         /// <remarks>
@@ -159,15 +177,6 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.Label SP_AverageRating;
 
         /// <summary>
-        /// SP_Status control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SP_Status;
-
-        /// <summary>
         /// SP_ShopAddress control.
         /// </summary>
         /// <remarks>
@@ -175,6 +184,42 @@ namespace HomeServiceFinder.Pages.New_Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label SP_ShopAddress;
+
+        /// <summary>
+        /// btnAcceptBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAcceptBooking;
+
+        /// <summary>
+        /// btnDeclineBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeclineBooking;
+
+        /// <summary>
+        /// hfDeclineReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfDeclineReason;
+
+        /// <summary>
+        /// hfBookingStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfBookingStatus;
 
         /// <summary>
         /// Booking_Status control.
@@ -195,6 +240,15 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.Label Booking_DateTime;
 
         /// <summary>
+        /// Visiting_Date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Visiting_Date;
+
+        /// <summary>
         /// Booking_Rating control.
         /// </summary>
         /// <remarks>
@@ -213,6 +267,15 @@ namespace HomeServiceFinder.Pages.New_Admin
         protected global::System.Web.UI.WebControls.Label Booking_Decline_Reason;
 
         /// <summary>
+        /// Booking_Code control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Booking_Code;
+
+        /// <summary>
         /// btnBack control.
         /// </summary>
         /// <remarks>
@@ -220,14 +283,5 @@ namespace HomeServiceFinder.Pages.New_Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBack;
-
-        /// <summary>
-        /// btnEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEdit;
     }
 }

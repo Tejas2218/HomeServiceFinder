@@ -94,25 +94,44 @@
                     runat="server" />
             </div>
 
-            <!-- TIME -->
+            <!-- VISITING DATE -->
+            <div class="profile-item">
+                <label>Visiting Date</label>
+                <asp:TextBox
+                    ID="txtVisitingDate"
+                    runat="server"
+                    CssClass="textbox"
+                    TextMode="Date" />
+
+                <asp:RequiredFieldValidator
+                    ControlToValidate="txtVisitingDate"
+                    ErrorMessage="Select visiting date"
+                    CssClass="error"
+                    Display="Dynamic"
+                    runat="server" />
+            </div>
+
+            <!-- SERVICE TIME -->
             <div class="profile-item">
                 <label>Service Time</label>
                 <asp:DropDownList ID="ddlServiceTime" runat="server" CssClass="textbox">
                     <asp:ListItem Text="Select Time Slot" Value=""></asp:ListItem>
-                    <asp:ListItem Text="09:00 A.M. to 11:00 A.M." Value="09:00 A.M. to 11:00 A.M."></asp:ListItem>
-                    <asp:ListItem Text="11:00 A.M. to 01:00 P.M." Value="11:00 A.M. to 01:00 P.M."></asp:ListItem>
-                    <asp:ListItem Text="01:00 P.M. to 03:00 P.M." Value="01:00 P.M. to 03:00 P.M."></asp:ListItem>
-                    <asp:ListItem Text="03:00 P.M. to 05:00 P.M." Value="03:00 P.M. to 05:00 P.M."></asp:ListItem>
-                    <asp:ListItem Text="05:00 P.M. to 07:00 P.M." Value="05:00 P.M. to 07:00 P.M."></asp:ListItem>
-                    <asp:ListItem Text="07:00 P.M. to 09:00 P.M." Value="07:00 P.M. to 09:00 P.M."></asp:ListItem>
-
+                    <asp:ListItem Text="09:00 A.M. to 11:00 A.M." />
+                    <asp:ListItem Text="11:00 A.M. to 01:00 P.M." />
+                    <asp:ListItem Text="01:00 P.M. to 03:00 P.M." />
+                    <asp:ListItem Text="03:00 P.M. to 05:00 P.M." />
+                    <asp:ListItem Text="05:00 P.M. to 07:00 P.M." />
+                    <asp:ListItem Text="07:00 P.M. to 09:00 P.M." />
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator ControlToValidate="ddlServiceTime"
+
+                <asp:RequiredFieldValidator
+                    ControlToValidate="ddlServiceTime"
                     ErrorMessage="Select service time"
                     CssClass="error"
                     Display="Dynamic"
                     runat="server" />
             </div>
+
 
 
         </div>
@@ -133,5 +152,4 @@
         </div>
 
     </div>
-
 </asp:Content>

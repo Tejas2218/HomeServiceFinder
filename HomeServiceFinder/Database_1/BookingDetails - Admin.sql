@@ -1,4 +1,5 @@
-
+use Home_Service_Finder
+go
 --dev 28-12-25--Admin
 -----------------Total booking 
 create or alter proc TotalAll_Booking
@@ -49,6 +50,10 @@ begin
 end
 go
 
+
+select * from BookingDetails
+go
+
 --Display All Booking Details ByID
 create or alter proc Display_All_Booking_ByID
 @Booking_ID int
@@ -56,9 +61,11 @@ as
 begin
 	select BD.Booking_Status as Booking_Status,
 			BD.Booking_DateTime as Booking_DateTime,
+			BD.Visiting_DateTime as Visiting_Date,
 			BD.Booking_Rating as Booking_Rating,
 			BD.Booking_Decline_Reason as Booking_decline_Reason,
 			BD.Booking_ID as Booking_ID,
+			BD.Booking_Code as Booking_Code,
 
 			UD.User_Name as User_Name,
 			UD.User_EmailID as User_EmailID,
@@ -159,3 +166,28 @@ end
 go
 
 select * from BookingDetails
+go
+
+--Update Booking Status--
+CREATE OR ALTER PROCEDURE Update_Booking_Status
+    @Booking_ID int,
+	@Booking_Decline_Reason varchar(100)=null,
+    @Booking_Status varchar(50)
+AS
+BEGIN
+	if(@Booking_Status = 'Declined' or @Booking_Status = 'Cancelled')
+	begin
+		UPDATE BookingDetails
+		SET 
+			Booking_Status = @Booking_Status,
+			Booking_Decline_Reason=@Booking_Decline_Reason
+		WHERE Booking_ID = @Booking_ID
+	end
+	else
+	begin
+		UPDATE BookingDetails
+		SET Booking_Status = @Booking_Status
+		WHERE Booking_ID = @Booking_ID
+	end
+END
+GO

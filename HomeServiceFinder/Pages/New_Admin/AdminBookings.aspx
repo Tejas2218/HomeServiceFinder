@@ -106,12 +106,6 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Status">
-                    <ItemTemplate>
-                        <%# Eval("Booking_Status") %>
-                    </ItemTemplate>
-                </asp:TemplateField>
-
                 <asp:TemplateField HeaderText="Booking Time">
                     <ItemTemplate>
                         <%# Eval("Booking_DateTime") %>
@@ -130,6 +124,14 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
+                <asp:TemplateField HeaderText="Status">
+                    <ItemTemplate>
+                        <span class='<%# GetStatusClass(Eval("Booking_Status").ToString()) %>'>
+                            <%# Eval("Booking_Status") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
 
                 <asp:TemplateField HeaderText="Action">
                     <ItemTemplate>
@@ -144,7 +146,7 @@
                                 CausesValidation="false" />
 
 
-                          
+
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
