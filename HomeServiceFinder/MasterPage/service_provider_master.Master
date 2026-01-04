@@ -215,6 +215,8 @@
             border-collapse: collapse;
         }
 
+
+
         th {
             background: var(--dark);
             color: #fff;
@@ -222,10 +224,14 @@
             padding: 12px;
         }
 
+
+
         td {
             padding: 12px;
             border-bottom: 1px solid #eee;
         }
+
+
 
         tr:nth-child(even) {
             background: #fafafa;
@@ -240,18 +246,28 @@
         }
 
         .bg-pending {
-            background: #fff3cd;
-            color: #856404;
+            background: var(--primary);
+            color: white;
         }
 
         .bg-accept {
-            background: #d4edda;
-            color: #155724;
+            background: var(--success);
+            color: white;
         }
 
         .bg-decline {
-            background: #f8d7da;
-            color: #721c24;
+            background: var(--danger);
+            color: white;
+        }
+
+        .bg-cancelled {
+            background: #fff3cd;
+            color: white;
+        }
+
+        .bg-completed {
+            background: var(--success);
+            color: white;
         }
 
         .btn {
@@ -280,6 +296,11 @@
             color: white;
         }
 
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
         .btn-view {
             padding: 6px 12px;
             background: var(--primary);
@@ -289,6 +310,7 @@
             font-size: 13px;
             font-weight: 600;
         }
+
 
         .btn-back {
             display: inline-block;
@@ -365,22 +387,22 @@
                 <h2>Provider Pro</h2>
                 <div class="menu-item">
                     <a id="lnkBookings" runat="server" href="~/Pages/Service_Provider/service_provider_booking.aspx">
-                        <i class="bi bi-calendar3"></i> My Bookings
+                        <i class="bi bi-calendar3"></i>&nbsp;My Bookings
                     </a>
                 </div>
                 <div class="menu-item">
                     <a id="lnkHistory" runat="server" href="~/Pages/Service_Provider/service_provider_Booking_History.aspx">
-                        <i class="bi bi-clock-history"></i> My Booking History
+                        <i class="bi bi-clock-history"></i>&nbsp;My Booking History
                     </a>
                 </div>
                 <div class="menu-item">
                     <a id="lnkCustomers" runat="server" href="~/Pages/Service_Provider/service_provider_user.aspx">
-                        <i class="bi bi-person-circle"></i> My Customers
+                        <i class="bi bi-person-circle"></i>&nbsp;My Customers
                     </a>
                 </div>
                 <div class="menu-item">
                     <a id="lnkProfile" runat="server" href="~/Pages/Service_Provider/service_provider_profile.aspx">
-                        <i class="bi bi-sliders"></i> Profile Settings
+                        <i class="bi bi-sliders"></i>&nbsp;Profile Settings
                     </a>
                 </div>
             </div>

@@ -42,6 +42,24 @@ namespace HomeServiceFinder.Pages.Service_Provider
         protected global::System.Web.UI.WebControls.LinkButton btnFetchDeclined;
 
         /// <summary>
+        /// btnFetchCompleted control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnFetchCompleted;
+
+        /// <summary>
+        /// btnFetchCancelled control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnFetchCancelled;
+
+        /// <summary>
         /// gvBookings control.
         /// </summary>
         /// <remarks>

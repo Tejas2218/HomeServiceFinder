@@ -18,10 +18,10 @@ namespace HomeServiceFinder.Pages.User
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["sid"] != null &&
-            int.TryParse(Request.QueryString["sid"], out int sid))
+                if (Request.QueryString["eqid"] != null &&
+            int.TryParse(Request.QueryString["eqid"], out int eqid))
                 {
-                    LoadProvidersByID(sid);
+                    LoadProvidersByID(eqid);
                 }
                 //else
                 //{
@@ -74,7 +74,7 @@ namespace HomeServiceFinder.Pages.User
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@EQ_ID", eid);
+                    cmd.Parameters.AddWithValue("@Equipment_ID", eid);
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();

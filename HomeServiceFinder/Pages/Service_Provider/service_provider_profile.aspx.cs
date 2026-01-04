@@ -52,7 +52,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                     StateList.SelectedValue = dr["State_ID"].ToString();
                     BindCityList(null, null);
                     CityList.SelectedValue = dr["City_ID"].ToString();
-                    UserAddress.Text = dr["User_Address"].ToString();
+                    //UserAddress.Text = dr["User_Address"].ToString();
 
                     // SERVICE PROVIDER DETAILS
                     ServiceList.SelectedValue = dr["Service_ID"].ToString();
@@ -97,7 +97,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 SqlCommand cmd = new SqlCommand("Display_City", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@State_ID", StateList.SelectedItem.Value);
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -169,7 +169,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
 
                 cmd.Parameters.AddWithValue("@User_Name", UserName.Text);
                 cmd.Parameters.AddWithValue("@User_EmailID", UserEmail.Text);
-                cmd.Parameters.AddWithValue("@User_Address", UserAddress.Text);
+                //cmd.Parameters.AddWithValue("@User_Address", UserAddress.Text);
                 cmd.Parameters.AddWithValue("@User_ContactNo", UserContact.Text);
                 cmd.Parameters.AddWithValue("@User_Password", Password.Text);
                 cmd.Parameters.AddWithValue("@User_Role", "Worker");
@@ -205,7 +205,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 cmd.Parameters.AddWithValue("@SP_ID", Convert.ToInt32(ViewState["id"]));
                 cmd.Parameters.AddWithValue("@User_Name", UserName.Text);
                 cmd.Parameters.AddWithValue("@User_EmailID", UserEmail.Text);
-                cmd.Parameters.AddWithValue("@User_Address", UserAddress.Text);
+                //cmd.Parameters.AddWithValue("@User_Address", UserAddress.Text);
                 cmd.Parameters.AddWithValue("@User_ContactNo", UserContact.Text);
                 cmd.Parameters.AddWithValue("@User_Password", Password.Text);
                 cmd.Parameters.AddWithValue("@City_ID", CityList.SelectedItem.Value);

@@ -22,7 +22,7 @@ namespace HomeServiceFinder.login_signup
                 {
                     Response.Redirect("~/Pages/User/user_dashboard.aspx");
                 }
-                else if (Session["User_Role"].ToString() == "Worker")
+                else if (Session["UserRole"].ToString() == "Worker")
                 {
                     Response.Redirect("~/Pages/Service_Provider/service_provider_booking.aspx");
                 }

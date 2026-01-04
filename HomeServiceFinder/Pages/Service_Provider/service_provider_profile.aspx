@@ -2,243 +2,245 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .section-title {
-            grid-column: span 2;
-            font-size: 16px;
-            font-weight: 700;
-            color: #333;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #e5e7eb;
-            margin-top: 10px;
+        :root {
+            --primary: #FDA12B;
+            --secondary: #8D9297;
+            --light: #F8F9FA;
+            --dark: #182333;
+            --success: #28a745;
+            --danger: #dc3545;
+            --info: #0d6efd;
         }
 
         .profile-card {
-            background: #fff;
-            padding: 25px;
-            width: 100%;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            max-width: 950px;
+            margin: 30px auto;
+            border: 1px solid #eef0f2;
         }
 
         .profile-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px 24px;
+            /* Large 60px horizontal gap to prevent columns from touching */
+            gap: 25px 60px;
             width: 100%;
         }
+
+        .section-title {
+            grid-column: span 2;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary); /* Using your Orange #FDA12B */
+            margin: 35px 0 15px 0;
+            letter-spacing: -0.01em;
+        }
+
+            .section-title:first-child {
+                margin-top: 0;
+            }
 
         .profile-item {
             display: flex;
             flex-direction: column;
+            width: 100%;
         }
 
             .profile-item.full-width {
                 grid-column: span 2;
             }
 
+            .profile-item label {
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: var(--secondary); /* Using your Grey #8D9297 */
+                margin-bottom: 8px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+        /* Modern Input Styling */
+        .form-control, .textbox, select, .profile-value {
+            width: 100% !important;
+            box-sizing: border-box; /* Prevents padding from breaking the column width */
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--dark);
+            transition: all 0.2s ease;
+            background-color: var(--light); /* Using your Light Grey #F8F9FA */
+        }
+
+            .form-control:focus, select:focus, .profile-value:focus {
+                outline: none;
+                border-color: var(--primary);
+                background-color: #ffffff;
+                box-shadow: 0 0 0 4px rgba(253, 161, 43, 0.15); /* Orange glow */
+            }
+
+        /* Button Group */
+        .action-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            /* Set a fixed width that fits your longest text */
+            width: 200px;
+            /* Alternatively, use min-width if you want them to grow but start at the same size */
+            /* min-width: 180px; */
+
+            padding: 12px 0; /* Vertical padding stays, horizontal removed to let 'width' control it */
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            border: none;
+            text-transform: uppercase;
+            text-align: center; /* Ensures text stays in the middle of the fixed width */
+            display: inline-block;
+        }
+
+        .btn-back {
+            background: var(--secondary);
+            color: #ffffff;
+        }
+
+            .btn-back:hover {
+                background: var(--dark);
+            }
+
+        .btn-save, .btn-edit {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+            .btn-save:hover, .btn-edit:hover {
+                background: #e08e22; /* Slightly deeper orange for hover */
+                box-shadow: 0 4px 12px rgba(253, 161, 43, 0.2);
+                transform: translateY(-1px);
+            }
+
+        .error, .validation-error {
+            color: var(--danger); /* Using your Red #dc3545 */
+            font-size: 12px;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .profile-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .profile-item.full-width {
+            .section-title, .profile-item.full-width {
                 grid-column: span 1;
             }
         }
-
-        .error {
-            color: red;
-            font-size: 12px;
-            margin-top: 4px;
-        }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
 
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="profile-card">
+        <h2 style="margin-bottom: 30px; font-weight: 800; color: #111827;">Profile Settings</h2>
 
         <div class="profile-grid">
+            <div class="section-title">Personal Information</div>
 
-            <!-- PERSONAL INFO TITLE -->
-            <div class="section-title full-width">
-                Personal Information
-            </div>
-
-            <!-- Name -->
             <div class="profile-item">
-                <label>Name</label>
-                <asp:TextBox ID="UserName" runat="server" CssClass="profile-value" />
-                <asp:RequiredFieldValidator ControlToValidate="UserName"
-                    ErrorMessage="Name is required" Display="Dynamic"
-                    CssClass="error" runat="server" />
+                <label>Full Name</label>
+                <asp:TextBox ID="UserName" runat="server" CssClass="form-control" placeholder="Enter full name" />
+                <asp:RequiredFieldValidator ControlToValidate="UserName" ErrorMessage="Name is required" Display="Dynamic" CssClass="error" runat="server" />
             </div>
 
-            <!-- Email -->
             <div class="profile-item">
-                <label>Email</label>
-                <asp:TextBox ID="UserEmail" runat="server" CssClass="profile-value" />
-                <asp:RequiredFieldValidator Display="Dynamic"
-                    ControlToValidate="UserEmail"
-                    ErrorMessage="Email is required"
-                    CssClass="error" runat="server" />
-                <asp:RegularExpressionValidator ControlToValidate="UserEmail"
-                    Display="Dynamic"
-                    ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"
-                    ErrorMessage="Invalid email format"
-                    CssClass="error" runat="server" />
+                <label>Email Address</label>
+                <asp:TextBox ID="UserEmail" runat="server" CssClass="form-control" placeholder="email@example.com" />
+                <asp:RequiredFieldValidator ControlToValidate="UserEmail" ErrorMessage="Email required" Display="Dynamic" CssClass="error" runat="server" />
             </div>
 
-            <!-- Contact -->
             <div class="profile-item">
                 <label>Contact Number</label>
-                <asp:TextBox ID="UserContact" runat="server" CssClass="profile-value" />
-                <asp:RequiredFieldValidator ControlToValidate="UserContact"
-                    Display="Dynamic"
-                    ErrorMessage="Contact number is required"
-                    CssClass="error" runat="server" />
+                <asp:TextBox ID="UserContact" runat="server" CssClass="form-control" placeholder="+1 (555) 000-0000" />
             </div>
 
             <div class="profile-item">
                 <label>State</label>
-                <div class="input-row">
-                    <asp:DropDownList ID="StateList" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="BindCityList" Style="padding-left: 15px;">
-                        <asp:ListItem Text="Select State" Value=""></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-                <asp:RequiredFieldValidator ControlToValidate="StateList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a state" ValidationGroup="signup" Display="Dynamic" runat="server" />
+                <asp:DropDownList ID="StateList" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="BindCityList">
+                    <asp:ListItem Text="Select State" Value=""></asp:ListItem>
+                </asp:DropDownList>
             </div>
 
             <div class="profile-item">
                 <label>City</label>
-                <div class="input-row">
-                    <asp:DropDownList ID="CityList" runat="server" CssClass="textbox" Style="padding-left: 15px;">
-                        <asp:ListItem Text="Select City" Value=""></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-                <asp:RequiredFieldValidator ControlToValidate="CityList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a city" ValidationGroup="signup" Display="Dynamic" runat="server" />
-            </div>
-
-            <div class="profile-item full-width">
-                <label>Address</label>
-                <asp:TextBox ID="UserAddress" runat="server" CssClass="profile-value" />
-            </div>
-
-            <!-- WORKING INFO TITLE -->
-            <div class="section-title full-width">
-                Working Information
-            </div>
-
-            <div class="profile-item">
-                <label>Service</label>
-                <div class="input-row">
-                    <asp:DropDownList ID="ServiceList" runat="server" CssClass="textbox" AutoPostBack="true" OnSelectedIndexChanged="BindEquipmentList" Style="padding-left: 15px;">
-                        <asp:ListItem Text="Select Service" Value=""></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-                <asp:RequiredFieldValidator ControlToValidate="ServiceList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a Service" ValidationGroup="signup" Display="Dynamic" runat="server" />
-            </div>
-
-            <div class="profile-item">
-                <label>Equipment</label>
-                <div class="input-row">
-                    <asp:DropDownList ID="EquipmentList" runat="server" CssClass="textbox" Style="padding-left: 15px;">
-                        <asp:ListItem Text="Select Equipment" Value=""></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-                <asp:RequiredFieldValidator ControlToValidate="EquipmentList" InitialValue="" CssClass="validation-error" ErrorMessage="Select a Equipment" ValidationGroup="signup" Display="Dynamic" runat="server" />
+                <asp:DropDownList ID="CityList" runat="server" CssClass="form-control">
+                    <asp:ListItem Text="Select City" Value=""></asp:ListItem>
+                </asp:DropDownList>
             </div>
 
             <div class="profile-item">
                 <label>Age</label>
-                <asp:TextBox ID="SPAge" runat="server" CssClass="profile-value" />
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="SPAge"
-                    ErrorMessage="Age is required"
-                    ForeColor="Red" />
-                <asp:RangeValidator runat="server"
-                    ControlToValidate="SPAge"
-                    MinimumValue="18"
-                    MaximumValue="100"
-                    Type="Integer"
-                    ErrorMessage="Age must be between 18 and 100"
-                    ForeColor="Red" />
+                <asp:TextBox ID="SPAge" runat="server" CssClass="form-control" />
+            </div>
+
+            <div class="section-title">Professional Details</div>
+
+            <div class="profile-item">
+                <label>Primary Service</label>
+                <asp:DropDownList ID="ServiceList" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="BindEquipmentList">
+                    <asp:ListItem Text="Select Service" Value=""></asp:ListItem>
+                </asp:DropDownList>
+            </div>
+
+            <div class="profile-item">
+                <label>Equipment / Sub-Service</label>
+                <asp:DropDownList ID="EquipmentList" runat="server" CssClass="form-control">
+                    <asp:ListItem Text="Select Equipment" Value=""></asp:ListItem>
+                </asp:DropDownList>
             </div>
 
             <div class="profile-item">
                 <label>Experience (Years)</label>
-                <asp:TextBox ID="SPExperience" runat="server" CssClass="profile-value" />
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="SPExperience"
-                    ErrorMessage="Experience is required"
-                    ForeColor="Red" />
-                <asp:RangeValidator runat="server"
-                    ControlToValidate="SPExperience"
-                    MinimumValue="0"
-                    MaximumValue="50"
-                    Type="Integer"
-                    ErrorMessage="Experience must be between 0 and 50 years"
-                    ForeColor="Red" />
+                <asp:TextBox ID="SPExperience" runat="server" CssClass="form-control" placeholder="e.g. 5" />
             </div>
 
             <div class="profile-item">
-                <label>Minimum Price</label>
-                <asp:TextBox ID="SPMinimumPrice" runat="server" CssClass="profile-value" />
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="SPMinimumPrice"
-                    ErrorMessage="Minimum price is required"
-                    ForeColor="Red" />
-                <asp:CompareValidator runat="server"
-                    ControlToValidate="SPMinimumPrice"
-                    Operator="DataTypeCheck"
-                    Type="Double"
-                    ErrorMessage="Enter a valid price"
-                    ForeColor="Red" />
+                <label>Base Price ($)</label>
+                <asp:TextBox ID="SPMinimumPrice" runat="server" CssClass="form-control" placeholder="0.00" />
             </div>
 
             <div class="profile-item full-width">
-                <label>Shop Address</label>
-                <asp:TextBox ID="SPShopAddress" runat="server" CssClass="profile-value" />
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="SPShopAddress"
-                    ErrorMessage="Shop address is required"
-                    ForeColor="Red" />
+                <label>Workshop / Shop Address</label>
+                <asp:TextBox ID="SPShopAddress" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="2" />
             </div>
 
-            <!-- SECURITY INFO TITLE -->
-            <div class="section-title full-width">
-                Security Information
-            </div>
+            <div class="section-title">Security</div>
 
             <div class="profile-item full-width">
-                <label>Password</label>
-                <asp:TextBox ID="Password" runat="server"
-                    CssClass="profile-value" TextMode="Password" />
-                <asp:RequiredFieldValidator runat="server"
-                    ControlToValidate="Password"
-                    ErrorMessage="Password is required"
-                    ForeColor="Red" />
-                <asp:RegularExpressionValidator runat="server"
-                    ControlToValidate="Password"
-                    ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
-                    ErrorMessage="Password must be at least 6 characters with letters and numbers"
-                    ForeColor="Red" />
+                <label>Account Password</label>
+                <asp:TextBox ID="Password" runat="server" CssClass="form-control" TextMode="Password" placeholder="••••••••" />
             </div>
-
         </div>
 
+        <div class="action-group">
+            <asp:Button ID="btnBack" runat="server" Text="Cancel" CssClass="btn btn-back" OnClientClick="history.back(); return false;" />
 
-        <div style="text-align: center; margin-top: 20px;">
-            <asp:Button ID="btnBack" runat="server" Text="← Back"
-                CssClass="btn btn-view"
-                OnClientClick="history.back(); return false;" />
+            <asp:Button ID="btnEdit" runat="server" Text="Register as Provider" CssClass="btn btn-save" OnClick="btnEdit_Click" />
 
-            <asp:Button ID="btnEdit" runat="server"
-                Text="Add Service Provider"
-                CssClass="btn btn-edit"
-                OnClick="btnEdit_Click" />
-            <asp:Button ID="btnUpdate" runat="server"
-                Text="Save Changes"
-                CssClass="btn btn-edit"
-                OnClick="btnUpdate_Click"
-                Visible="false" />
+            <asp:Button ID="btnUpdate" runat="server" Text="Update Profile" CssClass="btn btn-save" OnClick="btnUpdate_Click" Visible="false" />
         </div>
+    </div>
 </asp:Content>

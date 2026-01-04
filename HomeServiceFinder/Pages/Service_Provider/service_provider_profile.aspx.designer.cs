@@ -60,13 +60,13 @@ namespace HomeServiceFinder.Pages.Service_Provider
         protected global::System.Web.UI.WebControls.DropDownList CityList;
 
         /// <summary>
-        /// UserAddress control.
+        /// SPAge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserAddress;
+        protected global::System.Web.UI.WebControls.TextBox SPAge;
 
         /// <summary>
         /// ServiceList control.
@@ -85,15 +85,6 @@ namespace HomeServiceFinder.Pages.Service_Provider
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList EquipmentList;
-
-        /// <summary>
-        /// SPAge control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SPAge;
 
         /// <summary>
         /// SPExperience control.

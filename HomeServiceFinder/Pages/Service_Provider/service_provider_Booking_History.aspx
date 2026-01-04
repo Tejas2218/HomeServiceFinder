@@ -12,6 +12,8 @@
             <asp:LinkButton ID="btnFetchAll" runat="server" CssClass="tab-btn active-tab" OnClick="btnFetchAll_Click" CommandArgument="none">All</asp:LinkButton>
             <asp:LinkButton ID="btnFetchAccepted" runat="server" CssClass="tab-btn" OnClick="btnFetchAll_Click" CommandArgument="Accepted">Accepted</asp:LinkButton>
             <asp:LinkButton ID="btnFetchDeclined" runat="server" CssClass="tab-btn" OnClick="btnFetchAll_Click" CommandArgument="Declined">Declined</asp:LinkButton>
+            <asp:LinkButton ID="btnFetchCompleted" runat="server" CssClass="tab-btn" OnClick="btnFetchAll_Click" CommandArgument="Completed">Completed</asp:LinkButton>
+            <asp:LinkButton ID="btnFetchCancelled" runat="server" CssClass="tab-btn" OnClick="btnFetchAll_Click" CommandArgument="Cancelled">Cancelled by user</asp:LinkButton>
         </div>
         <br />
 
@@ -31,7 +33,10 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="Equipment_Name" HeaderText="Service" />
-                <asp:BoundField DataField="Visiting_DateTime" HeaderText="Schedule" />
+                <asp:BoundField DataField="Visiting_DateTime"
+                    HeaderText="Visiting Date"
+                    DataFormatString="{0:dd-MM-yyyy}"
+                    HtmlEncode="false" />
 
                 <asp:TemplateField HeaderText="Status">
                     <ItemTemplate>
@@ -39,6 +44,16 @@
                         <span class='<%# "badge bg-" + Eval("Booking_Status").ToString().ToLower() %>'>
                             <%# Eval("Booking_Status") %>
                         </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Action">
+                    <ItemTemplate>
+                        <asp:Button ID="btnAccept" runat="server" Text="Accept"
+                            CommandName="Accept" CommandArgument='<%# Eval("Booking_ID") %>'
+                            CssClass="btn btn-primary" OnClick="btnAccept_Click" />
+                        <asp:Button ID="btnDecline" runat="server" Text="Decline"
+                            CommandName="Decline" CommandArgument='<%# Eval("Booking_ID") %>'
+                            CssClass="btn btn-danger" OnClick="btnDecline_Click" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
