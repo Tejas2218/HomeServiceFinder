@@ -105,8 +105,8 @@ alter table BookingDetails add Booking_Code varchar(6) not null -----add column
 
 ------update datatype size
 ALTER TABLE BookingDetails
-ALTER COLUMN Time_Slot VARCHAR(20) NOT NULL;
-
+ALTER COLUMN Time_Slot VARCHAR(50) NOT NULL;
+go
 
 
 --------------SP for Select Service and view acccording to equipment for sign up----------------
@@ -119,6 +119,7 @@ end
 
 exec View_ServiceMaster
 select * from ServiceMaster
+go
 
 create or alter proc View_Equipment_ByID
 @Service_ID int

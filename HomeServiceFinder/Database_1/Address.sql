@@ -5,6 +5,7 @@ as
 begin
 	select * from StateDetails
 end
+go
 
 --Display City--
 create or alter proc Display_City
@@ -13,7 +14,7 @@ as
 begin
 	select * from CityDetails where State_ID=@State_ID
 end
-SELECT * FROM CityDetails;
+go
 
 --Insert State--
 create proc Insert_State
@@ -23,6 +24,7 @@ begin
 	Insert into StateDetails(State_Name)
 	values(@State_Name)
 end
+go
 
 --Insert State--
 Insert into StateDetails(State_Name)
@@ -232,18 +234,10 @@ values(1,'Bhuj'),
 	(7, 'Aligarh')
 
 select * from CityDetails where State_ID=1
-
-
-
-
-
-
-
-
-
+go
 
 --Insert City--
-create proc Insert_City
+create or alter proc Insert_City
 @State_ID int,
 @City_Name varchar(50)
 as

@@ -8,6 +8,8 @@
     <title>Admin Dashboard | Service Finder</title>
 
     <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
@@ -17,6 +19,25 @@
             --secondary: #8D9297;
             --light: #F8F9FA;
             --dark: #182333;
+        }
+        /* Common input size fix */
+        .textbox,
+        input[type="date"] {
+            width: 100%;
+            height: 42px; /* match other fields */
+            padding: 8px 12px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .section-title {
+            grid-column: span 2;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e5e7eb;
+            margin-top: 10px;
         }
 
         .status-badge {

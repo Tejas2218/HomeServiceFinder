@@ -57,7 +57,7 @@ namespace HomeServiceFinder.Pages.New_Admin
         {
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("Count_ServiceProvider", con);
+                SqlCommand cmd = new SqlCommand("Count_ALL_ServiceProvider", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 con.Open();

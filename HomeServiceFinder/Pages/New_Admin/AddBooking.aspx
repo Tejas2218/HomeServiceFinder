@@ -40,11 +40,16 @@
             <div class="profile-item">
                 <label>Service </label>
                 <div class="input-row">
-                    <asp:DropDownList ID="ddlService" runat="server" CssClass="textbox">
+                    <asp:DropDownList
+                        ID="ddlService"
+                        runat="server"
+                        AutoPostBack="true"
+                        OnSelectedIndexChanged="ddlService_SelectedIndexChanged"
+                        CssClass="textbox">
                         <asp:ListItem Text="Select Service" Value=""></asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <asp:RequiredFieldValidator ControlToValidate="ddlServiceProvider"
+                <asp:RequiredFieldValidator ControlToValidate="ddlService"
                     InitialValue=""
                     ErrorMessage="Select a service "
                     CssClass="error"
@@ -52,8 +57,29 @@
                     runat="server" />
             </div>
 
-            <!-- SERVICE PROVIDER -->
+            <!-- Equipment  -->
             <div class="profile-item">
+                <label>Equipment </label>
+                <div class="input-row">
+                    <asp:DropDownList
+                        ID="ddlEquipment"
+                        runat="server"
+                        AutoPostBack="true"
+                        OnSelectedIndexChanged="ddlEquipment_SelectedIndexChanged"
+                        CssClass="textbox">
+                        <asp:ListItem Text="Select Service" Value=""></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <asp:RequiredFieldValidator ControlToValidate="ddlEquipment"
+                    InitialValue=""
+                    ErrorMessage="Select a Eequipment"
+                    CssClass="error"
+                    Display="Dynamic"
+                    runat="server" />
+            </div>
+
+            <!-- SERVICE PROVIDER -->
+            <div class="profile-item full-width" style="width: 48%">
                 <label>Service Provider</label>
                 <div class="input-row">
                     <asp:DropDownList ID="ddlServiceProvider" runat="server" CssClass="textbox">
@@ -68,60 +94,45 @@
                     runat="server" />
             </div>
 
-            <!-- DATE -->
+            <!-- VISITING DATE -->
             <div class="profile-item">
-                <label>Service Date</label>
-                <asp:TextBox ID="txtServiceDate"
+                <label>Visiting Date</label>
+                <asp:TextBox
+                    ID="txtVisitingDate"
                     runat="server"
-                    TextMode="Date"
-                    CssClass="profile-value" />
-                <asp:RequiredFieldValidator ControlToValidate="txtServiceDate"
-                    ErrorMessage="Select service date"
+                    CssClass="textbox"
+                    TextMode="Date" />
+
+                <asp:RequiredFieldValidator
+                    ControlToValidate="txtVisitingDate"
+                    ErrorMessage="Select visiting date"
                     CssClass="error"
                     Display="Dynamic"
                     runat="server" />
             </div>
 
-            <!-- TIME -->
+            <!-- SERVICE TIME -->
             <div class="profile-item">
                 <label>Service Time</label>
-                <asp:TextBox ID="txtServiceTime"
-                    runat="server"
-                    TextMode="Time"
-                    CssClass="profile-value" />
-                <asp:RequiredFieldValidator ControlToValidate="txtServiceTime"
+                <asp:DropDownList ID="ddlServiceTime" runat="server" CssClass="textbox">
+                    <asp:ListItem Text="Select Time Slot" Value=""></asp:ListItem>
+                    <asp:ListItem Text="09:00 A.M. to 11:00 A.M." />
+                    <asp:ListItem Text="11:00 A.M. to 01:00 P.M." />
+                    <asp:ListItem Text="01:00 P.M. to 03:00 P.M." />
+                    <asp:ListItem Text="03:00 P.M. to 05:00 P.M." />
+                    <asp:ListItem Text="05:00 P.M. to 07:00 P.M." />
+                    <asp:ListItem Text="07:00 P.M. to 09:00 P.M." />
+                </asp:DropDownList>
+
+                <asp:RequiredFieldValidator
+                    ControlToValidate="ddlServiceTime"
                     ErrorMessage="Select service time"
                     CssClass="error"
                     Display="Dynamic"
                     runat="server" />
             </div>
 
-            <!-- ADDRESS -->
-            <div class="profile-item full-width">
-                <label>Service Address</label>
-                <asp:TextBox ID="txtServiceAddress"
-                    runat="server"
-                    CssClass="profile-value"
-                    TextMode="MultiLine"
-                    Rows="3" />
-                <asp:RequiredFieldValidator ControlToValidate="txtServiceAddress"
-                    ErrorMessage="Service address is required"
-                    CssClass="error"
-                    Display="Dynamic"
-                    runat="server" />
-            </div>
 
-            <!-- STATUS -->
-            <div class="profile-item">
-                <label>Booking Status</label>
-                <div class="input-row">
-                    <asp:DropDownList ID="ddlStatus" runat="server" CssClass="textbox">
-                        <asp:ListItem Text="Pending" />
-                        <asp:ListItem Text="Approved" />
-                        <asp:ListItem Text="Rejected" />
-                    </asp:DropDownList>
-                </div>
-            </div>
 
         </div>
 
@@ -141,5 +152,4 @@
         </div>
 
     </div>
-
 </asp:Content>

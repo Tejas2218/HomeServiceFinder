@@ -98,8 +98,6 @@ namespace HomeServiceFinder.Pages.New_Admin
                 cmd.Parameters.AddWithValue("@SP_ID", ViewState["UserId"]);
                 cmd.Parameters.AddWithValue("@SP_Status", "Approved");
 
-                SqlCommand cmd2 = new SqlCommand("", con);
-
                 con.Open();
                 cmd.ExecuteNonQuery();
                 LoadUserData(id);
@@ -112,7 +110,7 @@ namespace HomeServiceFinder.Pages.New_Admin
 
                 if (dr.Read())
                 {
-                    SendEmail(id, "Approved", dr["User_Name"].ToString().ToString(), dr["User_EmailID"].ToString());
+                    SendEmail(id, "Approved", dr["User_Name"].ToString(), dr["User_EmailID"].ToString());
                 }
             }
             btnApprove.Visible = false;

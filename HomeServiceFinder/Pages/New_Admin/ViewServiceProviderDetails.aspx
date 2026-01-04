@@ -6,19 +6,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <style>
-        .section-title {
-            grid-column: span 2;
-            font-size: 16px;
-            font-weight: 700;
-            color: #333;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #e5e7eb;
-            margin-top: 10px;
-        }
-    </style>
 
     <h2 style="margin-bottom: 20px;">Service Provider Profile</h2>
 
