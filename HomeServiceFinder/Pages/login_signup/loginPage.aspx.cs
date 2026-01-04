@@ -11,6 +11,7 @@ namespace HomeServiceFinder.login_signup
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             // Redirect if already logged in
             if (Session["UserID"] != null && Session["UserRole"] != null)
             {

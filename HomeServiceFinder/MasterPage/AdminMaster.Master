@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
     <title>Admin Dashboard | Service Finder</title>
 
     <!-- Chart JS -->
@@ -20,6 +22,40 @@
             --light: #F8F9FA;
             --dark: #182333;
         }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #fff;
+        }
+
+        /* Title */
+        .topbar-title {
+            font-size: 18px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 70%;
+        }
+
+        /* Profile */
+        .profile-link {
+            color: black;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+
+            .profile-link i {
+                font-size: 20px;
+            }
+
         /* Common input size fix */
         .textbox,
         input[type="date"] {
@@ -61,6 +97,24 @@
             .status-badge.pending {
                 background-color: #fff3cd;
                 color: #856404;
+            }
+
+        .logout-item {
+            padding: 14px 25px;
+            margin-bottom: 20px; /* Space from bottom */
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+            .logout-item a {
+                color: #ff4d4d !important; /* Reddish logout color */
+                text-decoration: none;
+                display: block;
+                padding: 10px;
+                transition: 0.3s;
+            }
+
+            .logout-item:hover a {
+                color: #ff7878 !important;
             }
 
         .approval-box {
@@ -148,13 +202,13 @@
         /* ================= SIDEBAR ================= */
         .sidebar {
             width: 240px;
-            background: var(--dark);
-            height: 100vh;
             position: fixed;
-            top: 0;
             left: 0;
-            padding-top: 20px;
+            background: var(--dark);
+            top: 0;
+            height: 100vh;
         }
+
 
             .sidebar h2 {
                 text-align: center;
@@ -176,24 +230,32 @@
 
         /* ================= TOPBAR ================= */
         .topbar {
-            margin-left: 240px;
+            position: fixed;
+            top: 0;
+            left: 240px; /* ONLY this */
+            right: 0;
             height: 65px;
-            background: #fff;
-            border-bottom: 3px solid var(--primary);
             display: flex;
             align-items: center;
-            padding: 0 25px;
-            position: fixed;
-            width: calc(100% - 240px);
-            top: 0;
+            justify-content: space-between;
+            padding: 0 20px;
+            background: #fff;
+            border-bottom: 3px solid var(--primary);
             z-index: 10;
         }
 
+        /* REMOVE this if present ❌ */
+        /* margin-left: 240px; */
+        /* width: calc(100% - 240px); */
+
+
+
         /* ================= CONTENT ================= */
         .content {
-            margin-left: 240px;
+            margin-left: 240px; /* SAME as sidebar width */
             padding: 95px 30px 30px;
         }
+
 
         /* ================= FILTER BAR ================= */
         .filters {
@@ -707,6 +769,18 @@
                 background-color: #bfdbfe; /* light blue */
                 color: #1d4ed8; /* dark blue */
             }
+        /* Active sidebar link */
+        .menu-item a.active {
+            background-color: var(--primary); /* your highlight color */
+            color: #fff; /* text color */
+            font-weight: 700;
+        }
+
+            /* Hover effect still applies to active link but slightly darker */
+            .menu-item a.active:hover {
+                background-color: #e38c1f; /* slightly darker shade */
+                color: #fff;
+            }
     </style>
 </head>
 
@@ -716,18 +790,25 @@
         <!-- SIDEBAR -->
         <div class="sidebar">
             <h2>Admin Panel</h2>
-            <div class="menu-item"><a href="AdminDashbord.aspx">🏠 Dashboard</a></div>
+            <div class="menu-item active"><a href="AdminDashbord.aspx">🏠 Dashboard</a></div>
             <div class="menu-item"><a href="User.aspx">👥 Users</a></div>
             <div class="menu-item"><a href="ServiceProvider.aspx">🛠 Service Providers</a></div>
             <div class="menu-item"><a href="AdminBookings.aspx">📅 Bookings</a></div>
             <div class="menu-item"><a href="Reports.aspx">📊 Reports</a></div>
-            <div class="menu-item"><a href="Settings.aspx">⚙ Settings</a></div>
+            <hr />
+            <div class="menu-item"><a style="color: red" href="../login_signup/loginPage.aspx"><i class="bi bi-box-arrow-right"></i>Logout</a></div>
+
         </div>
 
         <!-- TOPBAR -->
         <div class="topbar">
             <h3>Service Finder – Admin Dashboard</h3>
+
+            <a href="Settings.aspx" class="profile-link">
+                <i class="bi bi-person-circle"></i>Profile
+            </a>
         </div>
+
 
         <!-- MAIN CONTENT -->
         <div class="content">
