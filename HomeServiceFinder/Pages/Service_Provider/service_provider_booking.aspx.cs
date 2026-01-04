@@ -24,7 +24,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 //pending_notification();
                 if (Session["UserID"] != null)
                 {
-                    loadData("Accepted");
+                    loadData("Accept");
                 }
                 else
                 {
@@ -124,7 +124,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
-                        cmd.Parameters.AddWithValue("@Booking_Status", "Accept");
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Accepted");
                         int result = cmd.ExecuteNonQuery();
                         loadData("Pending");
                     }
@@ -150,7 +150,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
-                        cmd.Parameters.AddWithValue("@Booking_Status", "Decline");
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Declined");
                         int result = cmd.ExecuteNonQuery();
                         loadData("Pending");
                     }
@@ -225,30 +225,58 @@ namespace HomeServiceFinder.Pages.Service_Provider
 
         protected void btnComplete_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            int Booking_ID = Convert.ToInt32(btn.CommandArgument);
-            try
+
+            string enteredCode = txtVerifyCode.Text.Trim();
+            string bookingId = hfSelectedBookingId.Value;
+
+            // Replace with your DB logic
+            //string actualCode = GetCodeFromDatabase(bookingId);
+
+            if (enteredCode == "")//actualCode
             {
-                using (SqlConnection con = new SqlConnection(constr))
-                {
-                    using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
-                    {
-                        con.Open();
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
-                        cmd.Parameters.AddWithValue("@Booking_Status", "Completed");
-                        int result = cmd.ExecuteNonQuery();
-                        loadData("Pending");
-                    }
-                }
+                //UpdateBookingStatus(bookingId, "Completed");
+
+                // Show Success SweetAlert
+                ScriptManager.RegisterStartupScript(this, GetType(), "success",
+                    "Swal.fire('Success', 'Booking marked as completed!', 'success');", true);
+
+                // Re-bind your GridView here
             }
-            catch (Exception ex)
+            else
             {
-                // For debugging: This will show you if the SQL fails
-                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                // Show Error SweetAlert
+                ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                    "Swal.fire('Error', 'Invalid verification code. Please try again.', 'error');", true);
             }
 
+
+
+
+            //Button btn = (Button)sender;
+            //int Booking_ID = Convert.ToInt32(btn.CommandArgument);
+            //try
+            //{
+            //    using (SqlConnection con = new SqlConnection(constr))
+            //    {
+            //        using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
+            //        {
+            //            con.Open();
+            //            cmd.CommandType = CommandType.StoredProcedure;
+            //            cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+            //            cmd.Parameters.AddWithValue("@Booking_Status", "Completed");
+            //            int result = cmd.ExecuteNonQuery();
+            //            loadData("Pending");
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    // For debugging: This will show you if the SQL fails
+            //    Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            //}
+
         }
+
 
         //protected void btnFetchAcceptedUpcomming_Click(object sender, EventArgs e)
         //{

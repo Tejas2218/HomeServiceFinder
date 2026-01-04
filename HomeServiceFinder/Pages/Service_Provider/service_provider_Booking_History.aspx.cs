@@ -112,7 +112,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
-                        cmd.Parameters.AddWithValue("@Booking_Status", "Accept");
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Accepted");
                         int result = cmd.ExecuteNonQuery();
                         btnFetchAll.CssClass = "tab-btn active-tab";
                         btnFetchDeclined.CssClass = "tab-btn";
@@ -143,7 +143,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
-                        cmd.Parameters.AddWithValue("@Booking_Status", "Decline");
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Declined");
                         int result = cmd.ExecuteNonQuery();
                         btnFetchAll.CssClass = "tab-btn active-tab";
                         btnFetchDeclined.CssClass = "tab-btn";

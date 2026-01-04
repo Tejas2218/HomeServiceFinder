@@ -45,7 +45,7 @@ END
 GO
 
 -- Testing Insert Procedure (Example)
-exec Insert_Booking_Details 'Pending',6,5,4,16,'4-5','2026-01-05','123041'
+exec Insert_Booking_Details 'Pending',6,5,4,16,'4-5','2026-01-04','122041'
 
 delete from BookingDetails
 
@@ -164,7 +164,7 @@ BEGIN
         SELECT * FROM BookingDetails AS BD 
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
-        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Accept'
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Accepted'
         ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE IF (@Booking_Status = 'Declined')
@@ -172,7 +172,7 @@ BEGIN
         SELECT * FROM BookingDetails AS BD 
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
-        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Decline'
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Declined'
         ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE IF (@Booking_Status = 'Completed')
@@ -196,7 +196,7 @@ BEGIN
         SELECT * FROM BookingDetails AS BD 
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
-        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Accept' AND BD.Visiting_DateTime > cast(GETDATE() as Date)
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Accepted' AND BD.Visiting_DateTime > cast(GETDATE() as Date)
         ORDER BY BD.Visiting_DateTime DESC
     END
     ELSE IF(@Booking_Status = 'Pending')
@@ -212,7 +212,7 @@ BEGIN
         SELECT * FROM BookingDetails AS BD 
         INNER JOIN UserDetails AS UD ON BD.User_ID=UD.User_ID 
         INNER JOIN EquipmentMaster AS EM ON BD.Equipment_ID = EM.Equipment_ID 
-        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status=@Booking_Status AND BD.Visiting_DateTime = cast(GETDATE() as Date)
+        WHERE BD.SP_ID=@SP_ID AND BD.Booking_Status='Accepted' AND BD.Visiting_DateTime = cast(GETDATE() as Date)
         ORDER BY BD.Visiting_DateTime DESC
     END
 END
@@ -252,7 +252,7 @@ AS
 BEGIN
     Declare @SP_ID int
     Select @SP_ID=SP_ID from ServiceProviderDetails where User_ID = @User_ID
-    SELECT Count(*) as Total FROM BookingDetails WHERE SP_ID = @SP_ID AND Booking_Status = 'Accept';
+    SELECT Count(*) as Total FROM BookingDetails WHERE SP_ID = @SP_ID AND Booking_Status = 'Accepted';
 END
 GO
 
@@ -299,7 +299,7 @@ BEGIN
         SELECT U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo 
         FROM BookingDetails B
         INNER JOIN UserDetails U ON B.User_ID = U.User_ID
-        WHERE B.SP_ID = @SP_ID AND B.Booking_Status = 'Accept' 
+        WHERE B.SP_ID = @SP_ID AND B.Booking_Status = 'Accepted' 
         GROUP BY U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo
     END
     ELSE
@@ -308,7 +308,7 @@ BEGIN
         FROM BookingDetails B
         INNER JOIN UserDetails U ON B.User_ID = U.User_ID
         WHERE B.SP_ID = @SP_ID 
-          AND B.Booking_Status = 'Accept' 
+          AND B.Booking_Status = 'Accepted' 
           -- Use LIKE for partial matching
           AND (U.User_Name LIKE '%' + @search + '%' OR U.User_EmailID LIKE '%' + @search + '%')
         GROUP BY U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo
@@ -317,5 +317,5 @@ END
 exec Get_Unique_Customers_By_SP 5,'Tanmay'
 select * from BookingDetails
 
-update BookingDetails set Booking_Status = 'Accept' where Booking_ID = 5
+update BookingDetails set Booking_Status = 'Accepted' where Booking_ID = 5
 GO

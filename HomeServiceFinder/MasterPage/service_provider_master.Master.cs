@@ -38,5 +38,12 @@ namespace HomeServiceFinder.Pages.Service_Provider
             else if (currentPage == "service_provider_profile.aspx")
                 lnkProfile.Attributes.Add("class", "active");
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Session.Clear();
+            Response.Redirect("~/Pages/login_signup/loginPage.aspx");
+        }
     }
 }
