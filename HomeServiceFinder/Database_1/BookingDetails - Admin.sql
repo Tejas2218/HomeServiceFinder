@@ -117,7 +117,24 @@ go
 create or alter proc Display_Pending_Booking
 as
 begin
-	select * from BookingDetails where Booking_Status='Pending';
+	select BD.Booking_Status,
+			BD.Booking_DateTime,
+			BD.Booking_Rating,
+			BD.Booking_Decline_Reason,
+			BD.Booking_ID,
+			UD.User_Name as User_Name, 
+			SUD.User_Name as Worker_Name,
+			SM.Service_Name
+	from BookingDetails BD
+	join UserDetails UD 
+	on BD.User_ID=UD.User_ID
+	join ServiceProviderDetails SPD
+	on BD.SP_ID=SPD.SP_ID
+	join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	join UserDetails SUD
+	on SPD.User_ID=SUD.User_ID
+	where Booking_Status='Pending';
 end
 go 
 
@@ -125,23 +142,74 @@ go
 create or alter proc Display_Completed_Booking
 as
 begin
-	select * from BookingDetails where Booking_Status='Completed';
+	select BD.Booking_Status,
+			BD.Booking_DateTime,
+			BD.Booking_Rating,
+			BD.Booking_Decline_Reason,
+			BD.Booking_ID,
+			UD.User_Name as User_Name, 
+			SUD.User_Name as Worker_Name,
+			SM.Service_Name
+	from BookingDetails BD
+	join UserDetails UD 
+	on BD.User_ID=UD.User_ID
+	join ServiceProviderDetails SPD
+	on BD.SP_ID=SPD.SP_ID
+	join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	join UserDetails SUD
+	on SPD.User_ID=SUD.User_ID
+	where Booking_Status='Completed';
 end
 go
 
 --Display User Cancel Booking--
-create or alter proc Display_User_Decine_Booking
+create or alter proc Display_User_Cancel_Booking
 as
 begin
-	select * from BookingDetails where Booking_Status='Cancel';
+	select BD.Booking_Status,
+			BD.Booking_DateTime,
+			BD.Booking_Rating,
+			BD.Booking_Decline_Reason,
+			BD.Booking_ID,
+			UD.User_Name as User_Name, 
+			SUD.User_Name as Worker_Name,
+			SM.Service_Name
+	from BookingDetails BD
+	join UserDetails UD 
+	on BD.User_ID=UD.User_ID
+	join ServiceProviderDetails SPD
+	on BD.SP_ID=SPD.SP_ID
+	join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	join UserDetails SUD
+	on SPD.User_ID=SUD.User_ID
+	where Booking_Status='Cancelled';
 end
 go
 
 --Display Worker Decline Booking--
-create or alter proc Display_User_Decine_Booking
+create or alter proc Display_Worker_Decline_Booking
 as
 begin
-	select * from BookingDetails where Booking_Status='Decline';
+	select BD.Booking_Status,
+			BD.Booking_DateTime,
+			BD.Booking_Rating,
+			BD.Booking_Decline_Reason,
+			BD.Booking_ID,
+			UD.User_Name as User_Name, 
+			SUD.User_Name as Worker_Name,
+			SM.Service_Name
+	from BookingDetails BD
+	join UserDetails UD 
+	on BD.User_ID=UD.User_ID
+	join ServiceProviderDetails SPD
+	on BD.SP_ID=SPD.SP_ID
+	join ServiceMaster SM
+	on SPD.Service_ID=SM.Service_ID
+	join UserDetails SUD
+	on SPD.User_ID=SUD.User_ID
+	where Booking_Status='Declined';
 end
 go
 

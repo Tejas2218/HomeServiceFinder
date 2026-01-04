@@ -635,6 +635,23 @@
                 grid-column: span 2;
             }
 
+        .btn-complete {
+            background: #28a745; /* green for completed */
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s ease;
+        }
+
+            .btn-complete:hover {
+                background: #218838; /* darker green on hover */
+                transform: translateY(-1px);
+            }
+
         @media (max-width: 768px) {
             .profile-grid {
                 grid-template-columns: 1fr;
@@ -650,6 +667,46 @@
             font-size: 12px;
             margin-top: 4px;
         }
+        /* ================= STATUS BADGES ================= */
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 6px; /* subtle rounding */
+            font-weight: 600;
+            font-size: 13px;
+            display: inline-block;
+            text-align: center;
+            min-width: 80px; /* optional for uniform width */
+        }
+
+            /* Accepted = Green */
+            .status-badge.approved {
+                background-color: #d1fae5; /* light green */
+                color: #065f46; /* dark green */
+            }
+
+            /* Declined = Red */
+            .status-badge.rejected {
+                background-color: #fee2e2; /* light red */
+                color: #b91c1c; /* dark red */
+            }
+
+            /* Pending = Yellow */
+            .status-badge.pending {
+                background-color: #fef9c3; /* light yellow */
+                color: #78350f; /* dark yellow/brown */
+            }
+
+            /* Cancelled = Gray */
+            .status-badge.cancelled {
+                background-color: #e5e7eb; /* light gray */
+                color: #374151; /* dark gray */
+            }
+
+            /* Completed = Blue */
+            .status-badge.completed {
+                background-color: #bfdbfe; /* light blue */
+                color: #1d4ed8; /* dark blue */
+            }
     </style>
 </head>
 

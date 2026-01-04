@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -27,6 +28,7 @@ namespace HomeServiceFinder.Pages.New_Admin
                     btnCancelBooking.Visible = false;
                     btnDeclineBooking.Visible = false;
                     btnAcceptBooking.Visible = false;
+                    btnCompletedBooking.Visible = false;
                     btnReBook.Visible = true;
                 }
                 else if (Booking_Status.Text == "Pending")
@@ -34,6 +36,7 @@ namespace HomeServiceFinder.Pages.New_Admin
                     btnCancelBooking.Visible = true;
                     btnDeclineBooking.Visible = true;
                     btnAcceptBooking.Visible = true;
+                    btnCompletedBooking.Visible = false;
                     btnReBook.Visible = false;
                 }
                 else if (Booking_Status.Text == "Accepted")
@@ -41,6 +44,7 @@ namespace HomeServiceFinder.Pages.New_Admin
                     btnCancelBooking.Visible = true;
                     btnDeclineBooking.Visible = true;
                     btnAcceptBooking.Visible = false;
+                    btnCompletedBooking.Visible = true;
                     btnReBook.Visible = false;
                 }
                 else if (Booking_Status.Text == "Declined")
@@ -48,7 +52,16 @@ namespace HomeServiceFinder.Pages.New_Admin
                     btnCancelBooking.Visible = false;
                     btnDeclineBooking.Visible = false;
                     btnAcceptBooking.Visible = false;
+                    btnCompletedBooking.Visible = false;
                     btnReBook.Visible = false;
+                }
+                else if (Booking_Status.Text == "Completed")
+                {
+                    btnCancelBooking.Visible = false;
+                    btnDeclineBooking.Visible = false;
+                    btnAcceptBooking.Visible = false;
+                    btnReBook.Visible = false;
+                    btnCompletedBooking.Visible = false;
                 }
             }
         }
@@ -263,14 +276,30 @@ namespace HomeServiceFinder.Pages.New_Admin
 
         protected void btnReBook_Click(object sender, EventArgs e)
         {
-            UpdateBookingStatus("Pending");
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("Update_Booking_Status", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Booking_ID", (int)ViewState["bookingID"]);
+                cmd.Parameters.AddWithValue("@Booking_Status", "Pending");
+                cmd.Parameters.AddWithValue("@Booking_Decline_Reason", "-");
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            Response.Redirect("AdminBookings.aspx");
         }
 
         protected void btnAcceptBooking_Click(object sender, EventArgs e)
         {
             UpdateBookingStatus("Accepted");
         }
-
+        protected void btnCompletedBooking_Click(object sender, EventArgs e)
+        {
+            UpdateBookingStatus("Completed");
+        }
         protected void btnStatusChange_Click(object sender, EventArgs e)
         {
             string status = hfBookingStatus.Value;
@@ -291,9 +320,5 @@ namespace HomeServiceFinder.Pages.New_Admin
 
             Response.Redirect("AdminBookings.aspx");
         }
-
-
-
-
     }
 }

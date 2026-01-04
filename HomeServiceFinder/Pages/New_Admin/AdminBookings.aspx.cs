@@ -40,9 +40,6 @@ namespace HomeServiceFinder.Pages.New_Admin
                 cmdd.CommandType = CommandType.StoredProcedure;
                 lblTodayBookings.Text = cmdd.ExecuteScalar().ToString();
 
-                SqlCommand cmde = new SqlCommand("Pending_Booking", con);
-                cmde.CommandType = CommandType.StoredProcedure;
-                lblPendingBookings.Text = cmde.ExecuteScalar().ToString();
             }
         }
         
@@ -65,12 +62,19 @@ namespace HomeServiceFinder.Pages.New_Admin
         {
             status = status.Trim();
 
-            if (status == "Approved")
+            if (status == "Accepted")
                 return "status-badge approved";
-            else if (status == "Rejected")
+            else if (status == "Declined")
                 return "status-badge rejected";
+            else if (status == "Pending")
+                return "status-badge pending";
+            else if (status == "Cancelled")
+                return "status-badge cancelled";
+            else if (status == "Completed")
+                return "status-badge completed";
             else
                 return "status-badge pending";
+
         }
 
         protected void UserGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -86,28 +90,6 @@ namespace HomeServiceFinder.Pages.New_Admin
                 int bookingID = Convert.ToInt32(e.CommandArgument);
                 Response.Redirect("~/Pages/New_Admin/ViewBooking.aspx?id=" + bookingID);
             }
-          
-            if (e.CommandName == "DeleteUser")
-            {
-                int userId = Convert.ToInt32(e.CommandArgument);
-                DeleteUser(userId);
-                BookingGrid.PageIndex = 0;
-                btnAll_Click(null,null);
-                CountAllBooking();
-            }
-        }
-
-        protected void DeleteUser(int userId)
-        {
-            using (SqlConnection con = new SqlConnection(connString))
-            {
-                SqlCommand cmd = new SqlCommand("Delete_Worker_Details", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@SP_ID", userId);
-
-                con.Open();
-                cmd.ExecuteNonQuery();
-            }
         }
 
         protected void btnAll_Click(object sender, EventArgs e)
@@ -119,12 +101,13 @@ namespace HomeServiceFinder.Pages.New_Admin
             btnCompleted.CssClass = "filter-btn";
             btnUserDecline.CssClass = "filter-btn";
             btnWorkerDecline.CssClass = "filter-btn";
-
+            btnAccepted.CssClass = "filter-btn";
         }
 
         protected void btnPending_Click(object sender, EventArgs e)
         {
             LoadBookingData("Display_Pending_Booking");
+            btnAccepted.CssClass = "filter-btn";
             btnAll.CssClass = "filter-btn";
             btnPending.CssClass = "filter-btn active";
             btnCompleted.CssClass = "filter-btn";
@@ -132,8 +115,21 @@ namespace HomeServiceFinder.Pages.New_Admin
             btnWorkerDecline.CssClass = "filter-btn";
         }
 
+        protected void btnAccepted_Click(object sender, EventArgs e)
+        {
+            LoadBookingData("Display_Pending_Booking");
+            btnAccepted.CssClass = "filter-btn";
+            btnAll.CssClass = "filter-btn";
+            btnPending.CssClass = "filter-btn";
+            btnCompleted.CssClass = "filter-btn";
+            btnUserDecline.CssClass = "filter-btn";
+            btnWorkerDecline.CssClass = "filter-btn";
+            btnAccepted.CssClass = "filter-btn active";
+        }
+
         protected void btnCompleted_Click(object sender, EventArgs e)
         {
+            btnAccepted.CssClass = "filter-btn";
             LoadBookingData("Display_Completed_Booking");
             btnAll.CssClass = "filter-btn";
             btnPending.CssClass = "filter-btn";
@@ -144,23 +140,25 @@ namespace HomeServiceFinder.Pages.New_Admin
 
         protected void btnUserDecline_Click(object sender, EventArgs e)
         {
-            LoadBookingData("Display_User_Decine_Booking");
+            LoadBookingData("Display_User_Cancel_Booking");
             btnAll.CssClass = "filter-btn";
             btnPending.CssClass = "filter-btn";
             btnCompleted.CssClass = "filter-btn";
             btnUserDecline.CssClass = "filter-btn active";
             btnWorkerDecline.CssClass = "filter-btn";
+            btnAccepted.CssClass = "filter-btn";
         }
 
         protected void btnWorkerDecline_Click(object sender, EventArgs e)
         {
-            LoadBookingData("Display_User_Decine_Booking");
+            LoadBookingData("Display_Worker_Decline_Booking");
             btnAll.CssClass = "filter-btn";
             btnPending.CssClass = "filter-btn";
             btnCompleted.CssClass = "filter-btn";
             btnUserDecline.CssClass = "filter-btn";
             btnWorkerDecline.CssClass = "filter-btn active";
         }
+   
 
         protected void btnBooking_Click(object sender, EventArgs e)
         {

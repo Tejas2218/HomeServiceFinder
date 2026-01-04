@@ -149,6 +149,16 @@
                 CssClass="btn btn-delete"
                 OnClick="btnStatusChange_Click"
                 OnClientClick="return confirmDecline(this,'Declined');" />
+
+            <asp:Button
+                ID="btnCompletedBooking"
+                runat="server"
+                Text="✔ Complete Booking"
+                CssClass="btn btn-complete"
+                Visible="false"
+                OnClick="btnCompletedBooking_Click"
+                OnClientClick="return confirmAction(this,'Completed');" />
+
             <asp:HiddenField ID="hfDeclineReason" runat="server" />
             <asp:HiddenField ID="hfBookingStatus" runat="server" />
 
