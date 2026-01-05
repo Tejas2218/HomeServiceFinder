@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
+using HomeServiceFinder.Pages.New_Admin;
 
 namespace HomeServiceFinder.Pages.User
 {
@@ -171,12 +172,12 @@ namespace HomeServiceFinder.Pages.User
                     cmd.Parameters.AddWithValue("@User_Name", txtName.Text);
                     cmd.Parameters.AddWithValue("@User_Address", txtAddress.Text);
                     cmd.Parameters.AddWithValue("@User_ContactNo", txtContact.Text);
+                    cmd.Parameters.AddWithValue("@User_EmailID", txtEmail.Text);
                     cmd.Parameters.AddWithValue("@City_Name", CityList.SelectedItem.Text);
                     cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    Response.Redirect("user_dashboard.aspx");
                 }
             }
             catch (Exception ex)

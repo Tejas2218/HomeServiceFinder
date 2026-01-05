@@ -1,4 +1,4 @@
-﻿using DevNoProject.Pages.User;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -308,7 +308,7 @@ namespace HomeServiceFinder.Pages.User
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "Error: " + ex;
+                lblMessage.Text = "Error: " + ex.Message ;
             }
         }
     }

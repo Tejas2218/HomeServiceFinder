@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 
-namespace DevNoProject.Pages.User
+namespace HomeServiceFinder.Pages.User
 {
     public class BasePage : Page
     {

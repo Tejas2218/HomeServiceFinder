@@ -15,7 +15,7 @@ BEGIN
     INNER JOIN ServiceMaster SM
         ON SPD.Service_ID = SM.Service_ID
     INNER JOIN EquipmentMaster EM
-        ON EM.Service_ID = SM.Service_ID
+        ON EM.Equipment_ID = SPD.Equipment_ID
 END
 GO
 
@@ -301,3 +301,20 @@ BEGIN
     WHERE User_ID = @User_ID
 END
 GO
+
+-------------------------service master view top3
+GO
+create or alter proc View_ServiceMasterTop3
+as
+Begin
+Select TOP 3 * from ServiceMaster
+end
+Go
+
+-----------get provider email
+create or alter proc Get_Provider_Email 
+@SP_ID int
+as 
+begin
+    Select UD.User_EmailID as EmailID from ServiceProviderDetails as SPD inner join UserDetails as UD on SPD.User_ID = UD.User_ID where SPD.SP_ID = @SP_ID
+end

@@ -2,6 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* Keep your CSS here, but do not put <script> or <link> inside */
         .otp-input {
@@ -9,7 +11,6 @@
             height: 60px;
             /* ... rest of your styles ... */
         }
-        
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -95,8 +96,8 @@
                                 OnClientClick="return confirm('Are you sure you want to Accept?');" />
                             <asp:Button ID="btnDecline" runat="server" Text="Decline"
                                 CommandName="Decline" CommandArgument='<%# Eval("Booking_ID") %>'
-                                CssClass="btn btn-danger" OnClick="btnDecline_Click"
-                                OnClientClick="return confirm('Are you sure you want to Decline?');" />
+                                CssClass="btn btn-danger"
+                                OnClientClick='<%# "return showDeclineAlert(\"" + Eval("Booking_ID") + "\");" %>' />
                             <asp:Button ID="btnComplete" runat="server" Text="Completed"
                                 CssClass="btn btn-success" OnClick="btnComplete_Click"
                                 CommandName="Completed" CommandArgument='<%# Eval("Booking_ID") %>'
@@ -111,40 +112,74 @@
         <asp:TextBox ID="txtVerifyCode" runat="server"></asp:TextBox>
         <asp:HiddenField ID="hfSelectedBookingId" runat="server" />
         <asp:Button ID="btnFinalSubmit" runat="server" OnClick="btnComplete_Click" />
+        <asp:HiddenField ID="hfDeclineReason" runat="server" />
+        <asp:Button ID="btnFinalDecline" runat="server" OnClick="btnDecline_Click" Style="display: none;" />
     </div>
     <script>
         function showOtpAlert(bookingId) {
             Swal.fire({
                 title: 'Verify Completion',
-                text: 'Please enter the 4-digit code provided by the customer:',
+                text: 'Please enter the 6-digit code provided by the customer:',
                 input: 'text',
                 inputAttributes: {
                     autocapitalize: 'off',
-                    maxlength: 4,
-                    placeholder: 'XXXX'
+                    maxlength: 6, // Changed to 6
+                    placeholder: 'XXXXXX', // Changed to 6
+                    style: 'text-align: center; font-size: 24px; letter-spacing: 5px;'
                 },
                 showCancelButton: true,
                 confirmButtonText: 'Verify & Complete',
                 confirmButtonColor: '#28a745',
                 cancelButtonColor: '#dc3545',
                 preConfirm: (code) => {
-                    if (!code || code.length < 4) {
-                        Swal.showValidationMessage('Please enter a valid 4-digit code');
+                    // Validate for exactly 6 digits
+                    if (!code || code.length !== 6 || isNaN(code)) {
+                        Swal.showValidationMessage('Please enter a valid 6-digit numeric code');
                     }
                     return code;
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Store the code and booking ID in hidden fields
                     document.getElementById('<%= txtVerifyCode.ClientID %>').value = result.value;
                     document.getElementById('<%= hfSelectedBookingId.ClientID %>').value = bookingId;
-
-                    // Trigger the hidden button click to go to server-side C#
                     document.getElementById('<%= btnFinalSubmit.ClientID %>').click();
                 }
             });
-            return false; // Prevent initial postback
+            return false;
         }
+        function showDeclineAlert(bookingId) {
+            Swal.fire({
+                title: 'Decline Booking',
+                text: 'Please provide a reason for declining this request:',
+                input: 'textarea',
+                inputPlaceholder: 'Type your reason here...',
+                inputAttributes: {
+                    'aria-label': 'Type your reason here'
+                },
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Confirm Decline',
+                preConfirm: (reason) => {
+                    if (!reason || reason.trim().length < 5) {
+                        Swal.showValidationMessage('Please enter a reason (at least 5 characters)');
+                    }
+                    return reason;
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Store data in hidden fields
+                    document.getElementById('<%= hfSelectedBookingId.ClientID %>').value = bookingId;
+                    document.getElementById('<%= hfDeclineReason.ClientID %>').value = result.value;
+
+                    // Trigger the server-side decline event
+                    document.getElementById('<%= btnFinalDecline.ClientID %>').click();
+                }
+            });
+            return false; // Prevent immediate postback
+        }
+
+
     </script>
 </asp:Content>
 

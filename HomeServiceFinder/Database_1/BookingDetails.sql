@@ -12,11 +12,11 @@ CREATE OR ALTER PROCEDURE Insert_Booking_Details
     @Booking_Status varchar(50),
     @User_ID int,
     @SP_ID int,
-    --  @Booking_Rating int,---- This will come after service completed    
+    @Booking_Rating int,---- This will come after service completed    
     @Equipment_ID int,          -- Added missing parameter
     @Time_Slot varchar(50),     -- Added missing parameter
     @Visiting_DateTime datetime, -- Added missing parameter
-    @Booking_Code varchar(6)
+    @Booking_Code varchar(6) =0
 AS
 BEGIN
     INSERT INTO BookingDetails
@@ -45,7 +45,7 @@ END
 GO
 
 -- Testing Insert Procedure (Example)
-exec Insert_Booking_Details 'Pending',6,5,4,16,'4-5','2026-01-04','122041'
+exec Insert_Booking_Details 'Pending',6,5,16,'4-5','2026-01-06','122041'
 
 delete from BookingDetails
 
@@ -115,6 +115,7 @@ CREATE OR ALTER PROCEDURE Get_Booking_Cancel_Details
 AS
 BEGIN
     SELECT 
+        b.Booking_Status,
         b.Booking_ID,
         b.Visiting_DateTime,
         b.Time_Slot,
@@ -252,7 +253,7 @@ AS
 BEGIN
     Declare @SP_ID int
     Select @SP_ID=SP_ID from ServiceProviderDetails where User_ID = @User_ID
-    SELECT Count(*) as Total FROM BookingDetails WHERE SP_ID = @SP_ID AND Booking_Status = 'Accepted';
+    SELECT Count(*) as Total FROM BookingDetails WHERE SP_ID = @SP_ID AND (Booking_Status = 'Accepted' or Booking_Status = 'Completed');
 END
 GO
 
@@ -299,7 +300,7 @@ BEGIN
         SELECT U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo 
         FROM BookingDetails B
         INNER JOIN UserDetails U ON B.User_ID = U.User_ID
-        WHERE B.SP_ID = @SP_ID AND B.Booking_Status = 'Accepted' 
+        WHERE B.SP_ID = @SP_ID AND (B.Booking_Status = 'Accepted' or B.Booking_Status = 'Completed')
         GROUP BY U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo
     END
     ELSE
@@ -308,7 +309,7 @@ BEGIN
         FROM BookingDetails B
         INNER JOIN UserDetails U ON B.User_ID = U.User_ID
         WHERE B.SP_ID = @SP_ID 
-          AND B.Booking_Status = 'Accepted' 
+          AND (B.Booking_Status = 'Accepted' or B.Booking_Status = 'Completed') 
           -- Use LIKE for partial matching
           AND (U.User_Name LIKE '%' + @search + '%' OR U.User_EmailID LIKE '%' + @search + '%')
         GROUP BY U.User_ID, U.User_Name, U.User_EmailID, U.User_ContactNo
@@ -317,5 +318,69 @@ END
 exec Get_Unique_Customers_By_SP 5,'Tanmay'
 select * from BookingDetails
 
-update BookingDetails set Booking_Status = 'Accepted' where Booking_ID = 5
+update BookingDetails set Booking_Status = 'Pending' where Booking_ID = 5
+GO
+
+create or alter proc Fetch_BookingCode
+@Booking_ID int
+as 
+begin
+    Select * from BookingDetails where Booking_ID=@Booking_ID
+end
+
+GO
+
+Create or alter proc Insert_Booking_DeclineReason
+@Booking_ID int,
+@Booking_Decline_Reason varchar(300)
+as
+begin
+    update BookingDetails set Booking_Decline_Reason = @Booking_Decline_Reason where Booking_ID=@Booking_ID
+end
+
+
+Go
+    
+    Create or alter proc Fetch_User_Details
+    @Booking_ID int
+    as
+    Begin
+        select 
+        UD.User_EmailID as User_EmailID,
+        UD_SPD.User_EmailID as SP_EmailID,
+        UD_SPD.User_Name as SP_Name,
+        BD.Booking_Decline_Reason as Reason,
+        BD.Visiting_DateTime as VisitingDate,
+        BD.Time_Slot as TimeSlot
+        from BookingDetails as BD inner join UserDetails as UD on BD.User_ID = UD.User_ID
+        inner join ServiceProviderDetails as SPD on BD.SP_ID = SPD.SP_ID
+        inner join UserDetails as UD_SPD on SPD.User_ID = UD_SPD.User_ID
+        where BD.Booking_ID = @Booking_ID
+    end
+
+
+    exec Fetch_User_Details 8
+GO
+
+Create or alter proc Insert_Booking_Code
+@Booking_ID int,
+@Booking_Code varchar(300)
+as
+begin
+    update BookingDetails set Booking_Code = @Booking_Code where Booking_ID=@Booking_ID
+end
+
+Go
+    
+    create or alter proc User_Cancle_Booking
+@Booking_ID int
+as
+begin
+    update BookingDetails
+    SET Booking_Status = 'Cancelled'
+    WHERE Booking_ID = @Booking_ID
+    AND Booking_Status IN ('Pending', 'Accepted');
+end
+
+
 GO
