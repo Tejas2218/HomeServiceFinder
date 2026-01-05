@@ -1,10 +1,13 @@
-﻿using System;
+﻿using HomeServiceFinder.Pages.New_Admin;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Web;
@@ -115,6 +118,7 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
             Button btn = (Button)sender;
             int Booking_ID = Convert.ToInt32(btn.CommandArgument);
+            string randomCode = GenerateRandomCode();
             try
             {
                 using (SqlConnection con = new SqlConnection(constr))
@@ -127,7 +131,41 @@ namespace HomeServiceFinder.Pages.Service_Provider
                         cmd.Parameters.AddWithValue("@Booking_Status", "Accepted");
                         int result = cmd.ExecuteNonQuery();
                         loadData("Pending");
+                        con.Close();
                     }
+                    using (SqlCommand cmd = new SqlCommand("Fetch_User_Details", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                string userEmail = dr["User_EmailID"].ToString();
+                                string spEmail = dr["SP_EmailID"].ToString();
+                                string spName = dr["SP_Name"].ToString();
+                                string timeSlot = dr["TimeSlot"].ToString();
+                                string visitDate = Convert.ToDateTime(dr["VisitingDate"]).ToString("dd MMM yyyy");
+                                SendAcceptEmailToUser(userEmail, visitDate, timeSlot,spName, spEmail,randomCode);
+                            }
+                            else
+                                lblAvgRating.Text = "No Rating";
+                        }
+                        con.Close();
+                    }
+                    using (SqlCommand cmd = new SqlCommand("Insert_Booking_Code", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+                        cmd.Parameters.AddWithValue("@Booking_Code", randomCode);
+                        int result = cmd.ExecuteNonQuery();
+                        loadData("Pending");
+                        con.Close();
+                    }
+
+
                 }
             }
             catch (Exception ex)
@@ -136,32 +174,156 @@ namespace HomeServiceFinder.Pages.Service_Provider
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
+        public string GenerateRandomCode(int length = 6)
+        {
+            const string chars = "0123456789";
+            Random random = new Random();
+
+            return new string(Enumerable
+                .Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)])
+                .ToArray());
+        }
+        private void SendAcceptEmailToUser(string email, string date, string time, string spName, string spEmail,string randomCode)
+        {
+            MailMessage mail = new MailMessage
+            {
+                From = new MailAddress("homeservicefinder999@gmail.com"),
+                Subject = "Booking Accepted by Service Provider",
+                IsBodyHtml = true,
+                Body = $@"
+                    <h3>Booking Accepted</h3>
+                    <p>Your Booking with <b>{spName}</b> has been booked.</p>
+                    <p><b>Date:</b> {date}</p>
+                    <p><b>Time:</b> {time}</p>
+                    <p>Please provide this code <h1>{randomCode}</h1> only to your authorized service provider. For your security, do not share this with anyone else.</p>"
+
+            };
+            mail.To.Add(email);
+            new SmtpClient().Send(mail);
+        }
 
         protected void btnDecline_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            int Booking_ID = Convert.ToInt32(btn.CommandArgument);
+            // Use the value from the hidden field instead of CommandArgument
+            if (string.IsNullOrEmpty(hfSelectedBookingId.Value)) return;
+
+            int Booking_ID = Convert.ToInt32(hfSelectedBookingId.Value);
+            string reason = Convert.ToString(hfDeclineReason.Value);
+
             try
             {
                 using (SqlConnection con = new SqlConnection(constr))
                 {
+                    using (SqlCommand cmd = new SqlCommand("Insert_Booking_DeclineReason", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+                        cmd.Parameters.AddWithValue("@Booking_Decline_Reason", reason);
+                        int result = cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                    // Note: Update your Stored Procedure to accept @Decline_Reason if you want to save it
                     using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
                     {
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
                         cmd.Parameters.AddWithValue("@Booking_Status", "Declined");
+
+                        // If your SP supports reason, uncomment the line below:
+                        // cmd.Parameters.AddWithValue("@Decline_Reason", reason);
+
                         int result = cmd.ExecuteNonQuery();
-                        loadData("Pending");
+                        // Clear fields
+                        hfDeclineReason.Value = "";
+                        hfSelectedBookingId.Value = "";
+
+                        // Show success and reload
+                        ScriptManager.RegisterStartupScript(this, GetType(), "declined",
+                            "Swal.fire('Declined', 'The booking has been declined.', 'info');", true);
+                        btnFetchAccepted.CssClass = "tab-btn active-tab";
+                        btnFetchPending.CssClass = "tab-btn";
+                        btnFetchAcceptedUpcomming.CssClass = "tab-btn";
+                        loadData("Accept");
+                        con.Close();
+                    }
+                    using (SqlCommand cmd = new SqlCommand("Fetch_User_Details", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read()) { 
+                                string userEmail = dr["User_EmailID"].ToString();
+                                string spEmail = dr["SP_EmailID"].ToString();
+                                string spName = dr["SP_Name"].ToString();
+                                string timeSlot = dr["TimeSlot"].ToString();
+                                string visitDate = Convert.ToDateTime(dr["VisitingDate"]).ToString("dd MMM yyyy");
+                                SendDeclineEmailToUser(userEmail,visitDate,timeSlot,reason,spName,spEmail);
+                            }
+                            else
+                                lblAvgRating.Text = "No Rating";
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                // For debugging: This will show you if the SQL fails
-                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "") + "');</script>");
             }
         }
+        private void SendDeclineEmailToUser(string email, string date, string time, string reason,string spName,string spEmail)
+        {
+            MailMessage mail = new MailMessage
+            {
+                From = new MailAddress("homeservicefinder999@gmail.com"),
+                Subject = "Booking Declined - HomeServiceFinder",
+                IsBodyHtml = true,
+                Body = $@"
+                    <h3>Booking Declined</h3>
+                    <p>Your booking with <b>{spName}</b> has been Declined.</p>
+                    <p><b>Date:</b> {date}</p>
+                    <p><b>Time:</b> {time}</p>
+                    <p><b>Reason:</b> {reason}</p>"
+            };
+            mail.To.Add(email);
+            new SmtpClient().Send(mail);
+        }
+
+        
+    
+
+
+
+
+        //protected void btnDecline_Click(object sender, EventArgs e)
+        //{
+        //    Button btn = (Button)sender;
+        //    int Booking_ID = Convert.ToInt32(btn.CommandArgument);
+        //    try
+        //    {
+        //        using (SqlConnection con = new SqlConnection(constr))
+        //        {
+        //            using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
+        //            {
+        //                con.Open();
+        //                cmd.CommandType = CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
+        //                cmd.Parameters.AddWithValue("@Booking_Status", "Declined");
+        //                int result = cmd.ExecuteNonQuery();
+        //                loadData("Pending");
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // For debugging: This will show you if the SQL fails
+        //        Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+        //    }
+        //}
 
         protected void btnFetchPending_Click(object sender, EventArgs e)
         {
@@ -227,54 +389,88 @@ namespace HomeServiceFinder.Pages.Service_Provider
         {
 
             string enteredCode = txtVerifyCode.Text.Trim();
-            string bookingId = hfSelectedBookingId.Value;
+            int bookingId = Convert.ToInt32(hfSelectedBookingId.Value);
 
-            // Replace with your DB logic
-            //string actualCode = GetCodeFromDatabase(bookingId);
+            // Logic to fetch the 6-digit code from your DB
+            string actualCode = GetCodeFromDatabase(bookingId);
 
-            if (enteredCode == "")//actualCode
+            if (enteredCode == actualCode && enteredCode.Length == 6)
             {
-                //UpdateBookingStatus(bookingId, "Completed");
+                // Execute Update SQL: UPDATE Bookings SET Status='Completed' WHERE ID=@ID
+                UpdateBookingStatus(bookingId, "Completed");
 
-                // Show Success SweetAlert
                 ScriptManager.RegisterStartupScript(this, GetType(), "success",
-                    "Swal.fire('Success', 'Booking marked as completed!', 'success');", true);
+                    "Swal.fire('Success', 'Service marked as Completed!', 'success');", true);
 
-                // Re-bind your GridView here
+                // Refresh your GridView data here
             }
             else
             {
-                // Show Error SweetAlert
                 ScriptManager.RegisterStartupScript(this, GetType(), "error",
-                    "Swal.fire('Error', 'Invalid verification code. Please try again.', 'error');", true);
+                    "Swal.fire('Invalid Code', 'The verification code does not match.', 'error');", true);
             }
+        }
 
+        protected string GetCodeFromDatabase(int booking_id)
+        {
+            string code = string.Empty;
+            try
+            {
 
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("Fetch_BookingCode", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", booking_id);
+                        //cmd.Parameters.AddWithValue("@Booking_Status", "Completed");
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            code = dr["Booking_Code"].ToString();
+                        }
+                        else
+                        {
+                            code = "Not Found";
+                        }
+                    }
+                }
 
-
-            //Button btn = (Button)sender;
+            }
+            catch (Exception ex)
+            {
+                // For debugging: This will show you if the SQL fails
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
+            return code;
+        }
+        protected void UpdateBookingStatus(int booking_id, string status)
+        {
             //int Booking_ID = Convert.ToInt32(btn.CommandArgument);
-            //try
-            //{
-            //    using (SqlConnection con = new SqlConnection(constr))
-            //    {
-            //        using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
-            //        {
-            //            con.Open();
-            //            cmd.CommandType = CommandType.StoredProcedure;
-            //            cmd.Parameters.AddWithValue("@Booking_ID", Booking_ID);
-            //            cmd.Parameters.AddWithValue("@Booking_Status", "Completed");
-            //            int result = cmd.ExecuteNonQuery();
-            //            loadData("Pending");
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    // For debugging: This will show you if the SQL fails
-            //    Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
-            //}
-
+            try
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("Update_Booking_Status", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Booking_ID", booking_id);
+                        cmd.Parameters.AddWithValue("@Booking_Status", "Completed");
+                        int result = cmd.ExecuteNonQuery();
+                        btnFetchAccepted.CssClass = "tab-btn active-tab";
+                        btnFetchPending.CssClass = "tab-btn";
+                        btnFetchAcceptedUpcomming.CssClass = "tab-btn";
+                        loadData("Accept");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // For debugging: This will show you if the SQL fails
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
         }
 
 

@@ -221,9 +221,19 @@
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
                     <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
+                    <a href="service_provider.aspx" class="nav-item nav-link active">Services Proveder</a>
                     <a href="profile.aspx" class="nav-item nav-link">Profile</a>
+                    <a href="service_provider.aspx" class="nav-item nav-link">Book Now</a>
                     <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
                     <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
+                    <asp:LinkButton
+                        ID="btnLogout"
+                        runat="server"
+                        CssClass="nav-item nav-link text-danger"
+                        OnClick="btnLogout_Click">
+                        <i class="bi bi-box-arrow-right me-1"></i> Logout
+                    </asp:LinkButton>
+
                 </div>
             </div>
         </nav>
@@ -236,43 +246,54 @@
         </div>
 
         <div class="container mb-5">
+            <div class="mb-4">
+                <asp:DropDownList ID="ddlServices" runat="server" CssClass="form-select"
+                    AutoPostBack="true" OnSelectedIndexChanged="ddlServices_SelectedIndexChanged">
+                    <asp:ListItem Text="-- All Services --" Value="0" />
+                </asp:DropDownList>
+            </div>
+
+
             <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <asp:Repeater ID="rptProviders" runat="server">
-                        <ItemTemplate>
-                            <div class="provider-card wow fadeInUp" data-wow-delay="0.1s">
-                                <img src='data:image/jpeg;base64,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' class="p-img" alt="Provider"
-                                    onerror="this.src='img/testimonial-1.jpg';" />
-                                <div class="p-details">
-                                    <h5 class="mb-1"><%# Eval("User_Name") %></h5>
-                                    <small class="text-muted d-block mb-2">
-                                        <i class="fa fa-tools me-1"></i><%# Eval("SP_Experience") %> Years Experience
-                                    </small>
-                                    <div class="p-rating">
-                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
-                                        <span class="text-muted ms-2">(<%# Eval("SP_AverageRating") %>)</span>
+                <div class="col-lg-10 mx-auto">
+                    <div class="row">
+
+                        <asp:Repeater ID="rptProviders" runat="server">
+                            <ItemTemplate>
+                                <div class="col-md-6 mb-4">
+                                    <div class="provider-card wow fadeInUp" data-wow-delay="0.1s">
+                                        <img src='data:image/jpeg;base64,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' class="p-img" alt="Provider"
+                                            onerror="this.src='img/testimonial-1.jpg';" />
+                                        <div class="p-details">
+                                            <h5 class="mb-1"><%# Eval("User_Name") %></h5>
+                                            <h6 class="mb-1"><%# Eval("Service_Name") %></h6>
+                                            <small class="text-muted d-block mb-2">
+                                                <i class="fa fa-tools me-1"></i><%# Eval("SP_Experience") %> Years Experience
+                                            </small>
+                                            <div class="p-rating">
+                                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
+                                                <span class="text-muted ms-2">(<%# Eval("SP_AverageRating") %>)</span>
+                                            </div>
+                                        </div>
+                                        <button type="button"
+                                            class="btn btn-select"
+                                            onclick="openModal(
+                                                '<%# Eval("User_Name") %>',
+                                                'Service Provider',
+                                                '<%# Eval("SP_AverageRating") %>',
+                                                'data:image/jpeg;base64,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',
+                                                '<%# Eval("SP_ID") %>',
+                                                '<%# Eval("Equipment_ID") %>',)">
+                                            Select
+                                        </button>
                                     </div>
                                 </div>
-                                <button type="button"
-                                    class="btn btn-select"
-                                    onclick="openModal(
-            '<%# Eval("User_Name") %>',
-            'Service Provider',
-            '<%# Eval("SP_AverageRating") %>',
-            'img/testimonial-1.jpg',
-            '<%# Eval("SP_ID") %>',
-                                    '<%# Eval("Equipment_ID") %>',
-        )">
-                                    Select
-                                </button>
-
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-
-                    <asp:Label ID="lblMessage" runat="server" Text="No providers available for this service."
-                        Visible="false" CssClass="alert alert-info d-block text-center"></asp:Label>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">

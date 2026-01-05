@@ -100,10 +100,18 @@
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
                     <a href="user_dashboard.aspx" class="nav-item nav-link">Home</a>
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
-                    <a href="appointment.aspx" class="nav-item nav-link">Appointment</a>
+                    <a href="service_provider.aspx" class="nav-item nav-link">Services Proveder</a>
                     <a href="profile.aspx" class="nav-item nav-link active">Profile</a>
+                    <a href="service_provider.aspx" class="nav-item nav-link">Book Now</a>
                     <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
                     <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
+                    <asp:LinkButton
+                        ID="btnLogout"
+                        runat="server"
+                        CssClass="nav-item nav-link text-danger"
+                        OnClick="btnLogout_Click">
+                        <i class="bi bi-box-arrow-right me-1"></i> Logout
+                    </asp:LinkButton>
                 </div>
             </div>
         </nav>

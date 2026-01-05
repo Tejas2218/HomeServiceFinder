@@ -8,10 +8,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
+using HomeServiceFinder.Pages.New_Admin;
 
 namespace HomeServiceFinder.Pages.User
 {
-    public partial class Profile : System.Web.UI.Page
+    public partial class Profile : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,6 +20,7 @@ namespace HomeServiceFinder.Pages.User
             {
                 BindStateList();
                 bindUserData();
+                btnLogout.Visible = Session["UserID"] != null;
 
                 if (!string.IsNullOrEmpty(userState))
                 {
@@ -32,6 +34,14 @@ namespace HomeServiceFinder.Pages.User
                 }
             }
 
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Redirect("~/Pages/login_signup/loginPage.aspx");
         }
 
         string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
@@ -161,12 +171,12 @@ namespace HomeServiceFinder.Pages.User
                     cmd.Parameters.AddWithValue("@User_Name", txtName.Text);
                     cmd.Parameters.AddWithValue("@User_Address", txtAddress.Text);
                     cmd.Parameters.AddWithValue("@User_ContactNo", txtContact.Text);
+                    cmd.Parameters.AddWithValue("@User_EmailID", txtEmail.Text);
                     cmd.Parameters.AddWithValue("@City_Name", CityList.SelectedItem.Text);
                     cmd.Parameters.AddWithValue("@State_Name", StateList.SelectedItem.Text);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    Response.Redirect("user_dashboard.aspx");
                 }
             }
             catch (Exception ex)

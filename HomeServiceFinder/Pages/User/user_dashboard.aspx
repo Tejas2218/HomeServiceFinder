@@ -86,9 +86,19 @@
                 <div class="navbar-nav ms-auto py-3 py-lg-0">
                     <a href="user_dashboard.aspx" class="nav-item nav-link active">Home</a>
                     <a href="service.aspx" class="nav-item nav-link">Our Services</a>
-                    <a href="profile.aspx" class="nav-item nav-link">Profile</a>
+                    <a href="service_provider.aspx" class="nav-item nav-link">Services Proveder</a>
+                    <a href="profile.aspx" id="profile" runat="server" class="nav-item nav-link">Profile</a>
+                    <a href="../login_signUp/loginPage.aspx" runat="server" id="signin" class="nav-item nav-link">sign in</a>
+                    <a href="service_provider.aspx" class="nav-item nav-link">Book Now</a>
                     <a href="user_booking.aspx" class="nav-item nav-link">Booking History</a>
                     <a href="about_us.aspx" class="nav-item nav-link">About Us</a>
+                    <asp:LinkButton
+                        ID="btnLogout"
+                        runat="server"
+                        CssClass="nav-item nav-link text-danger"
+                        OnClick="btnLogout_Click">
+                        <i class="bi bi-box-arrow-right me-1"></i> Logout
+                    </asp:LinkButton>
                 </div>
             </div>
         </nav>
@@ -302,14 +312,14 @@
                     <asp:Repeater ID="rptWorkers" runat="server">
                         <ItemTemplate>
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="<%# (Container.ItemIndex % 3) * 0.2 %>s">
-                                <a href="equipment.aspx?sid=<%# Eval("Service_ID") %>" class="service-link">
+                                <a href="service_provider.aspx?sid=<%# Eval("Service_ID") %>" class="service-link">
                                     <div class="service-item bg-light overflow-hidden h-100">
                                         <img class="img-fluid" src="img/service-1.jpg" alt="" />
                                         <div class="service-text position-relative text-center h-100 p-4">
                                             <h4 class="mb-3">
                                                 <%# Eval("Service_Name") %>
                                             </h4>
-                                            <div class="btn btn-primary py-2 px-4">View Equipments</div>
+                                            <div class="btn btn-primary py-2 px-4">View Providers</div>
                                         </div>
                                     </div>
                                 </a>

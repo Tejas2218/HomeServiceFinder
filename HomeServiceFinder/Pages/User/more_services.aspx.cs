@@ -17,7 +17,16 @@ namespace HomeServiceFinder.Pages.User
             if (!IsPostBack)
             {
                 LoadProviders();
+                btnLogout.Visible = Session["UserID"] != null;
             }
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Redirect("~/Pages/login_signup/loginPage.aspx");
         }
 
         public string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;

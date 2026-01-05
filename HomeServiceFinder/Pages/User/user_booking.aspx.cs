@@ -1,4 +1,5 @@
-﻿using System;
+﻿//using DevNoProject.Pages.User;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace HomeServiceFinder.Pages.User
 {
-    public partial class user_booking : System.Web.UI.Page
+    public partial class user_booking : BasePage
     {
         private string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
         private int PageSize = 5;
@@ -19,7 +20,15 @@ namespace HomeServiceFinder.Pages.User
             if (!IsPostBack)
             {
                 LoadBookings(0);
+                btnLogout.Visible = Session["UserID"] != null;
             }
+        }
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Redirect("~/Pages/login_signup/loginPage.aspx");
         }
 
         private void LoadBookings(int pageIndex)
@@ -41,24 +50,39 @@ namespace HomeServiceFinder.Pages.User
                 {
                     string status = row["Booking_Status"].ToString();
 
-                    if (status == "Pending")
+                    switch (status)
                     {
-                        row["StatusClass"] = "status-pending";
-                        row["ActionText"] = "Cancel";
-                        row["ActionClass"] = "btn btn-danger btn-sm";
+                        case "Pending":
+                            row["StatusClass"] = "status-pending";
+                            row["ActionText"] = "Cancel";
+                            row["ActionClass"] = "btn btn-danger btn-sm";
+                            break;
+
+                        case "Accepted":
+                            row["StatusClass"] = "status-accepted";
+                            row["ActionText"] = "Cancel";
+                            row["ActionClass"] = "btn btn-warning btn-sm";
+                            break;
+
+                        case "Declined":
+                            row["StatusClass"] = "status-declined";
+                            row["ActionText"] = "-";
+                            row["ActionClass"] = "btn btn-secondary btn-sm disabled";
+                            break;
+
+                        case "Cancelled":
+                            row["StatusClass"] = "status-cancelled";
+                            row["ActionText"] = "-";
+                            row["ActionClass"] = "btn btn-secondary btn-sm disabled";
+                            break;
+
+                        default:
+                            row["StatusClass"] = "status-cancelled";
+                            row["ActionText"] = "-";
+                            row["ActionClass"] = "btn btn-secondary btn-sm disabled";
+                            break;
                     }
-                    else if (status == "Completed")
-                    {
-                        row["StatusClass"] = "status-completed";
-                        row["ActionText"] = "Rate";
-                        row["ActionClass"] = "btn btn-success btn-sm";
-                    }
-                    else
-                    {
-                        row["StatusClass"] = "status-cancelled";
-                        row["ActionText"] = "-";
-                        row["ActionClass"] = "btn btn-secondary btn-sm disabled";
-                    }
+
                 }
 
                 PagedDataSource pds = new PagedDataSource
@@ -103,6 +127,13 @@ namespace HomeServiceFinder.Pages.User
                         return;
                     }
 
+                    if (dt.Rows[0]["Booking_Status"].ToString() != "Pending" &&
+                            dt.Rows[0]["Booking_Status"].ToString() != "Accepted")
+                    {
+                        lblMessage2.Text = "This booking cannot be cancelled.";
+                        return;
+                    }
+
                     userEmail = dt.Rows[0]["UserEmail"].ToString();
                     spEmail = dt.Rows[0]["ProviderEmail"].ToString();
                     spName = dt.Rows[0]["ProviderName"].ToString();
@@ -110,7 +141,7 @@ namespace HomeServiceFinder.Pages.User
                     visitDate = Convert.ToDateTime(dt.Rows[0]["Visiting_DateTime"]).ToString("dd MMM yyyy");
 
                     // 🔹 DELETE BOOKING
-                    SqlCommand delCmd = new SqlCommand("Delete_Booking_Details", con);
+                    SqlCommand delCmd = new SqlCommand("User_Cancle_Booking", con);
                     delCmd.CommandType = CommandType.StoredProcedure;
                     delCmd.Parameters.AddWithValue("@Booking_ID", bookingId);
                     delCmd.ExecuteNonQuery();

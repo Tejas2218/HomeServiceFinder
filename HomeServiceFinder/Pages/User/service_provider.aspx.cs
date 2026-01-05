@@ -1,10 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Mail;
+using System.Threading.Tasks;
+using System.Runtime.Remoting;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,21 +15,41 @@ using static System.Net.WebRequestMethods;
 
 namespace HomeServiceFinder.Pages.User
 {
-    public partial class service_provider1 : System.Web.UI.Page
+    public partial class service_provider1 : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["eqid"] != null &&
-            int.TryParse(Request.QueryString["eqid"], out int eqid))
+                if (Request.QueryString["sid"] != null &&
+            int.TryParse(Request.QueryString["sid"], out int sid))
                 {
-                    LoadProvidersByID(eqid);
+                    LoadProvidersByID(sid);
                 }
-                //else
-                //{
-                //    LoadProviders();
-                //}
+                else
+                {
+                    LoadProviders(0);
+                    LoadServices();
+                }
+                btnLogout.Visible = Session["UserID"] != null;
+            }
+        }
+
+        private void LoadServices()
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("View_ServiceMaster", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    ddlServices.DataSource = dr;
+                    ddlServices.DataTextField = "Service_Name";
+                    ddlServices.DataValueField = "Service_ID";
+                    ddlServices.DataBind();
+                    ddlServices.Items.Insert(0, new System.Web.UI.WebControls.ListItem("-- Select Service --", "0"));
+                }
             }
         }
 
@@ -35,46 +58,58 @@ namespace HomeServiceFinder.Pages.User
         public SqlCommand cmd;
         public DataSet sd;
 
-        //private void LoadProviders()
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection con = new SqlConnection(constr))
-        //        using (SqlCommand cmd = new SqlCommand("Display_Worker_Details", con))
-        //        {
-        //            cmd.CommandType = CommandType.StoredProcedure;
+        private void LoadProviders(int serviceId)
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    // If you want to filter by service, modify the SP to accept @ServiceID
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-        //            SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //            DataTable dt = new DataTable();
-        //            da.Fill(dt);
+                    // Filter in code if SP not accepting parameter yet
+                    if (serviceId != 0)
+                    {
+                        dt.DefaultView.RowFilter = $"Service_ID = {serviceId}";
+                        dt = dt.DefaultView.ToTable();
+                    }
 
-        //            if (dt.Rows.Count > 0)
-        //            {
-        //                rptProviders.DataSource = dt;
-        //                rptProviders.DataBind();
-        //            }
-        //            else
-        //            {
-        //                lblMessage.Text = "No service providers found.";
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        lblMessage.Text = "No user data found." + ex;
-        //    }
-        //}
+                    rptProviders.DataSource = dt;
+                    rptProviders.DataBind();
 
-        private void LoadProvidersByID(int eid)
+                    lblMessage.Text = dt.Rows.Count == 0 ? "No providers found." : "";
+                }
+            }
+        }
+
+        protected void ddlServices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int serviceId = Convert.ToInt32(ddlServices.SelectedValue);
+            LoadProviders(serviceId);
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Redirect("~/Pages/login_signup/loginPage.aspx");
+        }
+
+
+        private void LoadProvidersByID(int sid)
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(constr))
-                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details_ByEquipment", con))
+                using (SqlCommand cmd = new SqlCommand("Display_Worker_Details_ByService", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@Equipment_ID", eid);
+                    cmd.Parameters.AddWithValue("@Service_ID", sid);
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -259,9 +294,12 @@ namespace HomeServiceFinder.Pages.User
                         smtp.Credentials = new System.Net.NetworkCredential("homeservicefinder999@gmail.com", "cvquixtqamspxxjp");
                         smtp.EnableSsl = true;
 
-                        smtp.Send(mail);
-
-                        smtp.Send(spMail);
+                        Task.Run(() =>
+                        {
+                            smtp.Send(mail);
+                            smtp.Send(spMail);
+                        });
+                        
                     }
 
 
@@ -270,9 +308,8 @@ namespace HomeServiceFinder.Pages.User
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "Error: " + ex;
+                lblMessage.Text = "Error: " + ex.Message ;
             }
         }
     }
 }
-

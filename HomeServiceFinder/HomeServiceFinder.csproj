@@ -309,6 +309,9 @@
     <Compile Include="Pages\User\appointment.aspx.designer.cs">
       <DependentUpon>appointment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\User\change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

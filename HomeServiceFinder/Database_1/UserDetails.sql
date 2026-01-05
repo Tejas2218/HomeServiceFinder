@@ -38,15 +38,16 @@ BEGIN
         UD.User_Address,
         UD.User_ContactNo,
         UD.User_Password,
-        CD.City_Name,
-        SD.State_Name
+        CD.City_ID,
+        SD.State_ID,
+        UD.Created_DateTime
     FROM UserDetails UD
     INNER JOIN CityDetails CD ON UD.City_ID = CD.City_ID
-    LEFT JOIN StateDetails SD ON UD.State_ID = SD.State_ID
+    inner JOIN StateDetails SD ON UD.State_ID = SD.State_ID
     WHERE User_ID = @User_ID
 END
 GO
-
+exec Display_User_Details_ByID 11
 --Insert User Detail--
 CREATE OR ALTER PROCEDURE Insert_User_Details
     @User_Name varchar(50),
@@ -100,7 +101,6 @@ CREATE OR ALTER PROCEDURE Update_User_Details
     @User_EmailID varchar(100),
     @User_Address varchar(200),
     @User_ContactNo varchar(10), -- Changed from bigint to varchar to match Insert
-    @User_Password varchar(50),
     @City_Name varchar(50),
     @State_Name varchar(50)
 AS
@@ -116,10 +116,10 @@ BEGIN
         User_EmailID = @User_EmailID,
         User_Address = @User_Address,
         User_ContactNo = @User_ContactNo,
-        User_Password = @User_Password,
         City_ID = @City_ID,
         State_ID = @State_ID,
         Modified_DateTime = GETDATE()
     WHERE User_ID = @User_ID
 END
+select * from UserDetails as UD inner join CityDetails as C on UD.City_ID = C.City_ID
 GO

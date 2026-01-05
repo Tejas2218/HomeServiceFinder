@@ -90,6 +90,7 @@ alter table BookingDetails add constraint FK_BookingDetails_Equipment Foreign ke
 alter table BookingDetails add Time_Slot varchar(10) not null----addd column
 
 alter table BookingDetails alter Column Visiting_DateTime date not null----alter it
+alter table BookingDetails alter Column Booking_Decline_Reason varchar(300)----alter it
 
 
 ALTER TABLE BookingDetails 

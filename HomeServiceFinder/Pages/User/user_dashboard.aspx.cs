@@ -21,16 +21,33 @@ namespace HomeServiceFinder.Pages.User
         {
             if (!IsPostBack)
             {
+                if (Session["UserID"] != null && Session["UserRole"] != null)
+                {
+                    profile.Visible = true;
+                    signin.Visible = false;
+                }
+                else
+                {
+                    profile.Visible = false;
+                    signin.Visible = true;
+                }
                 LoadService();
+                btnLogout.Visible = Session["UserID"] != null;
             }
         }
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
 
+            Response.Redirect("~/Pages/login_signup/loginPage.aspx");
+        }
         private void LoadService()
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(constr))
-                using (SqlCommand cmd = new SqlCommand("View_ServiceMaster", con))
+                using (SqlCommand cmd = new SqlCommand("View_ServiceMasterTop3", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
