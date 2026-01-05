@@ -16,7 +16,18 @@ namespace HomeServiceFinder.Pages.User
         {
             if (!IsPostBack)
             {
+                if (Session["UserID"] != null && Session["UserRole"] != null)
+                {
+                    profile.Visible = true;
+                    signin.Visible = false;
+                }
+                else
+                {
+                    profile.Visible = false;
+                    signin.Visible = true;
+                }
                 LoadProviders();
+                btnLogout.Visible = Session["UserID"] != null;
             }
         }
 
@@ -24,6 +35,14 @@ namespace HomeServiceFinder.Pages.User
         public SqlDataAdapter sda;
         public SqlCommand cmd;
         public DataSet sd;
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Redirect("~/Pages/login_signup/loginPage.aspx");
+        }
 
         private void LoadProviders()
         {

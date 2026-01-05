@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevNoProject.Pages.User;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -11,7 +12,7 @@ using System.Xml.Linq;
 
 namespace HomeServiceFinder.Pages.User
 {
-    public partial class Profile : System.Web.UI.Page
+    public partial class Profile : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,6 +20,7 @@ namespace HomeServiceFinder.Pages.User
             {
                 BindStateList();
                 bindUserData();
+                btnLogout.Visible = Session["UserID"] != null;
 
                 if (!string.IsNullOrEmpty(userState))
                 {
@@ -32,6 +34,14 @@ namespace HomeServiceFinder.Pages.User
                 }
             }
 
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Redirect("~/Pages/login_signup/loginPage.aspx");
         }
 
         string constr = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
