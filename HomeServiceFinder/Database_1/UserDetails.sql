@@ -91,7 +91,7 @@ END
 GO
 
 -- Test Execution for Insert
--- exec Insert_User_Details 'Tanmay Adesara','t.adesara175@gmail.com','abcx ahshe ja  eeffef','9427396386','tanmay@123','User','Rajkot','Gujarat';
+exec Insert_User_Details 'Parmar Dev R.','dev46408@gmail.com','Kukma , Bhuj','9316667126','DPR@2111','Admin','Bhuj','Gujarat';
 GO
 
 --Update User Detail--
