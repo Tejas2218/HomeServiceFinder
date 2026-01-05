@@ -3,6 +3,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <!-- PAGE TITLE -->
+    <h2 style="margin-bottom: 20px;">Dashboard</h2>
+
     <!-- STATS -->
     <div class="stats">
         <div class="stat-card">

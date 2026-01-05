@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace HomeServiceFinder.Pages.New_Admin
 {
-    public partial class AddServiceProvider : System.Web.UI.Page
+    public partial class AddServiceProvider : BasePage
     {
         string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)

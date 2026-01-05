@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace HomeServiceFinder.Pages.New_Admin
 {
-    public partial class User : System.Web.UI.Page
+    public partial class User : BasePage
     {
         string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
 

@@ -802,9 +802,9 @@
 
         <!-- TOPBAR -->
         <div class="topbar">
-            <h3>Service Finder – Admin Dashboard</h3>
+            <h3>Admin Dashboard</h3>
 
-            <a href="Settings.aspx" class="profile-link">
+            <a href="AdminProfile.aspx" class="profile-link">
                 <i class="bi bi-person-circle"></i>Profile
             </a>
         </div>

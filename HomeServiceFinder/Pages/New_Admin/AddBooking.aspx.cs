@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace HomeServiceFinder.Pages.New_Admin
 {
-    public partial class AddBooking : System.Web.UI.Page
+    public partial class AddBooking : BasePage
     {
         string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)

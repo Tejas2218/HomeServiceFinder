@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace HomeServiceFinder.Pages.New_Admin
 {
-    public partial class ServiceProvider : System.Web.UI.Page
+    public partial class ServiceProvider : BasePage
     {
         string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
 

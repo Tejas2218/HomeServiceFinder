@@ -9,7 +9,7 @@ using System.Net.Mail;
 
 namespace HomeServiceFinder.Pages.New_Admin
 {
-    public partial class ViewServiceProviderDetails : System.Web.UI.Page
+    public partial class ViewServiceProviderDetails : BasePage
     {
         string connString = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
 

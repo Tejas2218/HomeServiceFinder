@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace HomeServiceFinder.Pages.New_Admin
 {
-    public partial class ServiceProviderProfile : System.Web.UI.Page
+    public partial class ServiceProviderProfile : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

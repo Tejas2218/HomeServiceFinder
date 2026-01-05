@@ -1,12 +1,12 @@
 ﻿<%@ Page Language="C#"
     MasterPageFile="~/MasterPage/AdminMaster.Master"
     AutoEventWireup="true"
-    CodeBehind="Settings.aspx.cs"
+    CodeBehind="AdminProfile.aspx.cs"
     Inherits="HomeServiceFinder.Pages.New_Admin.Settings" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2 style="margin-bottom:20px;">Settings</h2>
+    <h2 style="margin-bottom:20px;">Profile</h2>
 
     <div class="settings-box">
         <h3>Admin Profile</h3>
